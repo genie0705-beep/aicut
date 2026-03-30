@@ -13,10 +13,17 @@
 <meta name="author" content="주식회사 온니바이어">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AICUT — AI 기반 영상 편집 스튜디오">
-<meta property="og:description" content="AI 자동화 + 전담 에디터. 숏폼·유튜브·CG/VFX 원스톱. 48시간 납품.">
-<meta property="og:url" content="https://aicut.kr">
-<meta property="og:site_name" content="AICUT">
+<meta property="og:description" content="AI 자동화 + 전담 에디터. 숏폼·유튜브·CG/VFX 원스톱. 평균 48시간 납품.">
+<meta property="og:url" content="https://aicut.co.kr">
+<meta property="og:site_name" content="에이컷 (AICUT)">
+<meta property="og:image" content="https://aicut.co.kr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AICUT — AI 기반 영상 편집 스튜디오">
+<meta name="twitter:description" content="AI 자동화 + 전담 에디터. 숏폼·유튜브·CG/VFX 원스톱. 평균 48시간 납품.">
+<meta name="twitter:image" content="https://aicut.co.kr/og-image.png">
 <meta name="twitter:title" content="AICUT — AI 기반 영상 편집 스튜디오">
 <meta name="twitter:description" content="AI 자동화 + 전담 에디터. 숏폼·유튜브·CG/VFX 원스톱. 48시간 납품.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2565,6 +2572,10 @@ footer {
         📧 contact@aicut.co.kr<br>
         평일 09:00 — 18:00 (KST)
       </div>
+      <div style="font-size:12px;color:var(--gray-500);margin-top:12px;line-height:1.8">
+        대표이사 : 정효진<br>
+        사업자등록번호 : 353-86-03415
+      </div>
       <div class="footer-addr-block">
         <div class="footer-addr-label">OFFICE</div>
         <div class="footer-addr-row">
@@ -2609,11 +2620,11 @@ footer {
   </div>
 
   <div class="footer-bottom">
-    <span>© 2025 주식회사 온니바이어 (AICUT). All Rights Reserved. &nbsp;|&nbsp; 사업자등록번호 000-00-00000</span>
+    <span>© 2026 주식회사 온니바이어 (AICUT). All Rights Reserved. &nbsp;|&nbsp; 사업자등록번호 353-86-03415 &nbsp;|&nbsp; 대표이사 정효진</span>
     <span>
-      <a href="#" style="color:var(--gray-400);text-decoration:none">개인정보처리방침</a>
+      <a onclick="openLegalModal('privacy')" style="color:var(--gray-400);text-decoration:none;cursor:pointer">개인정보처리방침</a>
       &nbsp;·&nbsp;
-      <a href="#" style="color:var(--gray-400);text-decoration:none">이용약관</a>
+      <a onclick="openLegalModal('terms')" style="color:var(--gray-400);text-decoration:none;cursor:pointer">이용약관</a>
       &nbsp;·&nbsp;
       <a onclick="document.getElementById('adminLoginModal').classList.add('open')" style="color:var(--gray-700);text-decoration:none;cursor:pointer;font-size:11px;opacity:0.4;letter-spacing:.3px">관리</a>
     </span>
@@ -4656,6 +4667,36 @@ footer {
 </div>
 </div>
 
+<!-- 법적 문서 모달 (개인정보처리방침 / 이용약관) -->
+<div class="overlay" id="legalModal">
+  <div class="modal" style="max-width:720px;max-height:80vh;overflow-y:auto">
+    <button class="modal-close" onclick="document.getElementById('legalModal').classList.remove('open')">×</button>
+    <div id="legalModalContent"></div>
+  </div>
+</div>
+
+<!-- 비밀번호 재설정 모달 -->
+<div class="overlay" id="resetPwModal">
+  <div class="modal" style="max-width:440px">
+    <button class="modal-close" onclick="document.getElementById('resetPwModal').classList.remove('open')">×</button>
+    <div class="modal-logo"><span style="color:var(--accent)">AI</span>CUT</div>
+    <div class="modal-title">새 비밀번호 설정</div>
+    <div class="modal-sub">새로운 비밀번호를 입력해주세요</div>
+    <div style="margin-top:20px">
+      <div class="form-group">
+        <label class="form-label">새 비밀번호 (8자 이상)</label>
+        <input class="form-input" id="newPw1" type="password" placeholder="새 비밀번호 입력">
+      </div>
+      <div class="form-group">
+        <label class="form-label">새 비밀번호 확인</label>
+        <input class="form-input" id="newPw2" type="password" placeholder="비밀번호 재입력">
+      </div>
+      <div id="resetPwError" style="display:none;color:#ef4444;font-size:13px;margin-bottom:12px;padding:10px;background:#fef2f2;border-radius:8px"></div>
+      <button class="btn btn-primary btn-full btn-lg" id="resetPwBtn" onclick="doResetPassword()">비밀번호 변경하기</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // 전역 함수 즉시 선언 — onclick 호출 보호
 window.openModal = window.openModal || function(t) { document.getElementById('authModal')?.classList.add('open'); };
@@ -4994,6 +5035,171 @@ window.saveProfile = function() {
 };
 
 // 에러 표시 헬퍼
+// 비밀번호 재설정 모달 표시
+var _resetOobCode = '';
+function showResetPasswordModal(oobCode) {
+  _resetOobCode = oobCode;
+  document.getElementById('resetPwModal').classList.add('open');
+  var inp = document.getElementById('newPw1');
+  if (inp) inp.focus();
+}
+
+// 비밀번호 재설정 처리
+window.doResetPassword = function() {
+  var pw1   = (document.getElementById('newPw1') || {}).value || '';
+  var pw2   = (document.getElementById('newPw2') || {}).value || '';
+  var errEl = document.getElementById('resetPwError');
+  var btn   = document.getElementById('resetPwBtn');
+
+  if (!pw1 || pw1.length < 8) { showAuthError(errEl, '비밀번호는 8자 이상이어야 합니다'); return; }
+  if (pw1 !== pw2) { showAuthError(errEl, '비밀번호가 일치하지 않습니다'); return; }
+  if (!_resetOobCode) { showAuthError(errEl, '유효하지 않은 링크입니다. 다시 요청해주세요'); return; }
+
+  if (btn) { btn.disabled = true; btn.textContent = '변경 중...'; }
+  if (errEl) errEl.style.display = 'none';
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js')
+    .then(function(m) {
+      return m.confirmPasswordReset(window._fbAuth, _resetOobCode, pw1);
+    })
+    .then(function() {
+      document.getElementById('resetPwModal').classList.remove('open');
+      showToast('✅ 비밀번호가 변경됐습니다. 새 비밀번호로 로그인해주세요');
+      setTimeout(function() { openModal('login'); }, 1500);
+      if (btn) { btn.disabled = false; btn.textContent = '비밀번호 변경하기'; }
+    })
+    .catch(function(err) {
+      if (btn) { btn.disabled = false; btn.textContent = '비밀번호 변경하기'; }
+      var code = err.code || '';
+      var msg  = '비밀번호 변경에 실패했습니다';
+      if (code === 'auth/expired-action-code') msg = '링크가 만료됐습니다. 비밀번호 재설정을 다시 요청해주세요';
+      if (code === 'auth/invalid-action-code') msg = '유효하지 않은 링크입니다. 다시 요청해주세요';
+      if (code === 'auth/weak-password')        msg = '비밀번호는 8자 이상이어야 합니다';
+      showAuthError(errEl, msg);
+    });
+};
+
+// 법적 문서 모달
+window.openLegalModal = function(type) {
+  var modal = document.getElementById('legalModal');
+  var content = document.getElementById('legalModalContent');
+  if (!modal || !content) return;
+
+  var today = '2026년 3월 30일';
+
+  if (type === 'privacy') {
+    content.innerHTML = `
+      <h2 style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:4px">개인정보처리방침</h2>
+      <p style="font-size:13px;color:var(--gray-400);margin-bottom:24px">시행일: ${today}</p>
+      <div style="font-size:14px;color:var(--gray-600);line-height:1.9">
+        <p>주식회사 온니바이어(이하 "회사")는 에이컷(AICUT) 서비스 운영과 관련하여 「개인정보 보호법」 및 관련 법령에 따라 이용자의 개인정보를 보호하고, 이와 관련한 고충을 신속하게 처리하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">1. 수집하는 개인정보 항목</h3>
+        <p><b>필수 항목:</b> 이름, 이메일 주소, 비밀번호<br>
+        <b>선택 항목:</b> 연락처, 회사명<br>
+        <b>자동 수집:</b> IP 주소, 쿠키, 접속 로그, 서비스 이용 기록</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">2. 개인정보 수집 및 이용 목적</h3>
+        <p>• 서비스 제공 및 계약 이행 (영상 편집 의뢰, 납품)<br>
+        • 회원 관리 및 본인 확인<br>
+        • 고객 상담 및 불만 처리<br>
+        • 서비스 개선 및 신규 서비스 개발<br>
+        • 마케팅 및 광고 활용 (별도 동의 시)</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">3. 개인정보 보유 및 이용 기간</h3>
+        <p>• 회원 탈퇴 시까지 (탈퇴 후 즉시 파기)<br>
+        • 관련 법령에 따른 보존 기간:<br>
+        &nbsp;&nbsp;- 계약 또는 청약철회 기록: 5년 (전자상거래법)<br>
+        &nbsp;&nbsp;- 대금 결제 및 재화 공급 기록: 5년<br>
+        &nbsp;&nbsp;- 소비자 불만 및 분쟁처리 기록: 3년</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">4. 개인정보의 제3자 제공</h3>
+        <p>회사는 원칙적으로 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만 이용자의 동의가 있거나 법령에 의한 경우는 예외로 합니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">5. 개인정보 처리 위탁</h3>
+        <p>• Firebase (Google LLC) — 인증 및 데이터 저장<br>
+        • 채널톡 — 고객 상담 서비스<br>
+        • 포트원 — 결제 처리 (결제 이용 시)</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">6. 이용자의 권리</h3>
+        <p>이용자는 언제든지 개인정보 열람, 정정, 삭제, 처리 정지를 요청할 수 있습니다. 요청은 contact@aicut.co.kr로 연락해주세요.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">7. 개인정보 보호책임자</h3>
+        <p>성명: 정효진<br>
+        직책: 대표이사<br>
+        이메일: contact@aicut.co.kr</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">8. 개인정보처리방침 변경</h3>
+        <p>본 방침은 ${today}부터 적용됩니다. 변경 시 서비스 내 공지사항을 통해 사전 안내합니다.</p>
+
+        <p style="margin-top:24px;padding:16px;background:var(--gray-50);border-radius:8px;font-size:13px">
+        주식회사 온니바이어 | 대표이사 정효진<br>
+        사업자등록번호: 353-86-03415<br>
+        서울시 송파구 법원로 8길 8, SKV1 2차 1118호
+        </p>
+      </div>
+    `;
+  } else if (type === 'terms') {
+    content.innerHTML = `
+      <h2 style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:4px">이용약관</h2>
+      <p style="font-size:13px;color:var(--gray-400);margin-bottom:24px">시행일: ${today}</p>
+      <div style="font-size:14px;color:var(--gray-600);line-height:1.9">
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:0 0 8px">제1조 (목적)</h3>
+        <p>이 약관은 주식회사 온니바이어(이하 "회사")가 운영하는 에이컷(AICUT) 서비스(이하 "서비스")의 이용 조건 및 절차, 회사와 이용자 간의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제2조 (정의)</h3>
+        <p>• "서비스"란 회사가 제공하는 AI 기반 영상 편집 중개 플랫폼 및 관련 제반 서비스를 말합니다.<br>
+        • "이용자"란 본 약관에 동의하고 서비스를 이용하는 회원을 말합니다.<br>
+        • "에디터"란 회사와 계약하여 영상 편집 작업을 수행하는 전문 작업자를 말합니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제3조 (약관의 효력 및 변경)</h3>
+        <p>본 약관은 서비스 화면에 게시하거나 이용자에게 공지함으로써 효력이 발생합니다. 회사는 합리적인 사유가 있는 경우 약관을 변경할 수 있으며, 변경 시 7일 전 공지합니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제4조 (서비스 이용)</h3>
+        <p>• 서비스는 회원가입 후 이메일 인증을 완료한 이용자에게 제공됩니다.<br>
+        • 영상 편집 의뢰는 요금제 선택 및 결제 완료 후 진행됩니다.<br>
+        • 평균 납품 기간은 48시간이며, 플랜에 따라 상이할 수 있습니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제5조 (요금 및 결제)</h3>
+        <p>• SHORTS: ₩29,000 / BASIC: ₩49,000 / STANDARD: ₩120,000 / PREMIUM: ₩280,000<br>
+        • 결제는 신용카드, 계좌이체 등을 통해 이루어집니다.<br>
+        • 작업 시작 전 전액 환불, 작업 시작 후에는 환불이 제한될 수 있습니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제6조 (수정 및 재작업)</h3>
+        <p>• 납품 후 이용자가 요청하는 수정 사항은 원래 요청 범위 내에서 처리됩니다.<br>
+        • 원래 요청 범위를 초과하는 수정은 추가 비용이 발생할 수 있습니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제7조 (지식재산권)</h3>
+        <p>• 납품 완료된 영상의 저작권은 결제 완료 시점부터 이용자에게 귀속됩니다.<br>
+        • 이용자가 제공한 원본 소스의 저작권은 이용자에게 있습니다.<br>
+        • 회사는 포트폴리오 목적으로 작업물을 활용할 수 있습니다 (이용자 동의 시).</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제8조 (이용자 의무)</h3>
+        <p>• 타인의 저작권을 침해하는 콘텐츠 제작 의뢰 금지<br>
+        • 허위 정보 제공 금지<br>
+        • 서비스 운영을 방해하는 행위 금지</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제9조 (서비스 중단)</h3>
+        <p>회사는 시스템 점검, 불가항력적 사유 등으로 서비스 제공을 일시 중단할 수 있으며, 사전에 공지합니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제10조 (면책조항)</h3>
+        <p>회사는 이용자가 서비스를 이용하여 기대하는 수익을 얻지 못하거나 상실한 것에 대해 책임을 지지 않습니다.</p>
+
+        <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:20px 0 8px">제11조 (분쟁 해결)</h3>
+        <p>서비스 이용과 관련한 분쟁은 대한민국 법령을 적용하며, 소송의 관할 법원은 서울중앙지방법원으로 합니다.</p>
+
+        <p style="margin-top:24px;padding:16px;background:var(--gray-50);border-radius:8px;font-size:13px">
+        주식회사 온니바이어 | 대표이사 정효진<br>
+        사업자등록번호: 353-86-03415<br>
+        시행일: ${today}
+        </p>
+      </div>
+    `;
+  }
+
+  modal.classList.add('open');
+};
+
 function showAuthError(el, msg) {
   if (!el) { showToast('❌ ' + msg); return; }
   el.textContent = msg;
@@ -5132,79 +5338,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 이메일 확인 토큰 처리
   function handleEmailToken() {
-    var hash   = window.location.hash   || '';
     var search = window.location.search || '';
 
-    // confirmation_token 추출
-    var confToken = null;
-    if (hash.includes('confirmation_token=')) {
-      confToken = hash.split('confirmation_token=')[1].split('&')[0];
-    } else if (search.includes('confirmation_token=')) {
-      confToken = search.split('confirmation_token=')[1].split('&')[0];
-    } else if (search.includes('token=')) {
-      confToken = search.split('token=')[1].split('&')[0];
-    }
+    // Firebase Action URL 파라미터 파싱
+    // ?mode=resetPassword&oobCode=...
+    // ?mode=verifyEmail&oobCode=...
+    var params = {};
+    search.substring(1).split('&').forEach(function(p) {
+      var kv = p.split('=');
+      if (kv[0]) params[kv[0]] = decodeURIComponent(kv[1] || '');
+    });
 
-    // access_token 추출
-    var accessToken = null;
-    if (hash.includes('access_token=')) {
-      accessToken = hash.split('access_token=')[1].split('&')[0];
-    }
+    var mode    = params.mode    || '';
+    var oobCode = params.oobCode || '';
 
-    if (confToken) {
-      // _goTrue 준비될 때까지 최대 4초 대기
-      var attempts = 0;
-      var tryConfirm = function() {
-        if (!_goTrue) {
-          if (attempts++ < 20) { setTimeout(tryConfirm, 200); return; }
-          showToast('인증 서비스 연결 실패. 잠시 후 다시 시도해주세요');
-          return;
-        }
-        showToast('이메일 확인 중...');
-        window.history.replaceState(null, '', '/');
-        _goTrue.confirm(decodeURIComponent(confToken), true)
-          .then(function(user) {
-            var name  = (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0];
-            var email = user.email;
-            setSession('client', name, email);
-            updateNavState('client');
-            showPage('client');
-            initClientPage({ name: name, email: email });
-            showToast('🎉 이메일 확인 완료! 환영합니다, ' + name + ' 님!');
-          })
-          .catch(function(err) {
-            var raw = '';
-            try { raw = JSON.stringify(err.json || err.message || err); } catch(e) {}
-            console.warn('확인 실패:', raw);
-            // 이미 확인된 토큰이면 로그인 페이지로 안내
-            if (raw.includes('already') || raw.includes('expired') || raw.includes('invalid')) {
-              showToast('이미 확인된 링크입니다. 로그인해주세요');
-              openModal('login');
-            } else {
-              showToast('이메일 확인 중 오류. 다시 로그인해주세요');
-              openModal('login');
-            }
-          });
-      };
-      tryConfirm();
+    // 비밀번호 재설정 처리
+    if (mode === 'resetPassword' && oobCode) {
+      window.history.replaceState(null, '', '/');
+      showResetPasswordModal(oobCode);
       return;
     }
 
-    if (accessToken && _goTrue) {
-      try {
-        var u = _goTrue.currentUser();
-        if (u) {
-          var name  = (u.user_metadata && u.user_metadata.full_name) || u.email.split('@')[0];
-          var email = u.email;
-          setSession('client', name, email);
-          updateNavState('client');
-          showPage('client');
-          initClientPage({ name: name, email: email });
-          window.history.replaceState(null, '', '/');
-          showToast('환영합니다, ' + name + ' 님! 👋');
+    // 이메일 인증 처리
+    if (mode === 'verifyEmail' && oobCode) {
+      showToast('이메일 인증 확인 중...');
+      window.history.replaceState(null, '', '/');
+      // Firebase applyActionCode 사용
+      var waitApply = function(attempts) {
+        if (!window._fbAuth) {
+          if (attempts < 20) { setTimeout(function(){ waitApply(attempts+1); }, 300); return; }
+          showToast('인증 서비스 연결 실패. 잠시 후 다시 시도해주세요');
           return;
         }
-      } catch(e) {}
+        import('https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js')
+          .then(function(m) {
+            return m.applyActionCode(window._fbAuth, oobCode);
+          })
+          .then(function() {
+            showToast('🎉 이메일 인증 완료! 로그인해주세요');
+            setTimeout(function() { openModal('login'); }, 1000);
+          })
+          .catch(function(err) {
+            console.warn('이메일 인증 오류:', err.code);
+            showToast('이미 인증됐거나 링크가 만료됐습니다. 로그인해주세요');
+            setTimeout(function() { openModal('login'); }, 1000);
+          });
+      };
+      waitApply(0);
+      return;
     }
 
     // 일반 세션 복원
@@ -6272,47 +6453,73 @@ function playHeroVideo(index) {
   const video = document.getElementById('heroBgVideo');
   if (!video) return;
   _heroVideoIdx = ((index % _heroVideos.length) + _heroVideos.length) % _heroVideos.length;
-  video.classList.add('fading');
-  setTimeout(() => {
-    video.src = _heroVideos[_heroVideoIdx];
-    video.load();
-    video.classList.remove('fading');
-    const p = video.play();
-    if (p !== undefined) {
-      p.catch(() => {
-        video.style.display = 'none';
-        const slides = document.getElementById('heroSlides');
-        if (slides) slides.style.display = 'block';
-      });
-    }
-  }, 400);
+  video.src = _heroVideos[_heroVideoIdx];
+  video.load();
+  const p = video.play();
+  if (p !== undefined) {
+    p.catch(() => {
+      // 자동재생 실패 시 다음 영상 시도
+      setTimeout(() => playHeroVideo(_heroVideoIdx + 1), 1000);
+    });
+  }
 }
 
 (function() {
   const video = document.getElementById('heroBgVideo');
   if (!video) return;
 
-  // 영상 끝나면 자동으로 다음 영상 + 인디케이터 동기화
+  // 영상 끝나면 부드럽게 다음 영상
   video.addEventListener('ended', function() {
     const next = (_heroVideoIdx + 1) % _heroVideos.length;
+    // 슬라이드 인디케이터 동기화
     goSlide(next);
+    // 부드러운 전환 — 페이드 없이 바로 다음 영상
+    _heroVideoIdx = next;
+    video.src = _heroVideos[_heroVideoIdx];
+    video.load();
+    video.play().catch(() => {});
   });
 
+  // 영상 로드 오류 시 다음 영상
   video.addEventListener('error', function() {
     const next = (_heroVideoIdx + 1) % _heroVideos.length;
-    if (next !== 0) goSlide(next);
-    else {
-      video.style.display = 'none';
-      const slides = document.getElementById('heroSlides');
-      if (slides) slides.style.display = 'block';
+    setTimeout(() => {
+      _heroVideoIdx = next;
+      video.src = _heroVideos[_heroVideoIdx];
+      video.load();
+      video.play().catch(() => {});
+    }, 500);
+  });
+
+  // 영상이 멈춘 경우 감지 후 재생 재시도
+  video.addEventListener('stalled', function() {
+    setTimeout(() => {
+      if (video.paused) video.play().catch(() => {});
+    }, 2000);
+  });
+
+  video.addEventListener('waiting', function() {
+    setTimeout(() => {
+      if (video.paused && video.readyState >= 2) {
+        video.play().catch(() => {});
+      }
+    }, 3000);
+  });
+
+  // 페이지 가시성 변경 시 재생 재개 (탭 전환 후 복귀)
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden && video.paused) {
+      video.play().catch(() => {});
     }
   });
 
+  // 4초 내 로드 안 되면 다음 영상
   setTimeout(function() {
     if (video.readyState === 0) {
-      video.style.display = 'none';
-      const slides = document.getElementById('heroSlides');
-      if (slides) slides.style.display = 'block';
+      _heroVideoIdx = 1;
+      video.src = _heroVideos[1];
+      video.load();
+      video.play().catch(() => {});
     }
   }, 4000);
 
@@ -6480,6 +6687,11 @@ function nextSlide() {
 }
 
 function startHeroSlider() {
+  const video = document.getElementById('heroBgVideo');
+  // 영상이 재생 가능한 상태면 타이머 슬라이드 사용 안 함
+  // 영상 ended 이벤트에서 자동 전환 처리
+  if (video && video.src) return;
+  // 영상 없을 때만 타이머 슬라이드 사용
   _heroTimer = setInterval(nextSlide, 5000);
   const hero = document.querySelector('.hero');
   if (hero) {
