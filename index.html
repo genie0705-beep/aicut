@@ -6926,4 +6926,31 @@ function initRevenueCharts() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: fal
+      plugins: { legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.label + ': ₩' + ctx.parsed.toLocaleString('ko-KR')
+          }
+        }
+      }
+    }
+  });
+}
+
+// ===== INIT ON ADMIN PAGE =====
+document.addEventListener('DOMContentLoaded', function() {
+  // 매출 차트는 어드민 탭 열릴 때 초기화
+  const revenueTab = document.getElementById('tab-a-revenue');
+  if (revenueTab) {
+    const observer = new MutationObserver(() => {
+      if (revenueTab.style.display !== 'none') {
+        initRevenueCharts();
+        observer.disconnect();
+      }
+    });
+    observer.observe(revenueTab, { attributes: true, attributeFilter: ['style'] });
+  }
+});
+</script>
+</body>
+</html>
