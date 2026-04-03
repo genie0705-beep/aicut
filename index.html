@@ -10,6 +10,65 @@
 <meta name="description" content="AI 자동화 + 전담 에디터가 완성하는 영상편집 스튜디오. 숏폼·유튜브·기업홍보·CG/VFX까지 원스톱. 최대 48시간 납품. 시장가 대비 40~60% 합리적 가격.">
 <meta name="keywords" content="영상편집 외주, AI 영상편집, 영상편집 대행, 유튜브 편집 대행, 릴스 편집, 숏폼 편집, VFX 영상편집, 모션그래픽 제작, 기업 홍보영상 편집, 영상편집 스튜디오, AICUT">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aicut.co.kr">
+
+<!-- Schema.org 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "에이컷 (AICUT)",
+  "alternateName": "AICUT",
+  "description": "AI 자동화 + 전담 에디터가 완성하는 영상편집 스튜디오. 숏폼·유튜브·기업홍보·CG/VFX까지 원스톱. 최대 48시간 납품.",
+  "url": "https://aicut.co.kr",
+  "logo": "https://aicut.co.kr/og-image.png",
+  "image": "https://aicut.co.kr/og-image.png",
+  "email": "contact@aicut.co.kr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "법원로 8길 8, SKV1 2차 1118호",
+    "addressLocality": "송파구",
+    "addressRegion": "서울특별시",
+    "postalCode": "05855",
+    "addressCountry": "KR"
+  },
+  "openingHours": "Mo-Fr 09:00-18:00",
+  "priceRange": "₩29,000 ~ ₩280,000",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "영상 편집 서비스",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": { "@type": "Service", "name": "SHORTS 숏폼 편집" },
+        "price": "29000",
+        "priceCurrency": "KRW"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": { "@type": "Service", "name": "BASIC 유튜브 편집" },
+        "price": "49000",
+        "priceCurrency": "KRW"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": { "@type": "Service", "name": "STANDARD 기업홍보 편집" },
+        "price": "120000",
+        "priceCurrency": "KRW"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": { "@type": "Service", "name": "PREMIUM 고퀄리티 편집" },
+        "price": "280000",
+        "priceCurrency": "KRW"
+      }
+    ]
+  },
+  "sameAs": ["https://pf.kakao.com/"],
+  "founder": { "@type": "Person", "name": "정효진" },
+  "legalName": "주식회사 온니바이어"
+}
+</script>
 <meta name="author" content="주식회사 온니바이어">
 <meta property="og:type" content="website">
 <meta property="og:title" content="AICUT — AI 기반 영상 편집 스튜디오">
@@ -3237,37 +3296,12 @@ footer {
             <div class="panel-title">🔴 즉시 처리 필요</div>
             <button class="btn btn-primary" onclick="showTab('admin','a-orders',null)">전체 주문 보기</button>
           </div>
-          <table class="data-table">
+          <table class="data-table" id="adminUrgentTable">
             <tr><th>주문번호</th><th>의뢰인</th><th>프로젝트</th><th>플랜</th><th>상태</th><th>D-DAY</th><th>에디터</th><th>액션</th></tr>
-            <tr>
-              <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0041</td>
-              <td style="font-weight:600">이수현</td>
-              <td>유튜브 편집 3편</td>
-              <td><span style="font-size:12px;font-weight:700;color:var(--accent)">STANDARD</span></td>
-              <td><span class="badge badge-pending">대기중</span></td>
-              <td><span style="color:var(--red);font-weight:700;font-size:13px">D-0</span></td>
-              <td style="color:var(--gray-400);font-size:13px">미배정</td>
-              <td><button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="showTab('admin','a-orders',null)">배정하기</button></td>
-            </tr>
-            <tr>
-              <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0039</td>
-              <td style="font-weight:600">박지훈</td>
-              <td>기업 홍보영상 리뷰</td>
-              <td><span style="font-size:12px;font-weight:700;color:var(--accent)">PREMIUM</span></td>
-              <td><span class="badge badge-review">검수중</span></td>
-              <td><span style="color:var(--orange);font-weight:700;font-size:13px">D-1</span></td>
-              <td style="font-size:13px">Jason</td>
-              <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showTab('admin','a-upload',null)">납품처리</button></td>
-            </tr>
-            <tr>
-              <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0038</td>
-              <td style="font-weight:600">최미래</td>
-              <td>릴스 5편</td>
-              <td><span style="font-size:12px;font-weight:700;color:#94a3b8">SHORTS</span></td>
-              <td><span class="badge badge-pending">대기중</span></td>
-              <td><span style="color:var(--red);font-weight:700;font-size:13px">D-0</span></td>
-              <td style="color:var(--gray-400);font-size:13px">미배정</td>
-              <td><button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="showTab('admin','a-orders',null)">배정하기</button></td>
+            <tr id="adminUrgentEmpty">
+              <td colspan="8" style="text-align:center;padding:28px;color:var(--gray-400);font-size:14px">
+                ✅ 긴급 처리 항목이 없습니다
+              </td>
             </tr>
           </table>
         </div>
@@ -3321,112 +3355,33 @@ footer {
           <!-- 대기중 -->
           <div style="background:var(--gray-50);border-radius:12px;padding:14px;border:1px solid var(--gray-200)">
             <div style="font-size:12px;font-weight:700;color:var(--orange);margin-bottom:12px;display:flex;justify-content:space-between">
-              <span>⏳ 대기중 (미배정)</span><span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px">4</span>
+              <span>⏳ 대기중 (미배정)</span><span id="kanbanWaitCount" style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:20px">0</span>
             </div>
-            <div class="k-card" onclick="showTab('admin','a-orders',null)">
-              <div class="k-id">#FC-0041</div>
-              <div class="k-title">유튜브 편집 3편</div>
-              <div class="k-meta">이수현 · STANDARD</div>
-              <div class="k-day red">D-0 마감</div>
-            </div>
-            <div class="k-card" onclick="showTab('admin','a-orders',null)">
-              <div class="k-id">#FC-0038</div>
-              <div class="k-title">릴스 5편</div>
-              <div class="k-meta">최미래 · SHORTS</div>
-              <div class="k-day red">D-0 마감</div>
-            </div>
-            <div class="k-card" onclick="showTab('admin','a-orders',null)">
-              <div class="k-id">#FC-0036</div>
-              <div class="k-title">제품 소개 영상</div>
-              <div class="k-meta">강도현 · BASIC</div>
-              <div class="k-day orange">D-2 남음</div>
-            </div>
-            <div class="k-card" onclick="showTab('admin','a-orders',null)">
-              <div class="k-id">#FC-0035</div>
-              <div class="k-title">브이로그 편집</div>
-              <div class="k-meta">한소희 · BASIC</div>
-              <div class="k-day">D-4 남음</div>
-            </div>
+            <div id="kanbanWaitEmpty" style="padding:20px;text-align:center;color:var(--gray-400);font-size:13px">대기 중인 주문이 없습니다</div>
           </div>
 
           <!-- 편집중 -->
           <div style="background:var(--gray-50);border-radius:12px;padding:14px;border:1px solid var(--gray-200)">
             <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:12px;display:flex;justify-content:space-between">
-              <span>✂️ 편집중</span><span style="background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:20px">11</span>
+              <span>✂️ 편집중</span><span id="kanbanEditCount" style="background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:20px">0</span>
             </div>
-            <div class="k-card">
-              <div class="k-id">#FC-0040</div>
-              <div class="k-title">기업 인트로 VFX</div>
-              <div class="k-meta">㈜미디어플러스 · PREMIUM</div>
-              <div class="k-editor">✂️ Victor</div>
-              <div class="k-day orange">D-1 남음</div>
-            </div>
-            <div class="k-card">
-              <div class="k-id">#FC-0037</div>
-              <div class="k-title">SNS 릴스 10편</div>
-              <div class="k-meta">스타트업코리아 · B2B</div>
-              <div class="k-editor">✂️ Eric</div>
-              <div class="k-day">D-3 남음</div>
-            </div>
-            <div class="k-card">
-              <div class="k-id">#FC-0034</div>
-              <div class="k-title">유튜브 5편 패키지</div>
-              <div class="k-meta">박민수 · STANDARD</div>
-              <div class="k-editor">✂️ Jason</div>
-              <div class="k-day">D-3 남음</div>
-            </div>
-            <div class="k-card">
-              <div class="k-id">#FC-0033</div>
-              <div class="k-title">브랜드 홍보 영상</div>
-              <div class="k-meta">이정아 · PREMIUM</div>
-              <div class="k-editor">✂️ Luke</div>
-              <div class="k-day">D-4 남음</div>
-            </div>
-            <div style="font-size:12px;color:var(--gray-400);text-align:center;padding:8px 0">+ 7건 더 보기</div>
+            <div id="kanbanEditEmpty" style="padding:20px;text-align:center;color:var(--gray-400);font-size:13px">편집 중인 주문이 없습니다</div>
           </div>
 
           <!-- 검수중 -->
           <div style="background:var(--gray-50);border-radius:12px;padding:14px;border:1px solid var(--gray-200)">
             <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:12px;display:flex;justify-content:space-between">
-              <span>🔍 검수중</span><span style="background:#ede9ff;color:#5c3de8;padding:2px 8px;border-radius:20px">7</span>
+              <span>🔍 검수중</span><span id="kanbanReviewCount" style="background:#ede9ff;color:#5c3de8;padding:2px 8px;border-radius:20px">0</span>
             </div>
-            <div class="k-card">
-              <div class="k-id">#FC-0039</div>
-              <div class="k-title">기업 홍보영상</div>
-              <div class="k-meta">박지훈 · PREMIUM</div>
-              <div class="k-editor">✂️ Jason</div>
-              <div class="k-day orange">D-1 남음</div>
-              <button class="btn btn-outline" style="padding:4px 10px;font-size:11px;margin-top:8px;width:100%" onclick="showTab('admin','a-upload',null)">납품 처리</button>
-            </div>
-            <div class="k-card">
-              <div class="k-id">#FC-0032</div>
-              <div class="k-title">인터뷰 영상 3편</div>
-              <div class="k-meta">김민준 · STANDARD</div>
-              <div class="k-editor">✂️ Chris</div>
-              <div class="k-day">D-2 남음</div>
-              <button class="btn btn-outline" style="padding:4px 10px;font-size:11px;margin-top:8px;width:100%" onclick="showTab('admin','a-upload',null)">납품 처리</button>
-            </div>
-            <div style="font-size:12px;color:var(--gray-400);text-align:center;padding:8px 0">+ 5건 더 보기</div>
+            <div id="kanbanReviewEmpty" style="padding:20px;text-align:center;color:var(--gray-400);font-size:13px">검수 중인 주문이 없습니다</div>
           </div>
 
           <!-- 납품완료 -->
           <div style="background:var(--gray-50);border-radius:12px;padding:14px;border:1px solid var(--gray-200)">
             <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:12px;display:flex;justify-content:space-between">
-              <span>✅ 납품완료 (이번달)</span><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:20px">47</span>
+              <span>✅ 납품완료 (이번달)</span><span id="kanbanDoneCount" style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:20px">0</span>
             </div>
-            <div class="k-card" style="opacity:0.7">
-              <div class="k-id">#FC-0031</div>
-              <div class="k-title">쇼츠 7편</div>
-              <div class="k-meta">이수현 · SHORTS</div>
-              <div class="k-day" style="color:var(--green)">완료 2025.03.11</div>
-            </div>
-            <div class="k-card" style="opacity:0.7">
-              <div class="k-id">#FC-0030</div>
-              <div class="k-title">유튜브 월정기 편집</div>
-              <div class="k-meta">스타트업코리아 · B2B</div>
-              <div class="k-day" style="color:var(--green)">완료 2025.03.10</div>
-            </div>
-            <div style="font-size:12px;color:var(--gray-400);text-align:center;padding:8px 0">+ 45건 더 보기</div>
+            <div id="kanbanDoneEmpty" style="padding:20px;text-align:center;color:var(--gray-400);font-size:13px">이번달 납품 완료 건이 없습니다</div>
           </div>
         </div>
       </div>
@@ -3664,14 +3619,14 @@ footer {
                 <div style="font-size:11px;font-weight:700;color:var(--gray-400);margin-bottom:8px">생성될 폴더 구조</div>
                 <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--primary);line-height:2">
                   📁 AICUT-Uploads/<br>
-                  &nbsp;&nbsp;└ 📁 <span id="folderPreview" style="color:var(--accent);font-weight:700">FC-0039_박지훈_기업홍보영상</span>/<br>
+                  &nbsp;&nbsp;└ 📁 <span id="folderPreview" style="color:var(--accent);font-weight:700">주문번호_고객명_프로젝트명</span>/<br>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ 📄 원본 파일 (의뢰인만 업로드 가능)
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="form-label">의뢰인 이메일 (링크 발송 대상)</label>
-                <input class="form-input" id="clientEmail" placeholder="client@example.com" value="jihunn@mediaplus.co.kr">
+                <input class="form-input" id="clientEmail" placeholder="client@example.com" placeholder="client@example.com">
               </div>
               <div class="form-group">
                 <label class="form-label">구글 드라이브 업로드 링크 입력</label>
@@ -3725,17 +3680,17 @@ footer {
           <div>
             <div class="order-summary-card" style="margin-bottom:16px">
               <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:12px">선택된 주문</div>
-              <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gray-400)" id="uploadOrderNum">#FC-0039</div>
-              <div style="font-size:17px;font-weight:700;color:var(--primary);margin:6px 0 20px" id="uploadOrderName">기업 홍보영상</div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gray-400)" id="uploadOrderNum">—</div>
+              <div style="font-size:17px;font-weight:700;color:var(--primary);margin:6px 0 20px" id="uploadOrderName">주문을 선택해주세요</div>
               <div class="detail-grid" style="gap:16px">
-                <div class="detail-item"><label>의뢰인</label><p id="uploadClientName">박지훈</p></div>
-                <div class="detail-item"><label>플랜</label><p style="color:var(--accent)" id="uploadPlan">PREMIUM</p></div>
+                <div class="detail-item"><label>의뢰인</label><p id="uploadClientName">—</p></div>
+                <div class="detail-item"><label>플랜</label><p style="color:var(--accent)" id="uploadPlan">—</p></div>
                 <div class="detail-item"><label>납품예정</label><p style="color:var(--orange)">D-1 내일</p></div>
                 <div class="detail-item"><label>상태</label><p><span class="badge badge-review">검수중</span></p></div>
               </div>
               <div style="margin-top:20px;padding:16px;background:var(--gray-50);border-radius:10px;font-size:13px;color:var(--gray-600);line-height:1.7;border:1px solid var(--gray-200)">
                 <div style="font-weight:700;color:var(--primary);margin-bottom:8px">요구사항</div>
-                다크 시네마틱 컬러톤, 인트로 5초 임팩트, 로고 모션. 납품파일: 4K + 1080p
+                주문 선택 후 요구사항이 표시됩니다
               </div>
             </div>
 
@@ -4059,25 +4014,10 @@ footer {
         <!-- 접속 로그 -->
         <div class="panel" style="margin-top:20px">
           <div class="panel-header"><div class="panel-title">🕐 최근 접속 로그</div></div>
-          <table class="data-table">
+          <table class="data-table" id="adminAccessLog">
             <tr><th>관리자</th><th>접속 시간</th><th>IP</th><th>수행 작업</th></tr>
             <tr>
-              <td style="font-weight:600">김대표</td>
-              <td style="font-size:13px;color:var(--gray-400)">2025.03.16 09:14</td>
-              <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">121.xxx.xxx.42</td>
-              <td style="font-size:13px">로그인 · 주문 #FC-0041 착수 처리</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">이운영</td>
-              <td style="font-size:13px;color:var(--gray-400)">2025.03.15 18:30</td>
-              <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">210.xxx.xxx.11</td>
-              <td style="font-size:13px">로그인 · #FC-0039 납품 완료 처리</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">박상담</td>
-              <td style="font-size:13px;color:var(--gray-400)">2025.03.14 15:20</td>
-              <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">175.xxx.xxx.88</td>
-              <td style="font-size:13px">로그인 · 고객 상담 3건 응대</td>
+              <td colspan="4" style="text-align:center;padding:24px;color:var(--gray-400);font-size:14px">접속 기록이 없습니다</td>
             </tr>
           </table>
         </div>
@@ -4093,35 +4033,10 @@ footer {
           </div>
           <table class="data-table">
             <tr><th>ID</th><th>이름</th><th>이메일</th><th>유형</th><th>가입일</th><th>총 주문</th><th>총 금액</th><th>상태</th></tr>
-            <tr>
-              <td style="font-family:'DM Mono',monospace;font-size:11px">U-001</td>
-              <td style="font-weight:600">김민준</td>
-              <td style="font-size:13px;color:var(--gray-400)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="33505c5d4752504773525a5046471d505c1d5841">[email&#160;protected]</a></td>
-              <td><span class="badge badge-pending">개인</span></td>
-              <td style="font-size:13px;color:var(--gray-400)">2025.01.15</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700">7</td>
-              <td style="font-family:'DM Mono',monospace">₩693,900</td>
-              <td><span class="badge badge-review">활성</span></td>
-            </tr>
-            <tr>
-              <td style="font-family:'DM Mono',monospace;font-size:11px">U-002</td>
-              <td style="font-weight:600">이수현</td>
-              <td style="font-size:13px;color:var(--gray-400)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="385b57564c595b4c7859515b4d4c165b5716534a">[email&#160;protected]</a></td>
-              <td><span class="badge badge-done">B2B</span></td>
-              <td style="font-size:13px;color:var(--gray-400)">2024.09.15</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700">34</td>
-              <td style="font-family:'DM Mono',monospace">₩3,200,000</td>
-              <td><span class="badge badge-review">활성</span></td>
-            </tr>
-            <tr>
-              <td style="font-family:'DM Mono',monospace;font-size:11px">U-003</td>
-              <td style="font-weight:600">박지훈</td>
-              <td style="font-size:13px;color:var(--gray-400)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1d2dedfc5d0d2c5f1d0d8d2c4c59fd2de9fdac3">[email&#160;protected]</a></td>
-              <td><span class="badge badge-pending">개인</span></td>
-              <td style="font-size:13px;color:var(--gray-400)">2025.02.10</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700">3</td>
-              <td style="font-family:'DM Mono',monospace">₩1,149,000</td>
-              <td><span class="badge badge-review">활성</span></td>
+            <tr id="adminUserEmpty">
+              <td colspan="8" style="text-align:center;padding:32px;color:var(--gray-400);font-size:14px">
+                👤 가입된 회원이 없습니다
+              </td>
             </tr>
           </table>
         </div>
@@ -4774,7 +4689,9 @@ function getSession() {
   try { return JSON.parse(localStorage.getItem('aicut_session')); } catch { return null; }
 }
 function setSession(role, name, email) {
-  localStorage.setItem('aicut_session', JSON.stringify({ role, name, email: email||'', time: Date.now() }));
+  var EXPIRE_DAYS = 30;
+  var expireAt = Date.now() + (EXPIRE_DAYS * 24 * 60 * 60 * 1000);
+  localStorage.setItem('aicut_session', JSON.stringify({ role, name, email: email||'', time: Date.now(), expireAt: expireAt }));
 }
 function clearSession() {
   localStorage.removeItem('aicut_session');
@@ -6973,5 +6890,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
 </body>
 </html>
