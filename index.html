@@ -1996,7 +1996,7 @@ footer {
           if (typeof updateNavState === 'function') updateNavState('client');
           if (typeof initClientPage === 'function') initClientPage({ name, email });
         }
-        // 채널톡 사용자 식별 — 로그인한 고객 이름·이메일 전달
+        // 채널톡 사용자 식별 - 로그인한 고객 이름·이메일 전달
         if (typeof window._channelIOLogin === 'function') {
           window._channelIOLogin(name, email);
         }
@@ -2004,7 +2004,7 @@ footer {
     } else {
       window._fbCurrentUser = null;
       if (typeof clearSession === 'function') clearSession();
-      // 채널톡 사용자 초기화 — 로그아웃 시 익명으로 전환
+      // 채널톡 사용자 초기화 - 로그아웃 시 익명으로 전환
       if (typeof window._channelIOLogout === 'function') {
         window._channelIOLogout();
       }
@@ -4649,8 +4649,10 @@ footer {
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// 전역 함수 즉시 선언 — onclick 호출 보호
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+<script>
+// 전역 함수 즉시 선언 - onclick 호출 보호
 window.openModal = window.openModal || function(t) { document.getElementById('authModal')?.classList.add('open'); };
 window.scrollTo_ = window.scrollTo_ || function(id) { document.querySelector(id)?.scrollIntoView({behavior:'smooth'}); };
 window.openB2B = window.openB2B || function() { document.getElementById('b2bModal')?.classList.add('open'); };
