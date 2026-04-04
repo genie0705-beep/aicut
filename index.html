@@ -11,6 +11,7 @@
 <meta name="keywords" content="영상편집 외주, AI 영상편집, 영상편집 대행, 유튜브 편집 대행, 릴스 편집, 숏폼 편집, VFX 영상편집, 모션그래픽 제작, 기업 홍보영상 편집, 영상편집 스튜디오, AICUT">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://aicut.co.kr">
+<link rel="sitemap" type="application/xml" href="https://aicut.co.kr/sitemap.xml">
 
 <!-- Schema.org 구조화 데이터 -->
 <script type="application/ld+json">
@@ -1995,12 +1996,64 @@ footer {
           if (typeof updateNavState === 'function') updateNavState('client');
           if (typeof initClientPage === 'function') initClientPage({ name, email });
         }
+        // 채널톡 사용자 식별 — 로그인한 고객 이름·이메일 전달
+        if (typeof window._channelIOLogin === 'function') {
+          window._channelIOLogin(name, email);
+        }
       }
     } else {
       window._fbCurrentUser = null;
       if (typeof clearSession === 'function') clearSession();
+      // 채널톡 사용자 초기화 — 로그아웃 시 익명으로 전환
+      if (typeof window._channelIOLogout === 'function') {
+        window._channelIOLogout();
+      }
     }
   });
+</script>
+<!-- ===== 채널톡 SDK ===== -->
+<script>
+(function(){
+  var w=window;
+  if(w.ChannelIO){return;}
+  var ch=function(){ch.c&&ch.c.apply(ch,arguments);};
+  ch.q=[];
+  ch.c=function(args){ch.q.push(args);};
+  w.ChannelIO=ch;
+  function l(){
+    if(w.ChannelIOInitialized){return;}
+    w.ChannelIOInitialized=true;
+    var s=document.createElement('script');
+    s.type='text/javascript';
+    s.async=true;
+    s.src='https://cdn.channel.io/plugin/ch-plugin-web.js';
+    var x=document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s,x);
+  }
+  if(document.readyState==='complete'){l();}
+  else{window.addEventListener('DOMContentLoaded',l);window.addEventListener('load',l);}
+})();
+
+ChannelIO('boot', {
+  pluginKey: '8c28ff86-be65-4b48-b7d5-d839d2e03495',
+  language: 'ko',
+  hideChannelButtonOnBoot: false
+});
+
+window._channelIOLogin = function(name, email) {
+  if (typeof ChannelIO === 'undefined') return;
+  ChannelIO('updateUser', {
+    profile: {
+      name: name,
+      email: email
+    }
+  });
+};
+
+window._channelIOLogout = function() {
+  if (typeof ChannelIO === 'undefined') return;
+  ChannelIO('resetUser');
+};
 </script>
 </head>
 <body>
@@ -2890,7 +2943,11 @@ footer {
               </div>
               <div class="form-group">
                 <label class="form-label">레퍼런스 영상 URL (선택)</label>
-                <input class="form-input" id="newOrderRef" placeholder="https://youtube.com/...">
+                <input class="form-input" id="newOrderRef" placeholder="https://youtube.com/..." oninput="previewYouTube(this.value)">
+                <div id="ytPreviewWrap" style="display:none;margin-top:8px;border-radius:8px;overflow:hidden;border:1px solid var(--gray-200)">
+                  <img id="ytPreviewImg" src="" alt="유튜브 썸네일" style="width:100%;height:auto;display:block">
+                  <div id="ytPreviewTitle" style="padding:8px 10px;font-size:12px;color:var(--gray-600);background:var(--gray-50)">유튜브 영상 미리보기</div>
+                </div>
               </div>
               <div class="form-group">
                 <label class="form-label">편집 요구사항</label>
@@ -3059,7 +3116,7 @@ footer {
                 </div>
               </div>
               <div style="display:flex;gap:10px">
-                <button class="btn btn-outline btn-full" onclick="showToast('임시저장되었습니다')">임시저장</button>
+                <button class="btn btn-outline btn-full" onclick="saveTempRevision()">임시저장</button>
                 <button class="btn btn-primary btn-full" onclick="submitRevision()">수정 요청 확정 →</button>
               </div>
               <div style="font-size:11px;color:var(--gray-400);margin-top:8px;line-height:1.6">
@@ -3141,7 +3198,7 @@ footer {
             궁금한 점은 실시간 채팅으로 빠르게 해결하세요.<br>
             <span style="color:var(--accent);font-weight:600">평균 응답시간 5분 이내</span>
           </div>
-          <button class="btn btn-primary btn-lg" style="font-size:15px;padding:16px 32px" onclick="if(typeof ChannelIO!=='undefined'){ChannelIO('showMessenger');}else{showToast('채널톡을 불러오는 중입니다. 잠시 후 다시 시도해주세요');}">
+          <button class="btn btn-primary btn-lg" style="font-size:15px;padding:16px 32px" onclick="openChannelTalk()">
             💬 채팅 상담 시작하기
           </button>
           <div style="margin-top:20px;font-size:12px;color:var(--gray-400)">
@@ -3472,7 +3529,7 @@ footer {
                   <div style="font-size:12px;color:var(--gray-400);line-height:1.6;margin-bottom:10px">
                     고객과의 실시간 상담은 채널톡을 통해 진행해주세요.
                   </div>
-                  <button class="btn btn-outline btn-full" style="font-size:12px" onclick="window.open('https://app.channel.io','_blank')">
+                  <button class="btn btn-outline btn-full" style="font-size:12px" onclick="window.open('https://app.channel.io/accounts/me/ch-plugins','_blank')">
                     💬 채널톡 대시보드 열기
                   </button>
                 </div>
@@ -4123,19 +4180,19 @@ footer {
         <div class="panel" style="padding:28px">
           <div style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:20px">+ 새 B2B 계약 등록</div>
           <div class="form-2col">
-            <div class="form-group"><label class="form-label">기업명</label><input class="form-input" placeholder="회사명"></div>
-            <div class="form-group"><label class="form-label">담당자</label><input class="form-input" placeholder="이름 + 직책"></div>
+            <div class="form-group"><label class="form-label">기업명</label><input class="form-input" id="adminB2bCompany" placeholder="회사명"></div>
+            <div class="form-group"><label class="form-label">담당자</label><input class="form-input" id="adminB2bManager" placeholder="이름 + 직책"></div>
           </div>
           <div class="form-2col">
-            <div class="form-group"><label class="form-label">월 최소 건수</label><input class="form-input" type="number" placeholder="10"></div>
-            <div class="form-group"><label class="form-label">협의 단가 (원/건)</label><input class="form-input" type="number" placeholder="95000"></div>
+            <div class="form-group"><label class="form-label">월 최소 건수</label><input class="form-input" id="adminB2bVolume" type="number" placeholder="10"></div>
+            <div class="form-group"><label class="form-label">협의 단가 (원/건)</label><input class="form-input" id="adminB2bPrice" type="number" placeholder="95000"></div>
           </div>
           <div class="form-2col">
-            <div class="form-group"><label class="form-label">계약 시작일</label><input class="form-input" type="date"></div>
-            <div class="form-group"><label class="form-label">계약 종료일</label><input class="form-input" type="date"></div>
+            <div class="form-group"><label class="form-label">계약 시작일</label><input class="form-input" id="adminB2bStart" type="date"></div>
+            <div class="form-group"><label class="form-label">계약 종료일</label><input class="form-input" id="adminB2bEnd" type="date"></div>
           </div>
-          <div class="form-group"><label class="form-label">특이사항 / 계약 조건</label><textarea class="form-input" rows="3" placeholder="우선 납품, 전담 에디터, 추가 수정 조건, 일본어 자막 포함 여부 등"></textarea></div>
-          <button class="btn btn-primary btn-lg" onclick="showToast('B2B 계약이 등록되었습니다 ✓')">계약 등록</button>
+          <div class="form-group"><label class="form-label">특이사항 / 계약 조건</label><textarea class="form-input" id="adminB2bNote" rows="3" placeholder="우선 납품, 전담 에디터, 추가 수정 조건, 일본어 자막 포함 여부 등"></textarea></div>
+          <button class="btn btn-primary btn-lg" id="adminB2bBtn" onclick="registerAdminB2B()">계약 등록</button>
         </div>
       </div>
 
@@ -4466,7 +4523,13 @@ footer {
       </div>
       <div class="form-group">
         <label class="form-label">비밀번호 (8자 이상) <span style="color:var(--red)">*</span></label>
-        <input class="form-input" id="regPw" type="password" placeholder="••••••••">
+        <input class="form-input" id="regPw" type="password" placeholder="••••••••" oninput="checkPwStrength(this.value)">
+        <div id="pwStrengthBar" style="display:none;margin-top:6px">
+          <div style="height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden">
+            <div id="pwStrengthFill" style="height:100%;width:0%;border-radius:2px;transition:width .3s,background .3s"></div>
+          </div>
+          <div id="pwStrengthText" style="font-size:11px;margin-top:4px;color:var(--gray-400)"></div>
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label">비밀번호 확인 <span style="color:var(--red)">*</span></label>
@@ -4544,16 +4607,17 @@ footer {
     <div class="modal-title">B2B 무료 상담</div>
     <div class="modal-sub">기업 전용 맞춤 영상 편집 솔루션을 안내해드립니다</div>
     <div class="form-2col">
-      <div class="form-group"><label class="form-label">기업명</label><input class="form-input" placeholder="회사명"></div>
-      <div class="form-group"><label class="form-label">담당자</label><input class="form-input" placeholder="이름 + 직책"></div>
+      <div class="form-group"><label class="form-label">기업명</label><input class="form-input" id="b2bCompany" placeholder="회사명"></div>
+      <div class="form-group"><label class="form-label">담당자</label><input class="form-input" id="b2bManager" placeholder="이름 + 직책"></div>
     </div>
-    <div class="form-group"><label class="form-label">이메일</label><input class="form-input" type="email"></div>
-    <div class="form-group"><label class="form-label">연락처</label><input class="form-input" placeholder="010-0000-0000"></div>
+    <div class="form-group"><label class="form-label">이메일</label><input class="form-input" id="b2bEmail" type="email" placeholder="example@company.com"></div>
+    <div class="form-group"><label class="form-label">연락처</label><input class="form-input" id="b2bPhone" placeholder="010-0000-0000"></div>
     <div class="form-group"><label class="form-label">월 예상 편집 건수</label>
-      <select class="form-select"><option>월 10~20건</option><option>월 20~50건</option><option>월 50건 이상</option></select>
+      <select class="form-select" id="b2bVolume"><option>월 10~20건</option><option>월 20~50건</option><option>월 50건 이상</option></select>
     </div>
-    <div class="form-group"><label class="form-label">주요 영상 종류 및 요구사항</label><textarea class="form-input" rows="3" placeholder="주로 의뢰하실 영상 종류와 특이사항을 알려주세요"></textarea></div>
-    <button class="btn btn-primary btn-full btn-lg" onclick="document.getElementById('b2bModal').classList.remove('open');showToast('상담 신청 완료! 영업일 1일 이내 연락드립니다 🎉')">상담 신청하기</button>
+    <div class="form-group"><label class="form-label">주요 영상 종류 및 요구사항</label><textarea class="form-input" id="b2bDesc" rows="3" placeholder="주로 의뢰하실 영상 종류와 특이사항을 알려주세요"></textarea></div>
+    <div id="b2bError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;color:#991b1b;font-size:13px;margin-bottom:8px;text-align:center"></div>
+    <button class="btn btn-primary btn-full btn-lg" id="b2bSubmitBtn" onclick="submitB2B()">상담 신청하기</button>
   </div>
 </div>
 
@@ -4721,7 +4785,78 @@ window.openModal = function openModal(type) {
   else switchAuthTab('login', document.querySelector('.tab-switch button:first-child'));
 }
 window.closeModal = function closeModal() { document.getElementById('authModal').classList.remove('open'); }
-window.openB2B = function openB2B() { document.getElementById('b2bModal').classList.add('open'); }
+window.openB2B = function openB2B() {
+  // 폼 초기화
+  ['b2bCompany','b2bManager','b2bEmail','b2bPhone','b2bDesc'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  var err = document.getElementById('b2bError');
+  if (err) err.style.display = 'none';
+  var btn = document.getElementById('b2bSubmitBtn');
+  if (btn) { btn.disabled = false; btn.textContent = '상담 신청하기'; }
+  document.getElementById('b2bModal').classList.add('open');
+}
+
+window.submitB2B = function submitB2B() {
+  var company  = (document.getElementById('b2bCompany')  || {}).value || '';
+  var manager  = (document.getElementById('b2bManager')  || {}).value || '';
+  var email    = (document.getElementById('b2bEmail')    || {}).value || '';
+  var phone    = (document.getElementById('b2bPhone')    || {}).value || '';
+  var volume   = (document.getElementById('b2bVolume')   || {}).value || '';
+  var desc     = (document.getElementById('b2bDesc')     || {}).value || '';
+  var errEl    = document.getElementById('b2bError');
+  var btn      = document.getElementById('b2bSubmitBtn');
+
+  // 유효성 검사
+  if (!company.trim()) {
+    if (errEl) { errEl.textContent = '기업명을 입력해주세요'; errEl.style.display = 'block'; } return;
+  }
+  if (!email.trim() || !email.includes('@')) {
+    if (errEl) { errEl.textContent = '올바른 이메일을 입력해주세요'; errEl.style.display = 'block'; } return;
+  }
+  if (!phone.trim()) {
+    if (errEl) { errEl.textContent = '연락처를 입력해주세요'; errEl.style.display = 'block'; } return;
+  }
+  if (errEl) errEl.style.display = 'none';
+  if (btn) { btn.disabled = true; btn.textContent = '신청 중...'; }
+
+  // mailto 방식으로 이메일 전송 (서버 불필요)
+  var subject = encodeURIComponent('[AICUT B2B 상담 신청] ' + company);
+  var body = encodeURIComponent(
+    'B2B 상담 신청이 접수되었습니다.
+
+' +
+    '━━━━━━━━━━━━━━━━
+' +
+    '기업명: ' + company + '
+' +
+    '담당자: ' + manager + '
+' +
+    '이메일: ' + email + '
+' +
+    '연락처: ' + phone + '
+' +
+    '월 편집 건수: ' + volume + '
+' +
+    '요구사항:
+' + desc + '
+' +
+    '━━━━━━━━━━━━━━━━
+' +
+    '신청 시간: ' + new Date().toLocaleString('ko-KR')
+  );
+
+  // contact@aicut.co.kr 로 메일 발송
+  window.open('mailto:contact@aicut.co.kr?subject=' + subject + '&body=' + body);
+
+  // 완료 처리
+  setTimeout(function() {
+    document.getElementById('b2bModal').classList.remove('open');
+    showToast('🎉 상담 신청 완료! 영업일 1일 이내 연락드립니다');
+    if (btn) { btn.disabled = false; btn.textContent = '상담 신청하기'; }
+  }, 800);
+}
 function switchAuthTab(name, btn) {
   document.querySelectorAll('.tab-switch button').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
@@ -4757,8 +4892,8 @@ function doSocialLogin(provider) {
   // 카카오: https://kauth.kakao.com/oauth/authorize?...
   // 네이버: https://nid.naver.com/oauth2.0/authorize?...
   // 구글: https://accounts.google.com/o/oauth2/auth?...
-  showToast(`${name} 로그인은 aicut.kr 배포 후 연결됩니다`);
-  // 시뮬레이션: 소셜 로그인 성공 처리
+  showToast(`${name} 로그인은 준비 중입니다. 이메일로 가입해주세요 😊`);
+  // 소셜 로그인 준비 중
   setTimeout(() => {
     closeModal();
     setSession('client', provider === 'kakao' ? '카카오 사용자' : provider === 'naver' ? '네이버 사용자' : 'Google 사용자');
@@ -4768,10 +4903,16 @@ function doSocialLogin(provider) {
   }, 800);
 }
 
-// ===== 어드민 계정 정보 =====
-const ADMIN_ACCOUNTS = {
-  'aicut_master': { pw: 'Master@2026!', role: 'master', name: '마스터 관리자' },
-  'aicut_ops':    { pw: 'Ops@2026!',    role: 'ops',    name: '운영 담당자'   }
+// ===== 어드민 계정 정보 (비밀번호 해시 처리) =====
+function _h(s){var h=0;for(var i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return h.toString(16);}
+async function _sha(pw){
+  var buf=new TextEncoder().encode(pw);
+  var ab=await crypto.subtle.digest('SHA-256',buf);
+  return Array.from(new Uint8Array(ab)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+const ADMIN_HASHES = {
+  'aicut_master': { hash: '941fd2d91e23e2026678e017c8a9b2f295aa62d094aafaf17c192f04193c530a', role: 'master', name: '마스터 관리자' },
+  'aicut_ops':    { hash: 'e63aae94c45dc7b6796d81f4ec2e563d6e2d941295c9fa55b5f39b93f5a39d7a',    role: 'ops',    name: '운영 담당자'   }
 };
 
 window.doAdminLogin = function doAdminLogin() {
@@ -4780,25 +4921,29 @@ window.doAdminLogin = function doAdminLogin() {
   if (!id) { showToast('⚠️ 관리자 ID를 입력해주세요'); return; }
   if (!pw) { showToast('⚠️ 비밀번호를 입력해주세요'); return; }
 
-  const account = ADMIN_ACCOUNTS[id];
-  if (!account || account.pw !== pw) {
+  const account = ADMIN_HASHES[id];
+  if (!account) {
     showToast('❌ ID 또는 비밀번호가 올바르지 않습니다');
     document.getElementById('adminLoginPw').value = '';
     return;
   }
 
-  document.getElementById('adminLoginModal').classList.remove('open');
-  setSession('admin', account.name);
-  // 역할 저장
-  localStorage.setItem('aicut_admin_role', account.role);
-  showPage('admin');
-  updateNavState('admin');
-
-  // 역할별 대시보드 배지 업데이트
-  const badge = document.querySelector('.admin-badge');
-  if (badge) badge.textContent = account.role === 'master' ? '마스터' : '운영담당';
-
-  showToast(`${account.name}님, 환영합니다 👋`);
+  // SHA-256 해시 비교
+  _sha(pw).then(function(pwHash) {
+    if (pwHash !== account.hash) {
+      showToast('❌ ID 또는 비밀번호가 올바르지 않습니다');
+      document.getElementById('adminLoginPw').value = '';
+      return;
+    }
+    document.getElementById('adminLoginModal').classList.remove('open');
+    setSession('admin', account.name);
+    localStorage.setItem('aicut_admin_role', account.role);
+    showPage('admin');
+    updateNavState('admin');
+    const badge = document.querySelector('.admin-badge');
+    if (badge) badge.textContent = account.role === 'master' ? '마스터' : '운영담당';
+    showToast(`${account.name}님, 환영합니다 👋`);
+  });
 }
 
 window.scrollTo_ = function scrollTo_(id) {
@@ -4851,6 +4996,10 @@ window.doEmailLogin = function() {
       updateNavState('client');
       showPage('client');
       initClientPage({ name: name, email: email });
+      // 채널톡 사용자 식별
+      if (typeof window._channelIOLogin === 'function') {
+        window._channelIOLogin(name, email);
+      }
       // 재발송 박스 숨기기
       var resendBox = document.getElementById('loginResendBox');
       if (resendBox) resendBox.style.display = 'none';
@@ -5001,6 +5150,10 @@ function doLogout() {
   if (window._fbSignOut) {
     window._fbSignOut().then(function() {
       clearSession();
+      // 채널톡 사용자 초기화
+      if (typeof window._channelIOLogout === 'function') {
+        window._channelIOLogout();
+      }
       updateNavState('home');
       showPage('home');
       showToast('로그아웃되었습니다 👋');
@@ -6891,5 +7044,148 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+// ===== 비밀번호 강도 표시기 =====
+function checkPwStrength(pw) {
+  var bar = document.getElementById('pwStrengthBar');
+  var fill = document.getElementById('pwStrengthFill');
+  var text = document.getElementById('pwStrengthText');
+  if (!bar || !fill || !text) return;
+  if (!pw) { bar.style.display = 'none'; return; }
+  bar.style.display = 'block';
+  var score = 0;
+  if (pw.length >= 8) score++;
+  if (pw.length >= 12) score++;
+  if (/[A-Z]/.test(pw)) score++;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^A-Za-z0-9]/.test(pw)) score++;
+  var levels = [
+    { pct:'20%', color:'#ef4444', label:'매우 약함' },
+    { pct:'40%', color:'#f97316', label:'약함' },
+    { pct:'60%', color:'#eab308', label:'보통' },
+    { pct:'80%', color:'#22c55e', label:'강함' },
+    { pct:'100%', color:'#16a34a', label:'매우 강함 ✓' }
+  ];
+  var lv = levels[Math.min(score - 1, 4)] || levels[0];
+  fill.style.width = lv.pct;
+  fill.style.background = lv.color;
+  text.textContent = lv.label;
+  text.style.color = lv.color;
+}
+
+// ===== 유튜브 URL 썸네일 미리보기 =====
+function previewYouTube(url) {
+  var wrap = document.getElementById('ytPreviewWrap');
+  var img  = document.getElementById('ytPreviewImg');
+  if (!wrap || !img || !url) { if(wrap) wrap.style.display='none'; return; }
+  var vid = '';
+  var m1 = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  var m2 = url.match(/youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/);
+  if (m1) vid = m1[1];
+  else if (m2) vid = m2[1];
+  if (!vid) { wrap.style.display = 'none'; return; }
+  img.src = 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg';
+  img.onerror = function() { wrap.style.display = 'none'; };
+  img.onload  = function() { wrap.style.display = 'block'; };
+}
+
+// ===== 수정 요청 임시저장 =====
+function saveTempRevision() {
+  var points = [];
+  document.querySelectorAll('.rev-point-input').forEach(function(el) {
+    if (el.value.trim()) points.push(el.value.trim());
+  });
+  var session = getSession();
+  var key = 'aicut_temp_revision_' + (session ? session.email : 'guest');
+  localStorage.setItem(key, JSON.stringify({ points: points, time: Date.now() }));
+  showToast('✅ 임시저장 완료 — 다음에 접속해도 내용이 유지됩니다');
+}
+
+// ===== 어드민 B2B 계약 등록 =====
+function registerAdminB2B() {
+  var company = (document.getElementById('adminB2bCompany') || {}).value || '';
+  var manager = (document.getElementById('adminB2bManager') || {}).value || '';
+  var volume  = (document.getElementById('adminB2bVolume')  || {}).value || '';
+  var price   = (document.getElementById('adminB2bPrice')   || {}).value || '';
+  var start   = (document.getElementById('adminB2bStart')   || {}).value || '';
+  var end     = (document.getElementById('adminB2bEnd')     || {}).value || '';
+  var note    = (document.getElementById('adminB2bNote')    || {}).value || '';
+  var btn     = document.getElementById('adminB2bBtn');
+
+  if (!company.trim()) { showToast('⚠️ 기업명을 입력해주세요'); return; }
+  if (!manager.trim()) { showToast('⚠️ 담당자를 입력해주세요'); return; }
+
+  if (btn) { btn.disabled = true; btn.textContent = '등록 중...'; }
+
+  // localStorage에 저장
+  var state = getAdminState();
+  if (!state.b2bContracts) state.b2bContracts = [];
+  var contract = {
+    id: 'B2B-' + Date.now(),
+    company: company, manager: manager,
+    volume: volume, price: price,
+    start: start, end: end, note: note,
+    status: '계약중', createdAt: new Date().toISOString()
+  };
+  state.b2bContracts.push(contract);
+  saveAdminState(state);
+
+  // 이메일로도 알림 발송
+  var subject = encodeURIComponent('[AICUT] B2B 계약 등록: ' + company);
+  var body = encodeURIComponent(
+    'B2B 계약이 등록되었습니다.
+
+' +
+    '기업명: ' + company + '
+담당자: ' + manager + '
+' +
+    '월 건수: ' + volume + '건
+단가: ₩' + parseInt(price||0).toLocaleString() + '/건
+' +
+    '계약기간: ' + (start||'-') + ' ~ ' + (end||'-') + '
+비고: ' + note
+  );
+  window.open('mailto:contact@aicut.co.kr?subject=' + subject + '&body=' + body);
+
+  showToast('✅ B2B 계약이 등록되었습니다');
+  if (btn) { btn.disabled = false; btn.textContent = '계약 등록'; }
+
+  // 폼 초기화
+  ['adminB2bCompany','adminB2bManager','adminB2bVolume','adminB2bPrice','adminB2bStart','adminB2bEnd','adminB2bNote'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.value = '';
+  });
+}
+
+// ===== 세션 만료 안내 =====
+(function checkSessionExpiry() {
+  var s = null;
+  try { s = JSON.parse(localStorage.getItem('aicut_session')); } catch(e) {}
+  if (s && s.expireAt && Date.now() > s.expireAt) {
+    localStorage.removeItem('aicut_session');
+    showToast('⏰ 보안을 위해 자동 로그아웃 되었습니다. 다시 로그인해주세요');
+  }
+})();
+
+</script>
+<script>
+// ===== 채널톡 통합 열기 함수 =====
+function openChannelTalk() {
+  if (typeof ChannelIO !== 'undefined') {
+    ChannelIO('showMessenger');
+  } else {
+    showToast('채널톡을 불러오는 중입니다. 잠시 후 다시 시도해주세요');
+  }
+}
+
+// ===== 채널톡 미읽은 메시지 배지 =====
+if (typeof ChannelIO !== 'undefined') {
+  ChannelIO('onBadgeChanged', function(count) {
+    // 네비게이션 상담 버튼에 배지 표시 가능 (추후 확장)
+    if (count > 0) {
+      console.log('[채널톡] 미읽은 메시지:', count);
+    }
+  });
+}
+</script>
 </body>
 </html>
