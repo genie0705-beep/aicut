@@ -4783,26 +4783,13 @@ window.submitB2B = function submitB2B() {
   // mailto 방식으로 이메일 전송 (서버 불필요)
   var subject = encodeURIComponent('[AICUT B2B 상담 신청] ' + company);
   var body = encodeURIComponent(
-    'B2B 상담 신청이 접수되었습니다.
-
-' +
-    '━━━━━━━━━━━━━━━━
-' +
-    '기업명: ' + company + '
-' +
-    '담당자: ' + manager + '
-' +
-    '이메일: ' + email + '
-' +
-    '연락처: ' + phone + '
-' +
-    '월 편집 건수: ' + volume + '
-' +
-    '요구사항:
-' + desc + '
-' +
-    '━━━━━━━━━━━━━━━━
-' +
+    'B2B 상담 신청이 접수되었습니다.\n\n' +
+    '기업명: ' + company + '\n' +
+    '담당자: ' + manager + '\n' +
+    '이메일: ' + email + '\n' +
+    '연락처: ' + phone + '\n' +
+    '월 편집 건수: ' + volume + '\n' +
+    '요구사항: ' + desc + '\n' +
     '신청 시간: ' + new Date().toLocaleString('ko-KR')
   );
 
@@ -7092,17 +7079,13 @@ function registerAdminB2B() {
   // 이메일로도 알림 발송
   var subject = encodeURIComponent('[AICUT] B2B 계약 등록: ' + company);
   var body = encodeURIComponent(
-    'B2B 계약이 등록되었습니다.
-
-' +
-    '기업명: ' + company + '
-담당자: ' + manager + '
-' +
-    '월 건수: ' + volume + '건
-단가: ₩' + parseInt(price||0).toLocaleString() + '/건
-' +
-    '계약기간: ' + (start||'-') + ' ~ ' + (end||'-') + '
-비고: ' + note
+    'B2B 계약이 등록되었습니다.\n\n' +
+    '기업명: ' + company + '\n' +
+    '담당자: ' + manager + '\n' +
+    '월 건수: ' + volume + '건\n' +
+    '단가: ' + parseInt(price||0).toLocaleString() + '원/건\n' +
+    '계약기간: ' + (start||'-') + ' ~ ' + (end||'-') + '\n' +
+    '비고: ' + note
   );
   window.open('mailto:contact@aicut.co.kr?subject=' + subject + '&body=' + body);
 
