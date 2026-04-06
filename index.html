@@ -65,7 +65,7 @@
       }
     ]
   },
-  "sameAs": ["https://pf.kakao.com/"],
+  "sameAs": [],
   "founder": { "@type": "Person", "name": "정효진" },
   "legalName": "주식회사 온니바이어"
 }
@@ -2682,7 +2682,6 @@ footer {
       <div class="footer-heading">고객지원</div>
       <ul class="footer-links">
         <li><a style="cursor:pointer" onclick="openInfoModal('faq')">자주 묻는 질문</a></li>
-        <li><a style="cursor:pointer" href="https://pf.kakao.com/" target="_blank">카카오톡 채널</a></li>
         <li><a style="cursor:pointer" onclick="openInfoModal('guide')">이용 가이드</a></li>
         <li><a style="cursor:pointer" onclick="openInfoModal('editor')">에디터 지원</a></li>
       </ul>
@@ -3212,9 +3211,6 @@ footer {
     <a class="active" onclick="showTab('admin','a-home',this);setAdminTab(this)">
       <span class="abn-icon">📊</span><span>대시보드</span>
     </a>
-    <a onclick="showTab('admin','a-kanban',this);setAdminTab(this)">
-      <span class="abn-icon">🎬</span><span>칸반</span>
-    </a>
     <a onclick="showTab('admin','a-orders',this);setAdminTab(this)">
       <span class="abn-icon">📋</span><span>주문</span>
     </a>
@@ -3224,7 +3220,39 @@ footer {
     <a onclick="showTab('admin','a-revenue',this);setAdminTab(this)">
       <span class="abn-icon">📈</span><span>매출</span>
     </a>
+    <a onclick="toggleAdminMobileMenu()" id="adminMoreBtn">
+      <span class="abn-icon">☰</span><span>더보기</span>
+    </a>
   </nav>
+  <!-- 어드민 모바일 더보기 메뉴 -->
+  <div id="adminMobileMenu" style="display:none;position:fixed;bottom:60px;left:0;right:0;background:var(--primary);z-index:1001;padding:8px 0;border-top:1px solid rgba(255,255,255,0.1);box-shadow:0 -4px 20px rgba(0,0,0,0.3)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+      <a onclick="showTab('admin','a-kanban',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-size:18px">🎬</span> 칸반 보드
+      </a>
+      <a onclick="showTab('admin','a-editors',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-size:18px">✂️</span> 에디터
+      </a>
+      <a onclick="showTab('admin','a-users',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-size:18px">👤</span> 회원 관리
+      </a>
+      <a onclick="showTab('admin','a-pricing',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-size:18px">💰</span> 요금제
+      </a>
+      <a onclick="showTab('admin','a-b2b',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-size:18px">🏢</span> B2B 관리
+      </a>
+      <a onclick="showTab('admin','a-admins',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-size:18px">🔐</span> 관리자 계정
+      </a>
+      <a onclick="showPage('home');closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer">
+        <span style="font-size:18px">🌐</span> 사이트 이동
+      </a>
+      <a onclick="doLogout();closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:#ff6b6b;font-size:14px;font-weight:700;cursor:pointer">
+        <span style="font-size:18px">🚪</span> 로그아웃
+      </a>
+    </div>
+  </div>
   <div class="dash-wrap">
     <div class="sidebar">
       <div class="sb-logo">AI<span>CUT</span><br><span style="font-size:10px;color:var(--red);font-weight:700;letter-spacing:1px">ADMIN</span></div>
@@ -4506,8 +4534,8 @@ footer {
       </div>
       <button class="btn btn-primary btn-full btn-lg" id="regBtn" onclick="window.doEmailRegister && doEmailRegister()">무료로 시작하기 →</button>
       <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--gray-400);line-height:1.6;word-break:keep-all">
-        가입 시 <a style="color:var(--accent);cursor:pointer" onclick="openInfoModal('guide')">이용약관</a> 및
-        <a style="color:var(--accent);cursor:pointer" onclick="openInfoModal('faq')">개인정보처리방침</a>에 동의하게 됩니다
+        가입 시 <a style="color:var(--accent);cursor:pointer;text-decoration:underline" onclick="openLegalModal('terms')">이용약관</a> 및
+        <a style="color:var(--accent);cursor:pointer;text-decoration:underline" onclick="openLegalModal('privacy')">개인정보처리방침</a>에 동의하게 됩니다
       </div>
     </div>
 
@@ -4649,7 +4677,7 @@ footer {
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
 
 <script>
 // 전역 함수 즉시 선언 - onclick 호출 보호
@@ -7158,6 +7186,44 @@ function openChannelTalk() {
     if(typeof showToast==='function') showToast('채널톡을 불러오는 중입니다. 잠시 후 다시 시도해주세요');
   }
 }
+</script>
+<script>
+// ===== 어드민 모바일 더보기 메뉴 =====
+function toggleAdminMobileMenu() {
+  var menu = document.getElementById('adminMobileMenu');
+  if (!menu) return;
+  var isOpen = menu.style.display !== 'none';
+  menu.style.display = isOpen ? 'none' : 'block';
+  var btn = document.getElementById('adminMoreBtn');
+  if (btn) {
+    var icon = btn.querySelector('.abn-icon');
+    if (icon) icon.textContent = isOpen ? '☰' : '✕';
+    var label = btn.querySelector('span:not(.abn-icon)');
+    if (label) label.textContent = isOpen ? '더보기' : '닫기';
+  }
+}
+
+function closeAdminMobileMenu() {
+  var menu = document.getElementById('adminMobileMenu');
+  if (menu) menu.style.display = 'none';
+  var btn = document.getElementById('adminMoreBtn');
+  if (btn) {
+    var icon = btn.querySelector('.abn-icon');
+    if (icon) icon.textContent = '☰';
+    var label = btn.querySelector('span:not(.abn-icon)');
+    if (label) label.textContent = '더보기';
+  }
+}
+
+// 메뉴 외부 클릭 시 닫기
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('adminMobileMenu');
+  var btn = document.getElementById('adminMoreBtn');
+  if (!menu || menu.style.display === 'none') return;
+  if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
+    closeAdminMobileMenu();
+  }
+});
 </script>
 </body>
 </html>
