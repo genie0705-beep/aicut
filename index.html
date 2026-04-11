@@ -921,9 +921,20 @@ section { padding: 96px 48px; }
   z-index: 1;
 }
 .final-cta > * { position: relative; z-index: 2; }
-.final-cta h2 { font-size: clamp(28px, 4vw, 56px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 16px; text-shadow: 0 0 60px rgba(92,61,232,0.4), 0 2px 32px rgba(0,0,0,0.9); }
-.final-cta p { font-size: 17px; color: rgba(255,255,255,0.65); margin-bottom: 44px; text-shadow: 0 1px 12px rgba(0,0,0,0.8); }
-.final-cta-btns { display: flex; gap: 14px; justify-content: center; }
+.final-cta h2 { font-size: clamp(24px, 3.5vw, 52px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 16px; text-shadow: 0 0 60px rgba(92,61,232,0.4), 0 2px 32px rgba(0,0,0,0.9); }
+.final-cta p { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 36px; text-shadow: 0 1px 12px rgba(0,0,0,0.8); }
+.final-cta-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.final-cta-inner { display: flex; align-items: center; gap: 60px; max-width: 1160px; margin: 0 auto; }
+.final-cta-text { flex: 1; min-width: 280px; text-align: left; }
+.final-cta-video { flex-shrink: 0; width: 480px; border-radius: 16px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.12); }
+.final-cta-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.final-cta-video-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(92,61,232,0.15) 0%, transparent 60%); pointer-events: none; }
+@media (max-width: 900px) {
+  .final-cta-inner { flex-direction: column; gap: 36px; }
+  .final-cta-text { text-align: center; }
+  .final-cta-text .final-cta-btns { justify-content: center; }
+  .final-cta-video { width: 100%; max-width: 520px; }
+}
 
 /* ========== FOOTER ========== */
 footer {
@@ -2738,17 +2749,37 @@ footer {
 
 <!-- FINAL CTA -->
 <div class="final-cta">
-  <div style="display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,0.7);margin-bottom:20px">무료 도입 상담</div>
-  <h2>영상 인력 채용 전,<br>에이컷으로 먼저 시작하세요</h2>
-  <p style="word-break:keep-all">월 정기 편집 파트너를 찾고 계신다면, 상담 신청 후 24시간 이내 전담 매니저가 연락드립니다.<br>현재 상황과 필요 편수만 알려주시면 맞춤 플랜을 제안해 드립니다.</p>
-  <div class="final-cta-btns">
-    <button class="btn btn-xl" style="background:white;color:var(--primary);font-weight:700" onclick="openB2B()">무료 도입 상담 신청 →</button>
-    <button class="btn btn-xl btn-outline" style="border-color:rgba(255,255,255,0.3);color:white" onclick="scrollTo_('#pricing-section')">요금제 다시 보기</button>
-  </div>
-  <div style="margin-top:24px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap">
-    <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 계약 강제 없음</div>
-    <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 첫 달 언제든 해지 가능</div>
-    <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 24시간 내 응답 보장</div>
+  <div class="final-cta-inner">
+
+    <!-- 왼쪽 텍스트 -->
+    <div class="final-cta-text">
+      <div style="display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,0.7);margin-bottom:20px">무료 도입 상담</div>
+      <h2>영상 인력 채용 전,<br>에이컷으로 먼저 시작하세요</h2>
+      <p style="word-break:keep-all">월 정기 편집 파트너를 찾고 계신다면, 상담 신청 후 24시간 이내 전담 매니저가 연락드립니다.<br>현재 상황과 필요 편수만 알려주시면 맞춤 플랜을 제안해 드립니다.</p>
+      <div class="final-cta-btns">
+        <button class="btn btn-xl" style="background:white;color:var(--primary);font-weight:700" onclick="openB2B()">무료 도입 상담 신청 →</button>
+        <button class="btn btn-xl btn-outline" style="border-color:rgba(255,255,255,0.3);color:white" onclick="scrollTo_('#pricing-section')">요금제 다시 보기</button>
+      </div>
+      <div style="margin-top:24px;display:flex;gap:28px;flex-wrap:wrap">
+        <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 계약 강제 없음</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 첫 달 해지 가능</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 24시간 내 응답</div>
+      </div>
+    </div>
+
+    <!-- 오른쪽 편집 손 영상 -->
+    <div class="final-cta-video">
+      <video autoplay muted loop playsinline>
+        <source src="https://genie0705-beep.github.io/aicut/12358562-hd_1920_1080_30fps.mp4" type="video/mp4">
+      </video>
+      <div class="final-cta-video-overlay"></div>
+      <!-- 영상 위 레이블 -->
+      <div style="position:absolute;bottom:16px;left:16px;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:8px 14px;z-index:3">
+        <div style="font-size:10px;font-weight:700;color:rgba(167,139,250,0.9);letter-spacing:1px;margin-bottom:2px">AICUT EDITOR</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.8)">전담 에디터가 지금 작업 중입니다</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
