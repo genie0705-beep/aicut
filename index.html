@@ -2615,7 +2615,7 @@ footer {
   <div class="sp-card">
     <div class="sp-avatar" id="spAvatar">마</div>
     <div>
-      <div class="sp-text" id="spText"><strong>마케팅 에이전시</strong>가 STANDARD 계약을 신청했습니다</div>
+      <div class="sp-text" id="spText"><strong>A 마케팅사</strong> 상담 신청 완료</div>
       <div class="sp-time" id="spTime">방금 전</div>
     </div>
   </div>
@@ -7766,11 +7766,12 @@ function registerAdminB2B() {
 
   /* ── 4. 소셜 프루프 토스트 ── */
   var proofs = [
-    { init:'마', text:'<strong>마케팅 에이전시</strong>가 STANDARD 계약을 신청했습니다', time:'방금 전' },
-    { init:'스', text:'<strong>스타트업 기업</strong>이 STARTER 상담을 신청했습니다', time:'3분 전' },
-    { init:'이', text:'<strong>이커머스 브랜드</strong>가 월 정기 계약을 문의했습니다', time:'7분 전' },
-    { init:'교', text:'<strong>교육 플랫폼</strong>이 ENTERPRISE 견적을 요청했습니다', time:'12분 전' },
-    { init:'유', text:'<strong>유튜브 채널</strong>이 STANDARD 계약을 신청했습니다', time:'18분 전' },
+    { init:'A', text:'<strong>A 마케팅사</strong> 상담 신청 완료', time:'방금 전' },
+    { init:'B', text:'<strong>B 이커머스</strong> 정기 계약 완료', time:'4분 전' },
+    { init:'C', text:'<strong>C 에듀기업</strong> 견적 문의 완료', time:'8분 전' },
+    { init:'D', text:'<strong>D 미디어사</strong> STANDARD 계약 완료', time:'13분 전' },
+    { init:'E', text:'<strong>E 스타트업</strong> 도입 상담 완료', time:'19분 전' },
+    { init:'F', text:'<strong>F 병원</strong> 월 정기 계약 완료', time:'24분 전' },
   ];
   var spEl = document.getElementById('socialProof');
   var spIdx = 0;
@@ -7781,13 +7782,13 @@ function registerAdminB2B() {
     document.getElementById('spText').innerHTML = p.text;
     document.getElementById('spTime').textContent = p.time;
     spEl.classList.add('show');
-    setTimeout(function(){ spEl.classList.remove('show'); }, 4500);
+    setTimeout(function(){ spEl.classList.remove('show'); }, 5500);
     spIdx++;
   }
   setTimeout(function(){
     showProof();
-    setInterval(showProof, 14000);
-  }, 8000);
+    setInterval(showProof, 35000);
+  }, 12000);
 })();
 </script>
 
