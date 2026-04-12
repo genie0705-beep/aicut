@@ -1,0 +1,21 @@
+# AICUT (에이컷) robots.txt
+# https://aicut.co.kr
+
+User-agent: *
+Allow: /
+Disallow: /cdn-cgi/
+
+# 네이버 봇 (Yeti)
+User-agent: Yeti
+Allow: /
+Crawl-delay: 1
+
+# 구글 봇
+User-agent: Googlebot
+Allow: /
+
+# 빙 봇
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://aicut.co.kr/sitemap.xml
