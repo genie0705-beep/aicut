@@ -253,6 +253,139 @@ body {
   --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
 }
 
+/* ========== PRICING SUB TAGS ========== */
+.pricing-sub-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 4px;
+  margin-top: -8px;
+  margin-bottom: 4px;
+}
+.pricing-sub-tag {
+  font-size: 14px;
+  color: var(--gray-400);
+  white-space: nowrap;
+}
+.pricing-sub-divider {
+  font-size: 14px;
+  color: var(--gray-300);
+}
+@media (max-width: 768px) {
+  .pricing-sub-tags {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .pricing-sub-divider { display: none; }
+  .pricing-sub-tag { font-size: 13px; }
+}
+
+/* ========== VFX SECTION ========== */
+.vfx-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: clamp(60px,8vw,100px) clamp(24px,4vw,48px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+.vfx-text { flex: 1; min-width: 0; }
+.vfx-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.9;
+  margin-bottom: 24px;
+  word-break: keep-all;
+}
+.vfx-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.vfx-tag {
+  background: rgba(92,61,232,0.25);
+  border: 1px solid rgba(92,61,232,0.5);
+  color: rgba(167,139,250,0.9);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.vfx-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.vfx-card {
+  flex-shrink: 0;
+  width: 260px;
+}
+@media (max-width: 768px) {
+  .vfx-inner {
+    flex-direction: column;
+    padding: clamp(40px,8vw,60px) 20px;
+    gap: 0;
+  }
+  .vfx-card { display: none; }
+  .vfx-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .vfx-desc br { display: none; }
+  .vfx-tags {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .vfx-tag {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .vfx-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .vfx-cta-row .btn { width: 100%; justify-content: center; }
+}
+
+/* ========== CTA TRUST ROW ========== */
+.cta-trust-row {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+.cta-trust-item {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+}
+.cta-trust-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+@media (max-width: 480px) {
+  .cta-trust-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cta-trust-divider { display: none; }
+  .cta-trust-item { font-size: 14px; }
+}
+
 /* ========== SCROLL REVEAL ========== */
 .reveal {
   opacity: 0;
@@ -1136,7 +1269,7 @@ section { padding: 96px 48px; }
 }
 .b2b-left { flex: 1; }
 .b2b-eyebrow { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 2px; font-weight: 700; margin-bottom: 10px; }
-.b2b-title { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+.b2b-title { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; word-break: keep-all; }
 .b2b-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; }
 
 /* ========== REVIEWS ========== */
@@ -2192,14 +2325,13 @@ footer {
   .per-unit-item:last-child { border-bottom: none !important; }
 
   /* ===== VFX 섹션 ===== */
-  #vfx-section { padding: 28px 20px !important; border-radius: 14px !important; gap: 20px !important; }
-  #vfx-section > div:first-of-type { width: 100% !important; }
-  #vfx-section [style*="font-size:26px"] { font-size: 18px !important; }
-  #vfx-section [style*="font-size:clamp"] { font-size: clamp(18px,5vw,26px) !important; }
+  #vfx-section { min-height: auto !important; }
 
   /* ===== B2B 블록 ===== */
   .b2b-block { flex-direction: column; gap: 20px; padding: 24px 20px !important; }
-  .b2b-block [style*="font-size:clamp"] { font-size: clamp(18px,5vw,26px) !important; }
+  .b2b-title { font-size: 20px !important; letter-spacing: -0.3px !important; }
+  .b2b-desc { font-size: 13px !important; }
+  .b2b-desc br { display: none; }
 
   /* ===== 통계/수치 영역 ===== */
   [style*="grid-template-columns:repeat(3,1fr)"],
@@ -2548,7 +2680,7 @@ footer {
   <div class="section-center">
     <span class="section-eyebrow">HOW IT WORKS</span>
     <h2 class="section-title" style="word-break:keep-all">정기 편집, 이렇게 운영됩니다</h2>
-    <p class="section-desc" style="word-break:keep-all">온보딩 한 번이면 매월 자동으로 진행됩니다. 브랜드 가이드를 저장하면 매번 설명할 필요 없습니다.</p>
+    <p class="section-desc" style="word-break:keep-all">온보딩 한 번이면 매월 자동으로 진행됩니다.<br>브랜드 가이드를 저장하면 매번 설명할 필요 없습니다.</p>
   </div>
 
   <!-- 1행: 에디터 매칭 -->
@@ -2726,9 +2858,17 @@ footer {
     <span class="section-eyebrow">PRICING</span>
     <h2 class="section-title reveal">월 정기 패키지<br>인력 비용 없이 운영하세요</h2>
     <p class="section-desc" style="word-break:keep-all">
-      정기 계약으로 매월 안정적인 편집 리소스를 확보하세요.<br>
-      <span style="font-size:14px;color:var(--gray-400)">VAT 별도 · 전담 에디터 배정 · 브랜드 가이드 저장 · 계약 기간 제한 없음</span>
+      정기 계약으로 매월 안정적인 편집 리소스를 확보하세요.
     </p>
+    <div class="pricing-sub-tags">
+      <span class="pricing-sub-tag">VAT 별도</span>
+      <span class="pricing-sub-divider">·</span>
+      <span class="pricing-sub-tag">전담 에디터 배정</span>
+      <span class="pricing-sub-divider">·</span>
+      <span class="pricing-sub-tag">브랜드 가이드 저장</span>
+      <span class="pricing-sub-divider">·</span>
+      <span class="pricing-sub-tag">계약 기간 제한 없음</span>
+    </div>
   </div>
 
   <!-- 패키지 카드 3종 -->
@@ -2862,8 +3002,8 @@ footer {
         <div style="font-size:12px;color:var(--gray-400)">프로젝트 범위에 따라 결정</div>
       </div>
     </div>
-    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--gray-200);font-size:13px;color:var(--gray-500);text-align:center;line-height:1.6">
-      정기 패키지 계약 시 건당 단가 대비 평균 <strong style="color:var(--accent)">25~35% 절감</strong>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--gray-200);font-size:13px;color:var(--gray-500);text-align:center;line-height:1.6;word-break:keep-all">
+      정기 패키지 계약 시 건당 단가 대비 평균 <strong style="color:var(--accent);white-space:nowrap">25~35% 절감</strong>
     </div>
   </div>
 
@@ -2900,30 +3040,30 @@ footer {
   <div style="position:absolute;inset:0;z-index:1;background:rgba(0,0,0,0.45)"></div>
 
   <!-- 콘텐츠 -->
-  <div style="position:relative;z-index:2;width:100%;max-width:1160px;margin:0 auto;padding:clamp(60px,8vw,100px) clamp(20px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap">
+  <div class="vfx-inner">
 
     <!-- 왼쪽 텍스트 -->
-    <div style="flex:1;min-width:300px">
+    <div class="vfx-text">
       <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(167,139,250,0.9);margin-bottom:16px">✦ VFX · CG · MOTION</div>
-      <h2 style="font-size:clamp(28px,4vw,52px);font-weight:900;color:white;margin-bottom:20px;line-height:1.15;letter-spacing:-1px;word-break:keep-all">영상 편집 그 이상,<br><span style="color:#a78bfa">풀 VFX 프로덕션</span></h2>
-      <p style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.9;margin-bottom:28px;word-break:keep-all">모션그래픽 · CG 합성 · 3D 타이틀 · 파티클 이펙트 · 시네마틱 VFX<br>외부 VFX 업체 없이 에이컷(AICUT) 스튜디오에서 원스톱으로 처리됩니다.</p>
+      <h2 style="font-size:clamp(26px,4vw,52px);font-weight:900;color:white;margin-bottom:16px;line-height:1.2;letter-spacing:-1px;word-break:keep-all">영상 편집 그 이상,<br><span style="color:#a78bfa">풀 VFX 프로덕션</span></h2>
+      <p class="vfx-desc">모션그래픽 · CG 합성 · 3D 타이틀 · 파티클 이펙트 · 시네마틱 VFX<br>외부 VFX 업체 없이 에이컷(AICUT) 스튜디오에서 원스톱으로 처리됩니다.</p>
 
       <!-- 태그 뱃지 -->
-      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px">
-        <span style="background:rgba(92,61,232,0.25);border:1px solid rgba(92,61,232,0.5);color:rgba(167,139,250,0.9);font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px">모션그래픽 / 인포그래픽</span>
-        <span style="background:rgba(92,61,232,0.25);border:1px solid rgba(92,61,232,0.5);color:rgba(167,139,250,0.9);font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px">CG 합성 · 3D 요소 삽입</span>
-        <span style="background:rgba(92,61,232,0.25);border:1px solid rgba(92,61,232,0.5);color:rgba(167,139,250,0.9);font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px">풀 VFX 시퀀스 제작</span>
-        <span style="background:rgba(92,61,232,0.25);border:1px solid rgba(92,61,232,0.5);color:rgba(167,139,250,0.9);font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px">파티클 · 시네마틱 이펙트</span>
+      <div class="vfx-tags">
+        <span class="vfx-tag">모션그래픽 / 인포그래픽</span>
+        <span class="vfx-tag">CG 합성 · 3D 요소 삽입</span>
+        <span class="vfx-tag">풀 VFX 시퀀스 제작</span>
+        <span class="vfx-tag">파티클 · 시네마틱 이펙트</span>
       </div>
 
-      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <div class="vfx-cta-row">
         <button class="btn btn-lg" style="background:#5c3de8;color:white;border:none;font-weight:700;padding:14px 28px;font-size:15px" onclick="openB2B()">VFX 견적 문의하기 →</button>
         <div style="font-size:12px;color:rgba(255,255,255,0.35)">포트폴리오 · 레퍼런스 제공 가능</div>
       </div>
     </div>
 
-    <!-- 오른쪽 스펙 카드 -->
-    <div style="flex-shrink:0;width:260px">
+    <!-- 오른쪽 스펙 카드 (모바일 숨김) -->
+    <div class="vfx-card">
       <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:24px;backdrop-filter:blur(12px)">
         <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:16px">PROJECT QUOTE</div>
         <div style="font-size:32px;font-weight:900;color:white;margin-bottom:4px">협의</div>
@@ -3078,10 +3218,12 @@ footer {
       <button class="btn btn-xl" style="background:white;color:var(--primary);font-weight:700" onclick="openB2B()">무료 도입 상담 신청 →</button>
       <button class="btn btn-xl btn-outline" style="border-color:rgba(255,255,255,0.3);color:white" onclick="scrollTo_('#pricing-section')">요금제 다시 보기</button>
     </div>
-    <div style="margin-top:24px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap">
-      <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 계약 강제 없음</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 첫 달 언제든 해지 가능</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5)">✓ 24시간 내 응답 보장</div>
+    <div class="cta-trust-row">
+      <div class="cta-trust-item">✓ 계약 강제 없음</div>
+      <div class="cta-trust-divider"></div>
+      <div class="cta-trust-item">✓ 첫 달 언제든 해지 가능</div>
+      <div class="cta-trust-divider"></div>
+      <div class="cta-trust-item">✓ 24시간 내 응답 보장</div>
     </div>
   </div>
 
