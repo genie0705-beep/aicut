@@ -790,25 +790,42 @@ nav {
   text-shadow: 0 1px 8px rgba(0,0,0,0.4);
 }
 .hero-sub2 {
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: .3px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.hero-sub2::before,
+.hero-sub2::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
 }
 
 .cta-options {
-  display: flex; flex-wrap: wrap; gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
   justify-content: center;
-  max-width: 680px;
-  margin: 0 auto 28px;
+  max-width: 520px;
+  margin: 0 auto 32px;
 }
 
 .hero-cta-row {
-  display: flex; gap: 10px;
+  display: flex; gap: 12px;
   justify-content: center;
   flex-wrap: nowrap;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   width: 100%;
-  max-width: 560px;
+  max-width: 520px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -818,21 +835,23 @@ nav {
   white-space: nowrap;
 }
 .cta-option-btn {
-  padding: 12px 20px;
-  background: rgba(255,255,255,0.08);
-  border: 1.5px solid rgba(255,255,255,0.2);
-  border-radius: 10px;
-  font-size: 14px; font-weight: 500;
-  color: rgba(255,255,255,0.85);
+  padding: 11px 18px;
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
   cursor: pointer;
-  transition: all .18s;
+  transition: all .2s;
   font-family: inherit;
   backdrop-filter: blur(6px);
+  white-space: nowrap;
 }
 .cta-option-btn:hover,
 .cta-option-btn.selected {
   border-color: #a78bfa;
-  background: rgba(92,61,232,0.3);
+  background: rgba(92,61,232,0.35);
   color: white;
 }
 
@@ -2271,8 +2290,8 @@ footer {
   /* ===== 히어로 ===== */
   .hero { min-height: 100svh; padding: 90px 20px 60px; }
   .hero h1 { font-size: clamp(22px, 6vw, 32px); letter-spacing: -0.5px; margin-bottom: 14px; word-break: keep-all; }
-  .hero-sub { font-size: 13px; margin-bottom: 10px; word-break: keep-all; }
-  .hero-sub2 { font-size: 12px; margin-bottom: 14px; word-break: keep-all; }
+  .hero-sub { font-size: 14px; margin-bottom: 6px; word-break: keep-all; }
+  .hero-sub2 { font-size: 14px; margin-bottom: 12px; }
   .hero-badge { font-size: 11px; margin-bottom: 16px; padding: 6px 14px; }
   .cta-options { gap: 6px; margin-bottom: 16px; flex-wrap: wrap; justify-content: center; }
   .cta-option-btn { font-size: 12px; padding: 8px 12px; }
@@ -2374,7 +2393,8 @@ footer {
 @media (max-width: 360px) {
   .hero h1 { font-size: 20px; }
   .hero-cta-row .btn { font-size: 12px; padding: 12px 10px; }
-  .cta-option-btn { font-size: 11px; padding: 7px 10px; }
+  .cta-options { max-width: 300px; gap: 7px; }
+  .cta-option-btn { font-size: 11px; padding: 8px 12px; }
   .process-steps { grid-template-columns: 1fr; }
   [style*="grid-template-columns:repeat(4"] { grid-template-columns: 1fr !important; }
 }
@@ -2551,15 +2571,15 @@ footer {
 
   <div class="hero-badge"><span class="dot"></span> AI + 전담 에디터, 월 정기 편집 파트너</div>
   <h1>편집부터 납품까지<br>에이컷이 <span class="highlight">매월</span> 처리합니다</h1>
-  <p class="hero-sub">마케팅팀, 유튜브 채널, 교육 콘텐츠, 브랜드 SNS — 정기적으로 영상이 필요한 기업과 브랜드의 전담 편집 파트너. 에이컷(AICUT)이 매월 일정하게 납품합니다.</p>
-  <p class="hero-sub2" style="color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:20px">어떤 상황이신가요?</p>
+  <p class="hero-sub" style="word-break:keep-all">마케터, 유튜버, 기업 콘텐츠팀을 위한<br>채용 없는 월 정기 영상 편집 파트너</p>
+  <p class="hero-sub2">어떤 상황이신가요?</p>
   <div class="cta-options" id="ctaOptions">
     <button class="cta-option-btn" onclick="selectOption(this)">유튜브 채널 정기 편집</button>
     <button class="cta-option-btn" onclick="selectOption(this)">기업 마케팅 영상</button>
     <button class="cta-option-btn" onclick="selectOption(this)">교육 · 강의 콘텐츠</button>
     <button class="cta-option-btn" onclick="selectOption(this)">브랜드 SNS 영상</button>
-    <button class="cta-option-btn" onclick="selectOption(this)" style="border-color:rgba(167,139,250,0.6);color:#a78bfa;font-weight:700">✦ 모션그래픽 · CG</button>
-    <button class="cta-option-btn" onclick="selectOption(this)" style="border-color:rgba(167,139,250,0.6);color:#a78bfa;font-weight:700">✦ 대량 정기 계약</button>
+    <button class="cta-option-btn" onclick="selectOption(this)" style="border-color:rgba(167,139,250,0.5);color:#c4b5fd">✦ 모션그래픽 · CG</button>
+    <button class="cta-option-btn" onclick="selectOption(this)" style="border-color:rgba(167,139,250,0.5);color:#c4b5fd">✦ 대량 정기 계약</button>
   </div>
   <div class="hero-cta-row">
     <button class="btn btn-primary btn-xl" onclick="openB2B()">무료 도입 상담 신청 →</button>
