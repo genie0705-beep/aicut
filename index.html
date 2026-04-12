@@ -131,6 +131,132 @@ body {
   --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
 }
 
+/* ========== SCROLL REVEAL ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.65s cubic-bezier(.4,0,.2,1), transform 0.65s cubic-bezier(.4,0,.2,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ========== NAV 스크롤 전환 ========== */
+nav.nav-scrolled {
+  background: rgba(255,255,255,0.99) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10) !important;
+  border-bottom-color: var(--gray-200) !important;
+}
+nav.nav-top {
+  background: rgba(255,255,255,0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom-color: rgba(255,255,255,0.15) !important;
+  box-shadow: none !important;
+}
+nav.nav-top .nav-logo { color: white !important; }
+nav.nav-top .nav-logo span { color: #a78bfa !important; }
+nav.nav-top .nav-item > a { color: rgba(255,255,255,0.85) !important; }
+nav.nav-top #navConsultBtn { background: white !important; color: var(--primary) !important; }
+nav.nav-top .btn-outline { border-color: rgba(255,255,255,0.5) !important; color: white !important; }
+
+/* ========== 플로팅 CTA ========== */
+#floatingCta {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  z-index: 800;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1), opacity 0.4s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#floatingCta.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+#floatingCta button {
+  background: #5c3de8;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(92,61,232,0.45);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.3px;
+}
+#floatingCta button:active { transform: scale(0.97); }
+#floatingCta .fc-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 0 0 4px;
+  line-height: 1;
+  box-shadow: none;
+}
+@media (max-width: 768px) {
+  #floatingCta { bottom: 76px; width: calc(100% - 32px); }
+  #floatingCta button { width: 100%; justify-content: center; font-size: 14px; padding: 14px 20px; }
+}
+
+/* ========== 소셜 프루프 토스트 ========== */
+#socialProof {
+  position: fixed;
+  bottom: 28px;
+  left: 24px;
+  z-index: 810;
+  opacity: 0;
+  transform: translateX(-120%);
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1), opacity 0.45s ease;
+  pointer-events: none;
+  max-width: 300px;
+}
+#socialProof.show {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+#socialProof .sp-card {
+  background: white;
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+  border: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#socialProof .sp-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#socialProof .sp-text { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+#socialProof .sp-text strong { color: var(--primary); font-weight: 700; }
+#socialProof .sp-time { font-size: 11px; color: var(--gray-400); margin-top:2px; }
+@media (max-width: 768px) {
+  #socialProof { bottom: 140px; left: 12px; right: 12px; max-width: none; }
+}
+
 /* ========== NAV ========== */
 nav {
   position: fixed; top: 0; left: 0; right: 0;
@@ -2173,8 +2299,28 @@ footer {
   </div>
 </section>
 
+<!-- ===== 플로팅 CTA ===== -->
+<div id="floatingCta">
+  <button onclick="openB2B()">
+    <span style="font-size:15px;line-height:1">&#128172;</span>
+    무료 도입 상담 신청
+    <span class="fc-close" onclick="event.stopPropagation();document.getElementById('floatingCta').classList.remove('show');sessionStorage.setItem('fcHidden','1')" title="닫기">&#10005;</span>
+  </button>
+</div>
+
+<!-- ===== 소셜 프루프 토스트 ===== -->
+<div id="socialProof">
+  <div class="sp-card">
+    <div class="sp-avatar" id="spAvatar">마</div>
+    <div>
+      <div class="sp-text" id="spText"><strong>마케팅 에이전시</strong>가 STANDARD 계약을 신청했습니다</div>
+      <div class="sp-time" id="spTime">방금 전</div>
+    </div>
+  </div>
+</div>
+
 <!-- PAIN POINT -->
-<section class="pain-section" id="pain-section">
+<section class="pain-section reveal" id="pain-section">
   <div style="text-align:center;margin-bottom:8px">
     <span class="section-eyebrow">WHY 에이컷</span>
   </div>
@@ -2248,7 +2394,7 @@ footer {
 </section>
 
 <!-- FEATURES -->
-<section id="process-section" style="background:white;padding:120px 48px">
+<section id="process-section" class="reveal" style="background:white;padding:120px 48px">
   <div class="section-center">
     <span class="section-eyebrow">HOW IT WORKS</span>
     <h2 class="section-title" style="word-break:keep-all">정기 편집, 이렇게 운영됩니다</h2>
@@ -2391,7 +2537,7 @@ footer {
 </section>
 
 <!-- PROCESS STEPS -->
-<section id="steps-section" style="background:var(--primary);padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px);text-align:center">
+<section id="steps-section" class="reveal" style="background:var(--primary);padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px);text-align:center">
   <span class="section-eyebrow" style="color:rgba(255,255,255,0.5)">PROCESS</span>
   <h2 class="section-title" style="color:white;word-break:keep-all">온보딩부터 납품까지 — 정기 편집 5단계</h2>
   <div class="process-steps" id="processSteps">
@@ -2428,7 +2574,7 @@ footer {
 <section id="pricing-section" style="background:var(--gray-50)">
   <div class="section-center">
     <span class="section-eyebrow">PRICING</span>
-    <h2 class="section-title">월 정기 패키지<br>인력 비용 없이 운영하세요</h2>
+    <h2 class="section-title reveal">월 정기 패키지<br>인력 비용 없이 운영하세요</h2>
     <p class="section-desc" style="word-break:keep-all">
       정기 계약으로 매월 안정적인 편집 리소스를 확보하세요.<br>
       <span style="font-size:14px;color:var(--gray-400)">VAT 별도 · 전담 에디터 배정 · 브랜드 가이드 저장 · 계약 기간 제한 없음</span>
@@ -2659,7 +2805,7 @@ footer {
 </section>
 
 <!-- CLIENT CASES -->
-<section id="reviews-section" style="background:white">
+<section id="reviews-section" class="reveal" style="background:white">
   <div class="section-center">
     <span class="section-eyebrow">CLIENT CASES</span>
     <h2 class="section-title">우리와 같은 상황의<br>기업들이 선택했습니다</h2>
@@ -7252,6 +7398,85 @@ function registerAdminB2B() {
 
 </script>
 
+
+<!-- ===== 스크롤 인터랙션 JS ===== -->
+<script>
+(function() {
+  /* ── 1. 스크롤 reveal ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  function initReveal() {
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else { initReveal(); }
+
+  /* ── 2. Nav 스크롤 전환 ── */
+  var nav = document.getElementById('mainNav');
+  function updateNav() {
+    if (!nav) return;
+    var page = document.getElementById('page-home');
+    var isHome = page && (page.style.display !== 'none');
+    if (!isHome) { nav.classList.remove('nav-top','nav-scrolled'); return; }
+    if (window.scrollY < 60) {
+      nav.classList.add('nav-top');
+      nav.classList.remove('nav-scrolled');
+    } else {
+      nav.classList.remove('nav-top');
+      nav.classList.add('nav-scrolled');
+    }
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  document.addEventListener('DOMContentLoaded', updateNav);
+
+  /* ── 3. 플로팅 CTA ── */
+  var fcta = document.getElementById('floatingCta');
+  var fcHidden = sessionStorage.getItem('fcHidden');
+  function updateFcta() {
+    if (!fcta || fcHidden) return;
+    var page = document.getElementById('page-home');
+    var isHome = page && (page.style.display !== 'none');
+    if (isHome && window.scrollY > 400) {
+      fcta.classList.add('show');
+    } else {
+      fcta.classList.remove('show');
+    }
+  }
+  window.addEventListener('scroll', updateFcta, { passive: true });
+
+  /* ── 4. 소셜 프루프 토스트 ── */
+  var proofs = [
+    { init:'마', text:'<strong>마케팅 에이전시</strong>가 STANDARD 계약을 신청했습니다', time:'방금 전' },
+    { init:'스', text:'<strong>스타트업 기업</strong>이 STARTER 상담을 신청했습니다', time:'3분 전' },
+    { init:'이', text:'<strong>이커머스 브랜드</strong>가 월 정기 계약을 문의했습니다', time:'7분 전' },
+    { init:'교', text:'<strong>교육 플랫폼</strong>이 ENTERPRISE 견적을 요청했습니다', time:'12분 전' },
+    { init:'유', text:'<strong>유튜브 채널</strong>이 STANDARD 계약을 신청했습니다', time:'18분 전' },
+  ];
+  var spEl = document.getElementById('socialProof');
+  var spIdx = 0;
+  function showProof() {
+    if (!spEl) return;
+    var p = proofs[spIdx % proofs.length];
+    document.getElementById('spAvatar').textContent = p.init;
+    document.getElementById('spText').innerHTML = p.text;
+    document.getElementById('spTime').textContent = p.time;
+    spEl.classList.add('show');
+    setTimeout(function(){ spEl.classList.remove('show'); }, 4500);
+    spIdx++;
+  }
+  setTimeout(function(){
+    showProof();
+    setInterval(showProof, 12000);
+  }, 6000);
+})();
+</script>
 
 <!-- ===== 채널톡 SDK ===== -->
 <script>
