@@ -813,6 +813,9 @@ section { padding: 96px 48px; }
   max-width: 1160px;
   margin: 60px auto 0;
 }
+.pricing-grid-3col {
+  grid-template-columns: repeat(3,1fr);
+}
 .price-card {
   background: white;
   border: 1.5px solid var(--gray-200);
@@ -1899,10 +1902,18 @@ footer {
 
   /* ===== PRICING ===== */
   .pricing-grid { grid-template-columns: 1fr; gap: 16px; }
+  .pricing-grid-3col { grid-template-columns: 1fr !important; }
   .pricing-card { padding: 24px 20px; }
   .pricing-card .plan-name { font-size: 14px; }
   .pricing-card .plan-price { font-size: 32px; }
+  .price-amount { font-size: 32px !important; }
+  .price-card { padding: 24px 20px !important; }
+  .price-card.featured { margin-top: 0 !important; }
   [style*="grid-template-columns:repeat(4"] { grid-template-columns: 1fr 1fr !important; }
+  /* 건당 의뢰 박스 모바일 */
+  .per-unit-grid { grid-template-columns: 1fr !important; gap: 0 !important; }
+  .per-unit-item { border-left: none !important; border-right: none !important; border-bottom: 1px solid var(--gray-200) !important; padding: 14px 0 !important; }
+  .per-unit-item:last-child { border-bottom: none !important; }
 
   /* ===== VFX 섹션 ===== */
   #vfx-section { padding: 28px 20px !important; border-radius: 14px !important; gap: 20px !important; }
@@ -2425,7 +2436,7 @@ footer {
   </div>
 
   <!-- 패키지 카드 3종 -->
-  <div class="pricing-grid" style="grid-template-columns:repeat(3,1fr);max-width:1060px">
+  <div class="pricing-grid pricing-grid-3col" style="max-width:1060px">
 
     <!-- STARTER -->
     <div class="price-card">
@@ -2535,25 +2546,28 @@ footer {
 
   </div>
 
-  <!-- 건당 의뢰 안내 (기존 고객용 소형 안내) -->
-  <div style="max-width:860px;margin:32px auto 0;background:white;border-radius:14px;padding:24px 32px;border:1px solid var(--gray-200)">
-    <div style="font-size:13px;font-weight:700;color:var(--gray-500);margin-bottom:12px;letter-spacing:1px">📋 건당 의뢰도 가능합니다</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-      <div style="text-align:center;padding:12px">
-        <div style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:4px">STANDARD 건당</div>
-        <div style="font-size:12px;color:var(--gray-500)">₩79,000 / 편 (10분 이내)</div>
+  <!-- 건당 의뢰 안내 -->
+  <div style="max-width:860px;margin:32px auto 0;background:white;border-radius:14px;padding:24px 24px;border:1px solid var(--gray-200)">
+    <div style="font-size:13px;font-weight:700;color:var(--gray-500);margin-bottom:16px;letter-spacing:1px">📋 건당 의뢰도 가능합니다</div>
+    <div class="per-unit-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0">
+      <div class="per-unit-item" style="text-align:center;padding:16px 12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.5px;margin-bottom:6px">STANDARD</div>
+        <div style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:4px">₩79,000</div>
+        <div style="font-size:12px;color:var(--gray-400)">편당 · 완성본 10분 이내</div>
       </div>
-      <div style="text-align:center;padding:12px;border-left:1px solid var(--gray-200);border-right:1px solid var(--gray-200)">
-        <div style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:4px">PRO 건당</div>
-        <div style="font-size:12px;color:var(--gray-500)">₩180,000 / 편 (30분 이내)</div>
+      <div class="per-unit-item" style="text-align:center;padding:16px 12px;border-left:1px solid var(--gray-200);border-right:1px solid var(--gray-200)">
+        <div style="font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.5px;margin-bottom:6px">PRO</div>
+        <div style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:4px">₩180,000</div>
+        <div style="font-size:12px;color:var(--gray-400)">편당 · 완성본 30분 이내</div>
       </div>
-      <div style="text-align:center;padding:12px">
-        <div style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:4px">VFX · CG</div>
-        <div style="font-size:12px;color:var(--gray-500)">프로젝트 협의 후 결정</div>
+      <div class="per-unit-item" style="text-align:center;padding:16px 12px">
+        <div style="font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.5px;margin-bottom:6px">VFX · CG</div>
+        <div style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:4px">협의</div>
+        <div style="font-size:12px;color:var(--gray-400)">프로젝트 범위에 따라 결정</div>
       </div>
     </div>
-    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200);font-size:12px;color:var(--gray-400);text-align:center">
-      정기 패키지 계약 시 건당 단가 대비 평균 <strong style="color:var(--accent)">25~35% 절감</strong> 효과
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--gray-200);font-size:13px;color:var(--gray-500);text-align:center;line-height:1.6">
+      정기 패키지 계약 시 건당 단가 대비 평균 <strong style="color:var(--accent)">25~35% 절감</strong>
     </div>
   </div>
 
@@ -2779,62 +2793,16 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
+  <div class="footer-grid" style="grid-template-columns:1fr;max-width:900px;margin:0 auto">
 
-    <!-- 로고 + 연락처 + 주소 -->
     <div class="footer-logo-area">
       <div class="logo">AI<span>CUT</span></div>
       <div style="font-size:12px;font-weight:600;color:var(--gray-500);margin-bottom:12px">주식회사 온니바이어</div>
       <div class="footer-desc">기업·브랜드 전용 정기 영상 편집 파트너.<br>전담 에디터가 매월 안정적으로 납품합니다. 채용 없이, 계약 한 번으로.</div>
-      <div class="footer-contact">
-        📧 <a href="/cdn-cgi/l/email-protection#2845495b5c4d5a6849414b5d5c064b4706435a" style="color:inherit;text-decoration:none"><span class="__cf_email__" data-cfemail="503d31232435221031393325247e333f7e3b22">[email&#160;protected]</span></a><br>
+      <div class="footer-contact" style="margin-top:16px">
+        📧 <a href="mailto:contact@aicut.co.kr" style="color:inherit;text-decoration:none">contact@aicut.co.kr</a><br>
         평일 09:00 — 18:00 (KST)
       </div>
-      <div style="font-size:12px;color:var(--gray-500);margin-top:12px;line-height:1.8">
-        대표이사 : 정효진<br>
-        사업자등록번호 : 353-86-03415<br>
-        통신판매업 신고번호 : 제 2024-대구수성구-0271 호<br>
-        호스팅 서비스 : GitHub Pages (Microsoft)
-      </div>
-      <div class="footer-addr-block">
-        <div class="footer-addr-label">OFFICE</div>
-        <div class="footer-addr-row">
-          <span class="footer-addr-badge" style="background:var(--accent);color:white">지사</span>
-          <div>
-            <div class="footer-addr-text">서울시 송파구 법원로 8길 8, SKV1 2차 1118호</div>
-            <div class="footer-addr-zip">ZIP. 05855</div>
-          </div>
-        </div>
-        <div class="footer-addr-row">
-          <span class="footer-addr-badge" style="background:var(--primary);color:white">본사</span>
-          <div>
-            <div class="footer-addr-text">대구광역시 수성구 상록로16길 41, 463호</div>
-            <div class="footer-addr-zip">ZIP. 42012</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 서비스 -->
-    <div>
-      <div class="footer-heading">서비스</div>
-      <ul class="footer-links">
-        <li><a style="cursor:pointer" onclick="openModal('register')">영상 편집 의뢰</a></li>
-        <li><a style="cursor:pointer" onclick="scrollTo_('#pricing-section')">요금제 안내</a></li>
-        <li><a style="cursor:pointer" onclick="openB2B()">B2B 솔루션</a></li>
-        <li><a style="cursor:pointer" onclick="scrollTo_('#vfx-section')">VFX · CG 문의</a></li>
-      </ul>
-    </div>
-
-    <!-- 고객지원 -->
-    <div>
-      <div class="footer-heading">고객지원</div>
-      <ul class="footer-links">
-        <li><a style="cursor:pointer" onclick="openInfoModal('faq')">자주 묻는 질문</a></li>
-        <li><a style="cursor:pointer" onclick="openInfoModal('guide')">이용 가이드</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#600d01131405122001090315144e030f4e0b125f1315020a0503145d8cc0fc8dfcd4408bccd88cfdf8" style="cursor:pointer">제휴 문의</a></li>
-        <li><a style="cursor:pointer" onclick="openInfoModal('editor')">채용 · 에디터 지원</a></li>
-      </ul>
     </div>
 
   </div>
