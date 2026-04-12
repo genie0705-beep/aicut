@@ -207,8 +207,28 @@ nav.nav-top .btn-outline { border-color: rgba(255,255,255,0.5) !important; color
   box-shadow: none;
 }
 @media (max-width: 768px) {
-  #floatingCta { bottom: 76px; width: calc(100% - 32px); }
-  #floatingCta button { width: 100%; justify-content: center; font-size: 14px; padding: 14px 20px; }
+  #floatingCta {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    transform: translateX(0) translateY(100px);
+    white-space: normal;
+  }
+  #floatingCta.show {
+    transform: translateX(0) translateY(0);
+  }
+  #floatingCta button {
+    width: 100%;
+    justify-content: center;
+    font-size: 15px;
+    padding: 16px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(92,61,232,0.5);
+  }
+}
+@media (max-width: 480px) {
+  #floatingCta button { font-size: 14px; padding: 15px 16px; }
 }
 
 /* ========== 소셜 프루프 토스트 ========== */
@@ -218,7 +238,7 @@ nav.nav-top .btn-outline { border-color: rgba(255,255,255,0.5) !important; color
   left: 24px;
   z-index: 810;
   opacity: 0;
-  transform: translateX(-120%);
+  transform: translateX(-110%);
   transition: transform 0.45s cubic-bezier(.4,0,.2,1), opacity 0.45s ease;
   pointer-events: none;
   max-width: 300px;
@@ -254,7 +274,15 @@ nav.nav-top .btn-outline { border-color: rgba(255,255,255,0.5) !important; color
 #socialProof .sp-text strong { color: var(--primary); font-weight: 700; }
 #socialProof .sp-time { font-size: 11px; color: var(--gray-400); margin-top:2px; }
 @media (max-width: 768px) {
-  #socialProof { bottom: 140px; left: 12px; right: 12px; max-width: none; }
+  #socialProof {
+    bottom: 108px;
+    left: 12px;
+    right: auto;
+    max-width: calc(100% - 24px);
+  }
+  #socialProof .sp-card { padding: 10px 14px; gap: 10px; }
+  #socialProof .sp-avatar { width: 32px; height: 32px; font-size: 12px; }
+  #socialProof .sp-text { font-size: 12px; }
 }
 
 /* ========== NAV ========== */
@@ -7425,7 +7453,7 @@ function registerAdminB2B() {
     var page = document.getElementById('page-home');
     var isHome = page && (page.style.display !== 'none');
     if (!isHome) { nav.classList.remove('nav-top','nav-scrolled'); return; }
-    if (window.scrollY < 60) {
+    if (window.scrollY < 80) {
       nav.classList.add('nav-top');
       nav.classList.remove('nav-scrolled');
     } else {
@@ -7435,6 +7463,7 @@ function registerAdminB2B() {
   }
   window.addEventListener('scroll', updateNav, { passive: true });
   document.addEventListener('DOMContentLoaded', updateNav);
+  window.addEventListener('DOMContentLoaded', function() { setTimeout(updateNav, 100); });
 
   /* ── 3. 플로팅 CTA ── */
   var fcta = document.getElementById('floatingCta');
@@ -7443,7 +7472,7 @@ function registerAdminB2B() {
     if (!fcta || fcHidden) return;
     var page = document.getElementById('page-home');
     var isHome = page && (page.style.display !== 'none');
-    if (isHome && window.scrollY > 400) {
+    if (isHome && window.scrollY > 350) {
       fcta.classList.add('show');
     } else {
       fcta.classList.remove('show');
@@ -7473,8 +7502,8 @@ function registerAdminB2B() {
   }
   setTimeout(function(){
     showProof();
-    setInterval(showProof, 12000);
-  }, 6000);
+    setInterval(showProof, 14000);
+  }, 8000);
 })();
 </script>
 
