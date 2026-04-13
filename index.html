@@ -259,8 +259,8 @@ body {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 6px 4px;
-  margin-top: -8px;
+  gap: 4px 6px;
+  margin-top: 4px;
   margin-bottom: 4px;
 }
 .pricing-sub-tag {
@@ -274,11 +274,16 @@ body {
 }
 @media (max-width: 768px) {
   .pricing-sub-tags {
-    flex-direction: column;
-    gap: 6px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 0 12px;
   }
-  .pricing-sub-divider { display: none; }
-  .pricing-sub-tag { font-size: 13px; }
+  .pricing-sub-divider { display: inline; font-size: 12px; }
+  .pricing-sub-tag { font-size: 12px; }
 }
 
 /* ========== VFX SECTION ========== */
@@ -377,13 +382,16 @@ body {
   background: rgba(255,255,255,0.2);
   flex-shrink: 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .cta-trust-row {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 12px;
+    margin-top: 16px;
   }
-  .cta-trust-divider { display: none; }
-  .cta-trust-item { font-size: 14px; }
+  .cta-trust-divider { display: inline-block; }
+  .cta-trust-item { font-size: 12px; white-space: nowrap; }
 }
 
 /* ========== SCROLL REVEAL ========== */
@@ -2877,7 +2885,7 @@ footer {
   <div class="section-center">
     <span class="section-eyebrow">PRICING</span>
     <h2 class="section-title reveal">월 정기 패키지<br>인력 비용 없이 운영하세요</h2>
-    <p class="section-desc" style="word-break:keep-all">
+    <p class="section-desc" style="word-break:keep-all;margin-bottom:8px">
       정기 계약으로 매월 안정적인 편집 리소스를 확보하세요.
     </p>
     <div class="pricing-sub-tags">
