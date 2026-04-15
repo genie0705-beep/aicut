@@ -534,6 +534,10 @@ nav.nav-top .nav-item > a { color: rgba(255,255,255,0.85) !important; }
 nav.nav-top #navConsultBtn { background: white !important; color: var(--primary) !important; }
 nav.nav-top .btn-outline { border-color: rgba(255,255,255,0.5) !important; color: white !important; }
 
+@keyframes pstepSpin { to { transform: rotate(360deg); } }
+@keyframes pfloat1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+@keyframes pfloat2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
 /* ========== 플로팅 CTA ========== */
 #floatingCta {
   position: fixed;
@@ -5600,10 +5604,9 @@ footer {
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // 전역 함수 즉시 선언 - onclick 호출 보호
 window.openModal = window.openModal || function(t) { document.getElementById('authModal')?.classList.add('open'); };
-/* ===== 요금제 탭 필터 ===== */
-;
 
 /* ===== 프로세스 스텝 클릭 ===== */
+(function() {
   var steps = [
     ["01", "영상 업로드", "구글 드라이브 링크로 원본 영상과 요구사항을 전달합니다. 촬영만 하면 나머지는 에이컷이 처리합니다.", "드라이브 링크 전달"],
     ["02", "에디터 배정", "전담 에디터가 배정되고 브랜드 가이드를 저장합니다. 두 번째 달부터는 이 단계가 자동으로 생략됩니다.", "24시간 내 착수"],
@@ -8330,3 +8333,6 @@ function openChannelTalk() {
   }
 }
 </script>
+
+</body>
+</html>
