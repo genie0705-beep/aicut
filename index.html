@@ -657,6 +657,83 @@ nav.nav-top .btn-outline { border-color: rgba(255,255,255,0.5) !important; color
   #socialProof .sp-text { font-size: 12px; }
 }
 
+/* ========== MOBILE MENU ========== */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background .2s;
+}
+.nav-hamburger:hover { background: var(--gray-100); }
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: all .25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0; right: 0;
+  background: white;
+  z-index: 899;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+.mobile-menu.open { display: block; }
+.mobile-menu-inner { padding: 16px 20px 24px; }
+.mobile-menu-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+.mobile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--primary);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background .15s;
+  text-decoration: none;
+}
+.mobile-menu-item:hover { background: var(--gray-50); }
+.mobile-menu-item span { font-size: 16px; }
+.mobile-menu-divider {
+  height: 1px;
+  background: var(--gray-100);
+  margin: 10px 0;
+}
+.mobile-menu-section { margin-bottom: 4px; }
+
+@media (max-width: 768px) {
+  .nav-hamburger { display: flex; }
+  .nav-center { display: none !important; }
+  #navLoginBtn, #navLogoutBtn, #navMypageBtn, #navConsultBtn { display: none !important; }
+}
+
 /* ========== NAV ========== */
 nav {
   position: fixed; top: 0; left: 0; right: 0;
@@ -710,6 +787,7 @@ nav {
   z-index: 999;
 }
 .nav-item:hover .nav-dropdown { display: block; }
+.nav-item.open .nav-dropdown { display: block; }
 .nav-dropdown a {
   display: flex; align-items: center; gap: 10px;
   padding: 10px 14px; border-radius: 8px;
@@ -2687,8 +2765,48 @@ footer {
     <button id="navMypageBtn" class="btn btn-outline" style="display:none" onclick="goMypage()">마이페이지</button>
     <button id="navLogoutBtn" class="btn btn-outline" style="display:none;color:var(--gray-500)" onclick="doLogout()">로그아웃</button>
     <button id="navConsultBtn" class="btn btn-primary" onclick="openModal('register')">무료로 시작하기</button>
+    <button id="navHamburger" class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- 모바일 메뉴 -->
+<div id="mobileMenu" class="mobile-menu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-section">
+      <div class="mobile-menu-label">서비스</div>
+      <a class="mobile-menu-item" onclick="closeMobileMenu();scrollTo_('#process-section')">
+        <span>✂️</span> 영상 편집 서비스
+      </a>
+      <a class="mobile-menu-item" onclick="closeMobileMenu();scrollTo_('#vfx-section')">
+        <span>✨</span> VFX · CG · 모션그래픽
+      </a>
+      <a class="mobile-menu-item" onclick="closeMobileMenu();openB2B()">
+        <span>🏢</span> B2B 기업 솔루션
+      </a>
+    </div>
+    <div class="mobile-menu-divider"></div>
+    <a class="mobile-menu-item" onclick="closeMobileMenu();scrollTo_('#steps-section')">프로세스</a>
+    <a class="mobile-menu-item" onclick="closeMobileMenu();showPage('pricing')">요금제</a>
+    <a class="mobile-menu-item" onclick="closeMobileMenu();scrollTo_('#reviews-section')">고객 후기</a>
+    <div class="mobile-menu-divider"></div>
+    <div class="mobile-menu-section">
+      <div class="mobile-menu-label">고객지원</div>
+      <a class="mobile-menu-item" onclick="closeMobileMenu();openInfoModal('faq')">
+        <span>❓</span> 자주 묻는 질문
+      </a>
+      <a class="mobile-menu-item" onclick="closeMobileMenu();openInfoModal('guide')">
+        <span>📖</span> 이용 가이드
+      </a>
+    </div>
+    <div class="mobile-menu-divider"></div>
+    <div style="display:flex;gap:10px;padding:8px 0">
+      <button class="btn btn-outline btn-full" onclick="closeMobileMenu();openModal('login')">로그인</button>
+      <button class="btn btn-primary btn-full" onclick="closeMobileMenu();openModal('register')">무료로 시작하기</button>
+    </div>
+  </div>
+</div>
 
 <!-- ================================================================ -->
 <!-- HOME PAGE -->
@@ -5421,6 +5539,52 @@ footer {
 window.openModal = window.openModal || function(t) { document.getElementById('authModal')?.classList.add('open'); };
 /* ===== 요금제 탭 필터 ===== */
 ;
+
+/* ===== 모바일 메뉴 ===== */
+window.toggleMobileMenu = function() {
+  var menu = document.getElementById('mobileMenu');
+  var btn = document.getElementById('navHamburger');
+  if (!menu) return;
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+};
+window.closeMobileMenu = function() {
+  var menu = document.getElementById('mobileMenu');
+  var btn = document.getElementById('navHamburger');
+  if (menu) menu.classList.remove('open');
+  if (btn) btn.classList.remove('open');
+};
+// 외부 클릭 시 닫기
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('mobileMenu');
+  var btn = document.getElementById('navHamburger');
+  if (menu && menu.classList.contains('open')) {
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMobileMenu();
+    }
+  }
+});
+
+/* ===== PC 드롭다운 클릭 토글 ===== */
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.nav-item > a').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var item = a.parentElement;
+      var dropdown = item.querySelector('.nav-dropdown');
+      if (!dropdown) return;
+      e.stopPropagation();
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('open'); });
+  });
+  document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+    dd.addEventListener('click', function(e) { e.stopPropagation(); });
+  });
+});
 
 window.scrollTo_ = function(id) {
   var homePage = document.getElementById('page-home');
