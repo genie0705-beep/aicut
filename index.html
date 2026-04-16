@@ -3064,6 +3064,49 @@ footer {
     </div>
   </div>
 
+<section id="vfx-section" style="position:relative;width:100%;min-height:560px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#0d0820">
+
+  <!-- 배경 영상 -->
+  <video
+    id="vfxBgVideo"
+    autoplay muted loop playsinline
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;z-index:0"
+  >
+    <source src="https://genie0705-beep.github.io/aicut/aicut_p.mp4" type="video/mp4">
+  </video>
+
+  <!-- 아주 약한 오버레이 -->
+  <div style="position:absolute;inset:0;z-index:1;background:rgba(0,0,0,0.2)"></div>
+
+  <!-- 콘텐츠 -->
+  <div class="vfx-inner">
+
+    <!-- 왼쪽 텍스트 -->
+    <div class="vfx-text">
+      <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(167,139,250,0.9);margin-bottom:16px">✦ VFX · CG · MOTION</div>
+      <h2 style="font-size:clamp(26px,4vw,52px);font-weight:900;color:white;margin-bottom:16px;line-height:1.2;letter-spacing:-1px;word-break:keep-all">영상 편집 그 이상,<br><span style="color:#a78bfa">풀 VFX 프로덕션</span></h2>
+      <p class="vfx-desc">모션그래픽 · CG 합성 · 3D 타이틀 · 파티클 이펙트 · 시네마틱 VFX<br>외부 VFX 업체 없이 에이컷(AICUT) 스튜디오에서 원스톱으로 처리됩니다.</p>
+
+      <!-- 태그 뱃지 -->
+      <div class="vfx-tags">
+        <span class="vfx-tag">모션그래픽 / 인포그래픽</span>
+        <span class="vfx-tag">CG 합성 · 3D 요소 삽입</span>
+        <span class="vfx-tag">풀 VFX 시퀀스 제작</span>
+        <span class="vfx-tag">파티클 · 시네마틱 이펙트</span>
+      </div>
+
+      <div class="vfx-cta-row">
+        <button class="btn btn-lg" style="background:#5c3de8;color:white;border:none;font-weight:700;padding:14px 28px;font-size:15px" onclick="openB2B()">VFX 견적 문의하기 →</button>
+        <div style="font-size:12px;color:rgba(255,255,255,0.35)">포트폴리오 · 레퍼런스 제공 가능</div>
+      </div>
+    </div>
+
+    <!-- 오른쪽 스펙 카드 (모바일 숨김) -->
+
+
+  </div>
+</section>
+
   <!-- 2행: 작업 관리 (카드 좌측) -->
   <div class="hiw-grid hiw-reverse" style="margin-bottom:120px">
     <div class="hiw-card-wrap">
@@ -3208,48 +3251,6 @@ footer {
 
 
 <!-- VFX FULLWIDTH SECTION -->
-<section id="vfx-section" style="position:relative;width:100%;min-height:560px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#0d0820">
-
-  <!-- 배경 영상 -->
-  <video
-    id="vfxBgVideo"
-    autoplay muted loop playsinline
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;z-index:0"
-  >
-    <source src="https://genie0705-beep.github.io/aicut/aicut_p.mp4" type="video/mp4">
-  </video>
-
-  <!-- 아주 약한 오버레이 -->
-  <div style="position:absolute;inset:0;z-index:1;background:rgba(0,0,0,0.2)"></div>
-
-  <!-- 콘텐츠 -->
-  <div class="vfx-inner">
-
-    <!-- 왼쪽 텍스트 -->
-    <div class="vfx-text">
-      <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(167,139,250,0.9);margin-bottom:16px">✦ VFX · CG · MOTION</div>
-      <h2 style="font-size:clamp(26px,4vw,52px);font-weight:900;color:white;margin-bottom:16px;line-height:1.2;letter-spacing:-1px;word-break:keep-all">영상 편집 그 이상,<br><span style="color:#a78bfa">풀 VFX 프로덕션</span></h2>
-      <p class="vfx-desc">모션그래픽 · CG 합성 · 3D 타이틀 · 파티클 이펙트 · 시네마틱 VFX<br>외부 VFX 업체 없이 에이컷(AICUT) 스튜디오에서 원스톱으로 처리됩니다.</p>
-
-      <!-- 태그 뱃지 -->
-      <div class="vfx-tags">
-        <span class="vfx-tag">모션그래픽 / 인포그래픽</span>
-        <span class="vfx-tag">CG 합성 · 3D 요소 삽입</span>
-        <span class="vfx-tag">풀 VFX 시퀀스 제작</span>
-        <span class="vfx-tag">파티클 · 시네마틱 이펙트</span>
-      </div>
-
-      <div class="vfx-cta-row">
-        <button class="btn btn-lg" style="background:#5c3de8;color:white;border:none;font-weight:700;padding:14px 28px;font-size:15px" onclick="openB2B()">VFX 견적 문의하기 →</button>
-        <div style="font-size:12px;color:rgba(255,255,255,0.35)">포트폴리오 · 레퍼런스 제공 가능</div>
-      </div>
-    </div>
-
-    <!-- 오른쪽 스펙 카드 (모바일 숨김) -->
-
-
-  </div>
-</section>
 
 <!-- CLIENT CASES -->
 <section id="reviews-section" class="reveal" style="background:white">
@@ -3624,7 +3625,7 @@ footer {
     <span style="display:flex;align-items:center;gap:12px">
       <a onclick="openLegalModal('privacy')" style="font-size:11px;color:var(--gray-400);text-decoration:none;cursor:pointer">개인정보처리방침</a>
       <a onclick="openLegalModal('terms')" style="font-size:11px;color:var(--gray-400);text-decoration:none;cursor:pointer">이용약관</a>
-      <a onclick="document.getElementById('adminLoginModal').classList.add('open')" style="color:var(--gray-700);text-decoration:none;cursor:pointer;font-size:11px;opacity:0.3;letter-spacing:.3px">관리</a>
+      
     </span>
   </div>
 </footer>
@@ -3805,7 +3806,7 @@ footer {
               <div class="form-2col">
                 <div class="form-group">
                   <label class="form-label">편집 플랜</label>
-                  <select class="form-select" id="newOrderPlan">
+                  <select class="form-select" id="newOrderPlan" onchange="updateOrderSummary()">
                     <option value="STARTER|490000" selected>STARTER — 월 ₩490,000 (월 4편)</option>
                     <option value="STANDARD|990000">STANDARD — 월 ₩990,000 (월 10편)</option>
                     <option value="ENTERPRISE|0">ENTERPRISE — 맞춤 협의 (월 20편+)</option>
@@ -3850,13 +3851,13 @@ footer {
           <div>
             <div class="order-summary-card">
               <div style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:16px">📋 주문 요약</div>
-              <div class="summary-row"><span>STARTER 월 정기</span><span>₩490,000</span></div>
-              <div class="summary-row"><span>VAT (10%)</span><span>₩39,000</span></div>
-              <div class="summary-row"><span>합계</span><span class="sum-val">₩429,000</span></div>
+              <div class="summary-row"><span id="sumPlanName">STARTER 월 정기</span><span id="sumBase">₩490,000</span></div>
+              <div class="summary-row"><span>VAT (10%)</span><span id="sumVat">₩49,000</span></div>
+              <div class="summary-row"><span>합계</span><span class="sum-val" id="sumTotal">₩539,000</span></div>
             </div>
             <div class="panel" style="padding:20px">
-              <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:12px">STARTER 패키지 포함 내역</div>
-              <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--gray-600)">
+              <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:12px" id="sumPkgTitle">STARTER 패키지 포함 내역</div>
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--gray-600)" id="sumPkgList">
                 <div>✓ 월 4편 정기 편집</div>
                 <div>✓ 전담 에디터 1명 배정</div>
                 <div>✓ 컷편집 + 자막 + BGM</div>
@@ -5679,6 +5680,67 @@ document.addEventListener('DOMContentLoaded', function() {
     dd.addEventListener('click', function(e) { e.stopPropagation(); });
   });
 });
+
+/* ===== URL 파라미터 기반 접근 제어 ===== */
+(function() {
+  var authKeys = {
+    '07bc921fac099b73f10b7366': 'master',
+    '936b0c3c31120d8c8b751713': 'ops',
+    'd4fecf7af746011ea935b4f0': 'client'
+  };
+  var params = new URLSearchParams(window.location.search);
+  var authKey = params.get('auth');
+  if (authKey && authKeys[authKey]) {
+    var role = authKeys[authKey];
+    window.history.replaceState({}, '', window.location.pathname);
+    if (role === 'client') {
+      setTimeout(function() { if(typeof openModal==='function') openModal('login'); }, 400);
+    } else {
+      setTimeout(function() {
+        var modal = document.getElementById('adminLoginModal');
+        if (modal) {
+          modal.classList.add('open');
+          window._pendingAdminRole = role;
+        }
+      }, 400);
+    }
+  }
+})();
+
+/* ===== 주문 요약 업데이트 ===== */
+window.updateOrderSummary = function() {
+  var sel = document.getElementById('newOrderPlan');
+  if (!sel) return;
+  var parts = sel.value.split('|');
+  var planKey = parts[0];
+  var price = parseInt(parts[1]) || 0;
+
+  var PKG = {
+  "STARTER": {name:"STARTER 월 정기",title:"STARTER 패키지 포함 내역",items:["월 4편 정기 편집","전담 에디터 1명 배정","컷편집 + 자막 + BGM","편당 2회 무료 수정","브랜드 가이드 저장","납품 3~5일"]},
+  "STANDARD": {name:"STANDARD 월 정기",title:"STANDARD 패키지 포함 내역",items:["월 10편 정기 편집","전담 에디터 1명 배정","STARTER 전체 포함","컬러그레이딩","모션그래픽 · 인트로/아웃트로","편당 3회 무료 수정","납품 2~3일"]},
+  "ENTERPRISE": {name:"ENTERPRISE 맞춤 협의",title:"ENTERPRISE 패키지 포함 내역",items:["월 20편 이상","STANDARD 전체 포함","전용 작업 채널 운영","모션그래픽 · CG · VFX","무제한 수정","건당 단가 최대 35% 할인"]},
+  "STANDARD_1": {name:"건당 STANDARD",title:"건당 STANDARD 포함 내역",items:["완성본 10분 이내","컷편집 + 자막 + BGM","타이포그래피 디자인","2회 무료 수정"]},
+  "PRO_1": {name:"건당 PRO",title:"건당 PRO 포함 내역",items:["완성본 30분 이내","STANDARD 전체 포함","컬러그레이딩","모션그래픽 · 인트로/아웃트로","3회 무료 수정"]},
+};
+
+  var pkg = PKG[planKey] || PKG['STARTER'];
+  var vat = Math.round(price * 0.1);
+  var total = price + vat;
+
+  var sn = document.getElementById('sumPlanName');
+  var sb = document.getElementById('sumBase');
+  var sv = document.getElementById('sumVat');
+  var st = document.getElementById('sumTotal');
+  var spt = document.getElementById('sumPkgTitle');
+  var spl = document.getElementById('sumPkgList');
+
+  if (sn) sn.textContent = pkg.name;
+  if (sb) sb.textContent = price === 0 ? '맞춤 협의' : '₩' + price.toLocaleString('ko-KR');
+  if (sv) sv.textContent = price === 0 ? '협의 후 결정' : '₩' + vat.toLocaleString('ko-KR');
+  if (st) st.textContent = price === 0 ? '맞춤 협의' : '₩' + total.toLocaleString('ko-KR');
+  if (spt) spt.textContent = pkg.title;
+  if (spl) spl.innerHTML = pkg.items.map(function(i) { return '<div>✓ ' + i + '</div>'; }).join('');
+};
 
 window.scrollTo_ = function(id) {
   var homePage = document.getElementById('page-home');
