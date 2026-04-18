@@ -2718,13 +2718,11 @@ footer {
   #steps-section { padding: 40px 0 !important; }
   .ps-card { grid-template-columns: 1fr !important; min-height: 0 !important; }
   .ps-card-text { padding: 24px 20px 16px !important; order: 1; }
-  .ps-card-img { order: 2; height: 260px !important; position: relative !important; overflow: hidden !important; display: block !important; }
-  .ps-card-img-inner { position: static !important; width: 100% !important; height: 260px !important; display: block !important; }
-  .ps-card-img-inner img { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 260px !important; object-fit: cover !important; object-position: center top !important; }
+  .ps-card-img { order: 2; height: 260px !important; position: relative !important; overflow: hidden !important; }
+  .ps-card-img-inner { display: block !important; width: 100% !important; height: 260px !important; position: relative !important; }
+  .ps-card-img-inner img { display: block !important; width: 100% !important; height: 260px !important; max-width: none !important; object-fit: cover !important; object-position: center top !important; position: relative !important; top: 0 !important; left: 0 !important; }
   .ps-card-img-inner > div:nth-child(2) { display: none !important; }
-  .ps-card-img-inner > div:last-child { position: absolute !important; bottom: 12px !important; left: 12px !important; width: calc(100% - 24px) !important; max-width: 220px !important; padding: 10px 12px !important; box-sizing: border-box !important; }
-  .ps-card-img-inner { position: relative !important; width: 100% !important; height: 260px !important; display: block !important; }
-  .ps-card-img-inner img { display: block !important; width: 100% !important; height: 260px !important; object-fit: cover !important; object-position: center top !important; position: relative !important; top: auto !important; left: auto !important; }
+  .ps-card-img-inner > div:last-child { position: absolute !important; bottom: 12px !important; left: 12px !important; right: 12px !important; width: auto !important; max-width: 220px !important; padding: 10px 12px !important; }
 
   /* section-center margin-bottom 축소 */
   .section-center { margin-bottom: 36px !important; }
@@ -3321,8 +3319,8 @@ footer {
         </div>
         <div style="position:relative;overflow:hidden;background:#f5f3ff;height:100%" class="ps-card-img">
           <!-- 인물 이미지 (좌측) + 어드민 UI 카드 (우하단 오버랩) -->
-          <div class="ps-card-img-inner" style="width:100%;height:100%">
-            <img src="https://genie0705-beep.github.io/aicut/step1.png" alt="영상 업로드" style="width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;left:0;top:0">
+          <div class="ps-card-img-inner">
+            <img src="https://genie0705-beep.github.io/aicut/step1.png" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top" alt="영상 업로드">
             <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(245,243,255,0.6) 0%,transparent 45%)"></div>
             <!-- 어드민 UI 미니카드 -->
             <div style="position:absolute;bottom:28px;left:24px;background:white;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(0,0,0,0.12);width:200px">
@@ -3350,8 +3348,8 @@ footer {
           </div>
         </div>
         <div style="position:relative;overflow:hidden;background:#f0fdf4;height:100%" class="ps-card-img">
-          <div class="ps-card-img-inner" style="width:100%;height:100%">
-            <img src="https://genie0705-beep.github.io/aicut/step2.png" alt="에디터 배정" style="width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;left:0;top:0">
+          <div class="ps-card-img-inner">
+            <img src="https://genie0705-beep.github.io/aicut/step2.png" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top" alt="에디터 배정">
             <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(240,253,244,0.6) 0%,transparent 45%)"></div>
             <div style="position:absolute;bottom:28px;left:24px;background:white;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(0,0,0,0.12);width:200px">
               <div style="font-size:10px;font-weight:700;color:#065f46;margin-bottom:8px">👤 에디터 배정 완료</div>
@@ -3378,8 +3376,8 @@ footer {
           </div>
         </div>
         <div style="position:relative;overflow:hidden;background:#fefce8;height:100%" class="ps-card-img">
-          <div class="ps-card-img-inner" style="width:100%;height:100%">
-            <img src="https://genie0705-beep.github.io/aicut/step3.png" alt="편집 진행" style="width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;left:0;top:0">
+          <div class="ps-card-img-inner">
+            <img src="https://genie0705-beep.github.io/aicut/step3.png" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top" alt="편집 진행">
             <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(254,252,232,0.6) 0%,transparent 45%)"></div>
             <div style="position:absolute;bottom:28px;left:24px;background:white;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(0,0,0,0.12);width:210px">
               <div style="font-size:10px;font-weight:700;color:#92400e;margin-bottom:8px">✂️ 편집 진행중</div>
@@ -3407,8 +3405,8 @@ footer {
           </div>
         </div>
         <div style="position:relative;overflow:hidden;background:#eff6ff;height:100%" class="ps-card-img">
-          <div class="ps-card-img-inner" style="width:100%;height:100%">
-            <img src="https://genie0705-beep.github.io/aicut/step4.png" alt="검수 수정" style="width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;left:0;top:0">
+          <div class="ps-card-img-inner">
+            <img src="https://genie0705-beep.github.io/aicut/step4.png" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top" alt="검수 수정">
             <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(239,246,255,0.6) 0%,transparent 45%)"></div>
             <div style="position:absolute;bottom:28px;left:24px;background:white;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(0,0,0,0.12);width:210px">
               <div style="font-size:10px;font-weight:700;color:#1e40af;margin-bottom:8px">🔍 수정 요청</div>
@@ -3435,8 +3433,8 @@ footer {
           </div>
         </div>
         <div style="position:relative;overflow:hidden;background:#fdf4ff;height:100%" class="ps-card-img">
-          <div class="ps-card-img-inner" style="width:100%;height:100%">
-            <img src="https://genie0705-beep.github.io/aicut/step5.png" alt="최종 납품" style="width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;left:0;top:0">
+          <div class="ps-card-img-inner">
+            <img src="https://genie0705-beep.github.io/aicut/step5.png" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top" alt="최종 납품">
             <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(253,244,255,0.6) 0%,transparent 45%)"></div>
             <div style="position:absolute;bottom:28px;left:24px;background:white;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(0,0,0,0.12);width:210px">
               <div style="font-size:10px;font-weight:700;color:#7e22ce;margin-bottom:8px">🎉 납품 완료!</div>
