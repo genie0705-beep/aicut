@@ -3279,10 +3279,10 @@ footer {
 <!-- VFX FULLWIDTH SECTION -->
 
 <!-- CLIENT CASES -->
-<section id="reviews-section" class="reveal" style="background:#09061a;padding:72px 0 64px;overflow:hidden">
+<section id="reviews-section" class="reveal" style="background:#09061a;padding:72px 0 64px;overflow:hidden;scroll-margin-top:52px">
 
   <!-- 헤더 -->
-  <div style="text-align:center;margin-bottom:36px;padding:0 24px">
+  <div style="text-align:center;margin-bottom:64px;padding:0 24px">
     <span class="section-eyebrow" style="color:#7c5df8">CLIENT REVIEWS</span>
     <h2 class="section-title" style="color:white;margin-bottom:6px">에이컷 고객사 만족도 <span style="color:#a78bfa">4.9점</span></h2>
     <p style="font-size:13px;color:rgba(255,255,255,0.4)">실제 이용 고객 후기 · 월 정기 편집 파트너</p>
@@ -3290,34 +3290,34 @@ footer {
 
   <!-- 롤링 CSS -->
   <style>
-  .rv-wrap{overflow:hidden;position:relative;margin-bottom:10px}
+  .rv-wrap{overflow:hidden;position:relative;margin-bottom:40px}
   .rv-wrap::before,.rv-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
   .rv-wrap::before{left:0;background:linear-gradient(to right,#09061a,transparent)}
   .rv-wrap::after{right:0;background:linear-gradient(to left,#09061a,transparent)}
-  .rv-track{display:flex;gap:10px;width:max-content}
+  .rv-track{display:flex;gap:14px;width:max-content}
   .rv-t1{animation:rvroll1 44s linear infinite}
   .rv-t2{animation:rvroll2 52s linear infinite}
   
   @keyframes rvroll1{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
   @keyframes rvroll2{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
-  .rvc{flex-shrink:0;border-radius:14px;overflow:hidden}
-  .rvc-rv{width:256px;height:152px;background:white;padding:18px;display:flex;flex-direction:column;justify-content:space-between}
-  .rvc-rv-q{font-size:12px;color:#374151;line-height:1.7}
+  .rvc{flex-shrink:0;border-radius:18px;overflow:hidden}
+  .rvc-rv{width:340px;height:210px;background:white;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+  .rvc-rv-q{font-size:14px;color:#374151;line-height:1.75}
   .rvc-rv-b{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
-  .rvc-rv-n{font-size:11px;font-weight:700;color:#111}
-  .rvc-rv-r{font-size:10px;color:#6b7280}
-  .rvc-stat{width:164px;height:152px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
-  .rvc-stat-n{font-size:34px;font-weight:700;color:white;line-height:1}
-  .rvc-stat-l{font-size:11px;font-weight:700;color:rgba(255,255,255,0.65)}
-  .rvc-stat-s{font-size:10px;color:rgba(255,255,255,0.45)}
-  .rvc-wide{width:316px;height:152px;background:white;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between}
-  .rvc-wide-q{font-size:12px;color:#374151;line-height:1.7}
+  .rvc-rv-n{font-size:13px;font-weight:700;color:#111}
+  .rvc-rv-r{font-size:11px;color:#6b7280}
+  .rvc-stat{width:220px;height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+  .rvc-stat-n{font-size:44px;font-weight:700;color:white;line-height:1}
+  .rvc-stat-l{font-size:13px;font-weight:700;color:rgba(255,255,255,0.65)}
+  .rvc-stat-s{font-size:11px;color:rgba(255,255,255,0.45)}
+  .rvc-wide{width:420px;height:210px;background:white;padding:26px 28px;display:flex;flex-direction:column;justify-content:space-between}
+  .rvc-wide-q{font-size:14px;color:#374151;line-height:1.75}
   .rvc-wide-b{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
-  .rvc-nm{width:188px;height:152px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12)}
-  .rvc-nm-s{color:#22c55e;font-size:13px;margin-bottom:6px}
-  .rvc-nm-n{font-size:15px;font-weight:700;color:white;margin-bottom:3px}
-  .rvc-nm-r{font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5}
-  .rv-pl{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .rvc-nm{width:240px;height:210px;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12)}
+  .rvc-nm-s{color:#22c55e;font-size:16px;margin-bottom:8px}
+  .rvc-nm-n{font-size:18px;font-weight:700;color:white;margin-bottom:4px}
+  .rvc-nm-r{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6}
+  .rv-pl{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
   </style>
 
   <!-- 1행: 좌→우 -->
@@ -5890,17 +5890,20 @@ window.updateOrderSummary = function() {
 };
 
 window.scrollTo_ = function(id) {
+  var NAV_H = 52;
+  function doScroll() {
+    var el = document.querySelector(id);
+    if (!el) return;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - NAV_H;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
   var homePage = document.getElementById('page-home');
   var isHome = homePage && homePage.classList.contains('active');
   if (!isHome) {
     showPage('home');
-    setTimeout(function() {
-      var el = document.querySelector(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 350);
+    setTimeout(doScroll, 350);
   } else {
-    var el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    doScroll();
   }
 };
 window.openB2B = window.openB2B || function() { document.getElementById('b2bModal')?.classList.add('open'); };
