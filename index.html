@@ -1606,7 +1606,7 @@ section { padding: 96px 48px; }
 .b2b-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; }
 
 /* ========== REVIEWS ========== */
-.reviews-section { background: var(--gray-50); }
+.reviews-section { }
 .reviews-grid {
   display: grid; grid-template-columns: repeat(3,1fr);
   gap: 20px;
@@ -3279,106 +3279,136 @@ footer {
 <!-- VFX FULLWIDTH SECTION -->
 
 <!-- CLIENT CASES -->
-<section id="reviews-section" class="reveal" style="background:white">
-  <div class="section-center">
-    <span class="section-eyebrow">CLIENT CASES</span>
-    <h2 class="section-title">우리와 같은 상황의<br>기업들이 선택했습니다</h2>
-    <p class="section-desc" style="word-break:keep-all">업종별로 어떻게 활용하는지 확인해보세요</p>
+<section id="reviews-section" class="reveal" style="background:#09061a;padding:72px 0 64px;overflow:hidden">
+
+  <!-- 헤더 -->
+  <div style="text-align:center;margin-bottom:36px;padding:0 24px">
+    <span class="section-eyebrow" style="color:#7c5df8">CLIENT REVIEWS</span>
+    <h2 class="section-title" style="color:white;margin-bottom:6px">에이컷 고객사 만족도 <span style="color:#a78bfa">4.9점</span></h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.4)">실제 이용 고객 후기 · 월 정기 편집 파트너</p>
   </div>
 
-  <div class="reviews-grid" style="max-width:1100px;margin:60px auto 0">
+  <!-- 롤링 CSS -->
+  <style>
+  .rv-wrap{overflow:hidden;position:relative;margin-bottom:10px}
+  .rv-wrap::before,.rv-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+  .rv-wrap::before{left:0;background:linear-gradient(to right,#09061a,transparent)}
+  .rv-wrap::after{right:0;background:linear-gradient(to left,#09061a,transparent)}
+  .rv-track{display:flex;gap:10px;width:max-content}
+  .rv-t1{animation:rvroll1 44s linear infinite}
+  .rv-t2{animation:rvroll2 52s linear infinite}
+  
+  @keyframes rvroll1{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @keyframes rvroll2{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+  .rvc{flex-shrink:0;border-radius:14px;overflow:hidden}
+  .rvc-rv{width:256px;height:152px;background:white;padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+  .rvc-rv-q{font-size:12px;color:#374151;line-height:1.7}
+  .rvc-rv-b{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+  .rvc-rv-n{font-size:11px;font-weight:700;color:#111}
+  .rvc-rv-r{font-size:10px;color:#6b7280}
+  .rvc-stat{width:164px;height:152px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+  .rvc-stat-n{font-size:34px;font-weight:700;color:white;line-height:1}
+  .rvc-stat-l{font-size:11px;font-weight:700;color:rgba(255,255,255,0.65)}
+  .rvc-stat-s{font-size:10px;color:rgba(255,255,255,0.45)}
+  .rvc-wide{width:316px;height:152px;background:white;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between}
+  .rvc-wide-q{font-size:12px;color:#374151;line-height:1.7}
+  .rvc-wide-b{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+  .rvc-nm{width:188px;height:152px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12)}
+  .rvc-nm-s{color:#22c55e;font-size:13px;margin-bottom:6px}
+  .rvc-nm-n{font-size:15px;font-weight:700;color:white;margin-bottom:3px}
+  .rvc-nm-r{font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5}
+  .rv-pl{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+  </style>
 
-    <!-- 케이스 1: 이커머스 브랜드 -->
-    <div class="review-card" style="border-top:3px solid var(--accent)">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-        <div style="background:var(--accent);color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px">이커머스</div>
-        <div style="font-size:12px;color:var(--gray-400)">STANDARD 플랜 · 월 8편</div>
-      </div>
-      <div class="review-text">"제품 촬영본을 넘기면 정기적으로 편집해서 돌아옵니다. 인스타그램·유튜브·스마트스토어에 올릴 영상을 따로 발주할 필요 없이, 한 번에 해결되는 게 가장 큰 장점이에요."</div>
-      <div class="review-author">
-        <div>
-          <div class="review-name">한다혜 마케팅 매니저</div>
-          <div class="review-company">뷰티 이커머스 브랜드 · 월 제품 영상 8편 정기 계약</div>
-        </div>
-      </div>
+  <!-- 1행: 좌→우 -->
+  <div class="rv-wrap"><div class="rv-track rv-t1" id="rvt1">
+    <div class="rvc rvc-rv">
+      <div class="rvc-rv-q">"촬영만 넘기면 알아서 다 해줘요. 브랜드 톤을 처음부터 완벽하게 이해해서 따로 설명이 필요 없어졌어요."</div>
+      <div class="rvc-rv-b"><div><div class="rvc-rv-n">김지수 님</div><div class="rvc-rv-r">뷰티 브랜드 마케팅 팀장</div></div><span class="rv-pl" style="background:#EEEDFE;color:#3C3489">STANDARD</span></div>
     </div>
-
-    <!-- 케이스 2: 교육 플랫폼 -->
-    <div class="review-card" style="border-top:3px solid #10b981">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-        <div style="background:#10b981;color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px">교육·에듀테크</div>
-        <div style="font-size:12px;color:var(--gray-400)">ENTERPRISE 플랜 · 월 40편</div>
-      </div>
-      <div class="review-text">"매월 40편 이상의 강의 영상을 편집해야 하는데, 에이컷 전담팀이 우리 포맷을 완전히 학습한 뒤부터는 피드백이 거의 없습니다. 내부 인력 2명 분량의 업무를 대체했어요."</div>
-      <div class="review-author">
-        <div>
-          <div class="review-name">박지훈 콘텐츠팀장</div>
-          <div class="review-company">온라인 교육 플랫폼 · 강의 영상 월 40편 정기 계약</div>
-        </div>
-      </div>
+    <div class="rvc rvc-stat" style="background:#5c3de8">
+      <div class="rvc-stat-l">납기 준수율</div>
+      <div class="rvc-stat-n">100%</div>
+      <div class="rvc-stat-s">전체 납품 기준</div>
     </div>
-
-    <!-- 케이스 3: 스타트업 마케팅팀 -->
-    <div class="review-card" style="border-top:3px solid #f59e0b">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-        <div style="background:#f59e0b;color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px">스타트업</div>
-        <div style="font-size:12px;color:var(--gray-400)">STARTER 플랜 · 월 4편</div>
-      </div>
-      <div class="review-text">"마케터 혼자 기획부터 편집까지 다 했는데, 에이컷에 편집을 맡기고 나서 기획과 배포에만 집중할 수 있게 됐어요. 팀원 한 명 고용하는 비용의 10분의 1로 퀄리티는 훨씬 높습니다."</div>
-      <div class="review-author">
-        <div>
-          <div class="review-name">이수현 그로스팀 이사</div>
-          <div class="review-company">SaaS 스타트업 · 유튜브 채널 월 4편 정기 계약</div>
-        </div>
-      </div>
+    <div class="rvc rvc-wide">
+      <div class="rvc-wide-q">"월 24편 강의 영상을 납기 한 번도 어긴 적 없이 납품해줬어요. 내부 인력 2명 분량 업무를 완전히 대체했습니다."</div>
+      <div class="rvc-wide-b"><div><div class="rvc-rv-n">이현아 님 · 에듀테크 콘텐츠팀장</div></div><span class="rv-pl" style="background:#d1fae5;color:#085041">ENTERPRISE</span></div>
     </div>
-
-    <!-- 케이스 4: 유튜브 채널 운영사 -->
-    <div class="review-card" style="border-top:3px solid var(--accent)">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-        <div style="background:var(--accent);color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px">미디어·MCN</div>
-        <div style="font-size:12px;color:var(--gray-400)">ENTERPRISE 플랜 · 월 20편</div>
-      </div>
-      <div class="review-text">"여러 채널을 동시에 운영하다 보니 편집 리소스가 항상 부족했어요. 에이컷은 채널마다 다른 스타일을 정확히 구분해서 작업해줍니다. 소통 비용이 거의 없어서 정말 효율적입니다."</div>
-      <div class="review-author">
-        <div>
-          <div class="review-name">김민준 대표</div>
-          <div class="review-company">멀티채널 콘텐츠 스튜디오 · 채널 3개 월 20편 계약</div>
-        </div>
-      </div>
+    <div class="rvc rvc-nm">
+      <div class="rvc-nm-s">★★★★★</div>
+      <div class="rvc-nm-n">박민준 님</div>
+      <div class="rvc-nm-r">IT 스타트업 · 대표<br>STANDARD + VFX</div>
     </div>
-
-    <!-- 케이스 5: 공공기관·기업 홍보 -->
-    <div class="review-card" style="border-top:3px solid #6366f1">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-        <div style="background:#6366f1;color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px">기업·기관 홍보</div>
-        <div style="font-size:12px;color:var(--gray-400)">PRO 건당 · 행사별 발주</div>
-      </div>
-      <div class="review-text">"행사 때마다 홍보팀에서 직접 편집하느라 힘들었는데, 에이컷에 맡긴 후 빠른 납품과 높은 퀄리티에 놀랐습니다. 이제는 행사 영상은 무조건 에이컷입니다."</div>
-      <div class="review-author">
-        <div>
-          <div class="review-name">정현수 홍보팀 대리</div>
-          <div class="review-company">공공기관 홍보팀 · 행사·세미나 영상 정기 발주</div>
-        </div>
-      </div>
+    <div class="rvc rvc-rv">
+      <div class="rvc-rv-q">"클라이언트 5개사 영상을 한 곳에서 관리해요. 브랜드별 가이드 저장이 핵심이에요. 업무 효율이 완전히 달라졌어요."</div>
+      <div class="rvc-rv-b"><div><div class="rvc-rv-n">최서연 님</div><div class="rvc-rv-r">마케팅 에이전시 대표</div></div><span class="rv-pl" style="background:#EEEDFE;color:#3C3489">ENTERPRISE</span></div>
     </div>
-
-    <!-- 케이스 6: 병원·클리닉 -->
-    <div class="review-card" style="border-top:3px solid #10b981">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-        <div style="background:#10b981;color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px">의료·헬스케어</div>
-        <div style="font-size:12px;color:var(--gray-400)">STANDARD 플랜 · 월 6편</div>
-      </div>
-      <div class="review-text">"의료 정보 유튜브 채널을 운영하는데, 촬영만 해서 넘기면 자막·편집 다 해서 돌아옵니다. 원장님 시간을 촬영에만 쓸 수 있어서 채널 퀄리티가 눈에 띄게 올랐어요."</div>
-      <div class="review-author">
-        <div>
-          <div class="review-name">최유나 원무과장</div>
-          <div class="review-company">피부과 클리닉 · 의료 정보 유튜브 채널 월 6편 계약</div>
-        </div>
-      </div>
+    <div class="rvc rvc-stat" style="background:#7c3aed">
+      <div class="rvc-stat-l">고객 만족도</div>
+      <div class="rvc-stat-n">4.9<span style="font-size:16px">/5</span></div>
+      <div class="rvc-stat-s">실제 이용 고객 기준</div>
     </div>
+    <div class="rvc rvc-rv">
+      <div class="rvc-rv-q">"신규 환자 문의가 28% 늘었어요. 의료법을 처음부터 이해하고 작업해줘서 놀랐습니다."</div>
+      <div class="rvc-rv-b"><div><div class="rvc-rv-n">한소희 님</div><div class="rvc-rv-r">병원 원무과장</div></div><span class="rv-pl" style="background:#EEEDFE;color:#3C3489">STANDARD</span></div>
+    </div>
+    <div class="rvc rvc-wide">
+      <div class="rvc-wide-q">"에디터 채용 없이 매달 고퀄리티 영상이 나옵니다. 인건비 대비 효율이 압도적이에요. 주변 대표들한테 추천했습니다."</div>
+      <div class="rvc-wide-b"><div><div class="rvc-rv-n">류민서 님 · 스타트업 CEO</div></div><span class="rv-pl" style="background:#EEEDFE;color:#3C3489">STANDARD</span></div>
+    </div>
+  </div></div>
 
-  </div>
+  <!-- 2행: 우→좌 -->
+  <div class="rv-wrap"><div class="rv-track rv-t2" id="rvt2">
+    <div class="rvc rvc-wide">
+      <div class="rvc-wide-q">"매물이 올라오는 속도에 맞춰 빠르게 납품해줘서 정말 도움이 됩니다. 매물 클릭률이 41% 상승했어요."</div>
+      <div class="rvc-wide-b"><div><div class="rvc-rv-n">윤지영 님 · 부동산 플랫폼 대표</div></div><span class="rv-pl" style="background:#fef3c7;color:#633806">STANDARD</span></div>
+    </div>
+    <div class="rvc rvc-stat" style="background:#0f6e56">
+      <div class="rvc-stat-l">재계약률</div>
+      <div class="rvc-stat-n">92%</div>
+      <div class="rvc-stat-s">3개월 이상 유지</div>
+    </div>
+    <div class="rvc rvc-rv">
+      <div class="rvc-rv-q">"온보딩 한 번 하고 나서는 매달 따로 연락 안 해도 알아서 진행됩니다. 이게 진짜 월 정기 서비스죠."</div>
+      <div class="rvc-rv-b"><div><div class="rvc-rv-n">노예린 님</div><div class="rvc-rv-r">헬스케어 CMO</div></div><span class="rv-pl" style="background:#EEEDFE;color:#3C3489">STANDARD</span></div>
+    </div>
+    <div class="rvc rvc-nm" style="background:rgba(92,61,232,0.25);border-color:rgba(167,139,250,0.3)">
+      <div class="rvc-nm-s">★★★★★</div>
+      <div class="rvc-nm-n">정호성 님</div>
+      <div class="rvc-nm-r">F&amp;B 프랜차이즈<br>구독자 2,800명 달성</div>
+    </div>
+    <div class="rvc rvc-rv">
+      <div class="rvc-rv-q">"IR 피칭 영상을 맡겼는데 투자자 미팅에서 퀄리티로 좋은 인상을 남겼습니다. VFX까지 한 번에 해결됐어요."</div>
+      <div class="rvc-rv-b"><div><div class="rvc-rv-n">강도윤 님</div><div class="rvc-rv-r">SaaS 마케팅 담당</div></div><span class="rv-pl" style="background:#EEEDFE;color:#3C3489">VFX</span></div>
+    </div>
+    <div class="rvc rvc-stat" style="background:#185FA5">
+      <div class="rvc-stat-l">월 납품 편수</div>
+      <div class="rvc-stat-n">850<span style="font-size:16px">+</span></div>
+      <div class="rvc-stat-s">전체 고객사 합산</div>
+    </div>
+    <div class="rvc rvc-wide">
+      <div class="rvc-wide-q">"처음엔 반신반의했는데 첫 달 납품물 보고 바로 장기계약 했어요. 계약 강제가 없어서 부담 없이 시작할 수 있었습니다."</div>
+      <div class="rvc-wide-b"><div><div class="rvc-rv-n">임서현 님 · 온라인 쇼핑몰 운영자</div></div><span class="rv-pl" style="background:#d1fae5;color:#085041">STARTER</span></div>
+    </div>
+    <div class="rvc rvc-nm">
+      <div class="rvc-nm-s">★★★★★</div>
+      <div class="rvc-nm-n">오지훈 님</div>
+      <div class="rvc-nm-r">MCN · 운영팀<br>10채널 동시 운영</div>
+    </div>
+  </div></div>
+
+  <!-- JS: 카드 복제 -->
+  <script>
+  (function(){
+    var t1=document.getElementById('rvt1');
+    var t2=document.getElementById('rvt2');
+    if(t1) t1.innerHTML+=t1.innerHTML;
+    if(t2) t2.innerHTML+=t2.innerHTML;
+  })();
+  </script>
+
 </section>
 
 <!-- FINAL CTA -->
