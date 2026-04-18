@@ -2706,10 +2706,22 @@ footer {
   .chat-widget-btn { width: 52px; height: 52px; font-size: 22px; }
 
   /* ===== 전역 텍스트 ===== */
-  .section-title { font-size: clamp(20px, 5.5vw, 28px) !important; }
-  .section-eyebrow { font-size: 11px; }
+  .section-title { font-size: clamp(20px, 5.5vw, 28px) !important; margin-bottom: 20px !important; }
+  .section-eyebrow { font-size: 11px; margin-bottom: 12px !important; }
+  .section-desc { font-size: 14px !important; }
   p { word-break: keep-all; }
   h1, h2, h3 { word-break: keep-all; }
+
+  /* ===== 모바일 섹션 패딩 축소 ===== */
+  #service-section { padding: 56px 24px !important; }
+  #reviews-section { padding: 56px 24px !important; }
+  #steps-section { padding: 56px 24px !important; }
+
+  /* section-center margin-bottom 축소 */
+  .section-center { margin-bottom: 36px !important; }
+
+  /* 섹션 패딩 전체 축소 */
+  section { padding: 56px 24px !important; }
 }
 
 /* ===== 소형 모바일 (360px 이하) ===== */
@@ -8499,9 +8511,7 @@ function registerAdminB2B() {
 ChannelIO('boot', {
   pluginKey: '8c28ff86-be65-4b48-b7d5-d839d2e03495',
   language: 'ko',
-  appearance: 'dark',
-  zIndex: 799,
-  customLauncherSelector: '#channelTalkBtn',
+  zIndex: 9999,
   hideChannelButtonOnBoot: false,
   profile: {
     name: null,
