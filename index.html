@@ -2716,12 +2716,15 @@ footer {
   #service-section { padding: 56px 24px !important; }
   #reviews-section { padding: 56px 24px !important; }
   #steps-section { padding: 40px 0 !important; }
-  #steps-section > div:last-of-type { padding: 0 !important; }
+
   /* ── 모바일 프로세스 슬라이더 ── */
+  #psSliderWrap { padding: 0 !important; }
+  #psSliderBox { border-radius: 12px !important; }
   .ps-card {
     display: flex !important;
     flex-direction: column !important;
     min-height: 0 !important;
+    width: 100% !important;
   }
   .ps-card-text {
     order: 1;
@@ -2731,7 +2734,8 @@ footer {
   }
   .ps-card-img {
     order: 2;
-    width: 100% !important;
+    width: 100vw !important;
+    max-width: 100% !important;
     height: 300px !important;
     min-height: 300px !important;
     max-height: 300px !important;
@@ -2740,6 +2744,7 @@ footer {
     position: relative !important;
     overflow: hidden !important;
     flex-shrink: 0 !important;
+    align-self: stretch !important;
   }
   .ps-card-img-inner {
     display: block !important;
@@ -2753,7 +2758,7 @@ footer {
     display: block !important;
     width: 100% !important;
     height: 300px !important;
-    max-width: 100% !important;
+    max-width: none !important;
     object-fit: cover !important;
     object-position: center !important;
     position: relative !important;
@@ -3352,8 +3357,8 @@ footer {
   </div>
 
   <!-- 슬라이더 -->
-  <div style="padding:0 clamp(12px,3vw,48px)">
-  <div style="overflow:hidden;border-radius:20px;max-width:1100px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,0.08);">
+  <div id="psSliderWrap" style="padding:0 clamp(12px,3vw,48px)">
+  <div id="psSliderBox" style="overflow:hidden;border-radius:20px;max-width:1100px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,0.08);">
     <div id="psSlider" style="display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)">
 
       <!-- Step 1 -->
