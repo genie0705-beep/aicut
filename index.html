@@ -2841,7 +2841,6 @@ footer {
   /* 수치 섹션 모바일 */
   #stats-section { padding: 48px 0 0 !important; }
   #stats-section .stat-card { padding: 28px 16px !important; }
-  #stats-section > div:first-of-type > div:last-child { grid-template-columns: 1fr !important; }
 
   #steps-section .ps-si { min-width: 56px !important; }
   #steps-section .ps-si div:last-child { font-size: 12px !important; font-weight: 600 !important; }
@@ -2858,7 +2857,6 @@ footer {
   /* 수치 섹션 모바일 */
   #stats-section { padding: 48px 0 0 !important; }
   #stats-section .stat-card { padding: 28px 16px !important; }
-  #stats-section > div:first-of-type > div:last-child { grid-template-columns: 1fr !important; }
 
   #steps-section .ps-si { min-width: 56px !important; }
   #steps-section .ps-si div:last-child { font-size: 12px !important; font-weight: 600 !important; }
@@ -3227,25 +3225,25 @@ footer {
 <section id="stats-section" style="background:#eeedf5;padding:clamp(64px,8vw,100px) 0;overflow:hidden;position:relative">
 
   <!-- 상단 카운팅 (롤링 섹션과 동일 스타일로 통합) -->
-  <div style="display:flex;justify-content:center;align-items:center;gap:clamp(32px,6vw,96px);flex-wrap:wrap;margin-bottom:clamp(40px,5vw,60px);padding:0 clamp(20px,4vw,48px)">
+  <div style="display:flex;justify-content:center;align-items:center;gap:0;flex-wrap:nowrap;margin-bottom:clamp(40px,5vw,60px);padding:0 clamp(12px,3vw,48px)">
 
-    <div style="text-align:center">
-      <div style="font-size:14px;font-weight:700;color:#444;letter-spacing:1px;margin-bottom:12px;text-transform:uppercase">소속 전담 에디터</div>
-      <div style="font-size:clamp(48px,6vw,72px);font-weight:900;line-height:1;letter-spacing:-2px;color:#111"><span class="stats-count" data-target="10">0</span><span style="color:#111">+</span></div>
+    <div style="text-align:center;flex:1;min-width:0;padding:0 clamp(8px,2vw,24px)">
+      <div style="font-size:clamp(10px,2.5vw,14px);font-weight:700;color:#444;letter-spacing:0.5px;margin-bottom:8px;text-transform:uppercase;white-space:nowrap">소속 전담 에디터</div>
+      <div style="font-size:clamp(32px,8vw,72px);font-weight:900;line-height:1;letter-spacing:-1px;color:#111"><span class="stats-count" data-target="10">0</span><span style="color:#111">+</span></div>
     </div>
 
-    <div class="stats-divider" style="width:1px;height:60px;background:rgba(0,0,0,0.12);flex-shrink:0"></div>
+    <div class="stats-divider" style="width:1px;height:50px;background:rgba(0,0,0,0.12);flex-shrink:0"></div>
 
-    <div style="text-align:center">
-      <div style="font-size:14px;font-weight:700;color:#444;letter-spacing:1px;margin-bottom:12px;text-transform:uppercase">납기 준수율</div>
-      <div style="font-size:clamp(48px,6vw,72px);font-weight:900;line-height:1;letter-spacing:-2px;color:#111">100<span style="font-size:0.6em">%</span></div>
+    <div style="text-align:center;flex:1;min-width:0;padding:0 clamp(8px,2vw,24px)">
+      <div style="font-size:clamp(10px,2.5vw,14px);font-weight:700;color:#444;letter-spacing:0.5px;margin-bottom:8px;text-transform:uppercase;white-space:nowrap">납기 준수율</div>
+      <div style="font-size:clamp(32px,8vw,72px);font-weight:900;line-height:1;letter-spacing:-1px;color:#111">100<span style="font-size:0.6em">%</span></div>
     </div>
 
-    <div class="stats-divider" style="width:1px;height:60px;background:rgba(0,0,0,0.12);flex-shrink:0"></div>
+    <div class="stats-divider" style="width:1px;height:50px;background:rgba(0,0,0,0.12);flex-shrink:0"></div>
 
-    <div style="text-align:center">
-      <div style="font-size:14px;font-weight:700;color:#444;letter-spacing:1px;margin-bottom:12px;text-transform:uppercase">고객 만족도</div>
-      <div style="font-size:clamp(48px,6vw,72px);font-weight:900;line-height:1;letter-spacing:-2px;color:#111">4.9<span style="font-size:0.55em">점</span></div>
+    <div style="text-align:center;flex:1;min-width:0;padding:0 clamp(8px,2vw,24px)">
+      <div style="font-size:clamp(10px,2.5vw,14px);font-weight:700;color:#444;letter-spacing:0.5px;margin-bottom:8px;text-transform:uppercase;white-space:nowrap">고객 만족도</div>
+      <div style="font-size:clamp(32px,8vw,72px);font-weight:900;line-height:1;letter-spacing:-1px;color:#111">4.9<span style="font-size:0.55em">점</span></div>
     </div>
   </div>
 
