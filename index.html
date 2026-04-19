@@ -5887,7 +5887,7 @@ footer {
 
       <div style="display:flex;gap:10px">
         <button class="btn btn-outline btn-lg" style="flex:1" onclick="closePayment()">닫기</button>
-        <button class="btn btn-primary btn-lg" style="flex:2" onclick="closePayment();doLogin('client')">마이페이지 →</button>
+        <button class="btn btn-primary btn-lg" style="flex:2" onclick="closePayment();showPage('client')">마이페이지 →</button>
       </div>
     </div>
 
@@ -5975,12 +5975,9 @@ footer {
       </div>
     </div>
 
-    <!-- 관리자 패널 (숨김) -->
+    <!-- 관리자 패널 — 접근 불가 (보안 제거됨) -->
     <div class="tab-panel" id="ap-admin" style="display:none">
-      <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:14px 16px;font-size:13px;color:#991b1b;margin-bottom:20px">⚠️ 관리자 전용 로그인입니다</div>
-      <div class="form-group"><label class="form-label">관리자 ID</label><input class="form-input" id="adminLoginIdField" placeholder="admin"></div>
-      <div class="form-group"><label class="form-label">비밀번호</label><input class="form-input" id="adminLoginPwField" type="password" placeholder="••••••••"></div>
-      <button class="btn btn-full btn-lg" style="background:var(--red);color:white;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit" onclick="doLogin('admin')">관리자 로그인</button>
+      <!-- 이 탭은 비활성화됨. 관리자 로그인은 별도 adminLoginModal 사용 -->
     </div>
   </div>
 </div>
@@ -6179,7 +6176,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (lo) lo.style.display = 'inline-flex';
         if (mp) {
           mp.style.display = 'inline-flex';
-          mp.textContent = s.role === 'admin' ? '어드민' : '마이페이지';
+          // 페이지 새로고침 시: admin role이 localStorage에 있어도
+          // 메모리 토큰(_adminIdToken)이 없으므로 '마이페이지'로만 표시
+          // 실제 접근은 goMypage 내부에서 토큰 재검증으로 차단
+          var isRealAdmin = (s.role === 'admin' && window._adminIdToken);
+          mp.textContent = isRealAdmin ? '어드민' : '마이페이지';
         }
         if (cb) cb.style.display = 'none';
       }
@@ -6393,6 +6394,14 @@ window.showPage = function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   window.scrollTo(0,0);
+
+  // URL 해시 동기화 (공유 가능한 링크 생성)
+  // home은 깔끔하게 # 없이, 나머지는 #page 형태
+  if (id === 'home') {
+    window.history.replaceState({page: id}, '', window.location.pathname);
+  } else {
+    window.history.replaceState({page: id}, '', '#' + id);
+  }
   document.getElementById('mainNav').style.display = (id === 'home' || id === 'pricing') ? 'flex' : 'none';
   var nav = document.getElementById('mainNav');
   if (nav) {
@@ -6445,7 +6454,7 @@ function updateNavState(id) {
     if (logoutBtn) logoutBtn.style.display = 'inline-flex';
     if (mypageBtn) {
       mypageBtn.style.display = 'inline-flex';
-      mypageBtn.textContent = session.role === 'admin' ? '어드민' : '마이페이지';
+      mypageBtn.textContent = (session.role === 'admin' && window._adminIdToken) ? '어드민' : '마이페이지';
     }
     if (consultBtn) consultBtn.style.display = 'none';
   } else {
@@ -7242,18 +7251,11 @@ function initClientPage(session) {
 }
 
 window.doLogin = function doLogin(type) {
+  // ⚠️ 레거시 함수 — 모든 타입 차단
+  // admin: Firebase Custom Claims 검증(doAdminLogin)으로만 허용
+  // client: Firebase onAuthStateChanged에서만 세션 생성
   closeModal();
-  if (type === 'admin') {
-    setSession('admin', '관리자');
-    showPage('admin');
-    updateNavState('admin');
-    showToast('관리자 대시보드에 오신 것을 환영합니다 👋');
-  } else {
-    setSession('client', '김민준');
-    showPage('client');
-    updateNavState('client');
-    showToast('로그인되었습니다. 안녕하세요, 김민준 님! 👋');
-  }
+  console.warn('[SECURITY] doLogin(' + type + ') blocked — use Firebase Auth');
 };
 
 // 페이지 로드 시 세션 복원 + 이메일 확인 토큰 처리
@@ -7261,6 +7263,41 @@ document.addEventListener('DOMContentLoaded', () => {
   handleAdminNav();
   handleClientNav();
   initNetlifyIdentity();
+
+  // ── URL 해시 기반 페이지 복원 ──
+  // 예: aicut.co.kr/#admin → 어드민 로그인 후 어드민 페이지 진입
+  //     aicut.co.kr/#client → 로그인 후 마이페이지 진입
+  //     aicut.co.kr/#pricing → 요금제 페이지 바로 진입
+  (function() {
+    var hash = window.location.hash.replace('#', '').trim();
+    var allowed = ['pricing', 'admin', 'client'];
+    if (!allowed.includes(hash)) return;
+
+    // Firebase onAuthStateChanged 완료까지 잠깐 대기 후 복원
+    // (Firebase 초기화가 비동기이므로 300ms 후 시도)
+    setTimeout(function() {
+      if (hash === 'pricing') {
+        showPage('pricing');
+        return;
+      }
+      var session = typeof getSession === 'function' ? getSession() : null;
+      if (hash === 'admin') {
+        // 어드민: 세션+토큰 있으면 바로 진입, 없으면 로그인 모달
+        if (session && session.role === 'admin' && window._adminIdToken) {
+          showPage('admin');
+        } else {
+          // URL 해시는 유지하되 로그인 모달 오픈
+          if (typeof openModal === 'function') openModal('admin');
+        }
+      } else if (hash === 'client') {
+        if (session && session.role !== 'admin') {
+          showPage('client');
+        } else if (!session) {
+          if (typeof openModal === 'function') openModal('login');
+        }
+      }
+    }, 350);
+  })();
 
   // 이메일 확인 토큰 처리
   function handleEmailToken() {
@@ -9020,12 +9057,12 @@ function registerAdminB2B() {
 })();
 </script>
 
-<!-- ===== 채널톡 SDK ===== -->
+<!-- ===== 채널톡 SDK (표준 스크립트) ===== -->
 <script>
 (function(){
   var w=window;
   if(w.ChannelIO){return;}
-  var ch=function(){ch.c&&ch.c.apply(ch,arguments);};
+  var ch=function(){ch.c(arguments);};
   ch.q=[];
   ch.c=function(args){ch.q.push(args);};
   w.ChannelIO=ch;
@@ -9040,33 +9077,15 @@ function registerAdminB2B() {
     x.parentNode.insertBefore(s,x);
   }
   if(document.readyState==='complete'){l();}
-  else{window.addEventListener('DOMContentLoaded',l);window.addEventListener('load',l);}
+  else{w.addEventListener('DOMContentLoaded',l);
+  w.addEventListener('load',l);}
 })();
 
 ChannelIO('boot', {
-  pluginKey: '8c28ff86-be65-4b48-b7d5-d839d2e03495',
-  language: 'ko',
-  zIndex: 9999,
-  hideChannelButtonOnBoot: false,
-  profile: {
-    name: null,
-    email: null
-  }
+  pluginKey: '8c28ff86-be65-4b48-b7d5-d839d2e03495'
 });
 
-// 페이지 진입 후 20초 뒤 자동 팝업 (첫 방문자만)
-(function() {
-  var shown = sessionStorage.getItem('chtShown');
-  if (!shown) {
-    setTimeout(function() {
-      if (typeof ChannelIO !== 'undefined') {
-        ChannelIO('openChat', undefined, '안녕하세요! 에이컷입니다 👋 영상편집 월 정기 서비스가 궁금하신가요?');
-        sessionStorage.setItem('chtShown', '1');
-      }
-    }, 25000);
-  }
-})();
-
+// 로그인 사용자 식별
 window._channelIOLogin = function(name, email) {
   if (typeof ChannelIO === 'undefined') return;
   ChannelIO('updateUser', {
@@ -9074,11 +9093,13 @@ window._channelIOLogin = function(name, email) {
   });
 };
 
+// 로그아웃 시 초기화
 window._channelIOLogout = function() {
   if (typeof ChannelIO === 'undefined') return;
   ChannelIO('resetUser');
 };
 
+// 수동 열기
 function openChannelTalk() {
   if (typeof ChannelIO !== 'undefined') {
     ChannelIO('showMessenger');
