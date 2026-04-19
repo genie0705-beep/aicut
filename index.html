@@ -2928,7 +2928,13 @@ footer {
         var name  = user.displayName || user.email.split('@')[0];
         var email = user.email;
         if (typeof setSession === 'function') {
+          // Firebase 일반 로그인은 항상 'client' role 고정 — admin 우회 불가
           setSession('client', name, email);
+          // 혹시 이전 admin 세션 잔존 시 메모리 토큰 초기화
+          if (window._adminIdToken) {
+            window._adminIdToken   = null;
+            window._adminClaimRole = null;
+          }
           if (typeof updateNavState === 'function') updateNavState('client');
           if (typeof initClientPage === 'function') initClientPage({ name, email });
         }
@@ -6487,6 +6493,16 @@ window.doLogout = function doLogout() {
 window.goMypage = function goMypage() {
   const session = getSession();
   if (!session) { openModal('login'); return; }
+  // admin 페이지는 반드시 메모리 토큰(_adminIdToken) 존재 시에만 허용
+  // localStorage role 조작으로 직행 차단
+  if (session.role === 'admin') {
+    if (!window._adminIdToken || !window._fbCurrentUser) {
+      clearSession();
+      openModal('login');
+      showToast('⛔ 세션이 만료되었습니다. 다시 로그인해주세요.');
+      return;
+    }
+  }
   showPage(session.role);
 }
 
