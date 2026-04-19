@@ -3934,7 +3934,7 @@ footer {
         </div>
         <div style="display:flex;justify-content:space-between;font-size:13px">
           <span style="color:var(--gray-400)">납품 기간</span>
-          <span style="font-weight:600;color:var(--primary)">의뢰 후 3~5일</span>
+          <span style="font-weight:600;color:var(--primary)">원본 수령 후 영업일 3~5일</span>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:13px">
           <span style="color:var(--gray-400)">전담 에디터</span>
@@ -3944,7 +3944,8 @@ footer {
         <div style="font-size:12px;color:var(--gray-500);line-height:1.9">
           ✓ 컷편집 + 자막 + BGM<br>
           ✓ 타이포그래피 디자인<br>
-          ✓ 편당 2회 무료 수정<br>
+          ✓ 편당 2회 무료 수정 (항목 제한 없음)<br>
+          ✓ 썸네일 디자인 1종 포함<br>
           ✓ 브랜드 가이드 저장<br>
           ✓ 추가편 ₩95,000/편
         </div>
@@ -3969,7 +3970,7 @@ footer {
         </div>
         <div style="display:flex;justify-content:space-between;font-size:13px">
           <span style="color:var(--gray-400)">납품 기간</span>
-          <span style="font-weight:600;color:var(--primary)">의뢰 후 2~3일</span>
+          <span style="font-weight:600;color:var(--primary)">원본 수령 후 영업일 2~3일</span>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:13px">
           <span style="color:var(--gray-400)">전담 에디터</span>
@@ -3980,7 +3981,8 @@ footer {
           ✓ STARTER 전체 포함<br>
           ✓ 컬러그레이딩<br>
           ✓ 모션그래픽 · 인트로/아웃트로<br>
-          ✓ 편당 3회 무료 수정<br>
+          ✓ 유튜브 원본 → 숏폼 1편 자동 컷 포함<br>
+          ✓ 편당 3회 무료 수정 (항목 제한 없음)<br>
           ✓ 추가편 ₩85,000/편
         </div>
       </div>
@@ -4013,7 +4015,7 @@ footer {
         <div style="height:1px;background:rgba(255,255,255,0.15);margin:4px 0"></div>
         <div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.9">
           ✓ STANDARD 전체 포함<br>
-          ✓ 전용 작업 채널 운영<br>
+          ✓ 전용 카카오톡 채널 + 담당 PM 배정<br>
           ✓ 모션그래픽 · CG · VFX<br>
           ✓ 무제한 수정<br>
           ✓ 건당 단가 최대 35% 할인
@@ -4031,6 +4033,17 @@ footer {
       <p class="perunit-sub">정기 계약 없이 필요할 때 바로 의뢰하세요</p>
     </div>
     <div class="perunit-grid">
+      <div class="perunit-card">
+        <div class="perunit-plan">숏폼</div>
+        <div class="perunit-price">₩39,000</div>
+        <div class="perunit-spec">완성본 60초 이내</div>
+        <ul class="perunit-list">
+          <li>컷편집 + 자막 + BGM</li>
+          <li>세로형 최적화</li>
+          <li>1회 무료 수정</li>
+        </ul>
+        <button class="btn btn-outline btn-full" style="margin-top:auto" onclick="openB2B()">의뢰하기</button>
+      </div>
       <div class="perunit-card">
         <div class="perunit-plan">STANDARD</div>
         <div class="perunit-price">₩79,000</div>
@@ -4096,6 +4109,7 @@ footer {
     <div class="footer-logo-area">
       <div class="logo">AI<span>CUT</span></div>
       <div class="footer-desc" style="margin-top:12px">
+        <span style="font-weight:700;color:var(--gray-400)">주식회사 온니바이어</span><br>
         서울시 송파구 법원로 8길 8, SKV1 2차 1118호<br>
         대표이사 : 정효진<br>
         사업자등록번호 : 353-86-03415
@@ -5977,7 +5991,7 @@ footer {
     <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:12px 16px;font-size:12px;color:#991b1b;margin-bottom:20px;line-height:1.6">
       🔒 관리자 전용 접근 경로입니다. 권한 없는 접근 시 보안 로그에 기록됩니다.
     </div>
-    <div class="form-group"><label class="form-label">관리자 ID</label><input class="form-input" id="adminLoginId" placeholder="관리자 계정 입력"></div>
+    <div class="form-group"><label class="form-label">관리자 이메일</label><input class="form-input" id="adminLoginId" type="email" placeholder="admin@aicut.co.kr" autocomplete="username"></div>
     <div class="form-group"><label class="form-label">비밀번호</label><input class="form-input" id="adminLoginPw" type="password" placeholder="••••••••" onkeypress="if(event.key==='Enter')doAdminLogin()"></div>
     <button class="btn btn-full btn-lg" style="background:var(--primary);color:white;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:4px" onclick="doAdminLogin()">관리자 로그인</button>
   </div>
@@ -6185,29 +6199,17 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/* ===== URL 파라미터 기반 접근 제어 ===== */
+/* ===== URL 파라미터 기반 접근 제어 (보안 강화 버전) ===== */
+/* authKeys 평문 제거 — 어드민 접근은 Firebase Custom Claims 토큰 검증으로만 허용 */
 (function() {
-  var authKeys = {
-    '7c5e162a9fae74ead1bbcd1c71608ec1': 'master',
-    'a181893a601d5317eddd95e30ca851fb': 'ops',
-    '6d4efa0b751b617d884af9f37f9f7cdc': 'client'
-  };
   var params = new URLSearchParams(window.location.search);
-  var authKey = params.get('auth');
-  if (authKey && authKeys[authKey]) {
-    var role = authKeys[authKey];
+  // 어드민 진입 힌트: ?admin=1 → 로그인 모달만 열어줌 (권한 부여 X)
+  if (params.get('admin') === '1') {
     window.history.replaceState({}, '', window.location.pathname);
-    if (role === 'client') {
-      setTimeout(function() { if(typeof openModal==='function') openModal('login'); }, 400);
-    } else {
-      setTimeout(function() {
-        var modal = document.getElementById('adminLoginModal');
-        if (modal) {
-          modal.classList.add('open');
-          window._pendingAdminRole = role;
-        }
-      }, 400);
-    }
+    setTimeout(function() {
+      var modal = document.getElementById('adminLoginModal');
+      if (modal) modal.classList.add('open');
+    }, 400);
   }
 })();
 
@@ -6334,10 +6336,35 @@ window.showTab = window.showTab || function(s,t) {
 window.showPage = function showPage(id) {
   const session = getSession();
 
-  // ── 어드민 페이지: 어드민 세션만 허용 ──
+  // ── 어드민 페이지: Firebase Custom Claims 토큰 재검증 ──
   if (id === 'admin') {
+    const fbUser = window._fbCurrentUser;
+    // 메모리 토큰 없음 or Firebase 미로그인 → 어드민 로그인 모달
+    if (!window._adminIdToken || !fbUser) {
+      if (typeof openModal === 'function') openModal('admin');
+      return;
+    }
+    // 비동기 토큰 재검증 (60분마다 자동 갱신, claims 위변조 방지)
+    fbUser.getIdTokenResult(false).then(function(result) {
+      if (!result.claims.admin) {
+        // claims 없으면 즉시 차단 후 로그아웃
+        window._adminIdToken = null;
+        window._adminClaimRole = null;
+        clearSession();
+        showPage('home');
+        showToast('⛔ 관리자 권한이 확인되지 않습니다. 다시 로그인해주세요.');
+      } else {
+        window._adminIdToken   = result.token;
+        window._adminClaimRole = result.claims.role || 'ops';
+      }
+    }).catch(function() {
+      window._adminIdToken = null;
+      clearSession();
+      showPage('home');
+      showToast('⛔ 세션이 만료되었습니다. 다시 로그인해주세요.');
+    });
+    // 초기 렌더는 메모리 토큰 존재 시 허용 (비동기 검증이 백그라운드 실행)
     if (!session || session.role !== 'admin') {
-      // 비로그인 or 일반고객 → 어드민 로그인 모달
       if (typeof openModal === 'function') openModal('admin');
       return;
     }
@@ -6438,11 +6465,16 @@ function getSession() {
 function setSession(role, name, email) {
   var EXPIRE_DAYS = 30;
   var expireAt = Date.now() + (EXPIRE_DAYS * 24 * 60 * 60 * 1000);
+  // admin role은 메모리 토큰(_adminIdToken)과 함께 사용될 때만 유효
+  // localStorage의 role:'admin' 단독으로는 어드민 페이지 접근 불가 (가드에서 이중 검증)
   localStorage.setItem('aicut_session', JSON.stringify({ role, name, email: email||'', time: Date.now(), expireAt: expireAt }));
 }
 function clearSession() {
   localStorage.removeItem('aicut_session');
   localStorage.removeItem('aicut_admin_role');
+  // 메모리 어드민 토큰 초기화 (페이지 새로고침 없이도 즉시 차단)
+  window._adminIdToken   = null;
+  window._adminClaimRole = null;
 }
 
 window.doLogout = function doLogout() {
@@ -6581,41 +6613,81 @@ async function _sha(pw){
   var ab=await crypto.subtle.digest('SHA-256',buf);
   return Array.from(new Uint8Array(ab)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
-const ADMIN_HASHES = {
-  'aicut_master': { hash: '941fd2d91e23e2026678e017c8a9b2f295aa62d094aafaf17c192f04193c530a', role: 'master', name: '마스터 관리자' },
-  'aicut_ops':    { hash: 'e63aae94c45dc7b6796d81f4ec2e563d6e2d941295c9fa55b5f39b93f5a39d7a',    role: 'ops',    name: '운영 담당자'   }
-};
+/* ===== 어드민 로그인 — Firebase Auth + Custom Claims 검증 ===== */
+/*
+ * 보안 개선 사항:
+ * - ADMIN_HASHES(평문 해시) 완전 제거
+ * - Firebase 이메일 로그인 후 ID Token의 Custom Claims 서버 검증
+ * - claims.admin === true 인 계정만 어드민 페이지 허용
+ * - localStorage role 조작으로는 어드민 접근 불가 (토큰 재검증)
+ *
+ * Firebase Console → Functions 또는 Admin SDK에서 아래와 같이 권한 부여 필요:
+ *   admin.auth().setCustomUserClaims(uid, { admin: true, role: 'master' })
+ */
 
-window.doAdminLogin = function doAdminLogin() {
-  const id = document.getElementById('adminLoginId')?.value?.trim();
-  const pw = document.getElementById('adminLoginPw')?.value;
-  if (!id) { showToast('⚠️ 관리자 ID를 입력해주세요'); return; }
-  if (!pw) { showToast('⚠️ 비밀번호를 입력해주세요'); return; }
+window.doAdminLogin = async function doAdminLogin() {
+  const email = document.getElementById('adminLoginId')?.value?.trim();
+  const pw    = document.getElementById('adminLoginPw')?.value;
+  const btn   = document.querySelector('#adminLoginModal .btn');
 
-  const account = ADMIN_HASHES[id];
-  if (!account) {
-    showToast('❌ ID 또는 비밀번호가 올바르지 않습니다');
-    document.getElementById('adminLoginPw').value = '';
-    return;
-  }
+  if (!email) { showToast('⚠️ 관리자 이메일을 입력해주세요'); return; }
+  if (!pw)    { showToast('⚠️ 비밀번호를 입력해주세요'); return; }
 
-  // SHA-256 해시 비교
-  _sha(pw).then(function(pwHash) {
-    if (pwHash !== account.hash) {
-      showToast('❌ ID 또는 비밀번호가 올바르지 않습니다');
+  if (btn) { btn.disabled = true; btn.textContent = '인증 중...'; }
+
+  try {
+    const auth = window._fbAuth;
+    if (!auth) throw new Error('Firebase Auth 초기화 실패');
+
+    // 1) Firebase 이메일 로그인
+    const { signInWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js');
+    const cred = await signInWithEmailAndPassword(auth, email, pw);
+    const user = cred.user;
+
+    // 2) ID Token 강제 갱신 후 Custom Claims 확인
+    const idTokenResult = await user.getIdTokenResult(true);
+    const claims = idTokenResult.claims;
+
+    if (!claims.admin) {
+      // 어드민 권한 없음 → 즉시 로그아웃 후 차단
+      await auth.signOut();
+      showToast('❌ 관리자 권한이 없는 계정입니다');
       document.getElementById('adminLoginPw').value = '';
       return;
     }
+
+    // 3) 권한 확인 완료 — 세션 저장 (role은 claims에서만 취득)
+    const role     = claims.role || 'ops';   // 'master' | 'ops'
+    const dispName = user.displayName || email.split('@')[0];
+
     document.getElementById('adminLoginModal').classList.remove('open');
-    setSession('admin', account.name);
-    localStorage.setItem('aicut_admin_role', account.role);
+
+    // localStorage에는 role 저장 안 함 — 매 접근마다 토큰 재검증
+    setSession('admin', dispName, email);
+    window._adminIdToken   = await user.getIdToken();   // 메모리에만 보관
+    window._adminClaimRole = role;
+
     showPage('admin');
     updateNavState('admin');
+
     const badge = document.querySelector('.admin-badge');
-    if (badge) badge.textContent = account.role === 'master' ? '마스터' : '운영담당';
-    showToast(`${account.name}님, 환영합니다 👋`);
-  });
-}
+    if (badge) badge.textContent = role === 'master' ? '마스터' : '운영담당';
+    showToast(`${dispName}님, 환영합니다 👋`);
+
+  } catch (err) {
+    const code = err.code || '';
+    if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+      showToast('❌ 이메일 또는 비밀번호가 올바르지 않습니다');
+    } else if (code === 'auth/too-many-requests') {
+      showToast('⚠️ 로그인 시도가 너무 많습니다. 잠시 후 다시 시도해주세요');
+    } else {
+      showToast('❌ 로그인 중 오류가 발생했습니다: ' + (err.message || code));
+    }
+    document.getElementById('adminLoginPw').value = '';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '관리자 로그인'; }
+  }
+};
 
 
 window.selectOption = function selectOption(btn) {
