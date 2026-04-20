@@ -6776,20 +6776,47 @@ window.doEmailLogin = function() {
         return;
       }
       var name = user.displayName || email.split('@')[0];
-      setSession('client', name, email);
-      updateNavState('client');
-      showPage('client');
-      initClientPage({ name: name, email: email });
-      // 채널톡 사용자 식별
-      if (typeof window._channelIOLogin === 'function') {
-        window._channelIOLogin(name, email);
-      }
-      // 재발송 박스 숨기기
-      var resendBox = document.getElementById('loginResendBox');
-      if (resendBox) resendBox.style.display = 'none';
-      closeModal();
-      showToast('안녕하세요, ' + name + ' 님! 👋');
-      if (btn) { btn.disabled = false; btn.textContent = '로그인'; }
+
+      // Claims 확인 후 admin/client 분기
+      user.getIdTokenResult(false).then(function(idTokenResult) {
+        var claims = idTokenResult.claims;
+
+        if (claims && claims.admin) {
+          // ── 어드민 계정 ──
+          window._adminIdToken   = idTokenResult.token;
+          window._adminClaimRole = claims.role || 'ops';
+          setSession('admin', name, email);
+          closeModal();
+          showPage('admin');
+          updateNavState('admin');
+          var badge = document.querySelector('.admin-badge');
+          if (badge) badge.textContent = claims.role === 'master' ? '마스터' : '운영담당';
+          showToast('어드민으로 로그인되었습니다 👋');
+        } else {
+          // ── 일반 고객 계정 ──
+          setSession('client', name, email);
+          updateNavState('client');
+          showPage('client');
+          initClientPage({ name: name, email: email });
+          if (typeof window._channelIOLogin === 'function') {
+            window._channelIOLogin(name, email);
+          }
+          var resendBox = document.getElementById('loginResendBox');
+          if (resendBox) resendBox.style.display = 'none';
+          closeModal();
+          showToast('안녕하세요, ' + name + ' 님! 👋');
+        }
+        if (btn) { btn.disabled = false; btn.textContent = '로그인'; }
+      }).catch(function() {
+        // Claims 조회 실패 시 일반 고객으로 처리
+        setSession('client', name, email);
+        updateNavState('client');
+        showPage('client');
+        initClientPage({ name: name, email: email });
+        closeModal();
+        showToast('안녕하세요, ' + name + ' 님! 👋');
+        if (btn) { btn.disabled = false; btn.textContent = '로그인'; }
+      });
     })
     .catch(function(err) {
       if (btn) { btn.disabled = false; btn.textContent = '로그인'; }
