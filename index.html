@@ -6655,8 +6655,16 @@ window.submitB2B = function submitB2B() {
           if (el) el.value = '';
         });
       }).catch(function(e) {
-        console.error('[Firestore] B2B 저장 실패:', e.message);
-        if (errEl) { errEl.textContent = '저장 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.'; errEl.style.display = 'block'; }
+        console.error('[Firestore] B2B 저장 실패 코드:', e.code, '메시지:', e.message);
+        var msg = '저장 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+        if (e.code === 'permission-denied') {
+          msg = 'Firestore 보안 규칙 오류입니다. Firebase Console에서 규칙을 확인해주세요.';
+        } else if (e.code === 'unavailable' || e.code === 'failed-precondition') {
+          msg = 'Firestore 데이터베이스가 준비되지 않았습니다. 잠시 후 다시 시도해주세요.';
+        } else if (e.code === 'not-found') {
+          msg = 'Firestore 데이터베이스를 찾을 수 없습니다. Firebase Console에서 Firestore를 생성해주세요.';
+        }
+        if (errEl) { errEl.textContent = msg + ' (코드: ' + (e.code||'unknown') + ')'; errEl.style.display = 'block'; }
         if (btn) { btn.disabled = false; btn.textContent = '계약 문의하기'; }
       });
     });
