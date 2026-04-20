@@ -1991,7 +1991,7 @@ footer {
 }
 .metric-icon { font-size: 20px; margin-bottom: 12px; }
 .metric-label { font-size: 12px; color: var(--gray-400); font-weight: 600; margin-bottom: 6px; }
-.metric-val { font-size: 28px; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; }
+.metric-val { font-size: 28px; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; font-family: 'Noto Sans KR', -apple-system, sans-serif; }
 .metric-change { font-size: 12px; color: var(--green); margin-top: 4px; font-weight: 600; }
 .metric-change.down { color: var(--red); }
 
@@ -2611,7 +2611,7 @@ footer {
 
   /* 업로드 탭 */
   #page-admin #uploadOrderSelect { font-size: 14px; }
-  #page-admin [style*="font-family:'DM Mono',monospace;font-size:12px"] { font-size: 11px; word-break: break-all; }
+  #page-admin [style*="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px"] { font-size: 11px; word-break: break-all; }
   #page-admin #folderPreview { font-size: 11px !important; word-break: break-all; }
 
   /* 관리자 계정 탭 */
@@ -4249,7 +4249,7 @@ footer {
           <div class="metric-card">
             <div class="metric-icon">💳</div>
             <div class="metric-label">이번달 비용</div>
-            <div class="metric-val" id="statCost">₩0</div>
+            <div class="metric-val" id="statCost" style="font-family:inherit">₩0</div>
           </div>
         </div>
 
@@ -4320,11 +4320,16 @@ footer {
                 <div class="form-group">
                   <label class="form-label">편집 플랜</label>
                   <select class="form-select" id="newOrderPlan" onchange="updateOrderSummary()">
-                    <option value="STARTER|490000" selected>STARTER — 월 ₩490,000 (월 4편)</option>
-                    <option value="STANDARD|990000">STANDARD — 월 ₩990,000 (월 10편)</option>
-                    <option value="ENTERPRISE|0">ENTERPRISE — 맞춤 협의 (월 20편+)</option>
-                    <option value="STANDARD_1|79000">건당 STANDARD — ₩79,000</option>
-                    <option value="PRO_1|180000">건당 PRO — ₩180,000</option>
+                    <optgroup label="── 월 정기 플랜 ──">
+                      <option value="STARTER|490000" selected>STARTER — ₩490,000/월 (월 4편)</option>
+                      <option value="STANDARD|990000">STANDARD — ₩990,000/월 (월 10편)</option>
+                      <option value="ENTERPRISE|0">ENTERPRISE — 맞춤 협의 (월 20편+)</option>
+                    </optgroup>
+                    <optgroup label="── 건당 플랜 ──">
+                      <option value="SHORTFORM_1|39000">숏폼 — ₩39,000 (60초 이내)</option>
+                      <option value="STANDARD_1|79000">STANDARD — ₩79,000</option>
+                      <option value="PRO_1|180000">PRO — ₩180,000</option>
+                    </optgroup>
                   </select>
                 </div>
                 <div class="form-group">
@@ -4553,30 +4558,30 @@ footer {
             <table class="data-table">
               <tr><th>주문번호</th><th>프로젝트명</th><th>플랜</th><th>상태</th><th>납품예정</th><th>금액</th><th></th></tr>
               <tr>
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0024</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0024</td>
                 <td style="font-weight:600">브랜드 인트로 영상</td>
                 <td><span style="font-size:12px;font-weight:700;color:var(--accent)">PREMIUM</span></td>
                 <td><span class="badge badge-editing">편집중</span></td>
                 <td style="font-size:13px;color:var(--gray-400)">2024.12.20</td>
-                <td style="font-family:'DM Mono',monospace;font-size:13px">₩308,000</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩308,000</td>
                 <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>
               </tr>
               <tr>
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0023</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0023</td>
                 <td style="font-weight:600">SNS 릴스 3편</td>
                 <td><span style="font-size:12px;font-weight:700;color:var(--gray-400)">STANDARD</span></td>
                 <td><span class="badge badge-review">검수중</span></td>
                 <td style="font-size:13px;color:var(--gray-400)">2024.12.18</td>
-                <td style="font-family:'DM Mono',monospace;font-size:13px">₩132,000</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩132,000</td>
                 <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>
               </tr>
               <tr>
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0021</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0021</td>
                 <td style="font-weight:600">제품 소개 영상</td>
                 <td><span style="font-size:12px;font-weight:700;color:var(--gray-400)">STARTER</span></td>
                 <td><span class="badge badge-done">납품완료</span></td>
                 <td style="font-size:13px;color:var(--gray-400)">2024.12.10</td>
-                <td style="font-family:'DM Mono',monospace;font-size:13px">₩53,900</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩53,900</td>
                 <td><button class="btn btn-primary" style="padding:6px 14px;font-size:12px">다운로드</button></td>
               </tr>
             </table>
@@ -4599,7 +4604,7 @@ footer {
             💬 채팅 상담 시작하기
           </button>
           <div style="margin-top:20px;font-size:12px;color:var(--gray-400)">
-            운영시간 평일 09:00 ~ 18:00 · 주말/공휴일 휴무
+            평일 09:00 ~ 18:00 (주말/공휴일 채널톡 자동응답)
           </div>
         </div>
       </div>
@@ -4883,7 +4888,7 @@ footer {
               <div class="panel" style="margin-bottom:20px">
                 <div class="panel-header" style="border-bottom:1px solid var(--gray-200)">
                   <div>
-                    <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--gray-400)">#FC-0040</div>
+                    <div style="font-size:11px;font-family:'Noto Sans KR','DM Mono',monospace;color:var(--gray-400)">#FC-0040</div>
                     <div class="panel-title">기업 인트로 VFX</div>
                   </div>
                   <span class="badge badge-editing">편집중</span>
@@ -4997,7 +5002,7 @@ footer {
             <table class="data-table" id="adminOrderTable">
               <tr><th>주문번호</th><th>의뢰인</th><th>프로젝트</th><th>플랜</th><th>상태</th><th>수정 현황</th><th>납품예정</th><th>에디터</th><th>액션</th></tr>
               <tr data-s="pending">
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0041</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0041</td>
                 <td style="font-weight:600">이수현</td><td>유튜브 편집 3편</td>
                 <td><span style="font-size:12px;font-weight:700;color:var(--accent)">STANDARD</span></td>
                 <td><span class="badge badge-pending">대기중</span></td>
@@ -5007,7 +5012,7 @@ footer {
                 <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px" onclick="changeStatus(this,'editing','편집중','badge-editing')">착수</button></td>
               </tr>
               <tr data-s="pending">
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0038</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0038</td>
                 <td style="font-weight:600">최미래</td><td>릴스 5편</td>
                 <td><span style="font-size:12px;font-weight:700;color:#94a3b8">STARTER</span></td>
                 <td><span class="badge badge-pending">대기중</span></td>
@@ -5017,7 +5022,7 @@ footer {
                 <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px" onclick="changeStatus(this,'editing','편집중','badge-editing')">착수</button></td>
               </tr>
               <tr data-s="editing">
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0040</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0040</td>
                 <td style="font-weight:600">㈜미디어플러스</td><td>기업 인트로 VFX</td>
                 <td><span style="font-size:12px;font-weight:700;color:var(--accent)">PREMIUM</span></td>
                 <td><span class="badge badge-editing">편집중</span></td>
@@ -5033,7 +5038,7 @@ footer {
                 </td>
               </tr>
               <tr data-s="editing">
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0037</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0037</td>
                 <td style="font-weight:600">스타트업코리아</td><td>SNS 릴스 10편</td>
                 <td><span style="font-size:12px;font-weight:700;color:#3b82f6">B2B</span></td>
                 <td><span class="badge badge-editing">편집중</span></td>
@@ -5046,7 +5051,7 @@ footer {
                 </td>
               </tr>
               <tr data-s="review">
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0039</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0039</td>
                 <td style="font-weight:600">박지훈</td><td>기업 홍보영상</td>
                 <td><span style="font-size:12px;font-weight:700;color:var(--accent)">PREMIUM</span></td>
                 <td><span class="badge badge-review">검수중</span></td>
@@ -5056,7 +5061,7 @@ footer {
                 <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px" onclick="changeStatus(this,'done','납품완료','badge-done')">납품완료</button></td>
               </tr>
               <tr data-s="done">
-                <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0031</td>
+                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0031</td>
                 <td style="font-weight:600">이수현</td><td>쇼츠 7편</td>
                 <td><span style="font-size:12px;font-weight:700;color:#94a3b8">STARTER</span></td>
                 <td><span class="badge badge-done">납품완료</span></td>
@@ -5100,7 +5105,7 @@ footer {
 
               <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:16px;margin-bottom:16px">
                 <div style="font-size:11px;font-weight:700;color:var(--gray-400);margin-bottom:8px">생성될 폴더 구조</div>
-                <div style="font-family:'DM Mono',monospace;font-size:12px;color:var(--primary);line-height:2">
+                <div style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--primary);line-height:2">
                   📁 AICUT-Uploads/<br>
                   &nbsp;&nbsp;└ 📁 <span id="folderPreview" style="color:var(--accent);font-weight:700">주문번호_고객명_프로젝트명</span>/<br>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ 📄 원본 파일 (의뢰인만 업로드 가능)
@@ -5163,7 +5168,7 @@ footer {
           <div>
             <div class="order-summary-card" style="margin-bottom:16px">
               <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:12px">선택된 주문</div>
-              <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gray-400)" id="uploadOrderNum">—</div>
+              <div style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:11px;color:var(--gray-400)" id="uploadOrderNum">—</div>
               <div style="font-size:17px;font-weight:700;color:var(--primary);margin:6px 0 20px" id="uploadOrderName">주문을 선택해주세요</div>
               <div class="detail-grid" style="gap:16px">
                 <div class="detail-item"><label>의뢰인</label><p id="uploadClientName">—</p></div>
@@ -5241,14 +5246,14 @@ footer {
             <tr>
               <td style="font-weight:700">Jason</td>
               <td style="font-size:13px">롱폼 / 기업영상</td>
-              <td><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--blue)">3건</span></td>
+              <td><span style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700;color:var(--blue)">3건</span></td>
               <td>
                 <div style="display:flex;align-items:center;gap:8px">
                   <div style="height:6px;width:80px;background:var(--gray-200);border-radius:3px"><div style="width:75%;height:100%;background:var(--blue);border-radius:3px"></div></div>
                   <span style="font-size:12px;font-weight:600">75%</span>
                 </div>
               </td>
-              <td style="font-family:'DM Mono',monospace;font-size:13px">12건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">12건</td>
               <td style="font-size:13px">2.4일</td>
               <td><span class="badge badge-editing">활성</span></td>
               <td><button class="btn btn-outline" style="padding:5px 12px;font-size:12px" onclick="showEditorDetail(this)">상세</button></td>
@@ -5256,14 +5261,14 @@ footer {
             <tr>
               <td style="font-weight:700">Luke</td>
               <td style="font-size:13px">모션그래픽 / AE</td>
-              <td><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--orange)">4건</span></td>
+              <td><span style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700;color:var(--orange)">4건</span></td>
               <td>
                 <div style="display:flex;align-items:center;gap:8px">
                   <div style="height:6px;width:80px;background:var(--gray-200);border-radius:3px"><div style="width:100%;height:100%;background:var(--orange);border-radius:3px"></div></div>
                   <span style="font-size:12px;font-weight:600;color:var(--orange)">100% 풀</span>
                 </div>
               </td>
-              <td style="font-family:'DM Mono',monospace;font-size:13px">9건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">9건</td>
               <td style="font-size:13px">3.1일</td>
               <td><span class="badge badge-pending" style="background:#fef3c7;color:#92400e">포화</span></td>
               <td><button class="btn btn-outline" style="padding:5px 12px;font-size:12px" onclick="showEditorDetail(this)">상세</button></td>
@@ -5271,14 +5276,14 @@ footer {
             <tr>
               <td style="font-weight:700">Eric</td>
               <td style="font-size:13px">숏폼 / 릴스</td>
-              <td><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">2건</span></td>
+              <td><span style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700;color:var(--green)">2건</span></td>
               <td>
                 <div style="display:flex;align-items:center;gap:8px">
                   <div style="height:6px;width:80px;background:var(--gray-200);border-radius:3px"><div style="width:50%;height:100%;background:var(--green);border-radius:3px"></div></div>
                   <span style="font-size:12px;font-weight:600">50%</span>
                 </div>
               </td>
-              <td style="font-family:'DM Mono',monospace;font-size:13px">18건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">18건</td>
               <td style="font-size:13px">1.2일</td>
               <td><span class="badge badge-editing">활성</span></td>
               <td><button class="btn btn-outline" style="padding:5px 12px;font-size:12px" onclick="showEditorDetail(this)">상세</button></td>
@@ -5286,14 +5291,14 @@ footer {
             <tr>
               <td style="font-weight:700">Chris</td>
               <td style="font-size:13px">자막 / 일·한 번역</td>
-              <td><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--orange)">5건</span></td>
+              <td><span style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700;color:var(--orange)">5건</span></td>
               <td>
                 <div style="display:flex;align-items:center;gap:8px">
                   <div style="height:6px;width:80px;background:var(--gray-200);border-radius:3px"><div style="width:100%;height:100%;background:var(--orange);border-radius:3px"></div></div>
                   <span style="font-size:12px;font-weight:600;color:var(--orange)">100% 풀</span>
                 </div>
               </td>
-              <td style="font-family:'DM Mono',monospace;font-size:13px">22건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">22건</td>
               <td style="font-size:13px">1.8일</td>
               <td><span class="badge badge-pending" style="background:#fef3c7;color:#92400e">포화</span></td>
               <td><button class="btn btn-outline" style="padding:5px 12px;font-size:12px" onclick="showEditorDetail(this)">상세</button></td>
@@ -5301,14 +5306,14 @@ footer {
             <tr>
               <td style="font-weight:700">Victor</td>
               <td style="font-size:13px">CG / VFX</td>
-              <td><span style="font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">1건</span></td>
+              <td><span style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700;color:var(--green)">1건</span></td>
               <td>
                 <div style="display:flex;align-items:center;gap:8px">
                   <div style="height:6px;width:80px;background:var(--gray-200);border-radius:3px"><div style="width:25%;height:100%;background:var(--green);border-radius:3px"></div></div>
                   <span style="font-size:12px;font-weight:600">25%</span>
                 </div>
               </td>
-              <td style="font-family:'DM Mono',monospace;font-size:13px">5건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">5건</td>
               <td style="font-size:13px">4.2일</td>
               <td><span class="badge badge-editing">활성</span></td>
               <td><button class="btn btn-outline" style="padding:5px 12px;font-size:12px" onclick="showEditorDetail(this)">상세</button></td>
@@ -5579,9 +5584,9 @@ footer {
             <tr>
               <td style="font-weight:700">㈜미디어플러스</td>
               <td>이수현 이사</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700">월 30건+</td>
-              <td style="font-family:'DM Mono',monospace;color:var(--accent);font-weight:700">₩80,000/건</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">₩2,400,000+</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700">월 30건+</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;color:var(--accent);font-weight:700">₩80,000/건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700;color:var(--green)">₩2,400,000+</td>
               <td style="font-size:13px;color:var(--gray-400)">2025.01~2025.12</td>
               <td><span class="badge badge-review">계약중</span></td>
               <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px">갱신</button></td>
@@ -5589,9 +5594,9 @@ footer {
             <tr>
               <td style="font-weight:700">스타트업코리아</td>
               <td>박준혁 대표</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700">월 10건</td>
-              <td style="font-family:'DM Mono',monospace;color:var(--accent);font-weight:700">₩95,000/건</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">₩950,000</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700">월 10건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;color:var(--accent);font-weight:700">₩95,000/건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700;color:var(--green)">₩950,000</td>
               <td style="font-size:13px;color:var(--gray-400)">2025.03~2026.02</td>
               <td><span class="badge badge-review">계약중</span></td>
               <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px">상세</button></td>
@@ -5668,35 +5673,35 @@ footer {
             <tr><th>월</th><th>총 매출</th><th>총 건수</th><th>B2B</th><th>PREMIUM</th><th>PRO</th><th>STANDARD</th><th>전월 대비</th></tr>
             <tr>
               <td style="font-weight:700">2025년 3월</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--green)">₩6,800,000</td>
-              <td style="font-family:'DM Mono',monospace">47건</td>
-              <td style="font-family:'DM Mono',monospace;color:var(--accent)">₩3,350K</td>
-              <td style="font-family:'DM Mono',monospace">₩1,170K</td>
-              <td style="font-family:'DM Mono',monospace">₩1,490K</td>
-              <td style="font-family:'DM Mono',monospace">₩553K</td>
-              <td style="font-family:'DM Mono',monospace">₩232K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700;color:var(--green)">₩6,800,000</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">47건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;color:var(--accent)">₩3,350K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩1,170K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩1,490K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩553K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩232K</td>
               <td style="color:var(--green);font-weight:700">↑ 31%</td>
             </tr>
             <tr>
               <td style="font-weight:700">2025년 2월</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700">₩5,190,000</td>
-              <td style="font-family:'DM Mono',monospace">36건</td>
-              <td style="font-family:'DM Mono',monospace;color:var(--accent)">₩2,400K</td>
-              <td style="font-family:'DM Mono',monospace">₩780K</td>
-              <td style="font-family:'DM Mono',monospace">₩1,193K</td>
-              <td style="font-family:'DM Mono',monospace">₩632K</td>
-              <td style="font-family:'DM Mono',monospace">₩185K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700">₩5,190,000</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">36건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;color:var(--accent)">₩2,400K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩780K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩1,193K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩632K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩185K</td>
               <td style="color:var(--green);font-weight:700">↑ 19%</td>
             </tr>
             <tr>
               <td style="font-weight:700">2025년 1월</td>
-              <td style="font-family:'DM Mono',monospace;font-weight:700">₩4,360,000</td>
-              <td style="font-family:'DM Mono',monospace">29건</td>
-              <td style="font-family:'DM Mono',monospace;color:var(--accent)">₩2,400K</td>
-              <td style="font-family:'DM Mono',monospace">₩490K</td>
-              <td style="font-family:'DM Mono',monospace">₩895K</td>
-              <td style="font-family:'DM Mono',monospace">₩554K</td>
-              <td style="font-family:'DM Mono',monospace">₩121K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700">₩4,360,000</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">29건</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace;color:var(--accent)">₩2,400K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩490K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩895K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩554K</td>
+              <td style="font-family:'Noto Sans KR','DM Mono',monospace">₩121K</td>
               <td style="color:var(--blue)">신규</td>
             </tr>
           </table>
@@ -5729,7 +5734,7 @@ footer {
     <div id="pay-step1" style="padding:20px 28px 28px">
       <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:6px">STEP 1 / 3</div>
       <div style="font-size:20px;font-weight:800;color:var(--primary);margin-bottom:4px">의뢰 내용을 알려주세요</div>
-      <div style="font-size:13px;color:var(--gray-400);margin-bottom:20px">선택하신 플랜: <strong id="pay-plan-badge" style="color:var(--accent)">STANDARD</strong> — <span id="pay-plan-price" style="font-family:'DM Mono',monospace;font-weight:700">₩490,000</span></div>
+      <div style="font-size:13px;color:var(--gray-400);margin-bottom:20px">선택하신 플랜: <strong id="pay-plan-badge" style="color:var(--accent)">STANDARD</strong> — <span id="pay-plan-price" style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700">₩490,000</span></div>
 
       <div class="form-group">
         <label class="form-label">프로젝트 제목 <span style="color:var(--red)">*</span></label>
@@ -5796,13 +5801,13 @@ footer {
         <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:10px">주문 요약</div>
         <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
           <span id="pay-summary-plan" style="color:var(--primary)">STANDARD 플랜</span>
-          <span id="pay-summary-base" style="font-family:'DM Mono',monospace;font-weight:700">₩490,000</span>
+          <span id="pay-summary-base" style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:700">₩490,000</span>
         </div>
         <div id="pay-opt-rows" style="font-size:13px;color:var(--gray-400)"></div>
         <div style="height:0.5px;background:var(--gray-200);margin:10px 0"></div>
         <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:800">
           <span>총 결제금액 <span style="font-size:11px;font-weight:400;color:var(--gray-400)">(VAT 포함)</span></span>
-          <span id="pay-total" style="color:var(--accent);font-family:'DM Mono',monospace">₩163,900</span>
+          <span id="pay-total" style="color:var(--accent);font-family:'Noto Sans KR','DM Mono',monospace">₩163,900</span>
         </div>
       </div>
 
@@ -5872,14 +5877,14 @@ footer {
     <div id="pay-step3" style="padding:40px 28px;text-align:center;display:none">
       <div style="font-size:56px;margin-bottom:16px">🎉</div>
       <div style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:8px">결제가 완료되었습니다!</div>
-      <div style="font-size:14px;color:var(--gray-400);margin-bottom:28px;line-height:1.7">주문번호 <strong id="pay-order-num" style="font-family:'DM Mono',monospace;color:var(--accent)">#FC-0042</strong><br>담당 에디터 배정 후 작업을 시작합니다.</div>
+      <div style="font-size:14px;color:var(--gray-400);margin-bottom:28px;line-height:1.7">주문번호 <strong id="pay-order-num" style="font-family:'Noto Sans KR','DM Mono',monospace;color:var(--accent)">#FC-0042</strong><br>담당 에디터 배정 후 작업을 시작합니다.</div>
 
       <div style="background:var(--gray-50);border-radius:12px;padding:20px;text-align:left;margin-bottom:24px;border:1px solid var(--gray-200)">
         <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:12px">주문 내역</div>
         <div style="font-size:13px;line-height:2">
           <div style="display:flex;justify-content:space-between"><span>플랜</span><span id="done-plan" style="font-weight:700;color:var(--accent)">STANDARD</span></div>
           <div style="display:flex;justify-content:space-between"><span>납품 예정</span><span id="done-deadline" style="font-weight:600">2~3일</span></div>
-          <div style="display:flex;justify-content:space-between;border-top:0.5px solid var(--gray-200);margin-top:8px;padding-top:8px"><span style="font-weight:700">결제 금액</span><span id="done-amount" style="font-family:'DM Mono',monospace;font-weight:800;color:var(--primary)">₩163,900</span></div>
+          <div style="display:flex;justify-content:space-between;border-top:0.5px solid var(--gray-200);margin-top:8px;padding-top:8px"><span style="font-weight:700">결제 금액</span><span id="done-amount" style="font-family:'Noto Sans KR','DM Mono',monospace;font-weight:800;color:var(--primary)">₩163,900</span></div>
         </div>
       </div>
 
@@ -6287,6 +6292,7 @@ window.updateOrderSummary = function() {
   "ENTERPRISE": {name:"ENTERPRISE 맞춤 협의",title:"ENTERPRISE 패키지 포함 내역",items:["월 20편 이상","STANDARD 전체 포함","전용 작업 채널 운영","모션그래픽 · CG · VFX","무제한 수정","건당 단가 최대 35% 할인"]},
   "STANDARD_1": {name:"건당 STANDARD",title:"건당 STANDARD 포함 내역",items:["완성본 10분 이내","컷편집 + 자막 + BGM","타이포그래피 디자인","2회 무료 수정"]},
   "PRO_1": {name:"건당 PRO",title:"건당 PRO 포함 내역",items:["완성본 30분 이내","STANDARD 전체 포함","컬러그레이딩","모션그래픽 · 인트로/아웃트로","3회 무료 수정"]},
+  "SHORTFORM_1": {name:"건당 숏폼",title:"건당 숏폼 포함 내역",items:["완성본 60초 이내","컷편집 + 자막 + BGM","세로형 최적화","1회 무료 수정"]},
 };
 
   var pkg = PKG[planKey] || PKG['STARTER'];
@@ -7216,6 +7222,13 @@ function initClientPage(session) {
   if (statActive) statActive.textContent = active;
   if (statDone)   statDone.textContent   = done;
 
+  // 이번달 비용 계산
+  var statCostEl = document.getElementById('statCost');
+  if (statCostEl) {
+    var monthCost = orders.reduce(function(sum, o) { return sum + (o.total || 0); }, 0);
+    statCostEl.textContent = '₩' + monthCost.toLocaleString('ko-KR');
+  }
+
   var tableEl = document.getElementById('clientOrderTable');
   var emptyEl = document.getElementById('clientOrderEmpty');
   var guideEl = document.getElementById('onboardingGuide');
@@ -7987,12 +8000,12 @@ function completeOrder(order) {
     newRow.id = 'newOrderRow';
     newRow.style.cssText = 'background:#ede9ff;transition:background 2s';
     newRow.innerHTML = `
-      <td data-label="주문번호" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
+      <td data-label="주문번호" style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
       <td data-label="프로젝트명" style="font-weight:600">${order.name}</td>
       <td data-label="플랜"><span style="font-size:12px;font-weight:700;color:var(--accent)">${order.planName}</span></td>
       <td data-label="상태"><span class="badge badge-pending" style="background:#fef3c7;color:#92400e">결제완료</span></td>
       <td data-label="납품예정" style="font-size:13px;color:var(--gray-400)">${dStr}</td>
-      <td style="font-family:'DM Mono',monospace;font-size:13px">₩${order.total.toLocaleString()}</td>
+      <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩${order.total.toLocaleString()}</td>
       <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>
     `;
     const firstRow = clientTbody.querySelector('tr:nth-child(2)');
@@ -8008,7 +8021,7 @@ function completeOrder(order) {
     adminRow.setAttribute('data-s', 'pending');
     adminRow.style.cssText = 'background:#ede9ff;transition:background 3s';
     adminRow.innerHTML = `
-      <td style="font-family:'DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
+      <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
       <td style="font-weight:600">${clientName}</td>
       <td>${order.name}</td>
       <td><span style="font-size:12px;font-weight:700;color:var(--accent)">${order.planName}</span></td>
