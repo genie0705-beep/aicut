@@ -6634,8 +6634,24 @@ window.submitB2B = function submitB2B() {
       }).then(function(docRef) {
         console.log('[Firestore] B2B 상담 저장 완료:', docRef.id);
 
-        // 채널톡 실시간 알림 발송
+        // 채널톡 알림 — updateUser로 고객 정보 등록 + openChat으로 상담 자동 시작
         if (typeof ChannelIO !== 'undefined') {
+          // 1) 고객 정보 채널톡에 등록 (어드민에서 식별 가능)
+          ChannelIO('updateUser', {
+            profile: {
+              name:  manager.trim() + ' (' + company.trim() + ')',
+              email: email.trim(),
+              mobileNumber: phone.trim(),
+            },
+            tags: ['B2B상담신청'],
+          });
+
+          // 2) 자동으로 상담 채팅 오픈 + 메시지 전송 (어드민 단체방에 알림)
+          ChannelIO('openChat', undefined,
+            '[B2B] ' + company.trim() + ' / ' + manager.trim() + ' / ' + email.trim() + ' / ' + phone.trim() + ' / ' + volume
+          );
+
+          // 3) track 이벤트도 동시 발송 (자동화 설정 시 활용)
           ChannelIO('track', 'B2B상담신청', {
             기업명: company.trim(),
             담당자: manager.trim(),
