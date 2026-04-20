@@ -4709,7 +4709,7 @@ footer {
       <a onclick="showTab('admin','a-pricing',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
         <span style="font-size:18px">💰</span> 요금제
       </a>
-      <a onclick="showTab('admin','a-b2b',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
+      <a onclick="showTab('admin','a-b2b',null);closeAdminMobileMenu();loadB2BInquiries()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
         <span style="font-size:18px">🏢</span> B2B 관리
       </a>
       <a onclick="showTab('admin','a-admins',null);closeAdminMobileMenu()" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:white;font-size:14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.08)">
@@ -4738,7 +4738,7 @@ footer {
         <li><a onclick="showTab('admin','a-editors',this)"><span class="sb-icon">✂️</span>에디터 현황</a></li>
         <li><a onclick="showTab('admin','a-users',this)"><span class="sb-icon">👤</span>회원 관리</a></li>
         <li><a onclick="showTab('admin','a-pricing',this)"><span class="sb-icon">💰</span>요금제 관리</a></li>
-        <li><a onclick="showTab('admin','a-b2b',this)"><span class="sb-icon">🏢</span>B2B 관리</a></li>
+        <li><a onclick="showTab('admin','a-b2b',this);loadB2BInquiries()"><span class="sb-icon">🏢</span>B2B 관리</a></li>
         <li><a onclick="showTab('admin','a-revenue',this)"><span class="sb-icon">📈</span>매출 분석</a></li>
       </ul>
       <div class="sb-section">시스템</div>
@@ -5600,7 +5600,29 @@ footer {
 
       <!-- ===== B2B 관리 ===== -->
       <div id="tab-a-b2b" class="dash-tab" style="display:none">
-        <div class="dash-header"><div class="dash-title">B2B 기업 관리</div><div class="dash-sub">기업 고객 맞춤 단가 및 계약 관리</div></div>
+        <div class="dash-header">
+          <div><div class="dash-title">B2B 기업 관리</div><div class="dash-sub">기업 고객 맞춤 단가 및 계약 관리</div></div>
+          <button class="btn btn-outline" onclick="loadB2BInquiries()" style="white-space:nowrap">🔄 새로고침</button>
+        </div>
+
+        <!-- 상담 신청 목록 (Firestore 실시간) -->
+        <div class="panel" style="margin-bottom:20px">
+          <div class="panel-header">
+            <div class="panel-title">📬 B2B 상담 신청 목록</div>
+            <span id="b2bInquiryCount" class="badge badge-pending" style="font-size:12px">로딩 중...</span>
+          </div>
+          <div id="b2bInquiryEmpty" style="display:none;text-align:center;padding:32px;color:var(--gray-400);font-size:14px">
+            아직 상담 신청이 없습니다
+          </div>
+          <table class="data-table" id="b2bInquiryTable">
+            <tr>
+              <th>신청일시</th><th>기업명</th><th>담당자</th>
+              <th>이메일</th><th>연락처</th><th>월 건수</th>
+              <th>상태</th><th>변경</th>
+            </tr>
+          </table>
+        </div>
+
         <div class="panel" style="margin-bottom:20px">
           <div class="panel-header"><div class="panel-title">B2B 계약 현황</div></div>
           <table class="data-table">
@@ -6592,29 +6614,144 @@ window.submitB2B = function submitB2B() {
   if (errEl) errEl.style.display = 'none';
   if (btn) { btn.disabled = true; btn.textContent = '신청 중...'; }
 
-  // mailto 방식으로 이메일 전송 (서버 불필요)
-  var subject = encodeURIComponent('[AICUT B2B 상담 신청] ' + company);
-  var body = encodeURIComponent(
-    'B2B 상담 신청이 접수되었습니다.\n\n' +
-    '기업명: ' + company + '\n' +
-    '담당자: ' + manager + '\n' +
-    '이메일: ' + email + '\n' +
-    '연락처: ' + phone + '\n' +
-    '월 편집 건수: ' + volume + '\n' +
-    '요구사항: ' + desc + '\n' +
-    '신청 시간: ' + new Date().toLocaleString('ko-KR')
-  );
+  // Firestore b2b_inquiries 컬렉션에 저장
+  var saveB2B = function() {
+    if (!window._db) {
+      // Firestore 미초기화 시 재시도 (초기화 지연 대응)
+      setTimeout(saveB2B, 500);
+      return;
+    }
+    import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+      fs.addDoc(fs.collection(window._db, 'b2b_inquiries'), {
+        company:   company.trim(),
+        manager:   manager.trim(),
+        email:     email.trim(),
+        phone:     phone.trim(),
+        volume:    volume,
+        desc:      desc.trim(),
+        status:    '신규',
+        createdAt: fs.serverTimestamp()
+      }).then(function(docRef) {
+        console.log('[Firestore] B2B 상담 저장 완료:', docRef.id);
 
-  // master@aicut.co.kr 로 메일 발송
-  var _em='master'+'@'+'aicut.co.kr'; window.open('mailto:'+_em+'?subject=' + subject + '&body=' + body);
+        // 채널톡 실시간 알림 발송
+        if (typeof ChannelIO !== 'undefined') {
+          ChannelIO('track', 'B2B상담신청', {
+            기업명: company.trim(),
+            담당자: manager.trim(),
+            이메일: email.trim(),
+            연락처: phone.trim(),
+            월건수: volume
+          });
+        }
 
-  // 완료 처리
-  setTimeout(function() {
-    document.getElementById('b2bModal').classList.remove('open');
-    showToast('🎉 상담 신청 완료! 영업일 1일 이내 연락드립니다');
-    if (btn) { btn.disabled = false; btn.textContent = '상담 신청하기'; }
-  }, 800);
+        // 완료 처리
+        document.getElementById('b2bModal').classList.remove('open');
+        showToast('🎉 상담 신청 완료! 영업일 1일 이내 연락드립니다');
+        if (btn) { btn.disabled = false; btn.textContent = '계약 문의하기'; }
+        // 폼 초기화
+        ['b2bCompany','b2bManager','b2bEmail','b2bPhone','b2bDesc'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+      }).catch(function(e) {
+        console.error('[Firestore] B2B 저장 실패:', e.message);
+        if (errEl) { errEl.textContent = '저장 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.'; errEl.style.display = 'block'; }
+        if (btn) { btn.disabled = false; btn.textContent = '계약 문의하기'; }
+      });
+    });
+  };
+  saveB2B();
 }
+// ───── B2B 상담 신청 Firestore 조회 ─────
+window.loadB2BInquiries = function loadB2BInquiries() {
+  if (!window._db) { setTimeout(loadB2BInquiries, 600); return; }
+  var countEl  = document.getElementById('b2bInquiryCount');
+  var emptyEl  = document.getElementById('b2bInquiryEmpty');
+  var tableEl  = document.getElementById('b2bInquiryTable');
+  if (countEl) countEl.textContent = '조회 중...';
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    var q = fs.query(
+      fs.collection(window._db, 'b2b_inquiries'),
+      fs.orderBy('createdAt', 'desc'),
+      fs.limit(100)
+    );
+    fs.getDocs(q).then(function(snapshot) {
+      // 기존 동적 행 제거
+      if (tableEl) tableEl.querySelectorAll('tr[data-b2b]').forEach(function(r) { r.remove(); });
+
+      if (snapshot.empty) {
+        if (emptyEl) emptyEl.style.display = 'block';
+        if (countEl) countEl.textContent = '0건';
+        return;
+      }
+      if (emptyEl) emptyEl.style.display = 'none';
+      if (countEl) countEl.textContent = snapshot.size + '건';
+
+      snapshot.forEach(function(docSnap) {
+        var d = docSnap.data();
+        var docId = docSnap.id;
+        var dateStr = d.createdAt && d.createdAt.toDate
+          ? d.createdAt.toDate().toLocaleString('ko-KR', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})
+          : '—';
+        var statusMap = {
+          '신규':    'badge-pending',
+          '상담중':  'badge-editing',
+          '계약완료':'badge-done',
+          '미진행':  'badge-pending'
+        };
+        var badgeCls = statusMap[d.status] || 'badge-pending';
+        var tr = document.createElement('tr');
+        tr.setAttribute('data-b2b', docId);
+        tr.innerHTML = `
+          <td style="font-size:12px;color:var(--gray-400);white-space:nowrap">${dateStr}</td>
+          <td style="font-weight:700">${d.company || '-'}</td>
+          <td>${d.manager || '-'}</td>
+          <td style="font-size:13px"><a href="mailto:${d.email}" style="color:var(--accent)">${d.email || '-'}</a></td>
+          <td style="font-size:13px">${d.phone || '-'}</td>
+          <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">${d.volume || '-'}</td>
+          <td><span class="badge ${badgeCls}" id="b2b-status-${docId}">${d.status || '신규'}</span></td>
+          <td style="display:flex;gap:4px;flex-wrap:wrap">
+            <button class="btn btn-outline" style="padding:4px 8px;font-size:11px"
+              onclick="changeB2BStatus('${docId}','상담중')">상담중</button>
+            <button class="btn btn-primary" style="padding:4px 8px;font-size:11px"
+              onclick="changeB2BStatus('${docId}','계약완료')">계약완료</button>
+            <button class="btn btn-outline" style="padding:4px 8px;font-size:11px;color:var(--gray-400)"
+              onclick="changeB2BStatus('${docId}','미진행')">미진행</button>
+          </td>
+        `;
+        if (tableEl) tableEl.appendChild(tr);
+      });
+    }).catch(function(e) {
+      console.warn('[Firestore] B2B 조회 실패:', e.message);
+      if (countEl) countEl.textContent = '조회 실패';
+    });
+  });
+};
+
+// B2B 상담 상태 변경
+window.changeB2BStatus = function changeB2BStatus(docId, newStatus) {
+  if (!window._db) return;
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    var ref = fs.doc(window._db, 'b2b_inquiries', docId);
+    fs.updateDoc(ref, {
+      status: newStatus,
+      updatedAt: fs.serverTimestamp()
+    }).then(function() {
+      var badge = document.getElementById('b2b-status-' + docId);
+      var statusMap = { '신규':'badge-pending','상담중':'badge-editing','계약완료':'badge-done','미진행':'badge-pending' };
+      if (badge) {
+        badge.className = 'badge ' + (statusMap[newStatus] || 'badge-pending');
+        badge.textContent = newStatus;
+      }
+      showToast('✓ 상태가 "' + newStatus + '"으로 변경되었습니다');
+    }).catch(function(e) {
+      showToast('❌ 상태 변경 실패: ' + e.message);
+    });
+  });
+};
+
 function switchAuthTab(name, btn) {
   document.querySelectorAll('.tab-switch button').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
