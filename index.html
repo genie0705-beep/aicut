@@ -2903,6 +2903,17 @@ footer {
   const app  = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
+  // Firestore 초기화
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    window._db          = fs.getFirestore(app);
+    window._fsAddDoc    = fs.addDoc;
+    window._fsCollection= fs.collection;
+    window._fsDoc       = fs.doc;
+    window._fsUpdateDoc = fs.updateDoc;
+    window._fsGetDoc    = fs.getDoc;
+    console.log('[Firestore] 초기화 완료');
+  });
+
   // 한국어 설정
   auth.languageCode = 'ko';
 
@@ -7526,7 +7537,21 @@ const counterObserver = new IntersectionObserver((entries) => {
 const statsSection = document.getElementById('statsSection');
 if (statsSection) counterObserver.observe(statsSection);
 
-window.showAdminOrderDetail = function showAdminOrderDetail() {
+window.showAdminOrderDetail = function showAdminOrderDetail(orderId) {
+  // 주문 ID 전달받거나, 버튼이 속한 tr에서 첫 번째 td(주문번호)로 추출
+  if (orderId) {
+    window._currentAdminOrderId = orderId;
+  } else {
+    // 이벤트 버블링으로 클릭된 버튼의 부모 tr에서 주문번호 추출
+    var btn = event && event.target ? event.target.closest('tr') : null;
+    if (btn) {
+      var idCell = btn.querySelector('td:first-child');
+      if (idCell) {
+        var raw = idCell.textContent.replace('#','').trim();
+        if (raw) window._currentAdminOrderId = raw;
+      }
+    }
+  }
   document.getElementById('admin-order-list').style.display = 'none';
   document.getElementById('admin-order-detail').style.display = 'block';
 }
@@ -7750,11 +7775,26 @@ function saveAdminState(state) {
 }
 
 // 주문 상태 변경
+// 현재 어드민에서 열려있는 주문 ID
+window._currentAdminOrderId = null;
+
 function adminChangeOrderStatus(orderId, newStatus, label) {
   const state = getAdminState();
   if (state.orders[orderId]) {
     state.orders[orderId].status = newStatus;
     saveAdminState(state);
+  }
+  // Firestore 업데이트
+  if (window._db && window._fsDoc && window._fsUpdateDoc) {
+    const ref = window._fsDoc(window._db, 'orders', orderId);
+    window._fsUpdateDoc(ref, {
+      status: newStatus,
+      updatedAt: new Date().toISOString()
+    }).then(function() {
+      console.log('[Firestore] 주문 상태 업데이트:', orderId, newStatus);
+    }).catch(function(e) {
+      console.warn('[Firestore] 상태 업데이트 실패:', e.message);
+    });
   }
   // 화면 배지 업데이트
   const badgeMap = {
@@ -7764,7 +7804,6 @@ function adminChangeOrderStatus(orderId, newStatus, label) {
     'done':     ['badge-done','납품완료'],
   };
   const [cls, txt] = badgeMap[newStatus] || ['badge-pending', label];
-  // 주문 상세 배지 업데이트
   document.querySelectorAll('#admin-order-detail .badge-editing, #admin-order-detail .badge-review, #admin-order-detail .badge-pending, #admin-order-detail .badge-done').forEach(b => {
     b.className = 'badge ' + cls;
     b.textContent = txt;
@@ -7811,14 +7850,17 @@ function adminCompleteRevision(roundNum) {
 
 // 검수 요청 발송
 function adminSendReview() {
-  adminChangeOrderStatus('FC-0040', 'review', '검수중');
+  const orderId = window._currentAdminOrderId;
+  if (!orderId) { showToast('⚠️ 주문을 먼저 선택해주세요'); return; }
+  adminChangeOrderStatus(orderId, 'review', '검수중');
   showToast('📨 검수 요청이 의뢰인에게 발송되었습니다');
 }
 
 // 납품 완료 처리
 function adminCompleteDone() {
-  adminChangeOrderStatus('FC-0040', 'done', '납품완료');
-  // 납품일 카운트 업데이트
+  const orderId = window._currentAdminOrderId;
+  if (!orderId) { showToast('⚠️ 주문을 먼저 선택해주세요'); return; }
+  adminChangeOrderStatus(orderId, 'done', '납품완료');
   const doneEl = document.querySelector('#admin-order-detail [style*="color:var(--orange)"]');
   if (doneEl) { doneEl.style.color = '#10b981'; doneEl.textContent = '납품 완료'; }
   showToast('🎉 납품 완료! 의뢰인에게 알림이 발송되었습니다');
@@ -8122,25 +8164,40 @@ function completeOrder(order) {
     urgentBell.textContent = `🔴 긴급 ${cur + 1}건 처리 필요`;
   }
 
-  // 6. localStorage에 주문 저장
+  // 6. localStorage 저장 + Firestore 동기화
   const state = getAdminState();
-  state.orders[orderNum] = {
-    title: order.name,
-    client: clientName,
-    plan: order.planName,
-    status: 'pending',
-    editor: '',
-    deadline: dStr,
+  const orderData = {
+    orderId: orderNum,
+    userId: session ? session.email : '',
+    planName: order.planName,
+    type: order.type,
+    desc: document.getElementById('newOrderDesc')?.value?.trim() || '',
+    deadline: order.deadline,
     basePrice: order.basePrice || order.price,
     expressAmt: order.expressAmt || 0,
     price: order.price,
     vat: order.vat,
     total: order.total,
-    type: order.type,
-    deadlineType: order.deadline,
+    status: 'waiting',
     createdAt: now.toISOString(),
+    title: order.name,
+    client: clientName,
+    editor: '',
+    deadlineDate: dStr,
   };
+  state.orders[orderNum] = { ...orderData, status: 'pending' };
   saveAdminState(state);
+
+  // Firestore 저장
+  if (window._db && window._fsCollection && window._fsAddDoc) {
+    window._fsAddDoc(window._fsCollection(window._db, 'orders'), orderData)
+      .then(function(docRef) {
+        console.log('[Firestore] 주문 저장 완료:', docRef.id, orderNum);
+      })
+      .catch(function(e) {
+        console.warn('[Firestore] 주문 저장 실패 (localStorage 백업 유지):', e.message);
+      });
+  }
 
   // 7. 폼 초기화 + 이동
   ['newOrderName','newOrderDesc','newOrderRef'].forEach(id => {
@@ -8465,11 +8522,28 @@ function openClientDrive() {
 }
 
 function submitClientUpload() {
-  const link = document.getElementById('clientFileLink')?.value;
+  const link = document.getElementById('clientFileLink')?.value?.trim();
   if (!link) { showToast('파일 링크를 입력해주세요'); return; }
+
+  // 현재 주문 ID 가져오기 (주문 상세에서 data-order-id 속성 또는 전역 변수)
+  const orderId = window._currentClientOrderId;
+
+  // Firestore sourceFileUrl 업데이트
+  if (orderId && window._db && window._fsDoc && window._fsUpdateDoc) {
+    const ref = window._fsDoc(window._db, 'orders', orderId);
+    window._fsUpdateDoc(ref, {
+      sourceFileUrl: link,
+      uploadedAt: new Date().toISOString(),
+      status: 'waiting'
+    }).then(function() {
+      console.log('[Firestore] 파일 링크 저장 완료:', orderId);
+    }).catch(function(e) {
+      console.warn('[Firestore] 파일 링크 저장 실패:', e.message);
+    });
+  }
+
   document.getElementById('clientUploadUI').style.display = 'none';
   document.getElementById('clientUploadDone').style.display = 'block';
-  // 진행 스텝 1번 완료 표시
   const spItems = document.querySelectorAll('.sp-item');
   if (spItems[0]) { spItems[0].classList.add('done'); spItems[0].querySelector('.sp-dot').textContent = '✓'; }
   showToast('✓ 파일이 업로드되었습니다. 에이컷 팀에 전달됩니다!');
@@ -8623,14 +8697,40 @@ function updateUploadOrder() {
 }
 
 function sendUploadLink() {
-  const link = document.getElementById('driveUploadLink')?.value;
-  const email = document.getElementById('clientEmail')?.value;
+  const link  = document.getElementById('driveUploadLink')?.value?.trim();
+  const email = document.getElementById('clientEmail')?.value?.trim();
+  const orderId = window._currentAdminOrderId;
+
   if (!link || !link.startsWith('http')) {
     showToast('구글 드라이브 링크를 먼저 입력해주세요'); return;
   }
   if (!email || !email.includes('@')) {
     showToast('의뢰인 이메일을 확인해주세요'); return;
   }
+
+  // Firestore에 드라이브 링크 저장
+  if (orderId && window._db && window._fsDoc && window._fsUpdateDoc) {
+    const ref = window._fsDoc(window._db, 'orders', orderId);
+    window._fsUpdateDoc(ref, {
+      uploadFolderUrl: link,
+      uploadLinkSentAt: new Date().toISOString(),
+      status: 'waiting'
+    }).catch(function(e) { console.warn('[Firestore] 링크 저장 실패:', e.message); });
+  }
+
+  // EmailJS 연동 (서비스 ID/템플릿 ID 설정 후 활성화)
+  /*
+  if (typeof emailjs !== 'undefined') {
+    emailjs.send('service_aicut', 'template_upload_link', {
+      to_email: email,
+      drive_link: link,
+      order_id: orderId || ''
+    }).then(function() {
+      console.log('[EmailJS] 업로드 링크 발송 완료:', email);
+    });
+  }
+  */
+
   const sent = document.getElementById('uploadLinkSent');
   if (sent) sent.style.display = 'block';
   showToast(`📨 ${email} 로 업로드 링크가 발송되었습니다`);
