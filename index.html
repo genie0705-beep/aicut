@@ -2927,21 +2927,34 @@ footer {
       if (user.emailVerified) {
         var name  = user.displayName || user.email.split('@')[0];
         var email = user.email;
-        if (typeof setSession === 'function') {
-          // Firebase 일반 로그인은 항상 'client' role 고정 — admin 우회 불가
-          setSession('client', name, email);
-          // 혹시 이전 admin 세션 잔존 시 메모리 토큰 초기화
-          if (window._adminIdToken) {
-            window._adminIdToken   = null;
-            window._adminClaimRole = null;
+
+        // Custom Claims 확인 후 admin/client 분기
+        user.getIdTokenResult(false).then(function(idTokenResult) {
+          var claims = idTokenResult.claims;
+
+          if (claims && claims.admin) {
+            // ── 어드민 계정 ──
+            // doAdminLogin을 통해 이미 처리된 경우 중복 실행 방지
+            if (window._adminIdToken) return;
+            window._adminIdToken   = idTokenResult.token;
+            window._adminClaimRole = claims.role || 'ops';
+            if (typeof setSession === 'function') setSession('admin', name, email);
+            if (typeof updateNavState === 'function') updateNavState('admin');
+            if (typeof showPage === 'function') showPage('admin');
+          } else {
+            // ── 일반 고객 계정 ──
+            if (typeof setSession === 'function') setSession('client', name, email);
+            if (typeof updateNavState === 'function') updateNavState('client');
+            if (typeof initClientPage === 'function') initClientPage({ name, email });
+            if (typeof window._channelIOLogin === 'function') {
+              window._channelIOLogin(name, email);
+            }
           }
+        }).catch(function() {
+          if (typeof setSession === 'function') setSession('client', name, email);
           if (typeof updateNavState === 'function') updateNavState('client');
           if (typeof initClientPage === 'function') initClientPage({ name, email });
-        }
-        // 채널톡 사용자 식별 - 로그인한 고객 이름·이메일 전달
-        if (typeof window._channelIOLogin === 'function') {
-          window._channelIOLogin(name, email);
-        }
+        });
       }
     } else {
       window._fbCurrentUser = null;
