@@ -4806,7 +4806,10 @@ footer {
         <div class="panel" style="margin-bottom:20px">
           <div class="panel-header">
             <div class="panel-title">🔴 즉시 처리 필요</div>
-            <button class="btn btn-primary" onclick="showTab('admin','a-orders',null)">전체 주문 보기</button>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div id="paymentPendingBadge" style="background:#ede9ff;color:#5c3de8;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;cursor:pointer" onclick="filterAdmin('payment_pending');showTab('admin','a-orders',null)">💰 입금 확인 대기 0건</div>
+              <button class="btn btn-primary" onclick="showTab('admin','a-orders',null)">전체 주문 보기</button>
+            </div>
           </div>
           <table class="data-table" id="adminUrgentTable">
             <tr><th>주문번호</th><th>의뢰인</th><th>프로젝트</th><th>플랜</th><th>상태</th><th>D-DAY</th><th>에디터</th><th>액션</th></tr>
@@ -4996,6 +4999,12 @@ footer {
               <div class="panel" style="padding:20px;margin-bottom:16px">
                 <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:12px">빠른 액션</div>
                 <div style="display:flex;flex-direction:column;gap:8px">
+                  <!-- 입금 확인 블록 (입금대기 상태 시 활용) -->
+                  <div id="adminPayConfirmBlock" style="padding:12px;background:#ede9ff;border-radius:10px;border:1px solid rgba(92,61,232,0.2)">
+                    <div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:6px">💰 입금 확인</div>
+                    <div style="font-size:11px;color:var(--gray-600);margin-bottom:8px" id="adminTaxInfo">증빙 서류 정보 없음</div>
+                    <button class="btn btn-primary btn-full" style="font-size:12px" onclick="adminConfirmPayment()">✅ 입금 확인 완료</button>
+                  </div>
                   <button class="btn btn-outline btn-full" onclick="showToast('업로드 탭으로 이동합니다');showTab('admin','a-upload',null)">📤 결과물 업로드</button>
                   <button class="btn btn-outline btn-full" onclick="adminSendReview()">🔍 검수 요청 발송</button>
                   <button class="btn btn-primary btn-full" onclick="adminCompleteDone()">✅ 납품 완료 처리</button>
@@ -5017,6 +5026,7 @@ footer {
         <div id="admin-order-list">
           <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
             <button class="btn btn-primary" onclick="filterAdmin('all')">전체</button>
+            <button class="btn btn-outline" style="background:#ede9ff;color:#5c3de8;border-color:#5c3de8;font-weight:700" onclick="filterAdmin('payment_pending')">💰 입금대기</button>
             <button class="btn btn-outline" onclick="filterAdmin('pending')">대기중</button>
             <button class="btn btn-outline" onclick="filterAdmin('editing')">편집중</button>
             <button class="btn btn-outline" onclick="filterAdmin('review')">검수중</button>
@@ -6263,7 +6273,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var params = new URLSearchParams(window.location.search);
   // 어드민 진입 힌트: ?admin=1 → 로그인 모달만 열어줌 (권한 부여 X)
   if (params.get('admin') === '1') {
-    window.history.replaceState({}, '', window.location.pathname);
+    try { window.history.replaceState({}, '', window.location.pathname); } catch(e) {}
     setTimeout(function() {
       var modal = document.getElementById('adminLoginModal');
       if (modal) modal.classList.add('open');
@@ -6450,9 +6460,9 @@ window.showPage = function showPage(id) {
   // URL 해시 동기화 (공유 가능한 링크 생성)
   // home은 깔끔하게 # 없이, 나머지는 #page 형태
   if (id === 'home') {
-    window.history.replaceState({page: id}, '', window.location.pathname);
+    try { window.history.replaceState({page: id}, '', window.location.pathname); } catch(e) {}
   } else {
-    window.history.replaceState({page: id}, '', '#' + id);
+    try { window.history.replaceState({page: id}, '', '#' + id); } catch(e) {}
   }
   document.getElementById('mainNav').style.display = (id === 'home' || id === 'pricing') ? 'flex' : 'none';
   var nav = document.getElementById('mainNav');
@@ -7542,7 +7552,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 비밀번호 재설정 처리
     if (mode === 'resetPassword' && oobCode) {
-      window.history.replaceState(null, '', '/');
+      try { window.history.replaceState(null, '', '/'); } catch(e) {}
       showResetPasswordModal(oobCode);
       return;
     }
@@ -7550,7 +7560,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 이메일 인증 처리
     if (mode === 'verifyEmail' && oobCode) {
       showToast('이메일 인증 확인 중...');
-      window.history.replaceState(null, '', '/');
+      try { window.history.replaceState(null, '', '/'); } catch(e) {}
       // Firebase applyActionCode 사용
       var waitApply = function(attempts) {
         if (!window._fbAuth) {
@@ -7959,7 +7969,9 @@ function adminChangeOrderStatus(orderId, newStatus, label) {
   }
   // 화면 배지 업데이트
   const badgeMap = {
+    'payment_pending': ['', '입금대기'],
     'waiting':  ['badge-pending','대기중'],
+    'pending':  ['badge-pending','대기중'],
     'editing':  ['badge-editing','편집중'],
     'review':   ['badge-review','검수중'],
     'done':     ['badge-done','납품완료'],
@@ -8010,6 +8022,25 @@ function adminCompleteRevision(roundNum) {
 }
 
 // 검수 요청 발송
+// 입금 확인 완료 처리
+function adminConfirmPayment() {
+  const orderId = window._currentAdminOrderId;
+  if (!orderId) { showToast('⚠️ 주문을 먼저 선택해주세요'); return; }
+  adminChangeOrderStatus(orderId, 'pending', '대기중');
+  // 입금 확인 블록 숨기기
+  const block = document.getElementById('adminPayConfirmBlock');
+  if (block) block.style.display = 'none';
+  // 입금대기 카운트 업데이트
+  const badge = document.getElementById('paymentPendingBadge');
+  if (badge) {
+    const m = badge.textContent.match(/\d+/);
+    const cur = m ? parseInt(m[0]) : 1;
+    if (cur > 1) badge.textContent = '💰 입금 확인 대기 ' + (cur - 1) + '건';
+    else badge.style.display = 'none';
+  }
+  showToast('✅ 입금이 확인되었습니다. 곧 파일 업로드 링크를 보내드리겠습니다.');
+}
+
 function adminSendReview() {
   const orderId = window._currentAdminOrderId;
   if (!orderId) { showToast('⚠️ 주문을 먼저 선택해주세요'); return; }
@@ -8166,60 +8197,102 @@ window.submitOrder = function submitOrder() {
 }
 
 function showOrderPayModal(order) {
-  // 기존 모달 제거
   const existing = document.getElementById('orderPayModal');
   if (existing) existing.remove();
 
+  const orderJson = JSON.stringify(order).replace(/"/g,'&quot;');
+  const hasExpress = order.expressAmt && order.expressAmt > 0;
+
   const modal = document.createElement('div');
   modal.id = 'orderPayModal';
-  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto';
   modal.innerHTML = `
-    <div style="background:white;border-radius:20px;padding:32px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
-      <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:8px">결제 확인</div>
+    <div style="background:white;border-radius:20px;padding:32px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.2);margin:auto">
+      <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:6px">계좌이체 안내</div>
       <div style="font-size:20px;font-weight:900;color:var(--primary);margin-bottom:20px;letter-spacing:-0.5px">${order.name}</div>
-      <div style="background:var(--gray-50);border-radius:12px;padding:16px;margin-bottom:20px">
-        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--gray-200)">
+
+      <!-- 주문 금액 요약 -->
+      <div style="background:var(--gray-50);border-radius:12px;padding:16px;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--gray-200)">
           <span style="color:var(--gray-500)">플랜</span>
           <span style="font-weight:700;color:var(--accent)">${order.planName}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--gray-200)">
-          <span style="color:var(--gray-500)">용도</span>
-          <span style="font-weight:600">${order.type}</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--gray-200)">
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--gray-200)">
           <span style="color:var(--gray-500)">납품 기간</span>
           <span style="font-weight:600">${order.deadline}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--gray-200)">
-          <span style="color:var(--gray-500)">기본 편집 금액</span>
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--gray-200)">
+          <span style="color:var(--gray-500)">기본 금액</span>
           <span style="font-weight:600">₩${(order.basePrice||order.price).toLocaleString()}</span>
         </div>
-        <div id="modalExpressRow" style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--gray-200)">
-          <span style="color:#d97706">익스프레스 할증 (+50%)</span>
-          <span style="font-weight:600;color:#d97706" id="modalExpressAmt">+₩0</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--gray-200)">
+        ${hasExpress ? '<div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--gray-200)"><span style="color:#d97706">익스프레스 할증</span><span style="font-weight:600;color:#d97706">+₩' + (order.expressAmt||0).toLocaleString() + '</span></div>' : ''}
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--gray-200)">
           <span style="color:var(--gray-500)">VAT (10%)</span>
           <span style="font-weight:600">₩${order.vat.toLocaleString()}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:900;padding:10px 0 4px">
-          <span style="color:var(--primary)">최종 결제</span>
+        <div style="display:flex;justify-content:space-between;font-size:17px;font-weight:900;padding:10px 0 4px">
+          <span style="color:var(--primary)">입금 금액</span>
           <span style="color:var(--accent)">₩${order.total.toLocaleString()}</span>
         </div>
       </div>
+
+      <!-- 계좌 정보 -->
+      <div style="background:var(--accent-light);border:1.5px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:10px">🏦 입금 계좌 정보</div>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px">
+          <span style="color:var(--gray-500);font-size:13px">은행</span>
+          <span style="font-weight:700">우리은행</span>
+          <span style="color:var(--gray-500);font-size:13px">계좌번호</span>
+          <span style="font-weight:700;font-family:'Noto Sans KR','DM Mono',monospace;letter-spacing:0.5px">1005-304-593104</span>
+          <span style="color:var(--gray-500);font-size:13px">예금주</span>
+          <span style="font-weight:700">주식회사 온니바이어</span>
+        </div>
+        <div style="margin-top:12px;padding:10px;background:white;border-radius:8px;font-size:12px;color:var(--gray-600);line-height:1.7">
+          ⚠️ 입금 시 <strong>주문번호와 회사명</strong>을 함께 기재해주세요.<br>
+          ✅ 입금 확인 후 담당자가 <strong>채널톡으로 연락</strong>드립니다.
+        </div>
+      </div>
+
+      <!-- 세금계산서/현금영수증 선택 -->
+      <div style="border:1px solid var(--gray-200);border-radius:12px;padding:16px;margin-bottom:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:12px">📄 증빙 서류 선택</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px">
+            <input type="radio" name="taxType" value="tax" onchange="handleTaxTypeChange(this.value)" style="accent-color:var(--accent)">
+            세금계산서 발행
+          </label>
+          <div id="taxInputWrap" style="display:none;margin-left:24px">
+            <input class="form-input" id="taxBizNum" placeholder="사업자번호 (000-00-00000)" style="font-size:13px;padding:8px 12px">
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px">
+            <input type="radio" name="taxType" value="cash" onchange="handleTaxTypeChange(this.value)" style="accent-color:var(--accent)">
+            현금영수증 발행
+          </label>
+          <div id="cashInputWrap" style="display:none;margin-left:24px">
+            <input class="form-input" id="cashPhone" placeholder="휴대폰번호 (010-0000-0000)" style="font-size:13px;padding:8px 12px">
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px">
+            <input type="radio" name="taxType" value="none" onchange="handleTaxTypeChange(this.value)" style="accent-color:var(--accent)" checked>
+            필요없음
+          </label>
+        </div>
+      </div>
+
       <div style="display:flex;gap:10px">
         <button class="btn btn-outline btn-full" onclick="document.getElementById('orderPayModal').remove()">취소</button>
-        <button class="btn btn-primary btn-full btn-lg" onclick="completeOrder(${JSON.stringify(order).replace(/"/g,'&quot;')})">결제 완료 →</button>
+        <button class="btn btn-primary btn-full btn-lg" onclick="completeOrder(${orderJson})">💳 입금 완료했습니다</button>
       </div>
-      <div style="font-size:11px;color:var(--gray-400);text-align:center;margin-top:12px">🔒 토스페이먼츠 보안 결제 (시뮬레이션)</div>
+      <div style="font-size:11px;color:var(--gray-400);text-align:center;margin-top:12px">
+        입금 확인 전까지 주문이 자동으로 보류됩니다
+      </div>
     </div>
   `;
   document.body.appendChild(modal);
-  // 익스프레스 할증 행 표시 처리
-  var expRow = document.getElementById('modalExpressRow');
-  var expAmt = document.getElementById('modalExpressAmt');
-  if (expRow) expRow.style.display = (order.expressAmt && order.expressAmt > 0) ? 'flex' : 'none';
-  if (expAmt && order.expressAmt) expAmt.textContent = '+₩' + order.expressAmt.toLocaleString();
+}
+
+function handleTaxTypeChange(val) {
+  document.getElementById('taxInputWrap').style.display  = val === 'tax'  ? 'block' : 'none';
+  document.getElementById('cashInputWrap').style.display = val === 'cash' ? 'block' : 'none';
 }
 
 function completeOrder(order) {
@@ -8246,7 +8319,7 @@ function completeOrder(order) {
       <td data-label="주문번호" style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
       <td data-label="프로젝트명" style="font-weight:600">${order.name}</td>
       <td data-label="플랜"><span style="font-size:12px;font-weight:700;color:var(--accent)">${order.planName}</span></td>
-      <td data-label="상태"><span class="badge badge-pending" style="background:#fef3c7;color:#92400e">결제완료</span></td>
+      <td data-label="상태"><span class="badge" style="background:#ede9ff;color:#5c3de8;font-weight:700">입금 확인 중</span></td>
       <td data-label="납품예정" style="font-size:13px;color:var(--gray-400)">${dStr}</td>
       <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩${order.total.toLocaleString()}</td>
       <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>
@@ -8317,12 +8390,19 @@ function completeOrder(order) {
     }
   });
 
-  // 5. 긴급 알림 배지 업데이트
+  // 5. 긴급 알림 배지 + 입금대기 카운트 업데이트
   const urgentBell = document.getElementById('urgentBell');
   if (urgentBell) {
     const match = urgentBell.textContent.match(/(\d+)/);
     const cur = match ? parseInt(match[1]) : 0;
-    urgentBell.textContent = `🔴 긴급 ${cur + 1}건 처리 필요`;
+    urgentBell.textContent = '🔴 긴급 ' + (cur + 1) + '건 처리 필요';
+  }
+  const payBadge = document.getElementById('paymentPendingBadge');
+  if (payBadge) {
+    const m = payBadge.textContent.match(/\d+/);
+    const cur2 = m ? parseInt(m[0]) : 0;
+    payBadge.textContent = '💰 입금 확인 대기 ' + (cur2 + 1) + '건';
+    payBadge.style.display = 'block';
   }
 
   // 6. localStorage 저장 + Firestore 동기화
@@ -8339,7 +8419,18 @@ function completeOrder(order) {
     price: order.price,
     vat: order.vat,
     total: order.total,
-    status: 'waiting',
+    status: 'payment_pending',
+    taxType: (function() {
+      var r = document.querySelector('input[name="taxType"]:checked');
+      return r ? r.value : 'none';
+    })(),
+    taxValue: (function() {
+      var r = document.querySelector('input[name="taxType"]:checked');
+      if (!r) return '';
+      if (r.value === 'tax')  return (document.getElementById('taxBizNum')  || {}).value || '';
+      if (r.value === 'cash') return (document.getElementById('cashPhone')  || {}).value || '';
+      return '';
+    })(),
     createdAt: now.toISOString(),
     title: order.name,
     client: clientName,
@@ -8365,7 +8456,7 @@ function completeOrder(order) {
     const el = document.getElementById(id); if (el) el.value = '';
   });
 
-  showToast(`🎉 결제 완료! #${orderNum} 주문이 접수되었습니다`);
+  showToast(`✅ 주문이 접수되었습니다. 입금 확인 후 채널톡으로 안내드립니다.`);
   setTimeout(() => {
     showTab('client','c-orders', null);
     setClientTab(document.querySelector('.client-bottom-nav a:nth-child(3)'));
