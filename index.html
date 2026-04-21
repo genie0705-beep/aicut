@@ -8193,7 +8193,9 @@ window.submitOrder = function submitOrder() {
   const deadlineLabel = isExpress ? '익스프레스 (24시간 · +50%)' : (deadline === '2-3days' ? '2~3일 이내' : '3~5일 이내');
 
   // 결제 확인 모달 (심플 confirm 시뮬레이션)
-  showOrderPayModal({ name, planName, type, deadline: deadlineLabel, price, vat, total, basePrice, expressAmt });
+  // 주문번호 미리 생성 — 고객이 모달에서 확인 후 입금 시 기재
+  const preOrderNum = 'FC-' + String(Math.floor(Math.random() * 900) + 100).padStart(4,'0');
+  showOrderPayModal({ name, planName, type, deadline: deadlineLabel, price, vat, total, basePrice, expressAmt, preOrderNum });
 }
 
 function showOrderPayModal(order) {
@@ -8236,6 +8238,15 @@ function showOrderPayModal(order) {
         </div>
       </div>
 
+      <!-- 주문번호 강조 표시 -->
+      <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:4px">📋 주문번호 (입금 시 필수 기재)</div>
+          <div style="font-size:22px;font-weight:900;color:#166534;font-family:'Noto Sans KR','DM Mono',monospace;letter-spacing:1px">#${order.preOrderNum}</div>
+        </div>
+        <button onclick="navigator.clipboard&&navigator.clipboard.writeText('${order.preOrderNum}').then(function(){showToast('주문번호가 복사되었습니다')})" style="background:#166534;color:white;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer">복사</button>
+      </div>
+
       <!-- 계좌 정보 -->
       <div style="background:var(--accent-light);border:1.5px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:16px">
         <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:10px">🏦 입금 계좌 정보</div>
@@ -8246,9 +8257,11 @@ function showOrderPayModal(order) {
           <span style="font-weight:700;font-family:'Noto Sans KR','DM Mono',monospace;letter-spacing:0.5px">1005-304-593104</span>
           <span style="color:var(--gray-500);font-size:13px">예금주</span>
           <span style="font-weight:700">주식회사 온니바이어</span>
+          <span style="color:var(--gray-500);font-size:13px">입금액</span>
+          <span style="font-weight:900;color:var(--accent)">₩${order.total.toLocaleString()}</span>
         </div>
         <div style="margin-top:12px;padding:10px;background:white;border-radius:8px;font-size:12px;color:var(--gray-600);line-height:1.7">
-          ⚠️ 입금 시 <strong>주문번호와 회사명</strong>을 함께 기재해주세요.<br>
+          ⚠️ 입금 시 <strong>주문번호(#${order.preOrderNum})와 회사명</strong>을 함께 기재해주세요.<br>
           ✅ 입금 확인 후 담당자가 <strong>채널톡으로 연락</strong>드립니다.
         </div>
       </div>
@@ -8299,7 +8312,8 @@ function completeOrder(order) {
   document.getElementById('orderPayModal')?.remove();
 
   const now = new Date();
-  const orderNum = 'FC-' + String(Math.floor(Math.random() * 900) + 100).padStart(4,'0');
+  // 모달에서 미리 생성된 주문번호 사용 (없으면 새로 생성)
+  const orderNum = order.preOrderNum || ('FC-' + String(Math.floor(Math.random() * 900) + 100).padStart(4,'0'));
   const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
   const days = order.deadline.includes('24') ? 1 : order.deadline.includes('2~3') ? 3 : 5;
   const dDate = new Date(now); dDate.setDate(dDate.getDate() + days);
@@ -8474,7 +8488,8 @@ function showOrderSuccessBanner(orderNum, orderName) {
     <div style="font-size:32px">🎉</div>
     <div style="flex:1">
       <div style="font-size:15px;font-weight:800;margin-bottom:4px">#${orderNum} 접수 완료!</div>
-      <div style="font-size:13px;opacity:.9">${orderName} — 이제 원본 파일을 업로드해주세요. 에이컷 팀이 바로 작업을 시작합니다.</div>
+      <div style="font-size:13px;opacity:.9">${orderName}</div>
+      <div style="font-size:12px;opacity:.8;margin-top:4px">우리은행 1005-304-593104 (주식회사 온니바이어)로 입금 후 채널톡으로 안내드립니다.</div>
     </div>
     <button onclick="document.getElementById('orderSuccessBanner').remove()" style="background:rgba(255,255,255,0.2);border:none;color:white;font-size:16px;cursor:pointer;border-radius:8px;padding:4px 10px">✕</button>
   `;
