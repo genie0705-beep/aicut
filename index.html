@@ -5034,7 +5034,7 @@ footer {
           </div>
           <div class="panel">
             <table class="data-table" id="adminOrderTable">
-              <tr><th>주문번호</th><th>의뢰인</th><th>프로젝트</th><th>플랜</th><th>상태</th><th>수정 현황</th><th>납품예정</th><th>에디터</th><th>액션</th></tr>
+              <tr><th>주문번호</th><th>고객명</th><th>이메일</th><th>플랜</th><th>금액</th><th>용도</th><th>납품기간</th><th>접수일시</th><th>상태</th><th>에디터</th><th>액션</th></tr>
               <tr data-s="pending">
                 <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0041</td>
                 <td style="font-weight:600">이수현</td><td>유튜브 편집 3편</td>
@@ -7648,23 +7648,35 @@ window.loadAdminOrders = function loadAdminOrders() {
         const tr = document.createElement('tr');
         tr.setAttribute('data-s', o.status || 'pending');
         tr.setAttribute('data-source', 'firestore');
+        // 접수일시 포맷
+        var createdStr = '-';
+        if (o.createdAt && o.createdAt.toDate) {
+          createdStr = o.createdAt.toDate().toLocaleString('ko-KR', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+        } else if (o.createdAt) {
+          createdStr = new Date(o.createdAt).toLocaleDateString('ko-KR');
+        }
         tr.innerHTML = `
           <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${oid}</td>
-          <td style="font-weight:600">${o.clientName || o.userId || '-'}</td>
-          <td>${o.title || o.planName || '-'}</td>
+          <td style="font-weight:600">${o.clientName || '-'}</td>
+          <td style="font-size:12px;color:var(--gray-400)">${o.clientEmail || o.userId || '-'}</td>
           <td><span style="font-size:12px;font-weight:700;color:var(--accent)">${o.planName || '-'}</span></td>
+          <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px;font-weight:600">₩${(o.price||o.total||0).toLocaleString()}</td>
+          <td style="font-size:12px;color:var(--gray-600)">${o.type || '-'}</td>
+          <td style="font-size:12px;color:var(--gray-400)">${o.deadlineDate || o.deadline || '-'}</td>
+          <td style="font-size:11px;color:var(--gray-400);white-space:nowrap">${createdStr}</td>
           <td><span class="badge ${cls}" ${badgeStyle}>${txt}</span></td>
-          <td style="font-size:12px;color:var(--gray-400)">${o.editor || '—'}</td>
-          <td style="font-size:13px;color:var(--orange);font-weight:700">${o.deadlineDate || o.deadline || '-'}</td>
           <td>
-            <select class="form-select" style="padding:6px 10px;font-size:12px;border-radius:8px" onchange="checkEditorCapacity(this)">
-              <option value="">— 배정</option>
-              <option value="Jason">Jason</option>
-              <option value="Victor">Victor</option>
-              <option value="Eric">Eric</option>
+            <select class="form-select" style="padding:6px 10px;font-size:12px;border-radius:8px"
+              onchange="adminChangeOrderStatusFromSelect(this,'${oid}')">
+              <option value="">— 상태변경</option>
+              <option value="payment_pending">입금대기</option>
+              <option value="pending">대기중</option>
+              <option value="editing">편집중</option>
+              <option value="review">검수중</option>
+              <option value="done">납품완료</option>
             </select>
           </td>
-          <td style="display:flex;gap:4px">
+          <td style="display:flex;gap:4px;flex-wrap:wrap">
             <button class="btn btn-outline" style="padding:6px 10px;font-size:12px"
               onclick="window._currentAdminOrderId='${oid}';showAdminOrderDetail()">상세</button>
           </td>
@@ -8090,6 +8102,14 @@ function adminCompleteRevision(roundNum) {
 }
 
 // 검수 요청 발송
+// 어드민 주문 목록에서 직접 상태 변경
+window.adminChangeOrderStatusFromSelect = function(sel, orderId) {
+  const newStatus = sel.value;
+  if (!newStatus || !orderId) return;
+  adminChangeOrderStatus(orderId, newStatus, sel.options[sel.selectedIndex].text);
+  sel.value = '';
+};
+
 // 입금 확인 완료 처리
 function adminConfirmPayment() {
   const orderId = window._currentAdminOrderId;
@@ -8526,19 +8546,37 @@ function completeOrder(order) {
   if (window._db && window._fsDoc) {
     import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
       const ref = fs.doc(window._db, 'orders', orderNum);
-      fs.setDoc(ref, Object.assign({}, orderData, {
+      fs.setDoc(ref, {
+        orderId:     orderNum,
+        userId:      (window._fbCurrentUser && window._fbCurrentUser.uid) || (session ? session.email : ''),
         clientName:  clientName,
         clientEmail: session ? session.email : '',
-        userId:      (window._fbCurrentUser && window._fbCurrentUser.uid) || (session ? session.email : ''),
+        planName:    order.planName,
+        price:       order.total,
+        basePrice:   order.basePrice || order.price,
+        expressAmt:  order.expressAmt || 0,
+        vat:         order.vat,
+        type:        order.type,
+        desc:        document.getElementById('newOrderDesc')?.value?.trim() || '',
+        deadline:    order.deadline,
+        deadlineDate: dStr,
+        status:      'payment_pending',
+        taxType:     orderData.taxType || 'none',
+        taxValue:    orderData.taxValue || '',
+        title:       order.name,
+        editor:      '',
         createdAt:   fs.serverTimestamp(),
         updatedAt:   fs.serverTimestamp(),
-      })).then(function() {
+      }).then(function() {
         console.log('[Firestore] 주문 저장 완료:', orderNum);
         if (typeof loadAdminOrders === 'function') loadAdminOrders();
       }).catch(function(e) {
-        console.warn('[Firestore] 주문 저장 실패 (localStorage 백업 유지):', e.message);
+        console.warn('[Firestore] 주문 저장 실패:', e.code, e.message);
+        showToast('⚠️ 주문 저장 중 오류가 발생했습니다. 관리자에게 문의해주세요. (' + (e.code || e.message) + ')');
       });
     });
+  } else {
+    console.warn('[Firestore] DB 미초기화 — localStorage에만 저장됨');
   }
 
   // 7. 폼 초기화 + 이동
