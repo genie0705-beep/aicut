@@ -8505,42 +8505,58 @@ function completeOrder(order) {
   state.orders[orderNum] = { ...orderData, status: 'pending' };
   saveAdminState(state);
 
-  // Firestore 저장 — orderId를 문서 ID로 사용 + serverTimestamp
-  if (window._db && window._fsDoc) {
+  // Firestore 저장 — _db 준비 완료까지 최대 3초 대기 후 저장
+  var _fsOrderData = {
+    orderId:     orderNum,
+    userId:      (window._fbCurrentUser && window._fbCurrentUser.uid) || (session ? session.email : ''),
+    clientName:  clientName,
+    clientEmail: session ? session.email : '',
+    planName:    order.planName,
+    price:       order.total,
+    basePrice:   order.basePrice || order.price,
+    expressAmt:  order.expressAmt || 0,
+    vat:         order.vat,
+    type:        order.type,
+    desc:        orderData.desc || '',
+    deadline:    order.deadline,
+    deadlineDate: dStr,
+    status:      'waiting',
+    taxType:     orderData.taxType || 'none',
+    taxValue:    orderData.taxValue || '',
+    title:       order.name,
+    editor:      '',
+  };
+
+  var _saveToFirestore = function(retryCount) {
+    if (!window._db) {
+      if ((retryCount || 0) < 6) {
+        setTimeout(function() { _saveToFirestore((retryCount || 0) + 1); }, 500);
+      } else {
+        console.warn('[Firestore] DB 초기화 실패 — localStorage에만 저장됨');
+      }
+      return;
+    }
     import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
-      const ref = fs.doc(window._db, 'orders', orderNum);
-      fs.setDoc(ref, {
-        orderId:     orderNum,
-        userId:      (window._fbCurrentUser && window._fbCurrentUser.uid) || (session ? session.email : ''),
-        clientName:  clientName,
-        clientEmail: session ? session.email : '',
-        planName:    order.planName,
-        price:       order.total,
-        basePrice:   order.basePrice || order.price,
-        expressAmt:  order.expressAmt || 0,
-        vat:         order.vat,
-        type:        order.type,
-        desc:        document.getElementById('newOrderDesc')?.value?.trim() || '',
-        deadline:    order.deadline,
-        deadlineDate: dStr,
-        status:      'payment_pending',
-        taxType:     orderData.taxType || 'none',
-        taxValue:    orderData.taxValue || '',
-        title:       order.name,
-        editor:      '',
-        createdAt:   fs.serverTimestamp(),
-        updatedAt:   fs.serverTimestamp(),
-      }).then(function() {
-        console.log('[Firestore] 주문 저장 완료:', orderNum);
+      var ref = fs.doc(window._db, 'orders', orderNum);
+      fs.setDoc(ref, Object.assign({}, _fsOrderData, {
+        createdAt: fs.serverTimestamp(),
+        updatedAt: fs.serverTimestamp(),
+      })).then(function() {
+        console.log('[Firestore] ✅ 주문 저장 완료:', orderNum);
         if (typeof loadAdminOrders === 'function') loadAdminOrders();
       }).catch(function(e) {
-        console.warn('[Firestore] 주문 저장 실패:', e.code, e.message);
-        showToast('⚠️ 주문 저장 중 오류가 발생했습니다. 관리자에게 문의해주세요. (' + (e.code || e.message) + ')');
+        console.error('[Firestore] ❌ 주문 저장 실패 코드:', e.code, '메시지:', e.message);
+        if (e.code === 'permission-denied') {
+          showToast('⚠️ 저장 실패: Firebase 보안 규칙을 확인해주세요 (permission-denied)');
+        } else if (e.code === 'unavailable') {
+          showToast('⚠️ 네트워크 연결을 확인해주세요');
+        } else {
+          showToast('⚠️ 주문 저장 실패: ' + (e.code || e.message));
+        }
       });
     });
-  } else {
-    console.warn('[Firestore] DB 미초기화 — localStorage에만 저장됨');
-  }
+  };
+  _saveToFirestore(0);
 
   // 7. 폼 초기화 + 이동
   ['newOrderName','newOrderDesc','newOrderRef'].forEach(id => {
