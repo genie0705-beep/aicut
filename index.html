@@ -5038,75 +5038,15 @@ footer {
           </div>
           <div class="panel">
             <table class="data-table" id="adminOrderTable">
-              <tr><th>주문번호</th><th>고객명</th><th>이메일</th><th>플랜</th><th>금액</th><th>용도</th><th>납품기간</th><th>접수일시</th><th>상태</th><th>에디터</th><th>액션</th></tr>
-              <tr data-s="pending">
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0041</td>
-                <td style="font-weight:600">이수현</td><td>유튜브 편집 3편</td>
-                <td><span style="font-size:12px;font-weight:700;color:var(--accent)">STANDARD</span></td>
-                <td><span class="badge badge-pending">대기중</span></td>
-                <td style="font-size:12px;color:var(--gray-400)">—</td>
-                <td style="font-size:13px;color:var(--red);font-weight:700">D-0 오늘</td>
-                <td><select class="form-select" style="padding:6px 10px;font-size:12px;border-radius:8px"><option>— 배정</option><option>Jason</option><option>Luke</option><option>Victor</option><option>Eric</option><option>Chris</option></select></td>
-                <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px" onclick="changeStatus(this,'editing','편집중','badge-editing')">착수</button></td>
+              <tr>
+                <th>주문번호</th><th>고객명</th><th>이메일</th><th>플랜</th>
+                <th>금액</th><th>용도</th><th>납품기간</th><th>접수일시</th>
+                <th>상태</th><th>상태변경</th><th>액션</th>
               </tr>
-              <tr data-s="pending">
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0038</td>
-                <td style="font-weight:600">최미래</td><td>릴스 5편</td>
-                <td><span style="font-size:12px;font-weight:700;color:#94a3b8">STARTER</span></td>
-                <td><span class="badge badge-pending">대기중</span></td>
-                <td style="font-size:12px;color:var(--gray-400)">—</td>
-                <td style="font-size:13px;color:var(--red);font-weight:700">D-0 오늘</td>
-                <td><select class="form-select" style="padding:6px 10px;font-size:12px;border-radius:8px"><option>— 배정</option><option>Jason</option><option>Luke</option><option>Victor</option><option>Eric</option><option>Chris</option></select></td>
-                <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px" onclick="changeStatus(this,'editing','편집중','badge-editing')">착수</button></td>
-              </tr>
-              <tr data-s="editing">
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0040</td>
-                <td style="font-weight:600">㈜미디어플러스</td><td>기업 인트로 VFX</td>
-                <td><span style="font-size:12px;font-weight:700;color:var(--accent)">PREMIUM</span></td>
-                <td><span class="badge badge-editing">편집중</span></td>
-                <td>
-                  <span style="font-size:12px;font-weight:700;color:var(--orange)">2차 수정 요청</span>
-                  <button class="btn" style="padding:2px 8px;font-size:11px;background:var(--orange);color:white;border:none;border-radius:12px;cursor:pointer;margin-left:4px" onclick="showAdminOrderDetail()">보기</button>
+              <tr id="adminOrderEmptyRow">
+                <td colspan="11" style="text-align:center;padding:40px;color:var(--gray-400);font-size:14px">
+                  🔄 주문 데이터를 불러오는 중...
                 </td>
-                <td style="font-size:13px;color:var(--orange);font-weight:700">D-1 내일</td>
-                <td style="font-size:13px;font-weight:600">Victor</td>
-                <td style="display:flex;gap:6px">
-                  <button class="btn btn-outline" style="padding:6px 10px;font-size:12px" onclick="showAdminOrderDetail()">상세</button>
-                  <button class="btn btn-outline" style="padding:6px 10px;font-size:12px" onclick="changeStatus(this,'review','검수중','badge-review')">검수</button>
-                </td>
-              </tr>
-              <tr data-s="editing">
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0037</td>
-                <td style="font-weight:600">스타트업코리아</td><td>SNS 릴스 10편</td>
-                <td><span style="font-size:12px;font-weight:700;color:#3b82f6">B2B</span></td>
-                <td><span class="badge badge-editing">편집중</span></td>
-                <td style="font-size:12px;color:var(--gray-400)">수정 없음</td>
-                <td style="font-size:13px;color:var(--gray-400)">D-3 남음</td>
-                <td style="font-size:13px;font-weight:600">Eric</td>
-                <td style="display:flex;gap:6px">
-                  <button class="btn btn-outline" style="padding:6px 10px;font-size:12px" onclick="showTab('admin','a-upload',null);setAdminTab(document.querySelector('.admin-bottom-nav a:nth-child(4)'))"  >업로드</button>
-                  <button class="btn btn-outline" style="padding:6px 10px;font-size:12px" onclick="changeStatus(this,'review','검수중','badge-review')">검수</button>
-                </td>
-              </tr>
-              <tr data-s="review">
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0039</td>
-                <td style="font-weight:600">박지훈</td><td>기업 홍보영상</td>
-                <td><span style="font-size:12px;font-weight:700;color:var(--accent)">PREMIUM</span></td>
-                <td><span class="badge badge-review">검수중</span></td>
-                <td style="font-size:12px;color:var(--green);font-weight:600">1차 완료</td>
-                <td style="font-size:13px;color:var(--orange);font-weight:700">D-1 내일</td>
-                <td style="font-size:13px;font-weight:600">Jason</td>
-                <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px" onclick="changeStatus(this,'done','납품완료','badge-done')">납품완료</button></td>
-              </tr>
-              <tr data-s="done">
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0031</td>
-                <td style="font-weight:600">이수현</td><td>쇼츠 7편</td>
-                <td><span style="font-size:12px;font-weight:700;color:#94a3b8">STARTER</span></td>
-                <td><span class="badge badge-done">납품완료</span></td>
-                <td style="font-size:12px;color:var(--gray-400)">수정 없음</td>
-                <td style="font-size:13px;color:var(--gray-400)">2025.03.11</td>
-                <td style="font-size:13px;font-weight:600">Eric</td>
-                <td><span style="font-size:12px;color:var(--gray-400)">완료</span></td>
               </tr>
             </table>
           </div>
@@ -6748,7 +6688,7 @@ window.loadB2BInquiries = function loadB2BInquiries() {
           <td>${d.manager || '-'}</td>
           <td style="font-size:13px"><a href="mailto:${d.email}" style="color:var(--accent)">${d.email || '-'}</a></td>
           <td style="font-size:13px">${d.phone || '-'}</td>
-          <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">${d.volume || '-'}</td>
+          <td style="font-family:Pretendard,sans-serif;font-size:13px">${d.volume || '-'}</td>
           <td><span class="badge ${badgeCls}" id="b2b-status-${docId}">${d.status || '신규'}</span></td>
           <td style="display:flex;gap:4px;flex-wrap:wrap">
             <button class="btn btn-outline" style="padding:4px 8px;font-size:11px"
@@ -7622,93 +7562,92 @@ window.showTab = function showTab(section, tabId, linkEl) {
 // ── Firestore 주문 목록 실시간 조회 ──
 window.loadAdminOrders = function loadAdminOrders() {
   if (!window._db) {
-    // Firestore 초기화 지연 대응 — 최대 3초 대기
-    var _retryCount = (window._loadOrdersRetry || 0) + 1;
-    window._loadOrdersRetry = _retryCount;
-    if (_retryCount <= 6) {
-      console.log('[Firestore] DB 초기화 대기 중... (' + _retryCount + '/6)');
-      setTimeout(loadAdminOrders, 500);
-    } else {
-      console.warn('[Firestore] DB 초기화 실패 — 새로고침 후 재시도');
-      window._loadOrdersRetry = 0;
-    }
+    var retry = (window._loadOrdersRetry || 0) + 1;
+    window._loadOrdersRetry = retry;
+    if (retry <= 6) { setTimeout(loadAdminOrders, 500); }
+    else { window._loadOrdersRetry = 0; console.warn('[Firestore] DB 초기화 실패'); }
     return;
   }
   window._loadOrdersRetry = 0;
+
+  var emptyRow = document.getElementById('adminOrderEmptyRow');
+  if (emptyRow) { emptyRow.style.display = ''; emptyRow.cells[0].textContent = '🔄 데이터 조회 중...'; }
+
   import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
-    const q = fs.query(
+    var q = fs.query(
       fs.collection(window._db, 'orders'),
       fs.orderBy('createdAt', 'desc'),
-      fs.limit(50)
+      fs.limit(100)
     );
     fs.getDocs(q).then(function(snapshot) {
-      const tbody = document.getElementById('adminOrderTable');
+      var tbody = document.getElementById('adminOrderTable');
       if (!tbody) return;
-      // 기존 Firestore 행 제거
+
+      // Firestore 행만 제거 (헤더·emptyRow 유지)
       tbody.querySelectorAll('tr[data-source="firestore"]').forEach(function(r) { r.remove(); });
-      if (snapshot.empty) return;
-      const statusMap = {
-        payment_pending: ['', '입금대기'],
-        waiting:  ['badge-pending', '대기중'],
-        pending:  ['badge-pending', '대기중'],
-        editing:  ['badge-editing', '편집중'],
-        review:   ['badge-review',  '검수중'],
-        done:     ['badge-done',    '납품완료'],
+
+      var emptyRow = document.getElementById('adminOrderEmptyRow');
+      if (snapshot.empty) {
+        if (emptyRow) { emptyRow.style.display = ''; emptyRow.cells[0].textContent = '📭 접수된 주문이 없습니다'; }
+        return;
+      }
+      if (emptyRow) emptyRow.style.display = 'none';
+
+      var statusMap = {
+        payment_pending: ['', '입금대기', 'background:#ede9ff;color:#5c3de8;font-weight:700'],
+        waiting: ['badge-pending', '대기중', ''],
+        pending: ['badge-pending', '대기중', ''],
+        editing: ['badge-editing', '편집중', ''],
+        review:  ['badge-review',  '검수중', ''],
+        done:    ['badge-done',    '납품완료',''],
       };
+
       snapshot.forEach(function(docSnap) {
-        const o = docSnap.data();
-        const oid = o.orderId || docSnap.id;
-        const [cls, txt] = statusMap[o.status] || ['badge-pending', '대기중'];
-        const badgeStyle = o.status === 'payment_pending'
-          ? 'style="background:#ede9ff;color:#5c3de8;font-weight:700"'
-          : '';
-        const tr = document.createElement('tr');
-        tr.setAttribute('data-s', o.status || 'pending');
-        tr.setAttribute('data-source', 'firestore');
-        // 접수일시 포맷
+        var o = docSnap.data();
+        var oid = o.orderId || docSnap.id;
+        var si = statusMap[o.status] || ['badge-pending', '대기중', ''];
+        var cls = si[0], txt = si[1], bStyle = si[2] ? 'style="' + si[2] + '"' : '';
+
         var createdStr = '-';
         if (o.createdAt && o.createdAt.toDate) {
-          createdStr = o.createdAt.toDate().toLocaleString('ko-KR', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
-        } else if (o.createdAt) {
-          createdStr = new Date(o.createdAt).toLocaleDateString('ko-KR');
+          var d = o.createdAt.toDate();
+          createdStr = (d.getMonth()+1) + '/' + d.getDate() + ' ' +
+            String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
         }
-        tr.innerHTML = `
-          <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${oid}</td>
-          <td style="font-weight:600">${o.clientName || '-'}</td>
-          <td style="font-size:12px;color:var(--gray-400)">${o.clientEmail || o.userId || '-'}</td>
-          <td><span style="font-size:12px;font-weight:700;color:var(--accent)">${o.planName || '-'}</span></td>
-          <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px;font-weight:600">₩${(o.price||o.total||0).toLocaleString()}</td>
-          <td style="font-size:12px;color:var(--gray-600)">${o.type || '-'}</td>
-          <td style="font-size:12px;color:var(--gray-400)">${o.deadlineDate || o.deadline || '-'}</td>
-          <td style="font-size:11px;color:var(--gray-400);white-space:nowrap">${createdStr}</td>
-          <td><span class="badge ${cls}" ${badgeStyle}>${txt}</span></td>
-          <td>
-            <select class="form-select" style="padding:6px 10px;font-size:12px;border-radius:8px"
-              onchange="adminChangeOrderStatusFromSelect(this,'${oid}')">
-              <option value="">— 상태변경</option>
-              <option value="payment_pending">입금대기</option>
-              <option value="pending">대기중</option>
-              <option value="editing">편집중</option>
-              <option value="review">검수중</option>
-              <option value="done">납품완료</option>
-            </select>
-          </td>
-          <td style="display:flex;gap:4px;flex-wrap:wrap">
-            <button class="btn btn-outline" style="padding:6px 10px;font-size:12px"
-              onclick="window._currentAdminOrderId='${oid}';showAdminOrderDetail()">상세</button>
-          </td>
-        `;
+
+        var tr = document.createElement('tr');
+        tr.setAttribute('data-s', o.status || 'pending');
+        tr.setAttribute('data-source', 'firestore');
+        tr.innerHTML =
+          '<td style="font-family:Pretendard,sans-serif;font-size:12px;color:var(--gray-400)">#' + oid + '</td>' +
+          '<td style="font-weight:600;font-size:13px">' + (o.clientName || '-') + '</td>' +
+          '<td style="font-size:11px;color:var(--gray-400)">' + (o.clientEmail || o.userId || '-') + '</td>' +
+          '<td><span style="font-size:12px;font-weight:700;color:var(--accent)">' + (o.planName || '-') + '</span></td>' +
+          '<td style="font-family:Pretendard,sans-serif;font-size:13px;font-weight:600">₩' + ((o.price || o.total || 0).toLocaleString()) + '</td>' +
+          '<td style="font-size:12px;color:var(--gray-600)">' + (o.type || '-') + '</td>' +
+          '<td style="font-size:12px;color:var(--gray-400)">' + (o.deadlineDate || o.deadline || '-') + '</td>' +
+          '<td style="font-size:11px;color:var(--gray-400);white-space:nowrap">' + createdStr + '</td>' +
+          '<td><span class="badge ' + cls + '" ' + bStyle + '>' + txt + '</span></td>' +
+          '<td><select class="form-select" style="padding:5px 8px;font-size:11px;border-radius:8px;min-width:80px" onchange="adminChangeOrderStatusFromSelect(this,&quot;' + oid + '&quot;)">' +
+            '<option value="">변경</option>' +
+            '<option value="payment_pending">입금대기</option>' +
+            '<option value="pending">대기중</option>' +
+            '<option value="editing">편집중</option>' +
+            '<option value="review">검수중</option>' +
+            '<option value="done">납품완료</option>' +
+          '</select></td>' +
+          '<td><button class="btn btn-outline" style="padding:5px 10px;font-size:11px;white-space:nowrap" onclick="window._currentAdminOrderId=&quot;' + oid + '&quot;;showAdminOrderDetail()">상세</button></td>';
         tbody.appendChild(tr);
       });
-      console.log('[Firestore] 주문 ' + snapshot.size + '건 로드');
+      console.log('[Firestore] 주문 ' + snapshot.size + '건 로드 완료');
     }).catch(function(e) {
-      console.error('[Firestore] 주문 조회 실패 ❌ 코드:', e.code, '메시지:', e.message);
-      if (e.code === 'permission-denied') {
-        console.error('[해결방법] Firebase Console → Firestore → 규칙 탭에서 아래 규칙 추가:\n' +
-          'match /orders/{orderId} {\n' +
-          '  allow create: if request.auth != null;\n' +
-          '  allow read, update: if request.auth != null;\n' +
-          '}');
+      console.error('[Firestore] 주문 조회 실패:', e.code, e.message);
+      var emptyRow = document.getElementById('adminOrderEmptyRow');
+      if (emptyRow) {
+        emptyRow.style.display = '';
+        emptyRow.cells[0].textContent = e.code === 'permission-denied'
+          ? '❌ 권한 오류 — Firebase Console → Firestore → 규칙 탭에서 보안 규칙을 확인해주세요.'
+          : '❌ 조회 실패: ' + (e.code || e.message);
       }
     });
   });
@@ -8354,7 +8293,7 @@ function showOrderPayModal(order) {
       <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between">
         <div>
           <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:4px">📋 주문번호 (입금 시 필수 기재)</div>
-          <div style="font-size:22px;font-weight:900;color:#166534;font-family:'Noto Sans KR','DM Mono',monospace;letter-spacing:1px">#${order.preOrderNum}</div>
+          <div style="font-size:22px;font-weight:900;color:#166534;font-family:Pretendard,sans-serif;letter-spacing:1px">#${order.preOrderNum}</div>
         </div>
         <button onclick="navigator.clipboard&&navigator.clipboard.writeText('${order.preOrderNum}').then(function(){showToast('주문번호가 복사되었습니다')})" style="background:#166534;color:white;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer">복사</button>
       </div>
@@ -8366,7 +8305,7 @@ function showOrderPayModal(order) {
           <span style="color:var(--gray-500);font-size:13px">은행</span>
           <span style="font-weight:700">우리은행</span>
           <span style="color:var(--gray-500);font-size:13px">계좌번호</span>
-          <span style="font-weight:700;font-family:'Noto Sans KR','DM Mono',monospace;letter-spacing:0.5px">1005-304-593104</span>
+          <span style="font-weight:700;font-family:Pretendard,sans-serif;letter-spacing:0.5px">1005-304-593104</span>
           <span style="color:var(--gray-500);font-size:13px">예금주</span>
           <span style="font-weight:700">주식회사 온니바이어</span>
           <span style="color:var(--gray-500);font-size:13px">입금액</span>
@@ -8442,12 +8381,12 @@ function completeOrder(order) {
     newRow.id = 'newOrderRow';
     newRow.style.cssText = 'background:#ede9ff;transition:background 2s';
     newRow.innerHTML = `
-      <td data-label="주문번호" style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
+      <td data-label="주문번호" style="font-family:Pretendard,sans-serif;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
       <td data-label="프로젝트명" style="font-weight:600">${order.name}</td>
       <td data-label="플랜"><span style="font-size:12px;font-weight:700;color:var(--accent)">${order.planName}</span></td>
       <td data-label="상태"><span class="badge" style="background:#ede9ff;color:#5c3de8;font-weight:700">입금 확인 중</span></td>
       <td data-label="납품예정" style="font-size:13px;color:var(--gray-400)">${dStr}</td>
-      <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩${order.total.toLocaleString()}</td>
+      <td style="font-family:Pretendard,sans-serif;font-size:13px">₩${order.total.toLocaleString()}</td>
       <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>
     `;
     const firstRow = clientTbody.querySelector('tr:nth-child(2)');
@@ -8463,7 +8402,7 @@ function completeOrder(order) {
     adminRow.setAttribute('data-s', 'pending');
     adminRow.style.cssText = 'background:#ede9ff;transition:background 3s';
     adminRow.innerHTML = `
-      <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
+      <td style="font-family:Pretendard,sans-serif;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
       <td style="font-weight:600">${clientName}</td>
       <td>${order.name}</td>
       <td><span style="font-size:12px;font-weight:700;color:var(--accent)">${order.planName}</span></td>
