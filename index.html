@@ -8524,7 +8524,7 @@ function completeOrder(order) {
     editor:      '',
   };
 
-  // Firestore 저장 — auth.currentUser 직접 참조 + 토큰 갱신
+  // Firestore 저장 — auth.currentUser 직접 확인 후 addDoc
   var _doFirestoreSave = function(retryCount) {
     // DB 준비 대기 (최대 3초)
     if (!window._db) {
@@ -8536,47 +8536,29 @@ function completeOrder(order) {
       return;
     }
 
-    // auth.currentUser 직접 참조 (window._fbCurrentUser 의존 제거)
-    var currentUser = (window._fbAuth && window._fbAuth.currentUser)
-                   || window._fbCurrentUser;
-
-    if (!currentUser) {
-      console.error('[Firestore] ❌ currentUser 없음 — 로그인 필요');
-      showToast('⚠️ 로그인 상태를 확인해주세요');
+    // auth.currentUser 직접 참조 (v9 방식)
+    var user = window._fbAuth && window._fbAuth.currentUser;
+    if (!user) {
+      showToast('로그인이 필요합니다');
+      console.error('[Firestore] ❌ currentUser 없음');
       return;
     }
 
-    console.log('[Firestore] 저장 시작 — uid:', currentUser.uid, 'email:', currentUser.email);
-
-    // 토큰 강제 갱신 후 저장
-    currentUser.getIdToken(true)
-      .then(function() {
-        return import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js');
-      })
-      .then(function(fs) {
-        var ref = fs.doc(window._db, 'orders', orderNum);
-        var saveData = Object.assign({}, _fsOrderData, {
-          userId:      currentUser.uid,
-          clientEmail: currentUser.email || _fsOrderData.clientEmail,
-          createdAt:   fs.serverTimestamp(),
-          updatedAt:   fs.serverTimestamp(),
-        });
-        console.log('[Firestore] setDoc 호출:', orderNum, saveData);
-        return fs.setDoc(ref, saveData);
-      })
-      .then(function() {
-        console.log('[Firestore] ✅ 주문 저장 완료:', orderNum);
+    import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+      fs.addDoc(fs.collection(window._db, 'orders'), Object.assign({}, _fsOrderData, {
+        userId:      user.uid,
+        clientEmail: user.email,
+        orderId:     orderNum,
+        createdAt:   fs.serverTimestamp(),
+        updatedAt:   fs.serverTimestamp(),
+      })).then(function(docRef) {
+        console.log('[Firestore] ✅ 주문 저장 완료 docId:', docRef.id, 'orderId:', orderNum);
         if (typeof loadAdminOrders === 'function') loadAdminOrders();
-      })
-      .catch(function(e) {
-        console.error('[Firestore] ❌ 저장 실패 — 코드:', e.code, '메시지:', e.message);
-        console.error('  uid:', currentUser.uid, '/ db:', !!window._db, '/ orderId:', orderNum);
-        if (e.code === 'permission-denied') {
-          showToast('⚠️ 저장 실패 (permission-denied) — 콘솔 확인 후 관리자에게 문의해주세요');
-        } else {
-          showToast('⚠️ 주문 저장 실패: ' + (e.code || e.message));
-        }
+      }).catch(function(e) {
+        console.error('[Firestore] ❌ 저장 실패 코드:', e.code, '/ uid:', user.uid, '/ orderId:', orderNum);
+        showToast('⚠️ 주문 저장 실패: ' + (e.code || e.message));
       });
+    });
   };
   _doFirestoreSave(0);
 
