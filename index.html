@@ -8504,11 +8504,22 @@ function completeOrder(order) {
 
   // Firestore 저장
   var user = window._fbAuth && window._fbAuth.currentUser;
+
+  // 디버그 로그
+  console.log('[DEBUG] user:', user ? user.uid : 'NULL');
+  console.log('[DEBUG] user.email:', user ? user.email : 'NULL');
+  console.log('[DEBUG] _db:', window._db ? 'EXISTS' : 'NULL');
+  console.log('[DEBUG] _db type:', typeof window._db);
+  console.log('[DEBUG] _fbAuth:', window._fbAuth ? 'EXISTS' : 'NULL');
+  console.log('[DEBUG] _fbAuth.currentUser:', window._fbAuth && window._fbAuth.currentUser ? window._fbAuth.currentUser.uid : 'NULL');
+
   if (!user) {
     showToast('로그인이 필요합니다');
     console.error('[Firestore] ❌ currentUser 없음');
   } else {
     import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+      console.log('[DEBUG] fs.addDoc:', typeof fs.addDoc);
+      console.log('[DEBUG] fs.collection:', typeof fs.collection);
       fs.addDoc(fs.collection(window._db, 'orders'), {
         orderId:     orderNum,
         userId:      user.uid,
