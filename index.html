@@ -8378,155 +8378,80 @@ function completeOrder(order) {
   const session = getSession();
   const clientName = session ? session.name : '신규 고객';
 
-  // 1. 고객 마이페이지 주문 목록에 추가
-  const clientTbody = document.querySelector('#order-list .data-table');
-  if (clientTbody) {
-    const newRow = document.createElement('tr');
-    newRow.id = 'newOrderRow';
-    newRow.style.cssText = 'background:#ede9ff;transition:background 2s';
-    newRow.innerHTML = `
-      <td data-label="주문번호" style="font-family:Pretendard,sans-serif;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
-      <td data-label="프로젝트명" style="font-weight:600">${order.name}</td>
-      <td data-label="플랜"><span style="font-size:12px;font-weight:700;color:var(--accent)">${order.planName}</span></td>
-      <td data-label="상태"><span class="badge" style="background:#ede9ff;color:#5c3de8;font-weight:700">입금 확인 중</span></td>
-      <td data-label="납품예정" style="font-size:13px;color:var(--gray-400)">${dStr}</td>
-      <td style="font-family:Pretendard,sans-serif;font-size:13px">₩${order.total.toLocaleString()}</td>
-      <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>
-    `;
-    const firstRow = clientTbody.querySelector('tr:nth-child(2)');
-    if (firstRow) clientTbody.insertBefore(newRow, firstRow);
-    else clientTbody.appendChild(newRow);
-    setTimeout(() => { newRow.style.background = 'white'; }, 2000);
-  }
+  // taxType/taxValue 먼저 읽기 (모달 DOM이 살아있을 때)
+  var taxType  = (function() { var r = document.querySelector('input[name="taxType"]:checked'); return r ? r.value : 'none'; })();
+  var taxValue = (function() {
+    var r = document.querySelector('input[name="taxType"]:checked');
+    if (!r) return '';
+    if (r.value === 'tax')  return (document.getElementById('taxBizNum')  || {}).value || '';
+    if (r.value === 'cash') return (document.getElementById('cashPhone')  || {}).value || '';
+    return '';
+  })();
+  var descVal = document.getElementById('newOrderDesc') ? (document.getElementById('newOrderDesc').value || '') : '';
 
-  // 2. 어드민 주문 관리 테이블에 추가
-  const adminTable = document.getElementById('adminOrderTable');
-  if (adminTable) {
-    const adminRow = document.createElement('tr');
-    adminRow.setAttribute('data-s', 'pending');
-    adminRow.style.cssText = 'background:#ede9ff;transition:background 3s';
-    adminRow.innerHTML = `
-      <td style="font-family:Pretendard,sans-serif;font-size:12px;color:var(--gray-400)">#${orderNum}</td>
-      <td style="font-weight:600">${clientName}</td>
-      <td>${order.name}</td>
-      <td><span style="font-size:12px;font-weight:700;color:var(--accent)">${order.planName}</span></td>
-      <td><span class="badge badge-pending">대기중</span></td>
-      <td style="font-size:12px;color:var(--gray-400)">—</td>
-      <td style="font-size:13px;color:var(--orange);font-weight:700">${dStr}</td>
-      <td>
-        <select class="form-select" style="padding:6px 10px;font-size:12px;border-radius:8px">
-          <option>— 배정</option>
-          <option>Jason</option><option>Luke</option><option>Victor</option><option>Eric</option><option>Chris</option>
-        </select>
-      </td>
-      <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px" onclick="changeStatus(this,'editing','편집중','badge-editing')">착수</button></td>
-    `;
-    const firstDataRow = adminTable.querySelector('tr:nth-child(2)');
-    if (firstDataRow) adminTable.insertBefore(adminRow, firstDataRow);
-    else adminTable.appendChild(adminRow);
-    setTimeout(() => { adminRow.style.background = 'white'; }, 3000);
-  }
-
-  // 3. 어드민 칸반 보드 대기중 컬럼에 추가
-  const kanbanPending = document.querySelector('#tab-a-kanban .kanban-board > div:first-child');
-  if (kanbanPending) {
-    const kCard = document.createElement('div');
-    kCard.className = 'k-card';
-    kCard.style.cssText = 'background:#ede9ff;transition:background 3s';
-    kCard.innerHTML = `
-      <div class="k-id">#${orderNum}</div>
-      <div class="k-title">${order.name}</div>
-      <div class="k-meta">${clientName} · ${order.planName}</div>
-      <div class="k-day red">신규 접수</div>
-    `;
-    kCard.onclick = () => showTab('admin','a-orders',null);
-    kanbanPending.appendChild(kCard);
-    setTimeout(() => { kCard.style.background = 'white'; }, 3000);
-    // 칸반 카운트 업데이트
-    const pendingCount = kanbanPending.querySelector('[style*="border-radius:20px"]');
-    if (pendingCount) pendingCount.textContent = parseInt(pendingCount.textContent||0) + 1;
-  }
-
-  // 4. 대시보드 진행중 주문 카운터 업데이트
-  const metricCards = document.querySelectorAll('#tab-a-home .metric-val');
-  metricCards.forEach(el => {
-    const label = el.closest('.metric-card')?.querySelector('.metric-label');
-    if (label && label.textContent.includes('진행중')) {
-      el.textContent = parseInt(el.textContent||0) + 1;
+  // ── DOM 조작 (try-catch로 감싸기 — 실패해도 저장은 계속) ──
+  try {
+    // 1. 고객 마이페이지 주문 목록에 추가
+    var clientTbody = document.querySelector('#order-list .data-table');
+    if (clientTbody) {
+      var newRow = document.createElement('tr');
+      newRow.id = 'newOrderRow';
+      newRow.style.cssText = 'background:#ede9ff;transition:background 2s';
+      newRow.innerHTML =
+        '<td data-label="주문번호" style="font-size:12px;color:var(--gray-400)">#' + orderNum + '</td>' +
+        '<td data-label="프로젝트명" style="font-weight:600">' + order.name + '</td>' +
+        '<td data-label="플랜"><span style="font-size:12px;font-weight:700;color:var(--accent)">' + order.planName + '</span></td>' +
+        '<td data-label="상태"><span class="badge" style="background:#ede9ff;color:#5c3de8;font-weight:700">입금 확인 중</span></td>' +
+        '<td data-label="납품예정" style="font-size:13px;color:var(--gray-400)">' + dStr + '</td>' +
+        '<td style="font-size:13px">₩' + order.total.toLocaleString() + '</td>' +
+        '<td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>';
+      clientTbody.appendChild(newRow);
+      setTimeout(function() { newRow.style.background = 'white'; }, 2000);
     }
-    if (label && label.textContent.includes('대기중')) {
-      el.textContent = parseInt(el.textContent||0) + 1;
+
+    // 2. 대시보드 카운터 업데이트
+    var urgentBell = document.getElementById('urgentBell');
+    if (urgentBell) {
+      var match = urgentBell.textContent.match(/(\d+)/);
+      urgentBell.textContent = '🔴 긴급 ' + ((match ? parseInt(match[1]) : 0) + 1) + '건 처리 필요';
     }
-  });
-
-  // 5. 긴급 알림 배지 + 입금대기 카운트 업데이트
-  const urgentBell = document.getElementById('urgentBell');
-  if (urgentBell) {
-    const match = urgentBell.textContent.match(/(\d+)/);
-    const cur = match ? parseInt(match[1]) : 0;
-    urgentBell.textContent = '🔴 긴급 ' + (cur + 1) + '건 처리 필요';
-  }
-  const payBadge = document.getElementById('paymentPendingBadge');
-  if (payBadge) {
-    const m = payBadge.textContent.match(/\d+/);
-    const cur2 = m ? parseInt(m[0]) : 0;
-    payBadge.textContent = '💰 입금 확인 대기 ' + (cur2 + 1) + '건';
-    payBadge.style.display = 'block';
+    var payBadge = document.getElementById('paymentPendingBadge');
+    if (payBadge) {
+      var m = payBadge.textContent.match(/\d+/);
+      payBadge.textContent = '💰 입금 확인 대기 ' + ((m ? parseInt(m[0]) : 0) + 1) + '건';
+      payBadge.style.display = 'block';
+    }
+  } catch(e) {
+    console.warn('[DOM] 조작 실패 (무시):', e.message);
   }
 
-  // 6. localStorage 저장 + Firestore 동기화
-  const state = getAdminState();
-  const orderData = {
-    orderId: orderNum,
-    userId: session ? session.email : '',
-    planName: order.planName,
-    type: order.type,
-    desc: document.getElementById('newOrderDesc')?.value?.trim() || '',
-    deadline: order.deadline,
-    basePrice: order.basePrice || order.price,
-    expressAmt: order.expressAmt || 0,
-    price: order.price,
-    vat: order.vat,
-    total: order.total,
-    status: 'payment_pending',
-    taxType: (function() {
-      var r = document.querySelector('input[name="taxType"]:checked');
-      return r ? r.value : 'none';
-    })(),
-    taxValue: (function() {
-      var r = document.querySelector('input[name="taxType"]:checked');
-      if (!r) return '';
-      if (r.value === 'tax')  return (document.getElementById('taxBizNum')  || {}).value || '';
-      if (r.value === 'cash') return (document.getElementById('cashPhone')  || {}).value || '';
-      return '';
-    })(),
-    createdAt: now.toISOString(),
-    title: order.name,
-    client: clientName,
-    editor: '',
-    deadlineDate: dStr,
-  };
-  state.orders[orderNum] = { ...orderData, status: 'pending' };
-  saveAdminState(state);
+  // ── localStorage 저장 ──
+  try {
+    var state = getAdminState();
+    state.orders[orderNum] = {
+      orderId: orderNum, userId: session ? session.email : '',
+      planName: order.planName, type: order.type, desc: descVal,
+      deadline: order.deadline, basePrice: order.basePrice || order.price,
+      expressAmt: order.expressAmt || 0, price: order.price,
+      vat: order.vat, total: order.total, status: 'pending',
+      taxType: taxType, taxValue: taxValue,
+      createdAt: now.toISOString(), title: order.name,
+      client: clientName, editor: '', deadlineDate: dStr,
+    };
+    saveAdminState(state);
+  } catch(e) {
+    console.warn('[localStorage] 저장 실패 (무시):', e.message);
+  }
 
-  // Firestore 저장
+  // ── Firestore 저장 (항상 실행) ──
   var user = window._fbAuth && window._fbAuth.currentUser;
-
-  // 디버그 로그
-  console.log('[DEBUG] user:', user ? user.uid : 'NULL');
-  console.log('[DEBUG] user.email:', user ? user.email : 'NULL');
-  console.log('[DEBUG] _db:', window._db ? 'EXISTS' : 'NULL');
-  console.log('[DEBUG] _db type:', typeof window._db);
-  console.log('[DEBUG] _fbAuth:', window._fbAuth ? 'EXISTS' : 'NULL');
-  console.log('[DEBUG] _fbAuth.currentUser:', window._fbAuth && window._fbAuth.currentUser ? window._fbAuth.currentUser.uid : 'NULL');
-
   if (!user) {
+    console.error('[Firestore] ❌ currentUser 없음 — 로그인 필요');
     showToast('로그인이 필요합니다');
-    console.error('[Firestore] ❌ currentUser 없음');
+  } else if (!window._db) {
+    console.error('[Firestore] ❌ _db 없음 — Firestore 초기화 실패');
   } else {
     import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
-      console.log('[DEBUG] fs.addDoc:', typeof fs.addDoc);
-      console.log('[DEBUG] fs.collection:', typeof fs.collection);
       fs.addDoc(fs.collection(window._db, 'orders'), {
         orderId:     orderNum,
         userId:      user.uid,
@@ -8538,18 +8463,18 @@ function completeOrder(order) {
         expressAmt:  order.expressAmt || 0,
         vat:         order.vat,
         type:        order.type,
-        desc:        document.getElementById('newOrderDesc') ? (document.getElementById('newOrderDesc').value || '') : '',
+        desc:        descVal,
         deadline:    order.deadline,
         deadlineDate: dStr,
         status:      'waiting',
-        taxType:     orderData.taxType || 'none',
-        taxValue:    orderData.taxValue || '',
+        taxType:     taxType,
+        taxValue:    taxValue,
         title:       order.name,
         editor:      '',
         createdAt:   fs.serverTimestamp(),
       })
       .then(function(docRef) {
-        console.log('[Firestore] 주문 저장 성공 ✅ docId:', docRef.id, 'orderId:', orderNum);
+        console.log('[Firestore] 주문 저장 성공 ✅ docId:', docRef.id, '/ orderId:', orderNum);
         if (typeof loadAdminOrders === 'function') loadAdminOrders();
       })
       .catch(function(e) {
@@ -8559,7 +8484,7 @@ function completeOrder(order) {
     });
   }
 
-  // 7. 폼 초기화 + 이동
+  // ── 폼 초기화 + 이동
   ['newOrderName','newOrderDesc','newOrderRef'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = '';
   });
