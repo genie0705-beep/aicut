@@ -8250,7 +8250,6 @@ function showOrderPayModal(order) {
   const existing = document.getElementById('orderPayModal');
   if (existing) existing.remove();
 
-  const orderJson = JSON.stringify(order).replace(/"/g,'&quot;');
   const hasExpress = order.expressAmt && order.expressAmt > 0;
 
   const modal = document.createElement('div');
@@ -8340,8 +8339,8 @@ function showOrderPayModal(order) {
       </div>
 
       <div style="display:flex;gap:10px">
-        <button class="btn btn-outline btn-full" onclick="document.getElementById('orderPayModal').remove()">취소</button>
-        <button class="btn btn-primary btn-full btn-lg" onclick="completeOrder(${orderJson})">💳 입금 완료했습니다</button>
+        <button class="btn btn-outline btn-full" id="orderPayCancelBtn">취소</button>
+        <button class="btn btn-primary btn-full btn-lg" id="orderPayConfirmBtn">💳 입금 완료했습니다</button>
       </div>
       <div style="font-size:11px;color:var(--gray-400);text-align:center;margin-top:12px">
         입금 확인 전까지 주문이 자동으로 보류됩니다
@@ -8349,6 +8348,14 @@ function showOrderPayModal(order) {
     </div>
   `;
   document.body.appendChild(modal);
+
+  // onclick 대신 addEventListener — order 객체 직접 전달 (JSON 파싱 오류 방지)
+  document.getElementById('orderPayCancelBtn').addEventListener('click', function() {
+    document.getElementById('orderPayModal').remove();
+  });
+  document.getElementById('orderPayConfirmBtn').addEventListener('click', function() {
+    completeOrder(order);
+  });
 }
 
 function handleTaxTypeChange(val) {
