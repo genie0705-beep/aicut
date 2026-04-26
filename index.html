@@ -4887,48 +4887,14 @@ footer {
                   <div class="panel-title">📋 수정 이력 (의뢰인 요청)</div>
                   <div style="display:flex;align-items:center;gap:8px">
                     <span style="font-size:12px;color:var(--gray-400)" id="adminRevPlanInfo">-</span>
-                    <div style="display:flex;gap:4px">
-                      <div style="width:10px;height:10px;border-radius:50%;background:var(--green)"></div>
-                      <div style="width:10px;height:10px;border-radius:50%;background:var(--orange)"></div>
-                      <div style="width:10px;height:10px;border-radius:50%;background:var(--gray-200)"></div>
-                    </div>
-                    <span style="font-size:11px;color:var(--gray-400)">2회 진행</span>
+                    <span style="font-size:11px;color:var(--gray-400)" id="adminRevCount"></span>
                   </div>
                 </div>
 
-                <!-- 1차 수정 — 완료 -->
-                <div class="rev-round done">
-                  <div class="rev-round-header">
-                    <div style="display:flex;align-items:center;gap:8px">
-                      <span class="rev-num">1차</span>
-                      <span class="rev-date">2025.03.10</span>
-                    </div>
-                    <span class="badge badge-done" style="font-size:11px">반영 완료</span>
-                  </div>
-                  <div class="rev-items">
-                    <div class="rev-item done"><span class="rev-check">✓</span>인트로 5초 → 3초로 단축, 첫 컷 임팩트 강화</div>
-                    <div class="rev-item done"><span class="rev-check">✓</span>배경음악 볼륨 15% 낮춤 — 내레이션 명료하게</div>
-                    <div class="rev-item done"><span class="rev-check">✓</span>로고 등장 타이밍 1.2초 → 0.8초</div>
-                  </div>
-                </div>
-
-                <!-- 2차 수정 — 작업중 -->
-                <div class="rev-round active">
-                  <div class="rev-round-header">
-                    <div style="display:flex;align-items:center;gap:8px">
-                      <span class="rev-num" style="background:var(--orange);color:white">2차</span>
-                      <span class="rev-date">2025.03.12</span>
-                      <span style="font-size:11px;color:var(--orange);font-weight:600">· 에디터 작업 중</span>
-                    </div>
-                    <div style="display:flex;gap:8px;align-items:center">
-                      <span class="badge badge-pending" style="font-size:11px">진행 중</span>
-                      <button class="btn btn-outline" style="padding:4px 10px;font-size:11px" onclick="adminCompleteRevision(2)">완료 처리</button>
-                    </div>
-                  </div>
-                  <div class="rev-items">
-                    <div class="rev-item pending"><span class="rev-check pend">→</span>엔딩 자막 폰트 — 고딕 계열로 변경 요청</div>
-                    <div class="rev-item pending"><span class="rev-check pend">→</span>2분 38초 컷 전환 속도 더 빠르게</div>
-                    <div class="rev-item pending"><span class="rev-check pend">→</span>컬러톤 전체적으로 5% 밝게 조정</div>
+                <!-- 수정이력 — Firestore revisions 기반 동적 렌더링 -->
+                <div id="adminRevisionList" style="padding:8px 0">
+                  <div style="text-align:center;padding:24px;color:var(--gray-400);font-size:13px">
+                    아직 수정 요청이 없습니다
                   </div>
                 </div>
 
@@ -7743,7 +7709,8 @@ window.loadAdminOrders = function loadAdminOrders() {
             '<option value="review">검수중</option>' +
             '<option value="done">납품완료</option>' +
           '</select></td>' +
-          '<td><button class="btn btn-outline" style="padding:5px 10px;font-size:11px;white-space:nowrap" onclick="window._currentAdminOrderId=&quot;' + oid + '&quot;;showAdminOrderDetail()">상세</button></td>';
+          '<td><button class="btn btn-outline" style="padding:5px 10px;font-size:11px;white-space:nowrap" onclick="window._currentAdminOrderId=&quot;' + oid + '&quot;;showAdminOrderDetail()">상세</button></td>' +
+          '<td><button class="btn" style="padding:5px 10px;font-size:11px;background:#fef2f2;color:var(--red);border:1px solid #fecaca;border-radius:8px;white-space:nowrap" onclick="deleteAdminOrder(&quot;' + docSnap.id + '&quot;,&quot;' + oid + '&quot;,this)">삭제</button></td>';
         tbody.appendChild(tr);
       });
       console.log('[Firestore] 주문 ' + snapshot.size + '건 로드 완료');
@@ -7957,6 +7924,31 @@ window.fillAdminOrderDetail = function fillAdminOrderDetail(o, oid) {
   // 에디터 select 현재값 반영
   var editorOpt = document.getElementById('adminEditorCurrent');
   if (editorOpt) editorOpt.textContent = o.editor || '미배정';
+
+  // 수정이력 동적 렌더링
+  var revListEl = document.getElementById('adminRevisionList');
+  var revCountEl = document.getElementById('adminRevCount');
+  if (revListEl) {
+    var revs = o.revisions || [];
+    if (revCountEl) revCountEl.textContent = revs.length > 0 ? revs.length + '회 진행' : '';
+    if (revs.length === 0) {
+      revListEl.innerHTML = '<div style="text-align:center;padding:24px;color:var(--gray-400);font-size:13px">아직 수정 요청이 없습니다</div>';
+    } else {
+      revListEl.innerHTML = revs.map(function(rev, idx) {
+        var isDone = rev.status === 'done';
+        var items = (rev.items || []).map(function(item) {
+          return '<div class="rev-item ' + (isDone ? 'done' : 'pending') + '">' +
+            '<span class="rev-check ' + (isDone ? '' : 'pend') + '">' + (isDone ? '✓' : '→') + '</span>' + item + '</div>';
+        }).join('');
+        return '<div class="rev-round ' + (isDone ? 'done' : 'active') + '">' +
+          '<div class="rev-round-header"><div style="display:flex;align-items:center;gap:8px">' +
+          '<span class="rev-num" ' + (isDone ? '' : 'style="background:var(--orange);color:white"') + '>' + (idx+1) + '차</span>' +
+          '<span class="rev-date">' + (rev.date || '') + '</span></div>' +
+          '<span class="badge ' + (isDone ? 'badge-done' : 'badge-pending') + '" style="font-size:11px">' + (isDone ? '반영 완료' : '진행 중') + '</span>' +
+          '</div><div class="rev-items">' + items + '</div></div>';
+      }).join('');
+    }
+  }
 
   console.log('[상세] 데이터 로드 완료:', oid, o.status);
 };
@@ -8268,10 +8260,75 @@ function adminCompleteRevision(roundNum) {
 // 검수 요청 발송
 // 어드민 주문 목록에서 직접 상태 변경
 window.adminChangeOrderStatusFromSelect = function(sel, orderId) {
-  const newStatus = sel.value;
+  var newStatus = sel.value;
   if (!newStatus || !orderId) return;
-  adminChangeOrderStatus(orderId, newStatus, sel.options[sel.selectedIndex].text);
-  sel.value = '';
+  var label = sel.options[sel.selectedIndex].text;
+  sel.value = '';  // 드롭다운 리셋
+
+  // 행의 상태 배지 즉시 업데이트
+  var tr = sel.closest('tr');
+  if (tr) {
+    var badgeMap = {
+      payment_pending: ['', '입금대기', 'background:#ede9ff;color:#5c3de8;font-weight:700'],
+      pending:  ['badge-pending', '대기중', ''],
+      editing:  ['badge-editing', '편집중', ''],
+      review:   ['badge-review',  '검수중', ''],
+      done:     ['badge-done',    '납품완료', ''],
+    };
+    var si = badgeMap[newStatus] || ['badge-pending', label, ''];
+    var badge = tr.querySelector('.badge');
+    if (badge) {
+      badge.className = 'badge ' + si[0];
+      badge.textContent = si[1];
+      badge.style.cssText = si[2] ? si[2] : '';
+    }
+  }
+
+  // Firestore 업데이트
+  adminChangeOrderStatus(orderId, newStatus, label);
+  showToast('✓ 상태가 "' + label + '"으로 변경되었습니다');
+};
+
+// 어드민 주문 삭제
+window.deleteAdminOrder = function deleteAdminOrder(docId, orderId, btn) {
+  if (!confirm('이 주문을 삭제하시겠습니까? (되돌릴 수 없습니다)\n\n주문번호: #' + orderId)) return;
+
+  if (!window._db) { showToast('⚠️ DB 연결 오류'); return; }
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    // docId(문서ID)로 직접 삭제
+    var ref = docId ? fs.doc(window._db, 'orders', docId)
+                    : null;
+
+    var doDelete = function(ref) {
+      fs.deleteDoc(ref).then(function() {
+        var tr = btn.closest('tr');
+        if (tr) tr.remove();
+        // 삭제 후 빈 상태 확인
+        var tbody = document.getElementById('adminOrderTable');
+        if (tbody && tbody.querySelectorAll('tr[data-source="firestore"]').length === 0) {
+          var emptyRow = document.getElementById('adminOrderEmptyRow');
+          if (emptyRow) { emptyRow.style.display = ''; emptyRow.cells[0].textContent = '📭 접수된 주문이 없습니다'; }
+        }
+        showToast('🗑️ 주문 #' + orderId + ' 삭제 완료');
+        console.log('[Firestore] 주문 삭제:', orderId);
+      }).catch(function(e) {
+        console.error('[Firestore] 삭제 실패:', e.code, e.message);
+        showToast('⚠️ 삭제 실패: ' + (e.code || e.message));
+      });
+    };
+
+    if (ref) {
+      doDelete(ref);
+    } else {
+      // orderId 필드로 문서 찾아서 삭제
+      fs.getDocs(fs.query(fs.collection(window._db, 'orders'), fs.where('orderId', '==', orderId), fs.limit(1)))
+        .then(function(snap) {
+          if (snap.empty) { showToast('⚠️ 주문을 찾을 수 없습니다'); return; }
+          doDelete(snap.docs[0].ref);
+        });
+    }
+  });
 };
 
 // 입금 확인 완료 처리
