@@ -4468,18 +4468,13 @@ footer {
 
           <div class="panel" style="margin-bottom:20px">
             <div style="padding:24px">
-              <div class="detail-grid">
-                <div class="detail-item"><label>플랜</label><p style="color:var(--accent)">PREMIUM</p></div>
-                <div class="detail-item"><label>담당 에디터</label><p>Jason 에디터</p></div>
-                <div class="detail-item"><label>의뢰일</label><p>2024.12.15</p></div>
-                <div class="detail-item"><label>납품예정</label><p>2024.12.20</p></div>
-                <div class="detail-item"><label>결제금액</label><p style="color:var(--accent);font-weight:700">₩308,000</p></div>
-                <div class="detail-item"><label>진행률</label>
-                  <div style="margin-top:6px">
-                    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:60%"></div></div>
-                    <div style="font-size:11px;color:var(--gray-400);margin-top:4px">60% 완료</div>
-                  </div>
-                </div>
+              <div class="detail-grid" id="clientOrderDetailGrid">
+                <div class="detail-item"><label>플랜</label><p id="cd-plan">-</p></div>
+                <div class="detail-item"><label>담당 에디터</label><p id="cd-editor">-</p></div>
+                <div class="detail-item"><label>의뢰일</label><p id="cd-date">-</p></div>
+                <div class="detail-item"><label>납품예정</label><p id="cd-deadline">-</p></div>
+                <div class="detail-item"><label>결제금액</label><p id="cd-price" style="color:var(--accent);font-weight:700">-</p></div>
+                <div class="detail-item"><label>요구사항</label><p id="cd-desc" style="font-size:13px;line-height:1.6">-</p></div>
               </div>
             </div>
           </div>
@@ -4580,36 +4575,14 @@ footer {
         <!-- LIST VIEW -->
         <div id="order-list">
           <div class="panel">
-            <table class="data-table">
+            <table class="data-table" id="clientOrderTable">
               <tr><th>주문번호</th><th>프로젝트명</th><th>플랜</th><th>상태</th><th>납품예정</th><th>금액</th><th></th></tr>
-              <tr>
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0024</td>
-                <td style="font-weight:600">브랜드 인트로 영상</td>
-                <td><span style="font-size:12px;font-weight:700;color:var(--accent)">PREMIUM</span></td>
-                <td><span class="badge badge-editing">편집중</span></td>
-                <td style="font-size:13px;color:var(--gray-400)">2024.12.20</td>
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩308,000</td>
-                <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>
-              </tr>
-              <tr>
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0023</td>
-                <td style="font-weight:600">SNS 릴스 3편</td>
-                <td><span style="font-size:12px;font-weight:700;color:var(--gray-400)">STANDARD</span></td>
-                <td><span class="badge badge-review">검수중</span></td>
-                <td style="font-size:13px;color:var(--gray-400)">2024.12.18</td>
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩132,000</td>
-                <td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>
-              </tr>
-              <tr>
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:12px;color:var(--gray-400)">#FC-0021</td>
-                <td style="font-weight:600">제품 소개 영상</td>
-                <td><span style="font-size:12px;font-weight:700;color:var(--gray-400)">STARTER</span></td>
-                <td><span class="badge badge-done">납품완료</span></td>
-                <td style="font-size:13px;color:var(--gray-400)">2024.12.10</td>
-                <td style="font-family:'Noto Sans KR','DM Mono',monospace;font-size:13px">₩53,900</td>
-                <td><button class="btn btn-primary" style="padding:6px 14px;font-size:12px">다운로드</button></td>
-              </tr>
             </table>
+            <div id="clientOrderEmpty" style="text-align:center;padding:48px 20px;color:var(--gray-400)">
+              <div style="font-size:40px;margin-bottom:12px">📭</div>
+              <div style="font-size:15px;font-weight:700;color:var(--primary);margin-bottom:6px">아직 접수된 주문이 없습니다</div>
+              <div style="font-size:13px">새 의뢰 탭에서 첫 번째 프로젝트를 시작해보세요!</div>
+            </div>
           </div>
         </div>
       </div>
@@ -4916,17 +4889,21 @@ footer {
               <div class="panel" style="margin-bottom:20px">
                 <div class="panel-header" style="border-bottom:1px solid var(--gray-200)">
                   <div>
-                    <div style="font-size:11px;font-family:'Noto Sans KR','DM Mono',monospace;color:var(--gray-400)">#FC-0040</div>
-                    <div class="panel-title">기업 인트로 VFX</div>
+                    <div style="font-size:11px;font-family:'Noto Sans KR','DM Mono',monospace;color:var(--gray-400)" id="adminDetailOrderNum">#-</div>
+                    <div class="panel-title" id="adminDetailTitle">주문을 선택해주세요</div>
                   </div>
-                  <span class="badge badge-editing">편집중</span>
+                  <span class="badge badge-pending" id="adminDetailBadge">-</span>
                 </div>
                 <div style="padding:20px">
                   <div class="detail-grid">
-                    <div class="detail-item"><label>의뢰인</label><p>㈜미디어플러스</p></div>
-                    <div class="detail-item"><label>플랜</label><p style="color:var(--accent);font-weight:700">PREMIUM</p></div>
-                    <div class="detail-item"><label>담당 에디터</label><p>Victor</p></div>
-                    <div class="detail-item"><label>납품예정</label><p style="color:var(--orange);font-weight:700">D-1 내일</p></div>
+                    <div class="detail-item"><label>의뢰인</label><p id="ad-client">-</p></div>
+                    <div class="detail-item"><label>이메일</label><p id="ad-email" style="font-size:13px">-</p></div>
+                    <div class="detail-item"><label>플랜</label><p id="ad-plan" style="color:var(--accent);font-weight:700">-</p></div>
+                    <div class="detail-item"><label>금액</label><p id="ad-price" style="font-weight:700">-</p></div>
+                    <div class="detail-item"><label>담당 에디터</label><p id="ad-editor">미배정</p></div>
+                    <div class="detail-item"><label>납품예정</label><p id="ad-deadline" style="color:var(--orange);font-weight:700">-</p></div>
+                    <div class="detail-item"><label>영상 용도</label><p id="ad-type">-</p></div>
+                    <div class="detail-item"><label>요구사항</label><p id="ad-desc" style="font-size:13px;line-height:1.6">-</p></div>
                   </div>
                 </div>
               </div>
@@ -7549,14 +7526,99 @@ window.showTab = function showTab(section, tabId, linkEl) {
   const tab = document.getElementById('tab-'+tabId);
   if (tab) tab.style.display = 'block';
   if (linkEl) linkEl.classList.add('active');
-  // 어드민 탭별 Firestore 자동 조회
+  // 탭별 Firestore 자동 조회
   if (section === 'admin') {
     if (tabId === 'a-orders' && typeof loadAdminOrders === 'function') loadAdminOrders();
     if (tabId === 'a-b2b'    && typeof loadB2BInquiries === 'function') loadB2BInquiries();
   }
+  if (section === 'client') {
+    if (tabId === 'c-orders' && typeof loadClientOrders === 'function') loadClientOrders();
+  }
 }
 
 // ── Firestore 주문 목록 실시간 조회 ──
+// ── 고객 주문 목록 Firestore 조회 ──
+window.loadClientOrders = function loadClientOrders() {
+  if (!window._db) { setTimeout(loadClientOrders, 500); return; }
+  var user = window._fbAuth && window._fbAuth.currentUser;
+  if (!user) return;
+
+  var tableEl  = document.getElementById('clientOrderTable');
+  var emptyEl  = document.getElementById('clientOrderEmpty');
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    var q = fs.query(
+      fs.collection(window._db, 'orders'),
+      fs.where('userId', '==', user.uid),
+      fs.orderBy('createdAt', 'desc')
+    );
+    fs.getDocs(q).then(function(snapshot) {
+      if (!tableEl) return;
+      tableEl.querySelectorAll('tr[data-source="client"]').forEach(function(r) { r.remove(); });
+
+      if (snapshot.empty) {
+        if (emptyEl) emptyEl.style.display = 'block';
+        return;
+      }
+      if (emptyEl) emptyEl.style.display = 'none';
+
+      var statusMap = {
+        payment_pending: ['', '입금 확인 중', 'background:#ede9ff;color:#5c3de8;font-weight:700'],
+        waiting: ['badge-pending', '대기중', ''],
+        pending: ['badge-pending', '대기중', ''],
+        editing: ['badge-editing', '편집중', ''],
+        review:  ['badge-review',  '검수중', ''],
+        done:    ['badge-done',    '납품완료', ''],
+      };
+
+      snapshot.forEach(function(docSnap) {
+        var o = docSnap.data();
+        var oid = o.orderId || docSnap.id;
+        var si = statusMap[o.status] || ['badge-pending', '대기중', ''];
+        var bStyle = si[2] ? 'style="' + si[2] + '"' : '';
+        var tr = document.createElement('tr');
+        tr.setAttribute('data-source', 'client');
+        tr.innerHTML =
+          '<td style="font-size:12px;color:var(--gray-400)">#' + oid + '</td>' +
+          '<td style="font-weight:600">' + (o.title || o.planName || '-') + '</td>' +
+          '<td><span style="font-size:12px;font-weight:700;color:var(--accent)">' + (o.planName || '-') + '</span></td>' +
+          '<td><span class="badge ' + si[0] + '" ' + bStyle + '>' + si[1] + '</span></td>' +
+          '<td style="font-size:13px;color:var(--gray-400)">' + (o.deadlineDate || o.deadline || '-') + '</td>' +
+          '<td style="font-size:13px">₩' + ((o.price || o.total || 0).toLocaleString()) + '</td>' +
+          '<td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" ' +
+            'onclick="showClientOrderDetail(&quot;' + oid + '&quot;)">상세</button></td>';
+        tableEl.appendChild(tr);
+      });
+    }).catch(function(e) {
+      console.error('[고객주문] 조회 실패:', e.code, e.message);
+      if (emptyEl) { emptyEl.style.display = 'block'; emptyEl.querySelector('div:nth-child(2)').textContent = '조회 실패: ' + (e.code || e.message); }
+    });
+  });
+};
+
+// ── 고객 주문 상세 화면 ──
+window.showClientOrderDetail = function showClientOrderDetail(oid) {
+  document.getElementById('order-list').style.display   = 'none';
+  document.getElementById('order-detail').style.display = 'block';
+  window._currentClientOrderId = oid;
+
+  if (!window._db || !oid) return;
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    var q = fs.query(fs.collection(window._db, 'orders'), fs.where('orderId', '==', oid), fs.limit(1));
+    fs.getDocs(q).then(function(snap) {
+      var o = snap.empty ? null : snap.docs[0].data();
+      if (!o) return;
+      var set = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val || '-'; };
+      set('cd-plan',     o.planName);
+      set('cd-editor',   o.editor || '배정 대기 중');
+      set('cd-date',     o.createdAt && o.createdAt.toDate ? o.createdAt.toDate().toLocaleDateString('ko-KR') : '-');
+      set('cd-deadline', o.deadlineDate || o.deadline);
+      set('cd-price',    o.price ? '₩' + Number(o.price).toLocaleString() : '-');
+      set('cd-desc',     o.desc);
+    }).catch(function(e) { console.error('[고객상세] 조회 실패:', e.code); });
+  });
+};
+
 window.loadAdminOrders = function loadAdminOrders() {
   if (!window._db) {
     var retry = (window._loadOrdersRetry || 0) + 1;
@@ -7805,39 +7867,26 @@ window.fillAdminOrderDetail = function fillAdminOrderDetail(o, oid) {
   };
   var si = statusMap[o.status] || ['badge-pending', '대기중', '', ''];
 
-  // 주문번호
-  var numEl = document.querySelector('#admin-order-detail .panel-header [style*="gray-400"]');
-  if (numEl) numEl.textContent = '#' + (o.orderId || oid);
-
-  // 프로젝트명
-  var titleEl = document.querySelector('#admin-order-detail .panel-title');
-  if (titleEl) titleEl.textContent = o.title || o.planName || '-';
+  // 동적 ID로 직접 채우기
+  var setEl = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val || '-'; };
+  setEl('adminDetailOrderNum', '#' + (o.orderId || oid));
+  setEl('adminDetailTitle',    o.title || o.planName || '-');
+  setEl('ad-client',   o.clientName  || '-');
+  setEl('ad-email',    o.clientEmail || '-');
+  setEl('ad-plan',     o.planName    || '-');
+  setEl('ad-price',    o.price ? '₩' + Number(o.price).toLocaleString() : '-');
+  setEl('ad-editor',   o.editor || '미배정');
+  setEl('ad-deadline', o.deadlineDate || o.deadline || '-');
+  setEl('ad-type',     o.type || '-');
+  setEl('ad-desc',     o.desc || '-');
 
   // 상태 배지
-  document.querySelectorAll('#admin-order-detail .badge-editing, #admin-order-detail .badge-review, #admin-order-detail .badge-pending, #admin-order-detail .badge-done, #admin-order-detail .badge').forEach(function(b) {
-    b.className = 'badge ' + si[0];
-    b.textContent = si[1];
-    if (si[2]) { b.style.background = si[2]; b.style.color = si[3]; }
-  });
-
-  // detail-item 필드 채우기
-  var fields = {
-    '의뢰인':   o.clientName  || '-',
-    '이메일':   o.clientEmail || '-',
-    '플랜':     o.planName    || '-',
-    '담당 에디터': o.editor   || '미배정',
-    '납품예정': o.deadlineDate || o.deadline || '-',
-    '영상 용도': o.type       || '-',
-    '요구사항': o.desc        || '-',
-    '금액':     o.price ? '₩' + Number(o.price).toLocaleString() : '-',
-  };
-  document.querySelectorAll('#admin-order-detail .detail-item').forEach(function(item) {
-    var label = item.querySelector('label');
-    var p = item.querySelector('p');
-    if (!label || !p) return;
-    var key = label.textContent.trim();
-    if (fields[key] !== undefined) p.textContent = fields[key];
-  });
+  var badgeEl = document.getElementById('adminDetailBadge');
+  if (badgeEl) {
+    badgeEl.className = 'badge ' + si[0];
+    badgeEl.textContent = si[1];
+    if (si[2]) { badgeEl.style.background = si[2]; badgeEl.style.color = si[3]; }
+  }
 
   // 증빙 서류 정보 표시
   var taxEl = document.getElementById('adminTaxInfo');
