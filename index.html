@@ -4479,61 +4479,24 @@ footer {
             </div>
           </div>
           <div class="panel" style="margin-bottom:20px">
-            <!-- 수정 이력 요약 -->
             <div class="panel-header" style="border-bottom:1px solid var(--gray-200)">
               <div class="panel-title">📋 수정 이력</div>
-              <div style="display:flex;align-items:center;gap:8px">
-                <span style="font-size:12px;color:var(--gray-400)">STANDARD 플랜 · 3회 포함</span>
-                <div style="display:flex;gap:4px">
-                  <div style="width:10px;height:10px;border-radius:50%;background:var(--green)"></div>
-                  <div style="width:10px;height:10px;border-radius:50%;background:var(--orange)"></div>
-                  <div style="width:10px;height:10px;border-radius:50%;background:var(--gray-200)"></div>
-                </div>
-                <span style="font-size:11px;color:var(--gray-400)">2/3 사용</span>
+              <span id="revisionPlanInfo" style="font-size:12px;color:var(--gray-400)">-</span>
+            </div>
+            <!-- 수정이력 동적 렌더링 -->
+            <div id="revisionList" style="padding:16px">
+              <div style="text-align:center;padding:24px;color:var(--gray-400);font-size:13px">
+                아직 수정 요청이 없습니다
               </div>
             </div>
-
-            <!-- 1차 수정 — 완료 -->
-            <div class="rev-round done">
-              <div class="rev-round-header">
-                <div style="display:flex;align-items:center;gap:8px">
-                  <span class="rev-num">1차</span>
-                  <span class="rev-date">2025.03.10</span>
-                </div>
-                <span class="badge badge-done" style="font-size:11px">반영 완료</span>
-              </div>
-              <div class="rev-items">
-                <div class="rev-item done"><span class="rev-check">✓</span>인트로 5초 → 3초로 단축, 첫 컷 임팩트 강화</div>
-                <div class="rev-item done"><span class="rev-check">✓</span>배경음악 볼륨 15% 낮춤 — 내레이션 명료하게</div>
-                <div class="rev-item done"><span class="rev-check">✓</span>로고 등장 타이밍 1.2초 → 0.8초</div>
-              </div>
-            </div>
-
-            <!-- 2차 수정 — 작업중 -->
-            <div class="rev-round active">
-              <div class="rev-round-header">
-                <div style="display:flex;align-items:center;gap:8px">
-                  <span class="rev-num" style="background:var(--orange);color:white">2차</span>
-                  <span class="rev-date">2025.03.12</span>
-                  <span style="font-size:11px;color:var(--orange);font-weight:600">· 작업 중</span>
-                </div>
-                <span class="badge badge-pending" style="font-size:11px">에디터 확인 중</span>
-              </div>
-              <div class="rev-items">
-                <div class="rev-item pending"><span class="rev-check pend">→</span>엔딩 자막 폰트 — 고딕 계열로 변경 요청</div>
-                <div class="rev-item pending"><span class="rev-check pend">→</span>2분 38초 컷 전환 속도 더 빠르게</div>
-                <div class="rev-item pending"><span class="rev-check pend">→</span>컬러톤 전체적으로 5% 밝게 조정</div>
-              </div>
-            </div>
-
             <!-- 수정 요청 입력 폼 -->
             <div style="padding:16px;background:var(--gray-50);border-top:1px solid var(--gray-200)" id="rev-request-area">
               <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:10px">
-                + 수정 요청 추가 <span style="font-size:11px;font-weight:400;color:var(--gray-400)">(3차 · 마지막 1회 남음)</span>
+                + 수정 요청 추가
               </div>
               <div id="rev-input-list" style="margin-bottom:10px">
                 <div class="rev-input-row">
-                  <input class="form-input rev-point-input" placeholder="수정 내용을 구체적으로 입력해주세요 (예: 3분 12초 자막 오타 수정)" style="flex:1;font-size:13px">
+                  <input class="form-input rev-point-input" placeholder="수정 내용을 구체적으로 입력해주세요" style="flex:1;font-size:13px">
                   <button class="btn btn-outline" style="padding:8px 12px;font-size:12px;white-space:nowrap" onclick="addRevInput()">+ 추가</button>
                 </div>
               </div>
@@ -4610,6 +4573,16 @@ footer {
       <!-- PROFILE TAB -->
       <div id="tab-c-profile" class="dash-tab" style="display:none">
         <div class="dash-header"><div class="dash-title">프로필 설정</div></div>
+        <!-- 로그인 계정 정보 요약 -->
+        <div class="panel" style="padding:20px;max-width:600px;margin-bottom:16px;background:var(--accent-light);border:1px solid rgba(92,61,232,0.2)">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800" id="profileAvatar">?</div>
+            <div>
+              <div style="font-size:16px;font-weight:800;color:var(--primary)" id="profileDisplayName">-</div>
+              <div style="font-size:13px;color:var(--gray-500)" id="profileDisplayEmail">-</div>
+            </div>
+          </div>
+        </div>
         <div class="panel" style="padding:28px;max-width:600px">
           <div class="form-2col">
             <div class="form-group"><label class="form-label">이름</label><input class="form-input" id="profileName" placeholder="홍길동"></div>
@@ -4913,7 +4886,7 @@ footer {
                 <div class="panel-header" style="border-bottom:1px solid var(--gray-200)">
                   <div class="panel-title">📋 수정 이력 (의뢰인 요청)</div>
                   <div style="display:flex;align-items:center;gap:8px">
-                    <span style="font-size:12px;color:var(--gray-400)">PREMIUM · 무제한</span>
+                    <span style="font-size:12px;color:var(--gray-400)" id="adminRevPlanInfo">-</span>
                     <div style="display:flex;gap:4px">
                       <div style="width:10px;height:10px;border-radius:50%;background:var(--green)"></div>
                       <div style="width:10px;height:10px;border-radius:50%;background:var(--orange)"></div>
@@ -4991,7 +4964,7 @@ footer {
               <div class="panel" style="padding:20px">
                 <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:12px">에디터 배정</div>
                 <select id="adminEditorSelect" class="form-select" style="margin-bottom:10px">
-                  <option>Victor (현재)</option>
+                  <option id="adminEditorCurrent">미배정</option>
                   <option>Jason</option><option>Luke</option><option>Eric</option><option>Chris</option>
                 </select>
                 <button class="btn btn-outline btn-full" style="font-size:12px" onclick="adminChangeEditor()">배정 변경</button>
@@ -7532,7 +7505,23 @@ window.showTab = function showTab(section, tabId, linkEl) {
     if (tabId === 'a-b2b'    && typeof loadB2BInquiries === 'function') loadB2BInquiries();
   }
   if (section === 'client') {
-    if (tabId === 'c-orders' && typeof loadClientOrders === 'function') loadClientOrders();
+    if (tabId === 'c-orders'  && typeof loadClientOrders === 'function') loadClientOrders();
+    if (tabId === 'c-profile') {
+      var u = window._fbAuth && window._fbAuth.currentUser;
+      if (u) {
+        var nameEl  = document.getElementById('profileDisplayName');
+        var emailEl = document.getElementById('profileDisplayEmail');
+        var avatarEl = document.getElementById('profileAvatar');
+        var inputName  = document.getElementById('profileName');
+        var inputEmail = document.getElementById('profileEmail');
+        var displayName = u.displayName || u.email.split('@')[0];
+        if (nameEl)  nameEl.textContent  = displayName;
+        if (emailEl) emailEl.textContent = u.email;
+        if (avatarEl) avatarEl.textContent = displayName.charAt(0).toUpperCase();
+        if (inputName  && !inputName.value)  inputName.value  = displayName;
+        if (inputEmail && !inputEmail.value) inputEmail.value = u.email;
+      }
+    }
   }
 }
 
@@ -7608,6 +7597,7 @@ window.showClientOrderDetail = function showClientOrderDetail(oid) {
     fs.getDocs(q).then(function(snap) {
       var o = snap.empty ? null : snap.docs[0].data();
       if (!o) return;
+
       var set = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val || '-'; };
       set('cd-plan',     o.planName);
       set('cd-editor',   o.editor || '배정 대기 중');
@@ -7615,6 +7605,37 @@ window.showClientOrderDetail = function showClientOrderDetail(oid) {
       set('cd-deadline', o.deadlineDate || o.deadline);
       set('cd-price',    o.price ? '₩' + Number(o.price).toLocaleString() : '-');
       set('cd-desc',     o.desc);
+
+      // 수정이력 렌더링
+      var revList = document.getElementById('revisionList');
+      var planInfo = document.getElementById('revisionPlanInfo');
+      if (planInfo) planInfo.textContent = (o.planName || '-');
+
+      if (revList) {
+        var revisions = o.revisions || [];
+        if (revisions.length === 0) {
+          revList.innerHTML = '<div style="text-align:center;padding:24px;color:var(--gray-400);font-size:13px">아직 수정 요청이 없습니다</div>';
+        } else {
+          revList.innerHTML = revisions.map(function(rev, idx) {
+            var isDone = rev.status === 'done';
+            var items = (rev.items || []).map(function(item) {
+              return '<div class="rev-item ' + (isDone ? 'done' : 'pending') + '">' +
+                '<span class="rev-check ' + (isDone ? '' : 'pend') + '">' + (isDone ? '✓' : '→') + '</span>' +
+                item + '</div>';
+            }).join('');
+            return '<div class="rev-round ' + (isDone ? 'done' : 'active') + '">' +
+              '<div class="rev-round-header">' +
+              '<div style="display:flex;align-items:center;gap:8px">' +
+              '<span class="rev-num" ' + (isDone ? '' : 'style="background:var(--orange);color:white"') + '>' + (idx+1) + '차</span>' +
+              '<span class="rev-date">' + (rev.date || '') + '</span>' +
+              '</div>' +
+              '<span class="badge ' + (isDone ? 'badge-done' : 'badge-pending') + '" style="font-size:11px">' + (isDone ? '반영 완료' : '에디터 확인 중') + '</span>' +
+              '</div>' +
+              '<div class="rev-items">' + items + '</div>' +
+              '</div>';
+          }).join('');
+        }
+      }
     }).catch(function(e) { console.error('[고객상세] 조회 실패:', e.code); });
   });
 };
@@ -7901,6 +7922,14 @@ window.fillAdminOrderDetail = function fillAdminOrderDetail(o, oid) {
   if (payBlock) {
     payBlock.style.display = o.status === 'payment_pending' ? 'block' : 'none';
   }
+
+  // 어드민 수정이력 패널 플랜정보
+  var adminRevPlan = document.getElementById('adminRevPlanInfo');
+  if (adminRevPlan) adminRevPlan.textContent = (o.planName || '-');
+
+  // 에디터 select 현재값 반영
+  var editorOpt = document.getElementById('adminEditorCurrent');
+  if (editorOpt) editorOpt.textContent = o.editor || '미배정';
 
   console.log('[상세] 데이터 로드 완료:', oid, o.status);
 };
