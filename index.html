@@ -7749,23 +7749,112 @@ const statsSection = document.getElementById('statsSection');
 if (statsSection) counterObserver.observe(statsSection);
 
 window.showAdminOrderDetail = function showAdminOrderDetail(orderId) {
-  // 주문 ID 전달받거나, 버튼이 속한 tr에서 첫 번째 td(주문번호)로 추출
   if (orderId) {
     window._currentAdminOrderId = orderId;
   } else {
-    // 이벤트 버블링으로 클릭된 버튼의 부모 tr에서 주문번호 추출
-    var btn = event && event.target ? event.target.closest('tr') : null;
-    if (btn) {
-      var idCell = btn.querySelector('td:first-child');
-      if (idCell) {
-        var raw = idCell.textContent.replace('#','').trim();
-        if (raw) window._currentAdminOrderId = raw;
-      }
+    var tr = event && event.target ? event.target.closest('tr') : null;
+    if (tr) {
+      var idCell = tr.querySelector('td:first-child');
+      if (idCell) window._currentAdminOrderId = idCell.textContent.replace('#','').trim();
     }
   }
+
+  var oid = window._currentAdminOrderId;
   document.getElementById('admin-order-list').style.display = 'none';
   document.getElementById('admin-order-detail').style.display = 'block';
-}
+
+  if (!oid) return;
+
+  // Firestore에서 실제 데이터 조회
+  if (!window._db) { console.warn('[상세] Firestore 미초기화'); return; }
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    // orderId 필드로 쿼리 (addDoc 사용 시 문서ID와 orderId 다를 수 있음)
+    var q = fs.query(
+      fs.collection(window._db, 'orders'),
+      fs.where('orderId', '==', oid),
+      fs.limit(1)
+    );
+    fs.getDocs(q).then(function(snap) {
+      var data = null;
+      if (!snap.empty) {
+        data = snap.docs[0].data();
+      } else {
+        // orderId 필드가 없으면 문서 ID로 직접 조회
+        return fs.getDoc(fs.doc(window._db, 'orders', oid)).then(function(docSnap) {
+          if (docSnap.exists()) fillAdminOrderDetail(docSnap.data(), oid);
+          else console.warn('[상세] 문서 없음:', oid);
+        });
+      }
+      if (data) fillAdminOrderDetail(data, oid);
+    }).catch(function(e) {
+      console.error('[상세] 조회 실패:', e.code, e.message);
+    });
+  });
+};
+
+// 어드민 주문 상세 화면 데이터 채우기
+window.fillAdminOrderDetail = function fillAdminOrderDetail(o, oid) {
+  var statusMap = {
+    payment_pending: ['', '입금대기', '#ede9ff', '#5c3de8'],
+    waiting: ['badge-pending', '대기중', '', ''],
+    pending: ['badge-pending', '대기중', '', ''],
+    editing: ['badge-editing', '편집중', '', ''],
+    review:  ['badge-review',  '검수중', '', ''],
+    done:    ['badge-done',    '납품완료', '', ''],
+  };
+  var si = statusMap[o.status] || ['badge-pending', '대기중', '', ''];
+
+  // 주문번호
+  var numEl = document.querySelector('#admin-order-detail .panel-header [style*="gray-400"]');
+  if (numEl) numEl.textContent = '#' + (o.orderId || oid);
+
+  // 프로젝트명
+  var titleEl = document.querySelector('#admin-order-detail .panel-title');
+  if (titleEl) titleEl.textContent = o.title || o.planName || '-';
+
+  // 상태 배지
+  document.querySelectorAll('#admin-order-detail .badge-editing, #admin-order-detail .badge-review, #admin-order-detail .badge-pending, #admin-order-detail .badge-done, #admin-order-detail .badge').forEach(function(b) {
+    b.className = 'badge ' + si[0];
+    b.textContent = si[1];
+    if (si[2]) { b.style.background = si[2]; b.style.color = si[3]; }
+  });
+
+  // detail-item 필드 채우기
+  var fields = {
+    '의뢰인':   o.clientName  || '-',
+    '이메일':   o.clientEmail || '-',
+    '플랜':     o.planName    || '-',
+    '담당 에디터': o.editor   || '미배정',
+    '납품예정': o.deadlineDate || o.deadline || '-',
+    '영상 용도': o.type       || '-',
+    '요구사항': o.desc        || '-',
+    '금액':     o.price ? '₩' + Number(o.price).toLocaleString() : '-',
+  };
+  document.querySelectorAll('#admin-order-detail .detail-item').forEach(function(item) {
+    var label = item.querySelector('label');
+    var p = item.querySelector('p');
+    if (!label || !p) return;
+    var key = label.textContent.trim();
+    if (fields[key] !== undefined) p.textContent = fields[key];
+  });
+
+  // 증빙 서류 정보 표시
+  var taxEl = document.getElementById('adminTaxInfo');
+  if (taxEl) {
+    var taxLabel = { tax: '세금계산서', cash: '현금영수증', none: '필요없음' };
+    taxEl.textContent = (taxLabel[o.taxType] || '정보 없음') +
+      (o.taxValue ? ' / ' + o.taxValue : '');
+  }
+
+  // 입금대기 상태면 확인 블록 표시
+  var payBlock = document.getElementById('adminPayConfirmBlock');
+  if (payBlock) {
+    payBlock.style.display = o.status === 'payment_pending' ? 'block' : 'none';
+  }
+
+  console.log('[상세] 데이터 로드 완료:', oid, o.status);
+};
 
 // ===== 정보 모달 (FAQ / 이용 가이드 / 에디터 지원) =====
 const infoContents = {
