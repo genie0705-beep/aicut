@@ -7528,28 +7528,48 @@ window.showTab = function showTab(section, tabId, linkEl) {
 // ── Firestore 주문 목록 실시간 조회 ──
 // ── 고객 주문 목록 Firestore 조회 ──
 window.loadClientOrders = function loadClientOrders() {
-  if (!window._db) { setTimeout(loadClientOrders, 500); return; }
-  var user = window._fbAuth && window._fbAuth.currentUser;
-  if (!user) return;
+  // _db 미준비 시 재시도 (최대 3초)
+  if (!window._db) {
+    var retry = (window._clientOrderRetry || 0) + 1;
+    window._clientOrderRetry = retry;
+    if (retry <= 6) { setTimeout(loadClientOrders, 500); }
+    else { window._clientOrderRetry = 0; console.warn('[고객주문] DB 초기화 실패'); }
+    return;
+  }
+  window._clientOrderRetry = 0;
 
-  var tableEl  = document.getElementById('clientOrderTable');
-  var emptyEl  = document.getElementById('clientOrderEmpty');
+  var user = window._fbAuth && window._fbAuth.currentUser;
+  if (!user) { console.warn('[고객주문] 로그인 필요'); return; }
+
+  var tableEl = document.getElementById('clientOrderTable');
+  var emptyEl = document.getElementById('clientOrderEmpty');
+  if (!tableEl) return;
+
+  console.log('[고객주문] 조회 시작 uid:', user.uid);
 
   import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
     var q = fs.query(
       fs.collection(window._db, 'orders'),
-      fs.where('userId', '==', user.uid),
-      fs.orderBy('createdAt', 'desc')
+      fs.where('userId', '==', user.uid)
     );
     fs.getDocs(q).then(function(snapshot) {
-      if (!tableEl) return;
       tableEl.querySelectorAll('tr[data-source="client"]').forEach(function(r) { r.remove(); });
+      console.log('[고객주문] 조회 결과:', snapshot.size, '건');
 
       if (snapshot.empty) {
         if (emptyEl) emptyEl.style.display = 'block';
         return;
       }
       if (emptyEl) emptyEl.style.display = 'none';
+
+      // 클라이언트 정렬 (createdAt 내림차순)
+      var docs = [];
+      snapshot.forEach(function(d) { docs.push(d); });
+      docs.sort(function(a, b) {
+        var ta = a.data().createdAt && a.data().createdAt.toMillis ? a.data().createdAt.toMillis() : 0;
+        var tb = b.data().createdAt && b.data().createdAt.toMillis ? b.data().createdAt.toMillis() : 0;
+        return tb - ta;
+      });
 
       var statusMap = {
         payment_pending: ['', '입금 확인 중', 'background:#ede9ff;color:#5c3de8;font-weight:700'],
@@ -7560,7 +7580,7 @@ window.loadClientOrders = function loadClientOrders() {
         done:    ['badge-done',    '납품완료', ''],
       };
 
-      snapshot.forEach(function(docSnap) {
+      docs.forEach(function(docSnap) {
         var o = docSnap.data();
         var oid = o.orderId || docSnap.id;
         var si = statusMap[o.status] || ['badge-pending', '대기중', ''];
@@ -7579,8 +7599,15 @@ window.loadClientOrders = function loadClientOrders() {
         tableEl.appendChild(tr);
       });
     }).catch(function(e) {
-      console.error('[고객주문] 조회 실패:', e.code, e.message);
-      if (emptyEl) { emptyEl.style.display = 'block'; emptyEl.querySelector('div:nth-child(2)').textContent = '조회 실패: ' + (e.code || e.message); }
+      console.error('[고객주문] 조회 실패 코드:', e.code, '메시지:', e.message);
+      // 안전한 에러 표시
+      if (emptyEl) {
+        emptyEl.style.display = 'block';
+        var msgEl = emptyEl.querySelector('div');
+        if (msgEl) msgEl.textContent = e.code === 'permission-denied'
+          ? '⚠️ 권한 오류 — Firebase 보안 규칙을 확인해주세요'
+          : '조회 실패: ' + (e.code || e.message);
+      }
     });
   });
 };
@@ -8162,16 +8189,26 @@ function adminChangeOrderStatus(orderId, newStatus, label) {
     state.orders[orderId].status = newStatus;
     saveAdminState(state);
   }
-  // Firestore 업데이트
-  if (window._db && window._fsDoc && window._fsUpdateDoc) {
-    const ref = window._fsDoc(window._db, 'orders', orderId);
-    window._fsUpdateDoc(ref, {
-      status: newStatus,
-      updatedAt: new Date().toISOString()
-    }).then(function() {
-      console.log('[Firestore] 주문 상태 업데이트:', orderId, newStatus);
-    }).catch(function(e) {
-      console.warn('[Firestore] 상태 업데이트 실패:', e.message);
+  // Firestore updateDoc — orderId 필드로 문서 찾아서 업데이트
+  if (window._db) {
+    import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+      // orderId 필드 기준 쿼리 (addDoc 사용 시 문서ID != orderId)
+      var q = fs.query(fs.collection(window._db, 'orders'), fs.where('orderId', '==', orderId), fs.limit(1));
+      fs.getDocs(q).then(function(snap) {
+        if (snap.empty) {
+          // 문서ID로 직접 시도
+          return fs.updateDoc(fs.doc(window._db, 'orders', orderId), {
+            status: newStatus, updatedAt: fs.serverTimestamp()
+          });
+        }
+        return fs.updateDoc(snap.docs[0].ref, {
+          status: newStatus, updatedAt: fs.serverTimestamp()
+        });
+      }).then(function() {
+        console.log('[Firestore] ✅ 상태 업데이트:', orderId, newStatus);
+      }).catch(function(e) {
+        console.warn('[Firestore] 상태 업데이트 실패:', e.code, e.message);
+      });
     });
   }
   // 화면 배지 업데이트
