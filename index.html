@@ -2953,6 +2953,9 @@ footer {
             if (typeof setSession === 'function') setSession('admin', name, email);
             if (typeof updateNavState === 'function') updateNavState('admin');
             if (typeof showPage === 'function') showPage('admin');
+            setTimeout(function() {
+              if (typeof startDashboardRefresh === 'function') startDashboardRefresh();
+            }, 800);
           } else {
             // ── 일반 고객 계정 ──
             if (typeof setSession === 'function') setSession('client', name, email);
@@ -4711,7 +4714,7 @@ footer {
             <div class="dash-sub" id="adminDateLabel">로딩 중...</div>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
-            <div id="urgentBell" style="background:#fee2e2;color:#991b1b;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;cursor:pointer" onclick="showTab('admin','a-orders',null)">🔴 긴급 2건 처리 필요</div>
+            <div id="urgentBell" style="background:#fee2e2;color:#991b1b;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;cursor:pointer" onclick="showTab('admin','a-orders',null)">🔴 조회 중...</div>
             <button class="btn btn-primary" onclick="showTab('admin','a-kanban',null)">칸반 보드 →</button>
           </div>
         </div>
@@ -4720,31 +4723,31 @@ footer {
           <div class="metric-card">
             <div class="metric-icon">💰</div>
             <div class="metric-label">이번달 매출</div>
-            <div class="metric-val">₩6.8M</div>
-            <div class="metric-change">↑ 31% vs 전달</div>
+            <div class="metric-val" id="dashRevenue" style="font-family:'Noto Sans KR',sans-serif">-</div>
+            <div class="metric-change" id="dashRevenueChange">조회 중...</div>
           </div>
           <div class="metric-card">
             <div class="metric-icon">⚡</div>
             <div class="metric-label">진행중 주문</div>
-            <div class="metric-val" style="color:var(--blue)">18</div>
-            <div class="metric-change">편집중 11 / 검수중 7</div>
+            <div class="metric-val" id="dashActive" style="color:var(--blue)">-</div>
+            <div class="metric-change" id="dashActiveChange">조회 중...</div>
           </div>
           <div class="metric-card">
             <div class="metric-icon">⏳</div>
             <div class="metric-label">대기중 (미배정)</div>
-            <div class="metric-val" style="color:var(--orange)">4</div>
-            <div class="metric-change down">↑ 즉시 배정 필요</div>
+            <div class="metric-val" id="dashPending" style="color:var(--orange)">-</div>
+            <div class="metric-change down" id="dashPendingChange">조회 중...</div>
           </div>
           <div class="metric-card">
             <div class="metric-icon">✂️</div>
             <div class="metric-label">에디터 가동률</div>
-            <div class="metric-val" style="color:var(--green)">87%</div>
-            <div class="metric-change">5명 중 4.3명 풀가동</div>
+            <div class="metric-val" id="dashEditorRate" style="color:var(--green)">-</div>
+            <div class="metric-change" id="dashEditorChange">조회 중...</div>
           </div>
           <div class="metric-card">
             <div class="metric-icon">📅</div>
             <div class="metric-label">금일 납품 예정</div>
-            <div class="metric-val" style="color:var(--red)">3건</div>
+            <div class="metric-val" id="dashDelivery" style="color:var(--red)">-</div>
             <div class="metric-change down">D-0 마감 확인 필요</div>
           </div>
         </div>
@@ -4774,37 +4777,9 @@ footer {
             <div class="panel-title">✂️ 에디터 현황</div>
             <button class="btn btn-outline" onclick="showTab('admin','a-editors',null)">상세 보기</button>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:4px 0">
-            <div style="background:var(--gray-50);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--gray-200)">
-              <div style="font-size:13px;font-weight:700;color:var(--primary)">Jason</div>
-              <div style="font-size:11px;color:var(--gray-400);margin:3px 0 8px">롱폼 전문</div>
-              <div style="font-size:20px;font-weight:700;color:var(--blue)">3건</div>
-              <div style="height:4px;background:var(--gray-200);border-radius:2px;margin-top:8px"><div style="width:75%;height:100%;background:var(--blue);border-radius:2px"></div></div>
-            </div>
-            <div style="background:var(--gray-50);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--gray-200)">
-              <div style="font-size:13px;font-weight:700;color:var(--primary)">Luke</div>
-              <div style="font-size:11px;color:var(--gray-400);margin:3px 0 8px">모션그래픽</div>
-              <div style="font-size:20px;font-weight:700;color:var(--orange)">4건</div>
-              <div style="height:4px;background:var(--gray-200);border-radius:2px;margin-top:8px"><div style="width:100%;height:100%;background:var(--orange);border-radius:2px"></div></div>
-            </div>
-            <div style="background:var(--gray-50);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--gray-200)">
-              <div style="font-size:13px;font-weight:700;color:var(--primary)">Eric</div>
-              <div style="font-size:11px;color:var(--gray-400);margin:3px 0 8px">숏폼 전문</div>
-              <div style="font-size:20px;font-weight:700;color:var(--green)">2건</div>
-              <div style="height:4px;background:var(--gray-200);border-radius:2px;margin-top:8px"><div style="width:50%;height:100%;background:var(--green);border-radius:2px"></div></div>
-            </div>
-            <div style="background:var(--gray-50);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--gray-200)">
-              <div style="font-size:13px;font-weight:700;color:var(--primary)">Chris</div>
-              <div style="font-size:11px;color:var(--gray-400);margin:3px 0 8px">자막/번역</div>
-              <div style="font-size:20px;font-weight:700;color:var(--blue)">5건</div>
-              <div style="height:4px;background:var(--gray-200);border-radius:2px;margin-top:8px"><div style="width:100%;height:100%;background:var(--orange);border-radius:2px"></div></div>
-            </div>
-            <div style="background:var(--gray-50);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--gray-200)">
-              <div style="font-size:13px;font-weight:700;color:var(--primary)">Victor</div>
-              <div style="font-size:11px;color:var(--gray-400);margin:3px 0 8px">CG / VFX</div>
-              <div style="font-size:20px;font-weight:700;color:var(--green)">1건</div>
-              <div style="height:4px;background:var(--gray-200);border-radius:2px;margin-top:8px"><div style="width:25%;height:100%;background:var(--green);border-radius:2px"></div></div>
-            </div>
+          <div id="dashEditorGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:4px 0">
+            <!-- Firestore orders에서 에디터별 담당건수 자동 집계 -->
+            <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;grid-column:1/-1">조회 중...</div>
           </div>
         </div>
       </div>
@@ -7465,6 +7440,8 @@ window.showTab = function showTab(section, tabId, linkEl) {
   if (linkEl) linkEl.classList.add('active');
   // 탭별 Firestore 자동 조회
   if (section === 'admin') {
+    if (tabId === 'a-home'   && typeof startDashboardRefresh === 'function') startDashboardRefresh();
+    else if (typeof stopDashboardRefresh === 'function') stopDashboardRefresh();
     if (tabId === 'a-orders' && typeof loadAdminOrders === 'function') loadAdminOrders();
     if (tabId === 'a-b2b'    && typeof loadB2BInquiries === 'function') loadB2BInquiries();
     if (tabId === 'a-upload' && typeof loadUploadOrders === 'function') loadUploadOrders();
@@ -7630,6 +7607,204 @@ window.showClientOrderDetail = function showClientOrderDetail(oid) {
       }
     }).catch(function(e) { console.error('[고객상세] 조회 실패:', e.code); });
   });
+};
+
+// ══════════════════════════════════════════
+// 어드민 대시보드 Firestore 실시간 집계
+// ══════════════════════════════════════════
+window._dashInterval = null;
+
+window.loadAdminDashboard = function loadAdminDashboard() {
+  if (!window._db) { setTimeout(loadAdminDashboard, 600); return; }
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    // orders 전체 조회 (필터는 클라이언트에서)
+    fs.getDocs(fs.collection(window._db, 'orders')).then(function(snap) {
+      var all = [];
+      snap.forEach(function(d) { all.push(d.data()); });
+
+      var now   = new Date();
+      var today = now.toISOString().slice(0,10); // YYYY-MM-DD
+      var yyyyMM = today.slice(0,7);             // YYYY-MM
+
+      // ── 이달 첫날/마지막날 ──
+      var monthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+      var prevStart  = new Date(now.getFullYear(), now.getMonth()-1, 1).getTime();
+      var prevEnd    = monthStart;
+
+      var thisMonthRevenue = 0, prevMonthRevenue = 0;
+      var activeCount = 0, editingCount = 0, reviewCount = 0;
+      var pendingUnassigned = 0, paymentPendingCount = 0;
+      var todayDelivery = 0;
+      var editorMap = {}; // { 에디터명: 건수 }
+      var urgentOrders = [];
+
+      all.forEach(function(o) {
+        var status   = o.status || '';
+        var editor   = o.editor || '';
+        var ts       = o.createdAt && o.createdAt.toMillis ? o.createdAt.toMillis() : 0;
+        var dueDate  = o.deadlineDate || o.dueDate || '';
+        var price    = Number(o.price || o.total || 0);
+
+        // [1] 이번달 매출 (납품완료)
+        if (status === 'done' && ts >= monthStart) thisMonthRevenue += price;
+        // 전달 매출
+        if (status === 'done' && ts >= prevStart && ts < prevEnd) prevMonthRevenue += price;
+
+        // [2] 진행중 (편집중 + 검수중)
+        if (status === 'editing') { activeCount++; editingCount++; }
+        if (status === 'review')  { activeCount++; reviewCount++;  }
+
+        // [3] 입금완료(대기중) + 미배정
+        if ((status === 'pending' || status === 'waiting') && !editor) pendingUnassigned++;
+
+        // [5] 금일 납품 예정
+        if (dueDate === today && status !== 'done') todayDelivery++;
+
+        // [8] 입금 확인 대기
+        if (status === 'payment_pending') paymentPendingCount++;
+
+        // [7] 에디터별 담당 건수 (진행 중 주문)
+        if (editor && (status === 'editing' || status === 'review' || status === 'pending')) {
+          editorMap[editor] = (editorMap[editor] || 0) + 1;
+        }
+
+        // [6] 즉시 처리 필요 (D-0, D-1, 납품완료 제외)
+        if (dueDate && status !== 'done') {
+          var due = new Date(dueDate).getTime();
+          var diffDays = Math.floor((due - new Date(today).getTime()) / 86400000);
+          if (diffDays <= 1) {
+            urgentOrders.push({ o: o, diffDays: diffDays });
+          }
+        }
+      });
+
+      // ── 화면 업데이트 ──
+      var set = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; };
+
+      // [1] 매출
+      var revenueStr = thisMonthRevenue >= 1000000
+        ? '₩' + (thisMonthRevenue / 1000000).toFixed(1) + 'M'
+        : '₩' + thisMonthRevenue.toLocaleString();
+      set('dashRevenue', revenueStr);
+      if (prevMonthRevenue > 0) {
+        var pct = Math.round((thisMonthRevenue - prevMonthRevenue) / prevMonthRevenue * 100);
+        set('dashRevenueChange', (pct >= 0 ? '↑ ' : '↓ ') + Math.abs(pct) + '% vs 전달');
+      } else {
+        set('dashRevenueChange', thisMonthRevenue > 0 ? '이번달 첫 매출' : '매출 없음');
+      }
+
+      // [2] 진행중
+      set('dashActive', activeCount);
+      set('dashActiveChange', '편집중 ' + editingCount + ' / 검수중 ' + reviewCount);
+
+      // [3] 대기중 미배정
+      set('dashPending', pendingUnassigned);
+      set('dashPendingChange', pendingUnassigned > 0 ? '↑ 즉시 배정 필요' : '✅ 전원 배정됨');
+
+      // [4] 에디터 가동률
+      var editorNames = Object.keys(editorMap);
+      var totalEditors = 5; // Jason, Luke, Eric, Chris, Victor
+      var busyEditors = editorNames.length;
+      var rate = Math.round(busyEditors / totalEditors * 100);
+      set('dashEditorRate', rate + '%');
+      set('dashEditorChange', totalEditors + '명 중 ' + busyEditors + '명 가동');
+
+      // [5] 금일 납품
+      set('dashDelivery', todayDelivery + '건');
+
+      // [8] 입금 확인 대기
+      var payBadge = document.getElementById('paymentPendingBadge');
+      if (payBadge) {
+        payBadge.textContent = '💰 입금 확인 대기 ' + paymentPendingCount + '건';
+        payBadge.style.display = paymentPendingCount > 0 ? 'block' : 'none';
+      }
+
+      // urgentBell
+      var totalUrgent = urgentOrders.length + paymentPendingCount;
+      set('urgentBell', totalUrgent > 0
+        ? '🔴 긴급 ' + totalUrgent + '건 처리 필요'
+        : '✅ 긴급 처리 없음');
+      var bellEl = document.getElementById('urgentBell');
+      if (bellEl) {
+        bellEl.style.background = totalUrgent > 0 ? '#fee2e2' : '#d1fae5';
+        bellEl.style.color      = totalUrgent > 0 ? '#991b1b' : '#065f46';
+      }
+
+      // [6] 즉시 처리 필요 테이블
+      var urgentTable = document.getElementById('adminUrgentTable');
+      var urgentEmpty = document.getElementById('adminUrgentEmpty');
+      if (urgentTable) {
+        urgentTable.querySelectorAll('tr[data-urgent]').forEach(function(r) { r.remove(); });
+        if (urgentOrders.length === 0) {
+          if (urgentEmpty) urgentEmpty.style.display = '';
+        } else {
+          if (urgentEmpty) urgentEmpty.style.display = 'none';
+          var statusLabel = { payment_pending:'입금대기', pending:'대기중', waiting:'대기중', editing:'편집중', review:'검수중' };
+          urgentOrders.sort(function(a,b) { return a.diffDays - b.diffDays; });
+          urgentOrders.forEach(function(item) {
+            var o = item.o;
+            var oid = o.orderId || '-';
+            var dDay = item.diffDays === 0 ? '<span style="color:var(--red);font-weight:700">D-0</span>'
+                     : '<span style="color:var(--orange);font-weight:700">D-1</span>';
+            var statusBadge = { editing:'badge-editing', review:'badge-review', pending:'badge-pending', waiting:'badge-pending' };
+            var cls = statusBadge[o.status] || 'badge-pending';
+            var tr = document.createElement('tr');
+            tr.setAttribute('data-urgent', '1');
+            tr.innerHTML =
+              '<td style="font-size:12px;color:var(--gray-400)">#' + oid + '</td>' +
+              '<td style="font-weight:600">' + (o.clientName || '-') + '</td>' +
+              '<td>' + (o.title || o.planName || '-') + '</td>' +
+              '<td><span style="font-size:11px;font-weight:700;color:var(--accent)">' + (o.planName || '-') + '</span></td>' +
+              '<td><span class="badge ' + cls + '">' + (statusLabel[o.status] || o.status) + '</span></td>' +
+              '<td>' + dDay + '</td>' +
+              '<td style="font-size:13px">' + (o.editor || '미배정') + '</td>' +
+              '<td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px" onclick="window._currentAdminOrderId=&quot;' + oid + '&quot;;showTab(&quot;admin&quot;,&quot;a-orders&quot;,null)">처리</button></td>';
+            urgentTable.appendChild(tr);
+          });
+        }
+      }
+
+      // [7] 에디터 현황 카드
+      var editorGrid = document.getElementById('dashEditorGrid');
+      if (editorGrid) {
+        var editorDefs = [
+          { name:'Jason', spec:'롱폼 전문',   color:'var(--blue)' },
+          { name:'Luke',  spec:'모션그래픽', color:'var(--orange)' },
+          { name:'Eric',  spec:'숏폼 전문',   color:'var(--green)' },
+          { name:'Chris', spec:'자막/번역',   color:'var(--blue)' },
+          { name:'Victor',spec:'CG / VFX',    color:'var(--green)' },
+        ];
+        var maxLoad = 5;
+        editorGrid.innerHTML = editorDefs.map(function(e) {
+          var cnt = editorMap[e.name] || 0;
+          var pct = Math.min(100, Math.round(cnt / maxLoad * 100));
+          var barColor = pct >= 100 ? '#ef4444' : pct >= 80 ? 'var(--orange)' : e.color;
+          return '<div style="background:var(--gray-50);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--gray-200)">' +
+            '<div style="font-size:13px;font-weight:700;color:var(--primary)">' + e.name + '</div>' +
+            '<div style="font-size:11px;color:var(--gray-400);margin:3px 0 8px">' + e.spec + '</div>' +
+            '<div style="font-size:20px;font-weight:700;color:' + e.color + '">' + cnt + '건</div>' +
+            '<div style="height:4px;background:var(--gray-200);border-radius:2px;margin-top:8px">' +
+              '<div style="width:' + pct + '%;height:100%;background:' + barColor + ';border-radius:2px;transition:width 0.5s"></div>' +
+            '</div></div>';
+        }).join('');
+      }
+
+      console.log('[Dashboard] 갱신 완료 —', all.length, '건, 매출:', revenueStr);
+    }).catch(function(e) {
+      console.error('[Dashboard] 조회 실패:', e.code, e.message);
+    });
+  });
+};
+
+// 대시보드 탭 진입 시 + 30초 자동 갱신
+window.startDashboardRefresh = function() {
+  loadAdminDashboard();
+  if (window._dashInterval) clearInterval(window._dashInterval);
+  window._dashInterval = setInterval(loadAdminDashboard, 30000);
+};
+window.stopDashboardRefresh = function() {
+  if (window._dashInterval) { clearInterval(window._dashInterval); window._dashInterval = null; }
 };
 
 window.loadAdminOrders = function loadAdminOrders() {
