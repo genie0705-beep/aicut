@@ -4980,9 +4980,7 @@ footer {
                 <div style="font-size:14px;font-weight:700;color:var(--primary)">주문 선택</div>
               </div>
               <select class="form-select" id="uploadOrderSelect" onchange="updateUploadOrder()">
-                <option value="FC-0039">FC-0039 — 박지훈 · 기업 홍보영상 [검수중 D-1]</option>
-                <option value="FC-0032">FC-0032 — 김민준 · 인터뷰 영상 3편 [검수중 D-2]</option>
-                <option value="FC-0040">FC-0040 — ㈜미디어플러스 · 기업 인트로 VFX [편집중]</option>
+                <option value="">🔄 주문 불러오는 중...</option>
               </select>
             </div>
 
@@ -5064,12 +5062,12 @@ footer {
               <div class="detail-grid" style="gap:16px">
                 <div class="detail-item"><label>의뢰인</label><p id="uploadClientName">—</p></div>
                 <div class="detail-item"><label>플랜</label><p style="color:var(--accent)" id="uploadPlan">—</p></div>
-                <div class="detail-item"><label>납품예정</label><p style="color:var(--orange)">D-1 내일</p></div>
-                <div class="detail-item"><label>상태</label><p><span class="badge badge-review">검수중</span></p></div>
+                <div class="detail-item"><label>납품예정</label><p style="color:var(--orange)" id="uploadDeadline">—</p></div>
+                <div class="detail-item"><label>상태</label><p id="uploadStatus"><span class="badge badge-pending">—</span></p></div>
               </div>
               <div style="margin-top:20px;padding:16px;background:var(--gray-50);border-radius:10px;font-size:13px;color:var(--gray-600);line-height:1.7;border:1px solid var(--gray-200)">
                 <div style="font-weight:700;color:var(--primary);margin-bottom:8px">요구사항</div>
-                주문 선택 후 요구사항이 표시됩니다
+                <div id="uploadDesc">주문 선택 후 요구사항이 표시됩니다</div>
               </div>
             </div>
 
@@ -7469,6 +7467,7 @@ window.showTab = function showTab(section, tabId, linkEl) {
   if (section === 'admin') {
     if (tabId === 'a-orders' && typeof loadAdminOrders === 'function') loadAdminOrders();
     if (tabId === 'a-b2b'    && typeof loadB2BInquiries === 'function') loadB2BInquiries();
+    if (tabId === 'a-upload' && typeof loadUploadOrders === 'function') loadUploadOrders();
   }
   if (section === 'client') {
     if (tabId === 'c-orders'  && typeof loadClientOrders === 'function') loadClientOrders();
@@ -9243,36 +9242,135 @@ function handleAdminNav() {
 window.addEventListener('resize', handleAdminNav);
 
 // ===== 구글 드라이브 업로드 워크플로우 =====
-const uploadOrders = {
-  'FC-0039': { name:'기업 홍보영상', client:'박지훈', plan:'PREMIUM', email:'jihun@mediaplus.co.kr' },
-  'FC-0032': { name:'인터뷰 영상 3편', client:'김민준', plan:'STANDARD', email:'minjun@company.kr' },
-  'FC-0040': { name:'기업 인트로 VFX', client:'㈜미디어플러스', plan:'PREMIUM', email:'contact@mediaplus.co.kr' },
+
+// 업로드 탭 진입 시 Firestore에서 실제 주문 로드
+window.loadUploadOrders = function loadUploadOrders() {
+  if (!window._db) { setTimeout(loadUploadOrders, 500); return; }
+  var sel = document.getElementById('uploadOrderSelect');
+  if (!sel) return;
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    // 진행 중인 주문 (payment_pending 이상) 조회
+    var q = fs.query(
+      fs.collection(window._db, 'orders'),
+      fs.where('status', 'in', ['payment_pending','pending','waiting','editing','review'])
+    );
+    fs.getDocs(q).then(function(snapshot) {
+      // 클라이언트 정렬 (createdAt 내림차순)
+      var docs = [];
+      snapshot.forEach(function(d) { docs.push({ id: d.id, data: d.data() }); });
+      docs.sort(function(a, b) {
+        var ta = a.data.createdAt && a.data.createdAt.toMillis ? a.data.createdAt.toMillis() : 0;
+        var tb = b.data.createdAt && b.data.createdAt.toMillis ? b.data.createdAt.toMillis() : 0;
+        return tb - ta;
+      });
+
+      // 기존 옵션 제거
+      sel.innerHTML = '<option value="">— 주문을 선택해주세요 —</option>';
+
+      var statusLabel = {
+        payment_pending: '입금대기', waiting: '대기중', pending: '대기중',
+        editing: '편집중', review: '검수중', done: '납품완료'
+      };
+
+      if (docs.length === 0) {
+        sel.innerHTML = '<option value="">진행 중인 주문이 없습니다</option>';
+        return;
+      }
+
+      docs.forEach(function(item) {
+        var o = item.data;
+        var oid = o.orderId || item.id;
+        var status = statusLabel[o.status] || o.status;
+        var label = oid + ' — ' + (o.clientName || '-') + ' · ' + (o.planName || '-') + ' [' + status + ']';
+        var opt = document.createElement('option');
+        opt.value = item.id; // Firestore 문서 ID 사용
+        opt.setAttribute('data-oid', oid);
+        opt.textContent = label;
+        sel.appendChild(opt);
+      });
+
+      console.log('[Upload] 주문 ' + docs.length + '건 로드');
+    }).catch(function(e) {
+      console.error('[Upload] 주문 조회 실패:', e.code, e.message);
+      sel.innerHTML = '<option value="">조회 실패: ' + (e.code || '오류') + '</option>';
+    });
+  });
 };
 
+// Firestore에서 가져온 데이터를 _uploadOrderCache에 저장
+window._uploadOrderCache = {};
+
 function updateUploadOrder() {
-  const sel = document.getElementById('uploadOrderSelect');
-  if (!sel) return;
-  const id = sel.value;
-  const o = uploadOrders[id];
-  if (!o) return;
-  const clientShort = o.client.replace('㈜','').replace(/\s/g,'');
-  const nameShort = o.name.replace(/\s/g,'').substring(0,8);
-  if (document.getElementById('folderPreview'))
-    document.getElementById('folderPreview').textContent = `${id}_${clientShort}_${nameShort}`;
-  if (document.getElementById('uploadOrderNum'))
-    document.getElementById('uploadOrderNum').textContent = '#' + id;
-  if (document.getElementById('uploadOrderName'))
-    document.getElementById('uploadOrderName').textContent = o.name;
-  if (document.getElementById('uploadClientName'))
-    document.getElementById('uploadClientName').textContent = o.client;
-  if (document.getElementById('uploadPlan'))
-    document.getElementById('uploadPlan').textContent = o.plan;
-  if (document.getElementById('clientEmail'))
-    document.getElementById('clientEmail').value = o.email;
-  if (document.getElementById('uploadLinkSent'))
-    document.getElementById('uploadLinkSent').style.display = 'none';
-  if (document.getElementById('deliveryDone'))
-    document.getElementById('deliveryDone').style.display = 'none';
+  var sel = document.getElementById('uploadOrderSelect');
+  if (!sel || !sel.value) return;
+
+  var docId = sel.value;
+  var selectedOpt = sel.options[sel.selectedIndex];
+  var oid = selectedOpt.getAttribute('data-oid') || docId;
+
+  // 캐시 확인
+  if (window._uploadOrderCache[docId]) {
+    _fillUploadPanel(oid, window._uploadOrderCache[docId]);
+    return;
+  }
+
+  // Firestore에서 문서 조회
+  if (!window._db) return;
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    fs.getDoc(fs.doc(window._db, 'orders', docId)).then(function(docSnap) {
+      if (!docSnap.exists()) return;
+      var o = docSnap.data();
+      window._uploadOrderCache[docId] = o;
+      _fillUploadPanel(oid, o);
+    });
+  });
+}
+
+function _fillUploadPanel(oid, o) {
+  var set = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val || '—'; };
+  var statusLabel = {
+    payment_pending: '입금대기', waiting: '대기중', pending: '대기중',
+    editing: '편집중', review: '검수중', done: '납품완료'
+  };
+  var clientShort = (o.clientName || '').replace(/\s/g, '');
+  var nameShort = (o.title || o.planName || '').replace(/\s/g, '').substring(0, 8);
+
+  set('folderPreview', oid + '_' + clientShort + '_' + nameShort);
+  set('uploadOrderNum', '#' + oid);
+  set('uploadOrderName', o.title || o.planName || '—');
+  set('uploadClientName', o.clientName || '—');
+  set('uploadPlan', o.planName || '—');
+  set('uploadDeadline', o.deadlineDate || o.deadline || '—');
+  set('uploadDesc', o.desc || '요구사항이 입력되지 않았습니다');
+
+  // 상태 배지
+  var statusEl = document.getElementById('uploadStatus');
+  if (statusEl) {
+    var badgeMap = {
+      payment_pending: ['', '입금대기', 'background:#ede9ff;color:#5c3de8'],
+      pending:  ['badge-pending',  '대기중', ''],
+      waiting:  ['badge-pending',  '대기중', ''],
+      editing:  ['badge-editing',  '편집중', ''],
+      review:   ['badge-review',   '검수중', ''],
+      done:     ['badge-done',     '납품완료', ''],
+    };
+    var si = badgeMap[o.status] || ['badge-pending', o.status || '—', ''];
+    statusEl.innerHTML = '<span class="badge ' + si[0] + '" style="' + si[2] + '">' + si[1] + '</span>';
+  }
+
+  // 이메일 자동 입력
+  var emailEl = document.getElementById('clientEmail');
+  if (emailEl && !emailEl.value) emailEl.value = o.clientEmail || '';
+
+  // 현재 선택 주문 ID 저장
+  window._currentAdminOrderId = oid;
+
+  // 링크 발송 완료 UI 초기화
+  var linkSent = document.getElementById('uploadLinkSent');
+  var deliveryDone = document.getElementById('deliveryDone');
+  if (linkSent) linkSent.style.display = 'none';
+  if (deliveryDone) deliveryDone.style.display = 'none';
 }
 
 function sendUploadLink() {
