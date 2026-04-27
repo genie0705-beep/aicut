@@ -4988,9 +4988,9 @@ footer {
                 </div>
                 <div style="font-size:11px;color:var(--gray-400);margin-top:6px">구글 드라이브에서 폴더 생성 후 → 공유 → 링크 복사 → 여기 붙여넣기</div>
               </div>
-              <button class="btn btn-primary btn-full" onclick="sendUploadLink()" style="margin-top:4px">📨 의뢰인에게 업로드 링크 발송</button>
+              <button class="btn btn-primary btn-full" onclick="sendUploadLink()" style="margin-top:4px">📋 링크 복사 후 채널톡으로 전달</button>
               <div id="uploadLinkSent" style="display:none;margin-top:12px;padding:12px;background:#d1fae5;border-radius:8px;font-size:13px;color:#065f46;font-weight:600">
-                ✓ 링크가 발송되었습니다. 의뢰인이 파일을 올리면 이 폴더에서 확인하세요.
+                ✓ 링크가 복사되었습니다. 채널톡으로 의뢰인에게 전달해주세요.
               </div>
             </div>
 
@@ -5046,30 +5046,12 @@ footer {
               </div>
             </div>
 
-            <!-- 진행 상태 체크 -->
+            <!-- 진행 상태 체크 — 실제 주문 status 기반 동적 렌더링 -->
             <div class="panel" style="padding:20px">
               <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:14px">이 주문 진행 현황</div>
-              <div style="display:flex;flex-direction:column;gap:10px">
-                <div style="display:flex;align-items:center;gap:10px;font-size:13px">
-                  <div style="width:20px;height:20px;border-radius:50%;background:#10b981;color:white;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">✓</div>
-                  <span style="color:#065f46;font-weight:600">결제 완료</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;font-size:13px">
-                  <div style="width:20px;height:20px;border-radius:50%;background:#10b981;color:white;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">✓</div>
-                  <span style="color:#065f46;font-weight:600">업로드 링크 발송</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;font-size:13px">
-                  <div style="width:20px;height:20px;border-radius:50%;background:#10b981;color:white;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">✓</div>
-                  <span style="color:#065f46;font-weight:600">원본 파일 수신 완료</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;font-size:13px">
-                  <div style="width:20px;height:20px;border-radius:50%;background:var(--orange);color:white;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">→</div>
-                  <span style="color:var(--orange);font-weight:600">편집 진행 중</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;font-size:13px;opacity:.4">
-                  <div style="width:20px;height:20px;border-radius:50%;background:var(--gray-200);font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">○</div>
-                  <span>결과물 납품</span>
-                </div>
+              <div id="uploadProgressSteps" style="display:flex;flex-direction:column;gap:10px">
+                <!-- JS에서 status 기반으로 채움 -->
+                <div style="font-size:12px;color:var(--gray-400);text-align:center;padding:8px">주문을 선택해주세요</div>
               </div>
             </div>
           </div>
@@ -7248,71 +7230,141 @@ function initClientPage(session) {
   var name  = (session && session.name)  || '회원';
   var email = (session && session.email) || '';
 
+  // 인사말 + 프로필 기본 설정
   var titleEl = document.getElementById('clientWelcomeTitle');
   if (titleEl) titleEl.textContent = '안녕하세요, ' + name + ' 님 👋';
 
-  var pName    = document.getElementById('profileName');
-  var pEmail   = document.getElementById('profileEmail');
-  var pPhone   = document.getElementById('profilePhone');
-  var pCompany = document.getElementById('profileCompany');
-  if (pName)    pName.value    = name;
-  if (pEmail)   pEmail.value   = email;
-  if (pPhone)   pPhone.value   = '';
-  if (pCompany) pCompany.value = '';
+  var pName = document.getElementById('profileName');
+  var pEmail = document.getElementById('profileEmail');
+  if (pName && !pName.value)  pName.value  = name;
+  if (pEmail && !pEmail.value) pEmail.value = email;
 
-  var orders = [];
-  try { orders = JSON.parse(localStorage.getItem('aicut_orders_' + email) || '[]'); } catch(e) {}
+  // Firestore 기반 대시보드 로드
+  _loadClientDashboard(name, email);
+}
 
-  var total  = orders.length;
-  var active = orders.filter(function(o){ return o.status !== 'done'; }).length;
-  var done   = orders.filter(function(o){ return o.status === 'done'; }).length;
+// Firestore 리스너 참조 (언마운트용)
+var _clientDashboardUnsubscribe = null;
 
-  var statTotal  = document.getElementById('statTotal');
-  var statActive = document.getElementById('statActive');
-  var statDone   = document.getElementById('statDone');
-  if (statTotal)  statTotal.textContent  = total;
-  if (statActive) statActive.textContent = active;
-  if (statDone)   statDone.textContent   = done;
-
-  // 이번달 비용 계산
-  var statCostEl = document.getElementById('statCost');
-  if (statCostEl) {
-    var monthCost = orders.reduce(function(sum, o) { return sum + (o.total || 0); }, 0);
-    statCostEl.textContent = '₩' + monthCost.toLocaleString('ko-KR');
+function _loadClientDashboard(name, email) {
+  if (!window._db) {
+    setTimeout(function() { _loadClientDashboard(name, email); }, 500);
+    return;
   }
 
-  var tableEl = document.getElementById('clientOrderTable');
-  var emptyEl = document.getElementById('clientOrderEmpty');
-  var guideEl = document.getElementById('onboardingGuide');
-  var subEl   = document.getElementById('clientWelcomeSub');
+  // 기존 리스너 해제
+  if (_clientDashboardUnsubscribe) {
+    try { _clientDashboardUnsubscribe(); } catch(e) {}
+    _clientDashboardUnsubscribe = null;
+  }
 
-  if (total === 0) {
-    if (guideEl) guideEl.style.display = 'block';
-    if (emptyEl) emptyEl.style.display = 'block';
-    if (tableEl) tableEl.style.display = 'none';
-    if (subEl)   subEl.textContent = '첫 번째 영상 편집을 의뢰해보세요!';
-  } else {
-    if (guideEl) guideEl.style.display = 'none';
-    if (emptyEl) emptyEl.style.display = 'none';
-    if (tableEl) tableEl.style.display = '';
-    if (subEl)   subEl.textContent = '현재 진행 중인 ' + active + '개의 프로젝트가 있습니다';
-    var rows = '<tr><th>주문번호</th><th>프로젝트명</th><th>플랜</th><th>상태</th><th>납품예정</th><th></th></tr>';
-    orders.slice(0,5).forEach(function(o){
-      var bc = o.status==='done'?'badge-done':o.status==='editing'?'badge-editing':o.status==='review'?'badge-review':'badge-pending';
-      var bt = o.status==='done'?'납품완료':o.status==='editing'?'편집중':o.status==='review'?'검수중':'대기중';
-      rows += [
-        '<tr>',
-        '<td data-label="주문번호" style="font-family:monospace;font-size:12px;color:var(--gray-400)">'+(o.id||'-')+'</td>',
-        '<td data-label="프로젝트명" style="font-weight:600">'+(o.name||'-')+'</td>',
-        '<td data-label="플랜"><span style="font-size:12px;font-weight:700;color:var(--accent)">'+(o.plan||'-')+'</span></td>',
-        '<td data-label="상태"><span class="badge '+bc+'">'+bt+'</span></td>',
-        '<td data-label="납품예정" style="font-size:13px;color:var(--gray-400)">'+(o.deadline||'-')+'</td>',
-        '<td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세보기</button></td>',
-        '</tr>'
-      ].join('');
+  var user = window._fbAuth && window._fbAuth.currentUser;
+  var uid  = user ? user.uid : null;
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    // uid 기준 쿼리 (email fallback)
+    var q = uid
+      ? fs.query(fs.collection(window._db, 'orders'), fs.where('userId', '==', uid))
+      : fs.query(fs.collection(window._db, 'orders'), fs.where('clientEmail', '==', email));
+
+    // onSnapshot으로 실시간 반영
+    _clientDashboardUnsubscribe = fs.onSnapshot(q, function(snapshot) {
+      var now = new Date();
+      var monthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+
+      var docs = [];
+      snapshot.forEach(function(d) { docs.push(d.data()); });
+
+      // 최신순 정렬
+      docs.sort(function(a, b) {
+        var ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
+        var tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
+        return tb - ta;
+      });
+
+      var total   = docs.length;
+      var active  = docs.filter(function(o) {
+        return ['pending','waiting','payment_pending','editing','review'].includes(o.status);
+      }).length;
+      var done    = docs.filter(function(o) { return o.status === 'done'; }).length;
+      var monthCost = docs.reduce(function(sum, o) {
+        var ts = o.createdAt && o.createdAt.toMillis ? o.createdAt.toMillis() : 0;
+        return sum + (ts >= monthStart ? Number(o.price || o.total || 0) : 0);
+      }, 0);
+
+      // [2] 통계 카드
+      var set = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; };
+      set('statTotal',  total);
+      set('statActive', active);
+      set('statDone',   done);
+      set('statCost',   '₩' + monthCost.toLocaleString('ko-KR'));
+
+      // [1] 인사말 조건부
+      var subEl   = document.getElementById('clientWelcomeSub');
+      var guideEl = document.getElementById('onboardingGuide');
+      var emptyEl = document.getElementById('clientOrderEmpty');
+      var tableEl = document.getElementById('clientOrderTable');
+
+      if (total === 0) {
+        if (subEl)   subEl.textContent = '첫 번째 영상 편집을 의뢰해보세요!';
+        if (guideEl) guideEl.style.display = 'block';   // [4] 가이드 표시
+        if (emptyEl) emptyEl.style.display = 'block';
+        if (tableEl) tableEl.style.display = 'none';
+      } else {
+        if (subEl)   subEl.textContent = '현재 ' + active + '건 진행 중입니다';
+        if (guideEl) guideEl.style.display = 'none';    // [4] 가이드 숨김
+        if (emptyEl) emptyEl.style.display = 'none';
+        if (tableEl) tableEl.style.display = '';
+
+        // [3] 최근 의뢰 현황 (최대 5건)
+        var statusMap = {
+          payment_pending: ['', '입금 확인 중', 'background:#ede9ff;color:#5c3de8;font-weight:700'],
+          pending:  ['badge-pending', '대기중', ''],
+          waiting:  ['badge-pending', '대기중', ''],
+          editing:  ['badge-editing', '편집중', ''],
+          review:   ['badge-review',  '검수중', ''],
+          done:     ['badge-done',    '납품완료', ''],
+        };
+
+        // 단계 인디케이터 HTML
+        var makeSteps = function(status) {
+          var steps = [
+            { label:'접수', done: true },
+            { label:'원본전달', done: ['editing','review','done'].includes(status) },
+            { label:'편집중',   done: ['review','done'].includes(status), active: status==='editing' },
+            { label:'검수중',   done: status==='done',                    active: status==='review'  },
+            { label:'납품완료', done: status==='done' },
+          ];
+          return '<div style="display:flex;gap:3px;align-items:center;flex-wrap:wrap;margin-top:4px">' +
+            steps.map(function(s, i) {
+              var c = s.done ? '#10b981' : (s.active ? 'var(--orange)' : 'var(--gray-200)');
+              var tc = s.done ? 'white' : (s.active ? 'white' : 'var(--gray-400)');
+              return (i > 0 ? '<div style="width:8px;height:1px;background:var(--gray-200)"></div>' : '') +
+                '<div style="font-size:9px;padding:2px 5px;border-radius:4px;background:' + c + ';color:' + tc + ';white-space:nowrap">' + s.label + '</div>';
+            }).join('') + '</div>';
+        };
+
+        var rows = '<tr><th>주문번호</th><th>프로젝트명</th><th>플랜</th><th>상태</th><th>납품예정</th><th></th></tr>';
+        docs.slice(0, 5).forEach(function(o) {
+          var oid = o.orderId || '-';
+          var si  = statusMap[o.status] || ['badge-pending', '대기중', ''];
+          var bStyle = si[2] ? 'style="' + si[2] + '"' : '';
+          rows += '<tr>' +
+            '<td data-label="주문번호" style="font-size:12px;color:var(--gray-400)">#' + oid + '</td>' +
+            '<td data-label="프로젝트명" style="font-weight:600">' + (o.title || o.planName || '-') +
+              makeSteps(o.status) + '</td>' +
+            '<td data-label="플랜"><span style="font-size:12px;font-weight:700;color:var(--accent)">' + (o.planName || '-') + '</span></td>' +
+            '<td data-label="상태"><span class="badge ' + si[0] + '" ' + bStyle + '>' + si[1] + '</span></td>' +
+            '<td data-label="납품예정" style="font-size:13px;color:var(--gray-400)">' + (o.deadlineDate || o.deadline || '-') + '</td>' +
+            '<td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showClientOrderDetail(&quot;' + oid + '&quot;)">상세</button></td>' +
+            '</tr>';
+        });
+        if (tableEl) tableEl.innerHTML = rows;
+      }
+    }, function(e) {
+      console.error('[Dashboard] Firestore 조회 실패:', e.code, e.message);
     });
-    if (tableEl) tableEl.innerHTML = rows;
-  }
+  });
 }
 
 window.doLogin = function doLogin(type) {
@@ -9426,9 +9478,10 @@ window.loadUploadOrders = function loadUploadOrders() {
 
   import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
     // 진행 중인 주문 (payment_pending 이상) 조회
+    // 입금완료(pending/waiting) 이상인 주문만 표시 (payment_pending 제외)
     var q = fs.query(
       fs.collection(window._db, 'orders'),
-      fs.where('status', 'in', ['payment_pending','pending','waiting','editing','review'])
+      fs.where('status', 'in', ['pending','waiting','editing','review','done'])
     );
     fs.getDocs(q).then(function(snapshot) {
       // 클라이언트 정렬 (createdAt 내림차순)
@@ -9546,46 +9599,98 @@ function _fillUploadPanel(oid, o) {
   var deliveryDone = document.getElementById('deliveryDone');
   if (linkSent) linkSent.style.display = 'none';
   if (deliveryDone) deliveryDone.style.display = 'none';
+
+  // 진행 현황 단계 렌더링 (실제 status 기반)
+  var stepsEl = document.getElementById('uploadProgressSteps');
+  if (stepsEl) {
+    var status = o.status || '';
+    var hasDriveLink = !!(o.driveLink || o.uploadFolderUrl);
+    var steps = [
+      { key: 'payment', label: '입금 확인',
+        done: ['pending','waiting','editing','review','done'].includes(status) },
+      { key: 'drive',   label: '원본 파일 수신 준비 (드라이브 링크 전달)',
+        done: hasDriveLink },
+      { key: 'editing', label: '편집 진행 중',
+        done: ['editing','review','done'].includes(status),
+        active: status === 'editing' },
+      { key: 'review',  label: '검수 중',
+        done: ['review','done'].includes(status),
+        active: status === 'review' },
+      { key: 'done',    label: '납품 완료',
+        done: status === 'done' },
+    ];
+    stepsEl.innerHTML = steps.map(function(s) {
+      var icon, iconBg, textStyle;
+      if (s.done) {
+        icon = '✓'; iconBg = '#10b981'; textStyle = 'color:#065f46;font-weight:600';
+      } else if (s.active) {
+        icon = '→'; iconBg = 'var(--orange)'; textStyle = 'color:var(--orange);font-weight:600';
+      } else {
+        icon = '○'; iconBg = 'var(--gray-200)'; textStyle = 'color:var(--gray-400)';
+      }
+      return '<div style="display:flex;align-items:center;gap:10px;font-size:13px' + ((!s.done && !s.active) ? ';opacity:.4' : '') + '">' +
+        '<div style="width:20px;height:20px;border-radius:50%;background:' + iconBg + ';color:white;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">' + icon + '</div>' +
+        '<span style="' + textStyle + '">' + s.label + '</span></div>';
+    }).join('');
+  }
 }
 
 function sendUploadLink() {
-  const link  = document.getElementById('driveUploadLink')?.value?.trim();
-  const email = document.getElementById('clientEmail')?.value?.trim();
-  const orderId = window._currentAdminOrderId;
+  var link    = document.getElementById('driveUploadLink')?.value?.trim();
+  var orderId = window._currentAdminOrderId;
+  // 드롭다운에서 선택된 Firestore 문서 ID
+  var sel     = document.getElementById('uploadOrderSelect');
+  var docId   = sel ? sel.value : null;
 
   if (!link || !link.startsWith('http')) {
     showToast('구글 드라이브 링크를 먼저 입력해주세요'); return;
   }
-  if (!email || !email.includes('@')) {
-    showToast('의뢰인 이메일을 확인해주세요'); return;
+
+  // 클립보드 복사
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(link).then(function() {
+      showToast('📋 링크가 복사됐습니다. 채널톡으로 전달해주세요!');
+    }).catch(function() {
+      // 폴백: execCommand
+      var ta = document.createElement('textarea');
+      ta.value = link; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('📋 링크가 복사됐습니다. 채널톡으로 전달해주세요!');
+    });
+  } else {
+    showToast('📋 링크가 복사됐습니다. 채널톡으로 전달해주세요!');
   }
 
-  // Firestore에 드라이브 링크 저장
-  if (orderId && window._db && window._fsDoc && window._fsUpdateDoc) {
-    const ref = window._fsDoc(window._db, 'orders', orderId);
-    window._fsUpdateDoc(ref, {
-      uploadFolderUrl: link,
-      uploadLinkSentAt: new Date().toISOString(),
-      status: 'waiting'
-    }).catch(function(e) { console.warn('[Firestore] 링크 저장 실패:', e.message); });
-  }
-
-  // EmailJS 연동 (서비스 ID/템플릿 ID 설정 후 활성화)
-  /*
-  if (typeof emailjs !== 'undefined') {
-    emailjs.send('service_aicut', 'template_upload_link', {
-      to_email: email,
-      drive_link: link,
-      order_id: orderId || ''
-    }).then(function() {
-      console.log('[EmailJS] 업로드 링크 발송 완료:', email);
+  // Firestore 저장 — 문서 ID(docId)로 직접 접근
+  if (window._db) {
+    import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+      var saveData = {
+        driveLink: link,
+        uploadFolderUrl: link,
+        driveLinkSentAt: fs.serverTimestamp(),
+        uploadLinkSentAt: fs.serverTimestamp(),
+      };
+      var doSave = function(ref) {
+        fs.updateDoc(ref, saveData)
+          .then(function() { console.log('[Firestore] 드라이브 링크 저장 완료'); })
+          .catch(function(e) { console.warn('[Firestore] 링크 저장 실패:', e.code); });
+      };
+      if (docId) {
+        doSave(fs.doc(window._db, 'orders', docId));
+      } else if (orderId) {
+        fs.getDocs(fs.query(
+          fs.collection(window._db, 'orders'),
+          fs.where('orderId', '==', orderId), fs.limit(1)
+        )).then(function(snap) {
+          if (!snap.empty) doSave(snap.docs[0].ref);
+        });
+      }
     });
   }
-  */
 
-  const sent = document.getElementById('uploadLinkSent');
+  var sent = document.getElementById('uploadLinkSent');
   if (sent) sent.style.display = 'block';
-  showToast(`📨 ${email} 로 업로드 링크가 발송되었습니다`);
 }
 
 function deliverResult() {
