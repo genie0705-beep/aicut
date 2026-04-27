@@ -7701,7 +7701,7 @@ window.loadAdminOrders = function loadAdminOrders() {
           '<td style="font-size:12px;color:var(--gray-400)">' + (o.deadlineDate || o.deadline || '-') + '</td>' +
           '<td style="font-size:11px;color:var(--gray-400);white-space:nowrap">' + createdStr + '</td>' +
           '<td><span class="badge ' + cls + '" ' + bStyle + '>' + txt + '</span></td>' +
-          '<td><select class="form-select" style="padding:5px 8px;font-size:11px;border-radius:8px;min-width:80px" onchange="adminChangeOrderStatusFromSelect(this,&quot;' + oid + '&quot;)">' +
+          '<td><select class="form-select" style="padding:5px 8px;font-size:11px;border-radius:8px;min-width:80px" onchange="adminChangeOrderStatusFromSelect(this,&quot;' + oid + '&quot;,&quot;' + docSnap.id + '&quot;)">' +
             '<option value="">변경</option>' +
             '<option value="payment_pending">입금대기</option>' +
             '<option value="pending">대기중</option>' +
@@ -8259,7 +8259,7 @@ function adminCompleteRevision(roundNum) {
 
 // 검수 요청 발송
 // 어드민 주문 목록에서 직접 상태 변경
-window.adminChangeOrderStatusFromSelect = function(sel, orderId) {
+window.adminChangeOrderStatusFromSelect = function(sel, orderId, docId) {
   var newStatus = sel.value;
   if (!newStatus || !orderId) return;
   var label = sel.options[sel.selectedIndex].text;
@@ -8282,11 +8282,43 @@ window.adminChangeOrderStatusFromSelect = function(sel, orderId) {
       badge.textContent = si[1];
       badge.style.cssText = si[2] ? si[2] : '';
     }
+    tr.setAttribute('data-s', newStatus);
   }
 
-  // Firestore 업데이트
-  adminChangeOrderStatus(orderId, newStatus, label);
   showToast('✓ 상태가 "' + label + '"으로 변경되었습니다');
+
+  // Firestore — docId(문서 실제 ID)로 직접 updateDoc
+  if (!window._db) { console.warn('[상태변경] DB 없음'); return; }
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    var doUpdate = function(ref) {
+      fs.updateDoc(ref, { status: newStatus, updatedAt: fs.serverTimestamp() })
+        .then(function() {
+          console.log('[Firestore] ✅ 상태 업데이트:', orderId, '→', newStatus);
+        })
+        .catch(function(e) {
+          console.error('[Firestore] ❌ 상태 업데이트 실패:', e.code, e.message);
+          showToast('⚠️ 저장 실패: ' + (e.code || e.message));
+        });
+    };
+
+    if (docId) {
+      // 문서 ID 직접 사용 (가장 확실)
+      doUpdate(fs.doc(window._db, 'orders', docId));
+    } else {
+      // orderId 필드로 조회 후 업데이트
+      fs.getDocs(fs.query(
+        fs.collection(window._db, 'orders'),
+        fs.where('orderId', '==', orderId),
+        fs.limit(1)
+      )).then(function(snap) {
+        if (snap.empty) {
+          doUpdate(fs.doc(window._db, 'orders', orderId));
+        } else {
+          doUpdate(snap.docs[0].ref);
+        }
+      });
+    }
+  });
 };
 
 // 어드민 주문 삭제
