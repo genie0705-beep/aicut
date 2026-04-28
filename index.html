@@ -7526,47 +7526,53 @@ window.showTab = function showTab(section, tabId, linkEl) {
 
 // ── Firestore 주문 목록 실시간 조회 ──
 // ── 고객 주문 목록 Firestore 조회 ──
+// 내 주문 탭 onSnapshot 리스너
+var _clientOrdersUnsubscribe = null;
+
 window.loadClientOrders = function loadClientOrders() {
-  // _db 미준비 시 재시도 (최대 3초)
   if (!window._db) {
     var retry = (window._clientOrderRetry || 0) + 1;
     window._clientOrderRetry = retry;
     if (retry <= 6) { setTimeout(loadClientOrders, 500); }
-    else { window._clientOrderRetry = 0; console.warn('[고객주문] DB 초기화 실패'); }
+    else { window._clientOrderRetry = 0; }
     return;
   }
   window._clientOrderRetry = 0;
 
   var user = window._fbAuth && window._fbAuth.currentUser;
-  if (!user) { console.warn('[고객주문] 로그인 필요'); return; }
+  if (!user) { console.warn('[내주문] 로그인 필요'); return; }
 
   var tableEl = document.getElementById('clientOrderTable');
   var emptyEl = document.getElementById('clientOrderEmpty');
   if (!tableEl) return;
 
-  console.log('[고객주문] 조회 시작 uid:', user.uid);
+  // 기존 리스너 해제
+  if (_clientOrdersUnsubscribe) {
+    try { _clientOrdersUnsubscribe(); } catch(e) {}
+    _clientOrdersUnsubscribe = null;
+  }
+
+  var uid   = user.uid;
+  var email = user.email || '';
+  console.log('[내주문] 조회 시작 uid:', uid, 'email:', email);
 
   import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
-    var q = fs.query(
-      fs.collection(window._db, 'orders'),
-      fs.where('userId', '==', user.uid)
-    );
-    fs.getDocs(q).then(function(snapshot) {
-      tableEl.querySelectorAll('tr[data-source="client"]').forEach(function(r) { r.remove(); });
-      console.log('[고객주문] 조회 결과:', snapshot.size, '건');
 
-      if (snapshot.empty) {
+    // uid 기준 쿼리 (저장 방식에 따라 uid 또는 email로 저장됨)
+    var doRender = function(docs) {
+      tableEl.querySelectorAll('tr[data-source="client"]').forEach(function(r) { r.remove(); });
+      console.log('[내주문] 렌더링:', docs.length, '건');
+
+      if (docs.length === 0) {
         if (emptyEl) emptyEl.style.display = 'block';
         return;
       }
       if (emptyEl) emptyEl.style.display = 'none';
 
-      // 클라이언트 정렬 (createdAt 내림차순)
-      var docs = [];
-      snapshot.forEach(function(d) { docs.push(d); });
+      // 최신순 정렬
       docs.sort(function(a, b) {
-        var ta = a.data().createdAt && a.data().createdAt.toMillis ? a.data().createdAt.toMillis() : 0;
-        var tb = b.data().createdAt && b.data().createdAt.toMillis ? b.data().createdAt.toMillis() : 0;
+        var ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
+        var tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
         return tb - ta;
       });
 
@@ -7579,33 +7585,70 @@ window.loadClientOrders = function loadClientOrders() {
         done:    ['badge-done',    '납품완료', ''],
       };
 
-      docs.forEach(function(docSnap) {
-        var o = docSnap.data();
-        var oid = o.orderId || docSnap.id;
-        var si = statusMap[o.status] || ['badge-pending', '대기중', ''];
+      // 진행 단계 인디케이터
+      var makeSteps = function(status) {
+        var steps = [
+          { label:'접수',     done: true },
+          { label:'입금확인', done: ['pending','waiting','editing','review','done'].includes(status) },
+          { label:'편집중',   done: ['review','done'].includes(status), active: status==='editing' },
+          { label:'검수중',   done: status==='done', active: status==='review' },
+          { label:'납품완료', done: status==='done' },
+        ];
+        return '<div style="display:flex;gap:2px;align-items:center;margin-top:4px;flex-wrap:wrap">' +
+          steps.map(function(s, i) {
+            var bg = s.done ? '#10b981' : (s.active ? 'var(--orange)' : 'var(--gray-200)');
+            var tc = (s.done || s.active) ? 'white' : 'var(--gray-400)';
+            return (i > 0 ? '<div style="width:6px;height:1px;background:var(--gray-200)"></div>' : '') +
+              '<div style="font-size:9px;padding:2px 4px;border-radius:3px;background:' + bg + ';color:' + tc + ';white-space:nowrap">' + s.label + '</div>';
+          }).join('') + '</div>';
+      };
+
+      docs.forEach(function(o) {
+        var oid = o.orderId || o.id || '-';
+        var si  = statusMap[o.status] || ['badge-pending','대기중',''];
         var bStyle = si[2] ? 'style="' + si[2] + '"' : '';
+        var price = Number(o.price || o.total || 0);
         var tr = document.createElement('tr');
         tr.setAttribute('data-source', 'client');
         tr.innerHTML =
           '<td style="font-size:12px;color:var(--gray-400)">#' + oid + '</td>' +
-          '<td style="font-weight:600">' + (o.title || o.planName || '-') + '</td>' +
+          '<td style="font-weight:600">' + (o.title || o.planName || '-') + makeSteps(o.status) + '</td>' +
           '<td><span style="font-size:12px;font-weight:700;color:var(--accent)">' + (o.planName || '-') + '</span></td>' +
           '<td><span class="badge ' + si[0] + '" ' + bStyle + '>' + si[1] + '</span></td>' +
           '<td style="font-size:13px;color:var(--gray-400)">' + (o.deadlineDate || o.deadline || '-') + '</td>' +
-          '<td style="font-size:13px">₩' + ((o.price || o.total || 0).toLocaleString()) + '</td>' +
+          '<td style="font-size:13px">₩' + price.toLocaleString() + '</td>' +
           '<td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" ' +
             'onclick="showClientOrderDetail(&quot;' + oid + '&quot;)">상세</button></td>';
         tableEl.appendChild(tr);
       });
-    }).catch(function(e) {
-      console.error('[고객주문] 조회 실패 코드:', e.code, '메시지:', e.message);
-      // 안전한 에러 표시
+    };
+
+    // onSnapshot으로 실시간 반영 (uid 기준)
+    var q = fs.query(fs.collection(window._db, 'orders'), fs.where('userId', '==', uid));
+    _clientOrdersUnsubscribe = fs.onSnapshot(q, function(snapshot) {
+      var docs = [];
+      snapshot.forEach(function(d) { docs.push(d.data()); });
+      console.log('[내주문] uid 조회:', docs.length, '건');
+
+      if (docs.length > 0) {
+        doRender(docs);
+      } else {
+        // uid로 없으면 email로 fallback 조회
+        var q2 = fs.query(fs.collection(window._db, 'orders'), fs.where('clientEmail', '==', email));
+        fs.getDocs(q2).then(function(snap2) {
+          var docs2 = [];
+          snap2.forEach(function(d) { docs2.push(d.data()); });
+          console.log('[내주문] email fallback 조회:', docs2.length, '건');
+          doRender(docs2);
+        }).catch(function(e) { console.warn('[내주문] email 조회 실패:', e.code); });
+      }
+    }, function(e) {
+      console.error('[내주문] onSnapshot 실패:', e.code, e.message);
       if (emptyEl) {
         emptyEl.style.display = 'block';
         var msgEl = emptyEl.querySelector('div');
         if (msgEl) msgEl.textContent = e.code === 'permission-denied'
-          ? '⚠️ 권한 오류 — Firebase 보안 규칙을 확인해주세요'
-          : '조회 실패: ' + (e.code || e.message);
+          ? '⚠️ 권한 오류 (permission-denied)' : '조회 실패: ' + (e.code || e.message);
       }
     });
   });
