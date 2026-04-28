@@ -7502,6 +7502,7 @@ window.showTab = function showTab(section, tabId, linkEl) {
     if (tabId === 'a-orders' && typeof loadAdminOrders === 'function') loadAdminOrders();
     if (tabId === 'a-b2b'    && typeof loadB2BInquiries === 'function') loadB2BInquiries();
     if (tabId === 'a-upload' && typeof loadUploadOrders === 'function') loadUploadOrders();
+    if (tabId === 'a-users'  && typeof loadAdminUsers  === 'function') loadAdminUsers();
   }
   if (section === 'client') {
     if (tabId === 'c-orders'  && typeof loadClientOrders === 'function') loadClientOrders();
@@ -7623,57 +7624,83 @@ window.loadClientOrders = function loadClientOrders() {
       });
     };
 
-    // onSnapshot으로 실시간 반영 (uid 기준)
-    var q = fs.query(fs.collection(window._db, 'orders'), fs.where('userId', '==', uid));
-    _clientOrdersUnsubscribe = fs.onSnapshot(q, function(snapshot) {
-      var docs = [];
-      snapshot.forEach(function(d) { docs.push(d.data()); });
-      console.log('[내주문] uid 조회:', docs.length, '건');
+    // uid + email 동시 조회 → 합산 후 orderId 중복 제거
+    var _mergedDocs = {};
+    var _renderTimer = null;
+    var scheduleRender = function() {
+      if (_renderTimer) clearTimeout(_renderTimer);
+      _renderTimer = setTimeout(function() {
+        var allDocs = Object.values(_mergedDocs);
+        console.log('[내주문] 병합 렌더링:', allDocs.length, '건');
+        doRender(allDocs);
+      }, 150);
+    };
 
-      if (docs.length > 0) {
-        doRender(docs);
-      } else {
-        // uid로 없으면 email로 fallback 조회
-        var q2 = fs.query(fs.collection(window._db, 'orders'), fs.where('clientEmail', '==', email));
-        fs.getDocs(q2).then(function(snap2) {
-          var docs2 = [];
-          snap2.forEach(function(d) { docs2.push(d.data()); });
-          console.log('[내주문] email fallback 조회:', docs2.length, '건');
-          doRender(docs2);
-        }).catch(function(e) { console.warn('[내주문] email 조회 실패:', e.code); });
-      }
+    // 쿼리1: userId == uid
+    var q1 = fs.query(fs.collection(window._db, 'orders'), fs.where('userId', '==', uid));
+    _clientOrdersUnsubscribe = fs.onSnapshot(q1, function(snap) {
+      snap.forEach(function(d) {
+        var data = d.data();
+        var key = data.orderId || d.id;
+        _mergedDocs[key] = data;
+      });
+      scheduleRender();
     }, function(e) {
-      console.error('[내주문] onSnapshot 실패:', e.code, e.message);
-      if (emptyEl) {
-        emptyEl.style.display = 'block';
-        var msgEl = emptyEl.querySelector('div');
-        if (msgEl) msgEl.textContent = e.code === 'permission-denied'
-          ? '⚠️ 권한 오류 (permission-denied)' : '조회 실패: ' + (e.code || e.message);
-      }
+      console.warn('[내주문] uid 쿼리 실패:', e.code);
     });
+
+    // 쿼리2: clientEmail == email (병렬 조회)
+    if (email) {
+      var q2 = fs.query(fs.collection(window._db, 'orders'), fs.where('clientEmail', '==', email));
+      fs.onSnapshot(q2, function(snap) {
+        snap.forEach(function(d) {
+          var data = d.data();
+          var key = data.orderId || d.id;
+          _mergedDocs[key] = data;
+        });
+        scheduleRender();
+      }, function(e) {
+        console.warn('[내주문] email 쿼리 실패:', e.code);
+      });
+    }
   });
 };
 
 // ── 고객 주문 상세 화면 ──
 window.showClientOrderDetail = function showClientOrderDetail(oid) {
-  document.getElementById('order-list').style.display   = 'none';
-  document.getElementById('order-detail').style.display = 'block';
   window._currentClientOrderId = oid;
 
   if (!window._db || !oid) return;
   import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    // orderId 필드로 먼저, 없으면 문서ID로 조회
     var q = fs.query(fs.collection(window._db, 'orders'), fs.where('orderId', '==', oid), fs.limit(1));
     fs.getDocs(q).then(function(snap) {
       var o = snap.empty ? null : snap.docs[0].data();
-      if (!o) return;
+      if (!o) {
+        // 문서ID로 직접 조회 시도
+        return fs.getDoc(fs.doc(window._db, 'orders', oid)).then(function(d) {
+          if (d.exists()) _renderClientOrderDetail(d.data(), oid);
+        });
+      }
+      _renderClientOrderDetail(o, oid);
+    });
+  });
+};
 
-      var set = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val || '-'; };
-      set('cd-plan',     o.planName);
-      set('cd-editor',   o.editor || '배정 대기 중');
-      set('cd-date',     o.createdAt && o.createdAt.toDate ? o.createdAt.toDate().toLocaleDateString('ko-KR') : '-');
-      set('cd-deadline', o.deadlineDate || o.deadline);
-      set('cd-price',    o.price ? '₩' + Number(o.price).toLocaleString() : '-');
-      set('cd-desc',     o.desc);
+window._renderClientOrderDetail = function _renderClientOrderDetail(o, oid) {
+  // 상세 패널 방식 (기존 유지)
+  var listEl   = document.getElementById('order-list');
+  var detailEl = document.getElementById('order-detail');
+  if (listEl)   listEl.style.display   = 'none';
+  if (detailEl) detailEl.style.display = 'block';
+
+  var set = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val || '-'; };
+  set('cd-plan',     o.planName);
+  set('cd-editor',   o.editor || '배정 대기 중');
+  set('cd-date',     o.createdAt && o.createdAt.toDate ? o.createdAt.toDate().toLocaleDateString('ko-KR') : '-');
+  set('cd-deadline', o.deadlineDate || o.deadline);
+  set('cd-price',    o.price ? '₩' + Number(o.price).toLocaleString() : '-');
+  set('cd-desc',     o.desc);
 
       // 수정이력 렌더링
       var revList = document.getElementById('revisionList');
@@ -7705,8 +7732,6 @@ window.showClientOrderDetail = function showClientOrderDetail(oid) {
           }).join('');
         }
       }
-    }).catch(function(e) { console.error('[고객상세] 조회 실패:', e.code); });
-  });
 };
 
 // ══════════════════════════════════════════
@@ -7903,6 +7928,73 @@ window.startDashboardRefresh = function() {
   if (window._dashInterval) clearInterval(window._dashInterval);
   window._dashInterval = setInterval(loadAdminDashboard, 30000);
 };
+// ── 어드민 회원 관리 Firestore 연동 ──
+window.loadAdminUsers = function loadAdminUsers() {
+  if (!window._db) { setTimeout(loadAdminUsers, 500); return; }
+  var tableEl = document.querySelector('#tab-a-users .data-table');
+  if (!tableEl) return;
+
+  import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
+    var q = fs.query(fs.collection(window._db, 'orders'));
+    fs.getDocs(q).then(function(orderSnap) {
+      // 이메일별 주문수 집계
+      var orderCount = {};
+      orderSnap.forEach(function(d) {
+        var email = d.data().clientEmail || d.data().userId || '';
+        if (email) orderCount[email] = (orderCount[email] || 0) + 1;
+      });
+
+      // Firebase Auth 사용자 목록은 Admin SDK만 가능 — orders에서 unique 이메일 추출
+      var users = {};
+      orderSnap.forEach(function(d) {
+        var o = d.data();
+        var email = o.clientEmail || '';
+        if (email && !users[email]) {
+          users[email] = {
+            name:      o.clientName || email.split('@')[0],
+            email:     email,
+            createdAt: o.createdAt,
+            count:     orderCount[email] || 0,
+          };
+        }
+      });
+
+      var rows = Object.values(users);
+      rows.sort(function(a,b) {
+        var ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
+        var tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
+        return tb - ta;
+      });
+
+      // 기존 동적 행 제거
+      tableEl.querySelectorAll('tr[data-user]').forEach(function(r) { r.remove(); });
+
+      if (rows.length === 0) {
+        var tr = document.createElement('tr');
+        tr.setAttribute('data-user', '1');
+        tr.innerHTML = '<td colspan="5" style="text-align:center;padding:32px;color:var(--gray-400)">가입 회원이 없습니다</td>';
+        tableEl.appendChild(tr);
+        return;
+      }
+
+      rows.forEach(function(u) {
+        var dateStr = u.createdAt && u.createdAt.toDate
+          ? u.createdAt.toDate().toLocaleDateString('ko-KR') : '-';
+        var tr = document.createElement('tr');
+        tr.setAttribute('data-user', u.email);
+        tr.innerHTML =
+          '<td style="font-weight:600">' + u.name + '</td>' +
+          '<td style="font-size:13px;color:var(--gray-500)">' + u.email + '</td>' +
+          '<td style="font-size:13px;color:var(--gray-400)">' + dateStr + '</td>' +
+          '<td><span class="badge badge-pending">일반 회원</span></td>' +
+          '<td style="font-family:monospace;font-weight:600;color:var(--accent)">' + u.count + '건</td>';
+        tableEl.appendChild(tr);
+      });
+      console.log('[회원관리] ' + rows.length + '명 로드');
+    });
+  });
+};
+
 window.stopDashboardRefresh = function() {
   if (window._dashInterval) { clearInterval(window._dashInterval); window._dashInterval = null; }
 };
@@ -7926,11 +8018,13 @@ window.loadAdminOrders = function loadAdminOrders() {
       fs.orderBy('createdAt', 'desc'),
       fs.limit(100)
     );
-    fs.getDocs(q).then(function(snapshot) {
+    // onSnapshot으로 실시간 반영
+    if (window._adminOrdersUnsubscribe) {
+      try { window._adminOrdersUnsubscribe(); } catch(e) {}
+    }
+    window._adminOrdersUnsubscribe = fs.onSnapshot(q, function(snapshot) {
       var tbody = document.getElementById('adminOrderTable');
       if (!tbody) return;
-
-      // Firestore 행만 제거 (헤더·emptyRow 유지)
       tbody.querySelectorAll('tr[data-source="firestore"]').forEach(function(r) { r.remove(); });
 
       var emptyRow = document.getElementById('adminOrderEmptyRow');
@@ -7988,13 +8082,13 @@ window.loadAdminOrders = function loadAdminOrders() {
         tbody.appendChild(tr);
       });
       console.log('[Firestore] 주문 ' + snapshot.size + '건 로드 완료');
-    }).catch(function(e) {
+    }, function(e) {
       console.error('[Firestore] 주문 조회 실패:', e.code, e.message);
       var emptyRow = document.getElementById('adminOrderEmptyRow');
       if (emptyRow) {
         emptyRow.style.display = '';
         emptyRow.cells[0].textContent = e.code === 'permission-denied'
-          ? '❌ 권한 오류 — Firebase Console → Firestore → 규칙 탭에서 보안 규칙을 확인해주세요.'
+          ? '❌ 권한 오류 — Firestore 규칙을 확인해주세요.'
           : '❌ 조회 실패: ' + (e.code || e.message);
       }
     });
