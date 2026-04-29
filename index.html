@@ -7310,8 +7310,8 @@ function _loadClientDashboard(name, email) {
       // [1] 인사말 조건부
       var subEl   = document.getElementById('clientWelcomeSub');
       var guideEl = document.getElementById('onboardingGuide');
-      var emptyEl = document.getElementById('clientOrderEmpty');
-      var tableEl = document.getElementById('clientOrderTable');
+      var emptyEl = document.getElementById('dashOrderEmpty');
+      var tableEl = document.getElementById('dashOrderTable');
 
       if (total === 0) {
         if (subEl)   subEl.textContent = '첫 번째 영상 편집을 의뢰해보세요!';
@@ -7538,8 +7538,10 @@ window.showTab = function showTab(section, tabId, linkEl) {
 
 // ── Firestore 주문 목록 실시간 조회 ──
 // ── 고객 주문 목록 Firestore 조회 ──
-// 내 주문 탭 onSnapshot 리스너
-var _clientOrdersUnsubscribe = null;
+// 내 주문 탭 onSnapshot 리스너 — 중복 실행 방지
+var _clientOrdersListeners = [];
+var _clientOrdersMerged   = {};
+var _clientOrdersTimer    = null;
 
 window.loadClientOrders = function loadClientOrders() {
   if (!window._db) {
@@ -7554,127 +7556,111 @@ window.loadClientOrders = function loadClientOrders() {
   var user = window._fbAuth && window._fbAuth.currentUser;
   if (!user) { console.warn('[내주문] 로그인 필요'); return; }
 
-  var tableEl = document.getElementById('clientOrderTable');
-  var emptyEl = document.getElementById('clientOrderEmpty');
-  if (!tableEl) return;
-
-  // 기존 리스너 해제
-  if (_clientOrdersUnsubscribe) {
-    try { _clientOrdersUnsubscribe(); } catch(e) {}
-    _clientOrdersUnsubscribe = null;
-  }
-
   var uid   = user.uid;
   var email = user.email || '';
-  console.log('[내주문] 조회 시작 uid:', uid, 'email:', email);
+
+  // 동일 uid면 재등록 안 함 (중복 방지 핵심)
+  if (window._clientOrdersUid === uid && _clientOrdersListeners.length > 0) {
+    console.log('[내주문] 이미 등록됨 — 스킵');
+    return;
+  }
+  window._clientOrdersUid = uid;
+
+  // 기존 리스너 전부 해제
+  _clientOrdersListeners.forEach(function(u) { try { u(); } catch(e) {} });
+  _clientOrdersListeners = [];
+  _clientOrdersMerged   = {};
+  if (_clientOrdersTimer) { clearTimeout(_clientOrdersTimer); _clientOrdersTimer = null; }
+
+  console.log('[내주문] 리스너 등록 uid:', uid);
+
+  var tableEl = document.getElementById('clientOrderTable');
+  var emptyEl = document.getElementById('clientOrderEmpty');
 
   import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
 
-    // uid 기준 쿼리 (저장 방식에 따라 uid 또는 email로 저장됨)
-    var doRender = function(docs) {
-      tableEl.querySelectorAll('tr[data-source="client"]').forEach(function(r) { r.remove(); });
-      console.log('[내주문] 렌더링:', docs.length, '건');
+    var render = function() {
+      if (_clientOrdersTimer) clearTimeout(_clientOrdersTimer);
+      _clientOrdersTimer = setTimeout(function() {
+        if (!tableEl) return;
+        tableEl.querySelectorAll('tr[data-source="client"]').forEach(function(r) { r.remove(); });
 
-      if (docs.length === 0) {
-        if (emptyEl) emptyEl.style.display = 'block';
-        return;
-      }
-      if (emptyEl) emptyEl.style.display = 'none';
+        var docs = Object.values(_clientOrdersMerged);
+        console.log('[내주문] 렌더링:', docs.length, '건');
 
-      // 최신순 정렬
-      docs.sort(function(a, b) {
-        var ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
-        var tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
-        return tb - ta;
-      });
+        if (docs.length === 0) {
+          if (emptyEl) emptyEl.style.display = 'block'; return;
+        }
+        if (emptyEl) emptyEl.style.display = 'none';
 
-      var statusMap = {
-        payment_pending: ['', '입금 확인 중', 'background:#ede9ff;color:#5c3de8;font-weight:700'],
-        waiting: ['badge-pending', '대기중', ''],
-        pending: ['badge-pending', '대기중', ''],
-        editing: ['badge-editing', '편집중', ''],
-        review:  ['badge-review',  '검수중', ''],
-        done:    ['badge-done',    '납품완료', ''],
-      };
-
-      // 진행 단계 인디케이터
-      var makeSteps = function(status) {
-        var activeStatuses = ['pending','waiting','payment_pending','editing','review','done'];
-      var steps = [
-          { label:'접수완료', done: true },
-          { label:'입금확인', done: ['pending','waiting','editing','review','done'].includes(status),
-                              active: status==='payment_pending' },
-          { label:'편집중',   done: ['review','done'].includes(status), active: status==='editing' },
-          { label:'검수중',   done: status==='done', active: status==='review' },
-          { label:'납품완료', done: status==='done' },
-        ];
-        return '<div style="display:flex;gap:2px;align-items:center;margin-top:4px;flex-wrap:wrap">' +
-          steps.map(function(s, i) {
-            var bg = s.done ? '#10b981' : (s.active ? 'var(--orange)' : 'var(--gray-200)');
-            var tc = (s.done || s.active) ? 'white' : 'var(--gray-400)';
-            return (i > 0 ? '<div style="width:6px;height:1px;background:var(--gray-200)"></div>' : '') +
-              '<div style="font-size:9px;padding:2px 4px;border-radius:3px;background:' + bg + ';color:' + tc + ';white-space:nowrap">' + s.label + '</div>';
-          }).join('') + '</div>';
-      };
-
-      docs.forEach(function(o) {
-        var oid = o.orderId || o.id || '-';
-        var si  = statusMap[o.status] || ['badge-pending','대기중',''];
-        var bStyle = si[2] ? 'style="' + si[2] + '"' : '';
-        var price = Number(o.price || o.total || 0);
-        var tr = document.createElement('tr');
-        tr.setAttribute('data-source', 'client');
-        tr.innerHTML =
-          '<td style="font-size:12px;color:var(--gray-400)">#' + oid + '</td>' +
-          '<td style="font-weight:600">' + (o.title || o.planName || '-') + makeSteps(o.status) + '</td>' +
-          '<td><span style="font-size:12px;font-weight:700;color:var(--accent)">' + (o.planName || '-') + '</span></td>' +
-          '<td><span class="badge ' + si[0] + '" ' + bStyle + '>' + si[1] + '</span></td>' +
-          '<td style="font-size:13px;color:var(--gray-400)">' + (o.deadlineDate || o.deadline || '-') + '</td>' +
-          '<td style="font-size:13px">₩' + price.toLocaleString() + '</td>' +
-          '<td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" ' +
-            'onclick="showClientOrderDetail(&quot;' + oid + '&quot;)">상세</button></td>';
-        tableEl.appendChild(tr);
-      });
-    };
-
-    // uid + email 동시 조회 → 합산 후 orderId 중복 제거
-    var _mergedDocs = {};
-    var _renderTimer = null;
-    var scheduleRender = function() {
-      if (_renderTimer) clearTimeout(_renderTimer);
-      _renderTimer = setTimeout(function() {
-        var allDocs = Object.values(_mergedDocs);
-        console.log('[내주문] 병합 렌더링:', allDocs.length, '건');
-        doRender(allDocs);
-      }, 150);
-    };
-
-    // 쿼리1: userId == uid
-    var q1 = fs.query(fs.collection(window._db, 'orders'), fs.where('userId', '==', uid));
-    _clientOrdersUnsubscribe = fs.onSnapshot(q1, function(snap) {
-      snap.forEach(function(d) {
-        var data = d.data();
-        var key = data.orderId || d.id;
-        _mergedDocs[key] = data;
-      });
-      scheduleRender();
-    }, function(e) {
-      console.warn('[내주문] uid 쿼리 실패:', e.code);
-    });
-
-    // 쿼리2: clientEmail == email (병렬 조회)
-    if (email) {
-      var q2 = fs.query(fs.collection(window._db, 'orders'), fs.where('clientEmail', '==', email));
-      fs.onSnapshot(q2, function(snap) {
-        snap.forEach(function(d) {
-          var data = d.data();
-          var key = data.orderId || d.id;
-          _mergedDocs[key] = data;
+        docs.sort(function(a,b) {
+          var ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
+          var tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
+          return tb - ta;
         });
-        scheduleRender();
-      }, function(e) {
-        console.warn('[내주문] email 쿼리 실패:', e.code);
-      });
+
+        var statusMap = {
+          payment_pending:['','입금 확인 중','background:#ede9ff;color:#5c3de8;font-weight:700'],
+          waiting:['badge-pending','대기중',''], pending:['badge-pending','대기중',''],
+          editing:['badge-editing','편집중',''], review:['badge-review','검수중',''],
+          done:['badge-done','납품완료',''],
+        };
+
+        var mkSteps = function(st) {
+          var steps=[
+            {l:'접수완료',done:true},
+            {l:'입금확인',done:['pending','waiting','editing','review','done'].includes(st),act:st==='payment_pending'},
+            {l:'편집중',done:['review','done'].includes(st),act:st==='editing'},
+            {l:'검수중',done:st==='done',act:st==='review'},
+            {l:'납품완료',done:st==='done'},
+          ];
+          return '<div style="display:flex;gap:2px;align-items:center;margin-top:4px;flex-wrap:wrap">'+
+            steps.map(function(s,i){
+              var bg=s.done?'#10b981':(s.act?'var(--orange)':'var(--gray-200)');
+              var tc=(s.done||s.act)?'white':'var(--gray-400)';
+              return (i>0?'<div style="width:6px;height:1px;background:var(--gray-200)"></div>':'')+
+                '<div style="font-size:9px;padding:2px 4px;border-radius:3px;background:'+bg+';color:'+tc+';white-space:nowrap">'+s.l+'</div>';
+            }).join('')+'</div>';
+        };
+
+        docs.forEach(function(o) {
+          var oid = o.orderId || o.id || '-';
+          var si  = statusMap[o.status] || ['badge-pending','대기중',''];
+          var bs  = si[2] ? 'style="'+si[2]+'"' : '';
+          var tr  = document.createElement('tr');
+          tr.setAttribute('data-source','client');
+          tr.innerHTML =
+            '<td style="font-size:12px;color:var(--gray-400)">#'+oid+'</td>'+
+            '<td style="font-weight:600">'+(o.title||o.planName||'-')+mkSteps(o.status)+'</td>'+
+            '<td><span style="font-size:12px;font-weight:700;color:var(--accent)">'+(o.planName||'-')+'</span></td>'+
+            '<td><span class="badge '+si[0]+'" '+bs+'>'+si[1]+'</span></td>'+
+            '<td style="font-size:13px;color:var(--gray-400)">'+(o.deadlineDate||o.deadline||'-')+'</td>'+
+            '<td style="font-size:13px">₩'+Number(o.price||o.total||0).toLocaleString()+'</td>'+
+            '<td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" '+
+              'onclick="showClientOrderDetail(&quot;'+oid+'&quot;)">상세</button></td>';
+          tableEl.appendChild(tr);
+        });
+      }, 200);
+    };
+
+    // uid 쿼리
+    _clientOrdersListeners.push(fs.onSnapshot(
+      fs.query(fs.collection(window._db,'orders'), fs.where('userId','==',uid)),
+      function(snap) {
+        snap.forEach(function(d){var o=d.data(); _clientOrdersMerged[o.orderId||d.id]=o;});
+        render();
+      }, function(e){console.warn('[내주문] uid 실패:',e.code);}
+    ));
+
+    // email 쿼리 (병렬, 중복은 _clientOrdersMerged로 제거)
+    if (email) {
+      _clientOrdersListeners.push(fs.onSnapshot(
+        fs.query(fs.collection(window._db,'orders'), fs.where('clientEmail','==',email)),
+        function(snap) {
+          snap.forEach(function(d){var o=d.data(); _clientOrdersMerged[o.orderId||d.id]=o;});
+          render();
+        }, function(e){console.warn('[내주문] email 실패:',e.code);}
+      ));
     }
   });
 };
