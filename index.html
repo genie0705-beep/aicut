@@ -7292,9 +7292,12 @@ function _loadClientDashboard(name, email) {
         return ['pending','waiting','payment_pending','editing','review'].includes(o.status);
       }).length;
       var done    = docs.filter(function(o) { return o.status === 'done'; }).length;
+      var paidStatuses = ['pending','waiting','editing','review','done'];
       var monthCost = docs.reduce(function(sum, o) {
         var ts = o.createdAt && o.createdAt.toMillis ? o.createdAt.toMillis() : 0;
-        return sum + (ts >= monthStart ? Number(o.price || o.total || 0) : 0);
+        // 입금완료 이상인 주문의 price만 합산
+        var isPaid = paidStatuses.includes(o.status);
+        return sum + (ts >= monthStart && isPaid ? Number(o.price || o.total || 0) : 0);
       }, 0);
 
       // [2] 통계 카드
@@ -7334,8 +7337,9 @@ function _loadClientDashboard(name, email) {
         // 단계 인디케이터 HTML
         var makeSteps = function(status) {
           var steps = [
-            { label:'접수', done: true },
-            { label:'원본전달', done: ['editing','review','done'].includes(status) },
+            { label:'접수완료', done: true },
+            { label:'입금확인', done: ['pending','waiting','editing','review','done'].includes(status),
+                                active: status==='payment_pending' },
             { label:'편집중',   done: ['review','done'].includes(status), active: status==='editing' },
             { label:'검수중',   done: status==='done',                    active: status==='review'  },
             { label:'납품완료', done: status==='done' },
@@ -7488,6 +7492,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== TABS =====
 window.showTab = function showTab(section, tabId, linkEl) {
+  // 어드민 탭 클릭 시 세션 자동 갱신 (로그인 모달 방지)
+  if (section === 'admin' && window._fbCurrentUser) {
+    window._fbCurrentUser.getIdToken(false).then(function(token) {
+      window._adminIdToken = token; // 토큰 갱신
+    }).catch(function() {});
+  }
   const prefix = section === 'client' ? 'c-' : 'a-';
   const pageId = section === 'client' ? 'page-client' : 'page-admin';
   document.querySelectorAll('#'+pageId+' .dash-tab').forEach(t => t.style.display='none');
@@ -7588,9 +7598,11 @@ window.loadClientOrders = function loadClientOrders() {
 
       // 진행 단계 인디케이터
       var makeSteps = function(status) {
-        var steps = [
-          { label:'접수',     done: true },
-          { label:'입금확인', done: ['pending','waiting','editing','review','done'].includes(status) },
+        var activeStatuses = ['pending','waiting','payment_pending','editing','review','done'];
+      var steps = [
+          { label:'접수완료', done: true },
+          { label:'입금확인', done: ['pending','waiting','editing','review','done'].includes(status),
+                              active: status==='payment_pending' },
           { label:'편집중',   done: ['review','done'].includes(status), active: status==='editing' },
           { label:'검수중',   done: status==='done', active: status==='review' },
           { label:'납품완료', done: status==='done' },
@@ -9064,41 +9076,16 @@ function completeOrder(order) {
   var descVal = document.getElementById('newOrderDesc') ? (document.getElementById('newOrderDesc').value || '') : '';
   var refVal  = document.getElementById('newOrderRef')  ? (document.getElementById('newOrderRef').value  || '') : '';
 
-  // ── DOM 조작 (try-catch로 감싸기 — 실패해도 저장은 계속) ──
+  // DOM 직접 추가 제거 — onSnapshot이 자동으로 렌더링함 (중복 방지)
+  // 대시보드 카운터만 업데이트
   try {
-    // 1. 고객 마이페이지 주문 목록에 추가
-    var clientTbody = document.querySelector('#order-list .data-table');
-    if (clientTbody) {
-      var newRow = document.createElement('tr');
-      newRow.id = 'newOrderRow';
-      newRow.style.cssText = 'background:#ede9ff;transition:background 2s';
-      newRow.innerHTML =
-        '<td data-label="주문번호" style="font-size:12px;color:var(--gray-400)">#' + orderNum + '</td>' +
-        '<td data-label="프로젝트명" style="font-weight:600">' + order.name + '</td>' +
-        '<td data-label="플랜"><span style="font-size:12px;font-weight:700;color:var(--accent)">' + order.planName + '</span></td>' +
-        '<td data-label="상태"><span class="badge" style="background:#ede9ff;color:#5c3de8;font-weight:700">입금 확인 중</span></td>' +
-        '<td data-label="납품예정" style="font-size:13px;color:var(--gray-400)">' + dStr + '</td>' +
-        '<td style="font-size:13px">₩' + order.total.toLocaleString() + '</td>' +
-        '<td><button class="btn btn-outline" style="padding:6px 14px;font-size:12px" onclick="showOrderDetail()">상세</button></td>';
-      clientTbody.appendChild(newRow);
-      setTimeout(function() { newRow.style.background = 'white'; }, 2000);
-    }
-
-    // 2. 대시보드 카운터 업데이트
-    var urgentBell = document.getElementById('urgentBell');
-    if (urgentBell) {
-      var match = urgentBell.textContent.match(/(\d+)/);
-      urgentBell.textContent = '🔴 긴급 ' + ((match ? parseInt(match[1]) : 0) + 1) + '건 처리 필요';
-    }
     var payBadge = document.getElementById('paymentPendingBadge');
     if (payBadge) {
-      var m = payBadge.textContent.match(/\d+/);
-      payBadge.textContent = '💰 입금 확인 대기 ' + ((m ? parseInt(m[0]) : 0) + 1) + '건';
+      var m2 = payBadge.textContent.match(/\d+/);
+      payBadge.textContent = '💰 입금 확인 대기 ' + ((m2 ? parseInt(m2[0]) : 0) + 1) + '건';
       payBadge.style.display = 'block';
     }
-  } catch(e) {
-    console.warn('[DOM] 조작 실패 (무시):', e.message);
-  }
+  } catch(e) {}
 
   // ── localStorage 저장 ──
   try {
