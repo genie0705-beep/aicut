@@ -4287,13 +4287,13 @@ footer {
             <div class="panel-title">최근 의뢰 현황</div>
             <button class="btn btn-primary" onclick="showTab('client','c-upload',null)">+ 새 의뢰</button>
           </div>
-          <div id="clientOrderEmpty" style="display:none;text-align:center;padding:40px 20px;color:var(--gray-400)">
+          <div id="dashOrderEmpty" style="display:none;text-align:center;padding:40px 20px;color:var(--gray-400)">
             <div style="font-size:40px;margin-bottom:12px">📭</div>
             <div style="font-size:15px;font-weight:600;color:var(--primary);margin-bottom:8px">아직 의뢰 내역이 없습니다</div>
             <div style="font-size:13px;margin-bottom:20px">첫 번째 영상 편집을 의뢰해보세요!</div>
             <button class="btn btn-primary" onclick="showTab('client','c-upload',null)">의뢰하기 →</button>
           </div>
-          <table class="data-table client-order-table" id="clientOrderTable">
+          <table class="data-table" id="dashOrderTable">
             <tr><th>주문번호</th><th>프로젝트명</th><th>플랜</th><th>상태</th><th>납품예정</th><th></th></tr>
           </table>
         </div>
@@ -7513,6 +7513,7 @@ window.showTab = function showTab(section, tabId, linkEl) {
     if (tabId === 'a-b2b'    && typeof loadB2BInquiries === 'function') loadB2BInquiries();
     if (tabId === 'a-upload' && typeof loadUploadOrders === 'function') loadUploadOrders();
     if (tabId === 'a-users'  && typeof loadAdminUsers  === 'function') loadAdminUsers();
+    if (tabId === 'a-users'  && typeof loadAdminUsers  === 'function') loadAdminUsers();
   }
   if (section === 'client') {
     if (tabId === 'c-orders'  && typeof loadClientOrders === 'function') loadClientOrders();
@@ -7700,11 +7701,12 @@ window.showClientOrderDetail = function showClientOrderDetail(oid) {
 };
 
 window._renderClientOrderDetail = function _renderClientOrderDetail(o, oid) {
-  // 상세 패널 방식 (기존 유지)
+  // c-orders 탭으로 이동 후 상세 패널 표시
+  showTab('client','c-orders',null);
   var listEl   = document.getElementById('order-list');
   var detailEl = document.getElementById('order-detail');
-  if (listEl)   listEl.style.display   = 'none';
-  if (detailEl) detailEl.style.display = 'block';
+  if (listEl)   { listEl.style.display   = 'none'; }
+  if (detailEl) { detailEl.style.display = 'block'; }
 
   var set = function(id, val) { var el = document.getElementById(id); if (el) el.textContent = val || '-'; };
   set('cd-plan',     o.planName);
@@ -7943,7 +7945,7 @@ window.startDashboardRefresh = function() {
 // ── 어드민 회원 관리 Firestore 연동 ──
 window.loadAdminUsers = function loadAdminUsers() {
   if (!window._db) { setTimeout(loadAdminUsers, 500); return; }
-  var tableEl = document.querySelector('#tab-a-users .data-table');
+  var tableEl = document.getElementById('adminUsersTable') || document.querySelector('#tab-a-users .data-table');
   if (!tableEl) return;
 
   import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js').then(function(fs) {
@@ -7978,7 +7980,7 @@ window.loadAdminUsers = function loadAdminUsers() {
         return tb - ta;
       });
 
-      // 기존 동적 행 제거
+      // 기존 동적 행 제거 (헤더 tr 제외)
       tableEl.querySelectorAll('tr[data-user]').forEach(function(r) { r.remove(); });
 
       if (rows.length === 0) {
