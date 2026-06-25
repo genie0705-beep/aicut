@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 966px; height: 966px; overflow: hidden;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+  .card {
+    width: 966px; height: 966px;
+    background: linear-gradient(145deg, #0D1630 0%, #1a1f4e 100%);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .glow { position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,185,66,0.4) 0%, transparent 65%);
+    width: 700px; height: 700px; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); }
+  .tag { color: #F4B942; font-size: 32px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 36px; z-index: 2; position: relative; }
+  .main { color: #fff; font-size: 80px; font-weight: 900;
+    line-height: 1.2; letter-spacing: -2px;
+    z-index: 2; position: relative; margin-bottom: 44px; }
+  .main em { color: #F4B942; font-style: normal; }
+  .divider { width: 80px; height: 4px; background: #F4B942;
+    border-radius: 2px; margin: 0 auto 44px; z-index: 2; position: relative; }
+  .url { color: #F4B942; font-size: 46px; font-weight: 900;
+    z-index: 2; position: relative; margin-bottom: 20px; letter-spacing: 1px; }
+  .sub { color: rgba(255,255,255,0.6); font-size: 34px; z-index: 2; position: relative; }
+  .cta { background: linear-gradient(135deg, #F4B942, #f97316); color: #fff;
+    font-size: 40px; font-weight: 800; padding: 24px 70px; border-radius: 70px;
+    z-index: 2; position: relative; margin-top: 44px; }
+  .brand { position: absolute; right: 60px; bottom: 56px;
+    color: rgba(255,255,255,0.3); font-size: 28px; font-weight: 900;
+    letter-spacing: 4px; z-index: 2; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow"></div>
+  <div class="tag">무료 상담 신청</div>
+  <div class="main">지금 편집 문제로<br>고민 중이라면<br><em>에이컷과 상담해보세요</em></div>
+  <div class="divider"></div>
+  <div class="url">aicut.co.kr</div>
+  <div class="sub">무료 상담 · 샘플 1편 제공</div>
+  <div class="cta">지금 바로 신청하기 →</div>
+  <div class="brand">AICUT</div>
+</div>
+</body>
+</html>

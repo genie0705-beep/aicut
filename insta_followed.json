@@ -1,0 +1,462 @@
+{
+  "followed": [
+    {
+      "username": "consomme_mkt",
+      "tag": "금융마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:10:35.815Z"
+    },
+    {
+      "username": "toss.im",
+      "tag": "금융마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:10:43.520Z"
+    },
+    {
+      "username": "merci_yoni",
+      "tag": "금융마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:10:52.545Z"
+    },
+    {
+      "username": "seo_conomy",
+      "tag": "금융마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:11:00.650Z"
+    },
+    {
+      "username": "shinhanbank_official",
+      "tag": "금융마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:11:08.027Z"
+    },
+    {
+      "username": "covigroup_official",
+      "tag": "금융마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:11:17.945Z"
+    },
+    {
+      "username": "boonyang_cok",
+      "tag": "부동산광고",
+      "status": "already",
+      "time": "2026-05-30T07:11:27.814Z"
+    },
+    {
+      "username": "beaulead_marketing",
+      "tag": "부동산광고",
+      "status": "already",
+      "time": "2026-05-30T07:11:39.005Z"
+    },
+    {
+      "username": "job.toss",
+      "tag": "부동산광고",
+      "status": "already",
+      "time": "2026-05-30T07:11:47.343Z"
+    },
+    {
+      "username": "rebizer_busan",
+      "tag": "부동산광고",
+      "status": "already",
+      "time": "2026-05-30T07:11:56.658Z"
+    },
+    {
+      "username": "ad_targets",
+      "tag": "부동산광고",
+      "status": "already",
+      "time": "2026-05-30T07:12:06.267Z"
+    },
+    {
+      "username": "budongsan_jobjob",
+      "tag": "부동산광고",
+      "status": "already",
+      "time": "2026-05-30T07:12:15.138Z"
+    },
+    {
+      "username": "yejin.kk",
+      "tag": "병원마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:12:23.321Z"
+    },
+    {
+      "username": "heimglobal",
+      "tag": "병원마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:12:32.080Z"
+    },
+    {
+      "username": "adresult_mapo",
+      "tag": "병원마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:12:40.779Z"
+    },
+    {
+      "username": "adlike_official",
+      "tag": "병원마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:12:49.621Z"
+    },
+    {
+      "username": "seoul_surgery_stemcell_center",
+      "tag": "병원마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:12:57.267Z"
+    },
+    {
+      "username": "logo._.first",
+      "tag": "기업브랜딩",
+      "status": "already",
+      "time": "2026-05-30T07:13:04.401Z"
+    },
+    {
+      "username": "onope_daily",
+      "tag": "기업브랜딩",
+      "status": "already",
+      "time": "2026-05-30T07:13:12.160Z"
+    },
+    {
+      "username": "sihyunhada_business",
+      "tag": "기업브랜딩",
+      "status": "already",
+      "time": "2026-05-30T07:13:19.161Z"
+    },
+    {
+      "username": "pymcreative_official",
+      "tag": "기업브랜딩",
+      "status": "already",
+      "time": "2026-05-30T07:13:26.079Z"
+    },
+    {
+      "username": "ceo_archive",
+      "tag": "기업브랜딩",
+      "status": "already",
+      "time": "2026-05-30T07:13:33.534Z"
+    },
+    {
+      "username": "admirror_official",
+      "tag": "기업브랜딩",
+      "status": "already",
+      "time": "2026-05-30T07:13:41.602Z"
+    },
+    {
+      "username": "the.watermelon_seoul",
+      "tag": "브랜드영상",
+      "status": "already",
+      "time": "2026-05-30T07:13:51.083Z"
+    },
+    {
+      "username": "ninemestudio",
+      "tag": "브랜드영상",
+      "status": "already",
+      "time": "2026-05-30T07:14:00.000Z"
+    },
+    {
+      "username": "dir.noh",
+      "tag": "브랜드영상",
+      "status": "already",
+      "time": "2026-05-30T07:14:08.441Z"
+    },
+    {
+      "username": "3d_studio99",
+      "tag": "브랜드영상",
+      "status": "already",
+      "time": "2026-05-30T07:14:15.208Z"
+    },
+    {
+      "username": "wonkyungjang",
+      "tag": "브랜드영상",
+      "status": "already",
+      "time": "2026-05-30T07:14:24.600Z"
+    },
+    {
+      "username": "dewy.frame",
+      "tag": "브랜드영상",
+      "status": "already",
+      "time": "2026-05-30T07:14:33.871Z"
+    },
+    {
+      "username": "gabistudio_official",
+      "tag": "스타트업마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:14:41.242Z"
+    },
+    {
+      "username": "brandrise_kr",
+      "tag": "스타트업마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:14:49.020Z"
+    },
+    {
+      "username": "startupted",
+      "tag": "스타트업마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:14:59.236Z"
+    },
+    {
+      "username": "busanstartup",
+      "tag": "스타트업마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:15:07.358Z"
+    },
+    {
+      "username": "everydayworks.club",
+      "tag": "스타트업마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:15:16.811Z"
+    },
+    {
+      "username": "sbs_mkt__official",
+      "tag": "스타트업마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:15:25.021Z"
+    },
+    {
+      "username": "shakewake_studio",
+      "tag": "기업홍보",
+      "status": "followed",
+      "time": "2026-05-30T07:15:33.711Z"
+    },
+    {
+      "username": "kppa.co",
+      "tag": "기업홍보",
+      "status": "already",
+      "time": "2026-05-30T07:15:42.083Z"
+    },
+    {
+      "username": "dhyeon_voice",
+      "tag": "기업홍보",
+      "status": "already",
+      "time": "2026-05-30T07:15:49.180Z"
+    },
+    {
+      "username": "jeenie_mc",
+      "tag": "기업홍보",
+      "status": "already",
+      "time": "2026-05-30T07:15:56.383Z"
+    },
+    {
+      "username": "apcorporation_official",
+      "tag": "기업홍보",
+      "status": "already",
+      "time": "2026-05-30T07:16:05.933Z"
+    },
+    {
+      "username": "lizzyconnect",
+      "tag": "마케팅대행사",
+      "status": "already",
+      "time": "2026-05-30T07:16:13.620Z"
+    },
+    {
+      "username": "0starrrr",
+      "tag": "마케팅대행사",
+      "status": "already",
+      "time": "2026-05-30T07:16:22.935Z"
+    },
+    {
+      "username": "contents.maker_ing",
+      "tag": "마케팅대행사",
+      "status": "already",
+      "time": "2026-05-30T07:16:31.750Z"
+    },
+    {
+      "username": "mongbee_marketing",
+      "tag": "마케팅대행사",
+      "status": "already",
+      "time": "2026-05-30T07:16:39.567Z"
+    },
+    {
+      "username": "mindrepublic_",
+      "tag": "마케팅대행사",
+      "status": "already",
+      "time": "2026-05-30T07:16:47.226Z"
+    },
+    {
+      "username": "winaid_marketing",
+      "tag": "마케팅대행사",
+      "status": "already",
+      "time": "2026-05-30T07:16:55.443Z"
+    },
+    {
+      "username": "fighting_orthopaedic_clinic",
+      "tag": "병원홍보",
+      "status": "already",
+      "time": "2026-05-30T07:17:04.842Z"
+    },
+    {
+      "username": "platemedia_official",
+      "tag": "병원홍보",
+      "status": "followed",
+      "time": "2026-05-30T07:17:13.561Z"
+    },
+    {
+      "username": "medical_flx",
+      "tag": "병원홍보",
+      "status": "already",
+      "time": "2026-05-30T07:17:22.473Z"
+    },
+    {
+      "username": "ollin_corp",
+      "tag": "병원홍보",
+      "status": "already",
+      "time": "2026-05-30T07:17:29.588Z"
+    },
+    {
+      "username": "nexv_marketing",
+      "tag": "병원홍보",
+      "status": "already",
+      "time": "2026-05-30T07:17:37.019Z"
+    },
+    {
+      "username": "medifilm.st",
+      "tag": "병원홍보",
+      "status": "already",
+      "time": "2026-05-30T07:17:44.903Z"
+    },
+    {
+      "username": "topclick_marketing",
+      "tag": "의원마케팅",
+      "status": "followed",
+      "time": "2026-05-30T07:17:54.002Z"
+    },
+    {
+      "username": "_dameun",
+      "tag": "의원마케팅",
+      "status": "followed",
+      "time": "2026-05-30T07:18:04.989Z"
+    },
+    {
+      "username": "triup_",
+      "tag": "의원마케팅",
+      "status": "followed",
+      "time": "2026-05-30T07:18:14.861Z"
+    },
+    {
+      "username": "rebizer_marketing",
+      "tag": "의원마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:18:22.027Z"
+    },
+    {
+      "username": "topclassmkt",
+      "tag": "의원마케팅",
+      "status": "followed",
+      "time": "2026-05-30T07:18:32.222Z"
+    },
+    {
+      "username": "vesplus_hcb",
+      "tag": "부동산마케팅",
+      "status": "followed",
+      "time": "2026-05-30T07:18:41.371Z"
+    },
+    {
+      "username": "h2mg.im",
+      "tag": "부동산마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:18:49.407Z"
+    },
+    {
+      "username": "_highend_official",
+      "tag": "부동산마케팅",
+      "status": "already",
+      "time": "2026-05-30T07:18:57.005Z"
+    },
+    {
+      "username": "ij_dnm_official",
+      "tag": "부동산마케팅",
+      "status": "followed",
+      "time": "2026-05-30T07:19:07.486Z"
+    },
+    {
+      "username": "stone_potatoes",
+      "tag": "기업영상",
+      "status": "already",
+      "time": "2026-05-30T07:19:16.772Z"
+    },
+    {
+      "username": "mdlstudio_",
+      "tag": "기업영상",
+      "status": "already",
+      "time": "2026-05-30T07:19:26.244Z"
+    },
+    {
+      "username": "creative_raup",
+      "tag": "기업영상",
+      "status": "already",
+      "time": "2026-05-30T07:19:34.499Z"
+    },
+    {
+      "username": "iambalcony",
+      "tag": "기업영상",
+      "status": "followed",
+      "time": "2026-05-30T07:19:43.396Z"
+    },
+    {
+      "username": "realhype_production",
+      "tag": "기업영상",
+      "status": "followed",
+      "time": "2026-05-30T07:19:53.982Z"
+    },
+    {
+      "username": "tomato9247",
+      "tag": "온라인교육마케팅",
+      "status": "followed",
+      "time": "2026-05-30T07:20:03.789Z"
+    },
+    {
+      "username": "naverconnect_official",
+      "tag": "에듀테크",
+      "status": "followed",
+      "time": "2026-05-30T07:20:13.984Z"
+    },
+    {
+      "username": "hello.nan_ssaem",
+      "tag": "에듀테크",
+      "status": "followed",
+      "time": "2026-05-30T07:20:24.082Z"
+    },
+    {
+      "username": "dodam_school",
+      "tag": "에듀테크",
+      "status": "followed",
+      "time": "2026-05-30T07:20:33.914Z"
+    },
+    {
+      "username": "brandmite.ai",
+      "tag": "에듀테크",
+      "status": "followed",
+      "time": "2026-05-30T07:20:44.609Z"
+    },
+    {
+      "username": "kit_tycher",
+      "tag": "에듀테크",
+      "status": "followed",
+      "time": "2026-05-30T07:20:55.000Z"
+    }
+  ],
+  "failed": [
+    {
+      "username": "reels",
+      "reason": "no_btn"
+    },
+    {
+      "username": "reels",
+      "reason": "no_btn"
+    },
+    {
+      "username": "reels",
+      "reason": "no_btn"
+    },
+    {
+      "username": "reels",
+      "reason": "page.evaluate: Execution context was destroyed, most likely because of a navigat"
+    },
+    {
+      "username": "reels",
+      "reason": "no_btn"
+    },
+    {
+      "username": "reels",
+      "reason": "no_btn"
+    }
+  ]
+}

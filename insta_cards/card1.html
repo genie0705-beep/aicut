@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1080px; overflow: hidden;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+  .card {
+    width: 1080px; height: 1080px;
+    background: linear-gradient(145deg, #0D1630 0%, #1a1f4e 100%);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .g { position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,92,246,0.45) 0%, transparent 65%);
+    width: 700px; height: 700px; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); }
+  .tag { color: #c4b5fd; font-size: 42px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 50px; z-index: 2; position: relative; }
+  .main { color: #fff; font-size: 150px; font-weight: 900;
+    line-height: 1.0; letter-spacing: -4px;
+    z-index: 2; position: relative; word-break: keep-all; text-align: center;
+    margin-bottom: 50px; }
+  .main em { color: #a78bfa; font-style: normal; display: block; }
+  .sub { color: rgba(255,255,255,0.7); font-size: 46px; font-weight: 500;
+    line-height: 1.55; z-index: 2; position: relative; margin-bottom: 60px;
+    word-break: keep-all; }
+  .cta { background: linear-gradient(135deg, #8b5cf6, #06b6d4); color: #fff;
+    font-size: 44px; font-weight: 800; padding: 28px 80px; border-radius: 70px;
+    z-index: 2; position: relative; }
+  .brand { position: absolute; right: 80px; bottom: 72px;
+    color: rgba(255,255,255,0.35); font-size: 34px; font-weight: 900;
+    letter-spacing: 4px; z-index: 2; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="g"></div>
+  <div class="tag">영상 편집 외주</div>
+  <div class="main">"또<br><em>밀렸어요"</em></div>
+  <div class="sub">매달 정해진 날짜에 납품<br>일정 걱정 없는 월정액 편집</div>
+  <div class="cta">무료 상담 →</div>
+  <div class="brand">AICUT</div>
+</div>
+</body>
+</html>

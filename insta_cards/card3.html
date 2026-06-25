@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1080px; overflow: hidden;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+  .card {
+    width: 1080px; height: 1080px;
+    background: linear-gradient(145deg, #0D1630 0%, #1a1f4e 100%);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .g { position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,185,66,0.4) 0%, transparent 65%);
+    width: 700px; height: 700px; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); }
+  .tag { color: #F4B942; font-size: 42px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 50px; z-index: 2; position: relative; }
+  .main { color: #fff; font-size: 136px; font-weight: 900;
+    line-height: 1.0; letter-spacing: -4px;
+    z-index: 2; position: relative; word-break: keep-all; text-align: center;
+    margin-bottom: 50px; }
+  .main em { color: #F4B942; font-style: normal; display: block; }
+  .sub { color: rgba(255,255,255,0.7); font-size: 46px; font-weight: 500;
+    line-height: 1.55; z-index: 2; position: relative; margin-bottom: 60px;
+    word-break: keep-all; }
+  .cta { background: linear-gradient(135deg, #F4B942, #f97316); color: #fff;
+    font-size: 44px; font-weight: 800; padding: 28px 80px; border-radius: 70px;
+    z-index: 2; position: relative; }
+  .brand { position: absolute; right: 80px; bottom: 72px;
+    color: rgba(255,255,255,0.3); font-size: 34px; font-weight: 900;
+    letter-spacing: 4px; z-index: 2; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="g"></div>
+  <div class="tag">비용 비교</div>
+  <div class="main">건당보다<br><em>월정액이 절반</em></div>
+  <div class="sub">월 4편 49만원~ · 약정 없음<br>전담팀 고정 · 정기납품 🙌</div>
+  <div class="cta">요금제 보기 →</div>
+  <div class="brand">AICUT</div>
+</div>
+</body>
+</html>

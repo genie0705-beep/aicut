@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 700px; height: 700px; overflow: hidden; margin: 0 auto;
+    font-family: 'Noto Sans KR', sans-serif; }
+  .card { width: 700px; height: 700px; position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #0D1630, #1a1f4e, #064e3b);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 60px; }
+  .glow { position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(52,211,153,0.35) 0%, transparent 60%);
+    width: 450px; height: 450px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .badge { display: inline-block; background: rgba(52,211,153,0.15);
+    color: #34d399; font-size: 18px; font-weight: 700; padding: 8px 24px;
+    border: 1px solid rgba(52,211,153,0.3); border-radius: 30px;
+    margin-bottom: 28px; z-index: 2; position: relative; }
+  .main { color: #fff; font-size: 48px; font-weight: 800; line-height: 1.4;
+    z-index: 2; position: relative; margin-bottom: 16px;
+    word-break: keep-all; letter-spacing: -1px; }
+  .main em { color: #34d399; font-style: normal; }
+  .sub { color: rgba(255,255,255,0.6); font-size: 20px; font-weight: 500; line-height: 1.5;
+    z-index: 2; position: relative; margin-bottom: 32px; word-break: keep-all; }
+  .cta { background: linear-gradient(135deg, #059669, #34d399); color: #fff;
+    font-size: 20px; font-weight: 700; padding: 14px 48px; border-radius: 50px;
+    z-index: 2; position: relative; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow"></div>
+  <div class="badge">📚 교육 콘텐츠</div>
+  <div class="main">온라인 강의·<br>교육 콘텐츠 창작자라면<br><em>영상 편집</em>이 필요한 이유</div>
+  <div class="sub">강의 퀄리티는 편집이 결정한다</div>
+  <div class="cta">AICUT 무료상담 →</div>
+</div>
+</body>
+</html>

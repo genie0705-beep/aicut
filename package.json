@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "better-sqlite3": "^12.11.1",
+    "canvas": "^3.2.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "instagram-private-api": "^1.46.1",
+    "pdf-parse": "^2.4.5",
+    "playwright": "^1.60.0",
+    "xlsx": "^0.18.5"
+  }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 966px; height: 966px; overflow: hidden;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+  .card {
+    width: 966px; height: 966px;
+    background: linear-gradient(145deg, #0D1630 0%, #1a1f4e 100%);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .glow { position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,185,66,0.35) 0%, transparent 65%);
+    width: 700px; height: 700px; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); }
+  .tag { color: #F4B942; font-size: 36px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 40px; z-index: 2; position: relative; }
+  .main { color: #fff; font-size: 88px; font-weight: 900;
+    line-height: 1.15; letter-spacing: -3px;
+    z-index: 2; position: relative; word-break: keep-all;
+    margin-bottom: 40px; }
+  .main em { color: #F4B942; font-style: normal; }
+  .divider { width: 80px; height: 4px; background: #F4B942;
+    border-radius: 2px; margin: 0 auto 40px; z-index: 2; position: relative; }
+  .sub { color: rgba(255,255,255,0.75); font-size: 38px; font-weight: 500;
+    line-height: 1.6; z-index: 2; position: relative;
+    word-break: keep-all; }
+  .brand { position: absolute; right: 60px; bottom: 56px;
+    color: rgba(255,255,255,0.3); font-size: 28px; font-weight: 900;
+    letter-spacing: 4px; z-index: 2; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow"></div>
+  <div class="tag">비용 비교 가이드</div>
+  <div class="main">유튜브 편집 대행<br><em>프리랜서 vs 월정액</em><br>직접 비교</div>
+  <div class="divider"></div>
+  <div class="sub">어떤 방식이 더 효율적일까?<br>숫자로 비교해봤다</div>
+  <div class="brand">AICUT</div>
+</div>
+</body>
+</html>

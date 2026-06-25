@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AICUT 블로그 이미지 뷰어</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px;
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  }
+  h1 { color: #a78bfa; font-size: 24px; margin-bottom: 30px; letter-spacing: 2px; }
+  .gallery { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+  .item {
+    background: #fff; border-radius: 12px; padding: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .item .label {
+    text-align: center; font-size: 13px; color: #666;
+    margin-top: 10px; font-weight: 500;
+  }
+  .item iframe { border: none; display: block; }
+  .item .big { width: 700px; height: 700px; }
+  .item .body-img { width: 700px; height: 400px; }
+  .note {
+    color: rgba(255,255,255,0.5); font-size: 14px;
+    margin-top: 30px; text-align: center; line-height: 1.6;
+  }
+  a { color: #a78bfa; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<h1>🖼️ AICUT 블로그 이미지 갤러리</h1>
+<div class="gallery" id="gallery"></div>
+<div class="note">
+  각 이미지 아래 파일명을 클릭하면 HTML 소스를 바로 열 수 있습니다.<br>
+  F12 개발자도구 → CSS 수정해서 실시간으로 위치 조정 가능
+</div>
+<script>
+const IMAGES = [
+  // --- 대표 이미지 (700x700) ---
+  { src: 'blog_img_shop.png', html: 'blog_img_shop.html', label: '🛒 쇼핑몰·이커머스', big: true },
+  { src: 'blog_img_realestate.png', html: 'blog_img_realestate.html', label: '🏢 부동산 중개사', big: true },
+  { src: 'blog_img_lawyer.png', html: 'blog_img_lawyer.html', label: '⚖️ 변호사·전문직', big: true },
+  { src: 'blog_img_hospital.png', html: 'blog_img_hospital.html', label: '🏥 병원·의원', big: true },
+  { src: 'blog_img_edu.png', html: 'blog_img_edu.html', label: '📚 온라인강의·교육', big: true },
+  { src: 'blog_img_realestate2.png', html: 'blog_img_realestate2.html', label: '🏢 부동산 중개법인', big: true },
+  // --- 본문 이미지 (700x400) ---
+  { src: 'body_shop_stat1.png', html: 'body_shop_stat1.html', label: '🛒 전환율80%' },
+  { src: 'body_shop_stat2.png', html: 'body_shop_stat2.html', label: '🛒 숏폼도달' },
+  { src: 'body_edu_stat1.png', html: 'body_edu_stat1.html', label: '📚 제작시간70%' },
+  { src: 'body_edu_check.png', html: 'body_edu_check.html', label: '📚 체크리스트' },
+  { src: 'body_lawyer_stat1.png', html: 'body_lawyer_stat1.html', label: '⚖️ 의뢰인40%' },
+  { src: 'body_lawyer_stat2.png', html: 'body_lawyer_stat2.html', label: '⚖️ 블로그vs숏폼' },
+  { src: 'body_lawyer_check.png', html: 'body_lawyer_check.html', label: '⚖️ 텍스트vs영상' },
+  { src: 'body_realestate2_result.png', html: 'body_realestate2_result.html', label: '🏢 월20편' },
+  { src: 'body_realestate2_rate.png', html: 'body_realestate2_rate.html', label: '🏢 재계약률95%' },
+  { src: 'body_hospital_stat.png', html: 'body_hospital_stat.html', label: '🏥 원장님영상' },
+];
+
+const gallery = document.getElementById('gallery');
+IMAGES.forEach(img => {
+  const div = document.createElement('div');
+  div.className = 'item';
+  const cls = img.big ? 'big' : 'body-img';
+  div.innerHTML = '<img src="' + img.src + '" class="' + cls + '">'
+    + '<div class="label"><a href="' + img.html + '" target="_blank">' + img.label + '</a></div>';
+  gallery.appendChild(div);
+});
+</script>
+</body>
+</html>

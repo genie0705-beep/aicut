@@ -1,0 +1,187 @@
+<!-- ========================================
+  에이컷 AICUT - GA4 전환 추적 코드
+  설치 위치: <head> 태그 안 (GA4 기본 태그 바로 아래)
+  ======================================== -->
+
+<script>
+(function() {
+  'use strict';
+
+  // GA4 이벤트 전송 함수
+  function sendGA4Event(eventName, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, params);
+      console.log('[GA4 Tracking]', eventName, params);
+    }
+  }
+
+  // CTA 버튼 클릭 추적
+  function trackCTAClick(el, label) {
+    sendGA4Event('cta_click', {
+      cta_label: label,
+      page_location: window.location.href,
+      page_title: document.title
+    });
+
+    // 주요 이벤트(전환)로도 전송
+    sendGA4Event('generate_lead', {
+      method: label
+    });
+  }
+
+  // 카카오 상담 클릭 추적
+  function trackKakaoClick() {
+    sendGA4Event('cta_click', {
+      cta_label: '카카오 상담',
+      page_location: window.location.href
+    });
+    sendGA4Event('generate_lead', {
+      method: '카카오 상담'
+    });
+  }
+
+  // 문의 폼 제출 추적
+  function trackFormSubmit(formType) {
+    sendGA4Event('form_submit', {
+      form_type: formType,
+      page_location: window.location.href
+    });
+    sendGA4Event('generate_lead', {
+      method: formType
+    });
+  }
+
+  // 스크롤 깊이 추적 (25%, 50%, 75%, 100%)
+  var scrollTracked = {};
+  function trackScroll() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var scrollPct = Math.round((scrollTop / docHeight) * 100);
+
+    [25, 50, 75, 90].forEach(function(milestone) {
+      if (scrollPct >= milestone && !scrollTracked[milestone]) {
+        scrollTracked[milestone] = true;
+        sendGA4Event('scroll_depth', {
+          scroll_depth: milestone + '%',
+          page_location: window.location.href
+        });
+      }
+    });
+  }
+
+  // DOM 로드 후 이벤트 바인딩
+  function initTracking() {
+
+    // ① "무료로 시작하기" 버튼
+    document.querySelectorAll('button, a').forEach(function(el) {
+      var text = (el.innerText || el.textContent || '').trim();
+
+      if (text.includes('무료로 시작하기')) {
+        el.addEventListener('click', function() {
+          trackCTAClick(el, '무료로 시작하기');
+        });
+      }
+
+      if (text.includes('월 정기 계약 문의')) {
+        el.addEventListener('click', function() {
+          trackCTAClick(el, '월 정기 계약 문의');
+        });
+      }
+
+      if (text.includes('VFX 견적 문의')) {
+        el.addEventListener('click', function() {
+          trackCTAClick(el, 'VFX 견적 문의');
+        });
+      }
+
+      if (text.includes('요금제 보기')) {
+        el.addEventListener('click', function() {
+          sendGA4Event('view_pricing', { page_location: window.location.href });
+        });
+      }
+    });
+
+    // ② 카카오 상담 링크
+    document.querySelectorAll('a[href*="kakao"]').forEach(function(el) {
+      el.addEventListener('click', trackKakaoClick);
+    });
+
+    // ③ mailto 클릭 (이메일 문의)
+    document.querySelectorAll('a[href^="mailto"]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        sendGA4Event('cta_click', {
+          cta_label: '이메일 문의',
+          page_location: window.location.href
+        });
+      });
+    });
+
+    // ④ 문의 폼 제출 감지
+    document.querySelectorAll('form').forEach(function(form) {
+      form.addEventListener('submit', function() {
+        trackFormSubmit('문의 폼');
+      });
+    });
+
+    // ⑤ 버튼 클릭으로 폼 제출 감지 (React SPA 대응)
+    document.addEventListener('click', function(e) {
+      var el = e.target.closest('button');
+      if (!el) return;
+      var text = (el.innerText || '').trim();
+
+      // 제출/완료 버튼
+      if (text.includes('제출') || text.includes('신청하기') || text.includes('문의 완료') || text.includes('보내기')) {
+        trackFormSubmit('버튼 제출: ' + text.substring(0, 20));
+      }
+    });
+
+    // ⑥ 스크롤 깊이
+    window.addEventListener('scroll', trackScroll, { passive: true });
+
+    console.log('[AICUT GA4 Tracking] 초기화 완료');
+  }
+
+  // DOM 준비 완료 후 실행
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTracking);
+  } else {
+    initTracking();
+  }
+
+  // React/Vue SPA 대응: DOM 변경 감지 후 재바인딩 (500ms 후 1회)
+  setTimeout(function() {
+    initTracking();
+  }, 1500);
+
+})();
+</script>
+
+<!-- 
+  [설치 가이드]
+  
+  1. aicut.co.kr 사이트 관리자 접속
+  2. <head> 태그 안, GA4 기본 스크립트 바로 아래에 위치시키기
+  
+  GA4 기본 태그 예시:
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXX');
+  </script>
+  ← 여기 아래에 이 코드 붙여넣기
+  
+  [추적 항목]
+  - 무료로 시작하기 클릭 → generate_lead 이벤트
+  - 월 정기 계약 문의 클릭 → generate_lead 이벤트  
+  - VFX 견적 문의 클릭 → generate_lead 이벤트
+  - 카카오 상담 클릭 → generate_lead 이벤트
+  - 이메일 문의 클릭 → cta_click 이벤트
+  - 폼 제출 → form_submit 이벤트
+  - 스크롤 깊이 25/50/75/90% → scroll_depth 이벤트
+  
+  [GA4에서 확인 방법]
+  보고서 → 참여도 → 이벤트 → generate_lead 항목 확인
+  전환으로 설정: 관리 → 이벤트 → generate_lead → 전환으로 표시 ON
+-->

@@ -1,0 +1,684 @@
+{
+  "sent": [],
+  "failed": [
+    {
+      "username": "consomme_mkt",
+      "url": "https://www.instagram.com/consomme_mkt/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.type: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:26:18.919Z"
+    },
+    {
+      "username": "toss.im",
+      "url": "https://www.instagram.com/toss.im/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.type: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:27:08.660Z"
+    },
+    {
+      "username": "merci_yoni",
+      "url": "https://www.instagram.com/merci_yoni/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.type: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:27:56.637Z"
+    },
+    {
+      "username": "seo_conomy",
+      "url": "https://www.instagram.com/seo_conomy/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.type: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:28:52.807Z"
+    },
+    {
+      "username": "shinhanbank_official",
+      "url": "https://www.instagram.com/shinhanbank_official/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.type: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:29:45.604Z"
+    },
+    {
+      "username": "consomme_mkt",
+      "url": "https://www.instagram.com/consomme_mkt/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Timeout 30000ms exceeded.",
+      "failedAt": "2026-05-28T05:31:07.174Z"
+    },
+    {
+      "username": "toss.im",
+      "url": "https://www.instagram.com/toss.im/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Timeout 30000ms exceeded.",
+      "failedAt": "2026-05-28T05:32:34.007Z"
+    },
+    {
+      "username": "merci_yoni",
+      "url": "https://www.instagram.com/merci_yoni/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:33:43.211Z"
+    },
+    {
+      "username": "seo_conomy",
+      "url": "https://www.instagram.com/seo_conomy/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Timeout 30000ms exceeded.",
+      "failedAt": "2026-05-28T05:34:55.156Z"
+    },
+    {
+      "username": "shinhanbank_official",
+      "url": "https://www.instagram.com/shinhanbank_official/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Timeout 30000ms exceeded.",
+      "failedAt": "2026-05-28T05:36:25.995Z"
+    },
+    {
+      "username": "covigroup_official",
+      "url": "https://www.instagram.com/covigroup_official/",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:37:41.211Z"
+    },
+    {
+      "username": "boonyang_cok",
+      "url": "https://www.instagram.com/boonyang_cok/",
+      "tag": "부동산광고",
+      "reason": "elementHandle.click: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:38:44.927Z"
+    },
+    {
+      "username": "beaulead_marketing",
+      "url": "https://www.instagram.com/beaulead_marketing/",
+      "tag": "부동산광고",
+      "reason": "elementHandle.click: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:39:42.681Z"
+    },
+    {
+      "username": "job.toss",
+      "url": "https://www.instagram.com/job.toss/",
+      "tag": "부동산광고",
+      "reason": "elementHandle.click: Element is not attached to the DOM",
+      "failedAt": "2026-05-28T05:40:37.397Z"
+    },
+    {
+      "username": "consomme_mkt",
+      "url": "https://www.instagram.com/consomme_mkt/",
+      "tag": "금융마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:40:59.374Z"
+    },
+    {
+      "username": "toss.im",
+      "url": "https://www.instagram.com/toss.im/",
+      "tag": "금융마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:41:59.994Z"
+    },
+    {
+      "username": "merci_yoni",
+      "url": "https://www.instagram.com/merci_yoni/",
+      "tag": "금융마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:42:58.554Z"
+    },
+    {
+      "username": "seo_conomy",
+      "url": "https://www.instagram.com/seo_conomy/",
+      "tag": "금융마케팅",
+      "reason": "page.evaluate: Execution context was destroyed, most likely because of a navigat",
+      "at": "2026-05-28T05:43:48.676Z"
+    },
+    {
+      "username": "shinhanbank_official",
+      "url": "https://www.instagram.com/shinhanbank_official/",
+      "tag": "금융마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:44:49.810Z"
+    },
+    {
+      "username": "covigroup_official",
+      "url": "https://www.instagram.com/covigroup_official/",
+      "tag": "금융마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:45:52.968Z"
+    },
+    {
+      "username": "boonyang_cok",
+      "url": "https://www.instagram.com/boonyang_cok/",
+      "tag": "부동산광고",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:46:54.483Z"
+    },
+    {
+      "username": "beaulead_marketing",
+      "url": "https://www.instagram.com/beaulead_marketing/",
+      "tag": "부동산광고",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:47:39.130Z"
+    },
+    {
+      "username": "job.toss",
+      "url": "https://www.instagram.com/job.toss/",
+      "tag": "부동산광고",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:48:24.736Z"
+    },
+    {
+      "username": "rebizer_busan",
+      "url": "https://www.instagram.com/rebizer_busan/",
+      "tag": "부동산광고",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:49:26.046Z"
+    },
+    {
+      "username": "ad_targets",
+      "url": "https://www.instagram.com/ad_targets/",
+      "tag": "부동산광고",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:54:23.594Z"
+    },
+    {
+      "username": "budongsan_jobjob",
+      "url": "https://www.instagram.com/budongsan_jobjob/",
+      "tag": "부동산광고",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:55:13.827Z"
+    },
+    {
+      "username": "yejin.kk",
+      "url": "https://www.instagram.com/yejin.kk/",
+      "tag": "병원마케팅",
+      "reason": "page.focus: Timeout 30000ms exceeded.",
+      "at": "2026-05-28T05:56:41.100Z"
+    },
+    {
+      "username": "heimglobal",
+      "url": "https://www.instagram.com/heimglobal/",
+      "tag": "병원마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:57:44.121Z"
+    },
+    {
+      "username": "adresult_mapo",
+      "url": "https://www.instagram.com/adresult_mapo/",
+      "tag": "병원마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:58:35.787Z"
+    },
+    {
+      "username": "adlike_official",
+      "url": "https://www.instagram.com/adlike_official/",
+      "tag": "병원마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T05:59:34.817Z"
+    },
+    {
+      "username": "seoul_surgery_stemcell_center",
+      "url": "https://www.instagram.com/seoul_surgery_stemcell_center/",
+      "tag": "병원마케팅",
+      "reason": "not_found_in_search",
+      "at": "2026-05-28T06:00:24.501Z"
+    },
+    {
+      "username": "consomme_mkt",
+      "url": "https://www.instagram.com/consomme_mkt/",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:00:40.728Z"
+    },
+    {
+      "username": "toss.im",
+      "url": "https://www.instagram.com/toss.im/",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:01:20.746Z"
+    },
+    {
+      "username": "merci_yoni",
+      "url": "https://www.instagram.com/merci_yoni/",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn [momentintl.com 외 2개,팔로잉]",
+      "at": "2026-05-28T06:02:10.605Z"
+    },
+    {
+      "username": "seo_conomy",
+      "url": "https://www.instagram.com/seo_conomy/",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:02:57.770Z"
+    },
+    {
+      "username": "shinhanbank_official",
+      "url": "https://www.instagram.com/shinhanbank_official/",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:03:52.017Z"
+    },
+    {
+      "username": "covigroup_official",
+      "url": "https://www.instagram.com/covigroup_official/",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn [맞팔로우,맞팔로우,page.stibee.com/subscriptions/293574 외 2개,팔로잉]",
+      "at": "2026-05-28T06:04:44.895Z"
+    },
+    {
+      "username": "boonyang_cok",
+      "url": "https://www.instagram.com/boonyang_cok/",
+      "tag": "부동산광고",
+      "reason": "no_msg_btn []",
+      "at": "2026-05-28T06:06:06.960Z"
+    },
+    {
+      "username": "beaulead_marketing",
+      "url": "https://www.instagram.com/beaulead_marketing/",
+      "tag": "부동산광고",
+      "reason": "no_msg_btn [pf.kakao.com/_ZxjdxlT 외 4개,팔로잉]",
+      "at": "2026-05-28T06:06:46.029Z"
+    },
+    {
+      "username": "job.toss",
+      "url": "https://www.instagram.com/job.toss/",
+      "tag": "부동산광고",
+      "reason": "no_msg_btn [www.tiktok.com/@seoulchicagency 외 3개,팔로우]",
+      "at": "2026-05-28T06:07:53.499Z"
+    },
+    {
+      "username": "rebizer_busan",
+      "url": "https://www.instagram.com/rebizer_busan/",
+      "tag": "부동산광고",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:08:32.851Z"
+    },
+    {
+      "username": "ad_targets",
+      "url": "https://www.instagram.com/ad_targets/",
+      "tag": "부동산광고",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:14:18.281Z"
+    },
+    {
+      "username": "budongsan_jobjob",
+      "url": "https://www.instagram.com/budongsan_jobjob/",
+      "tag": "부동산광고",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:14:59.681Z"
+    },
+    {
+      "username": "yejin.kk",
+      "url": "https://www.instagram.com/yejin.kk/",
+      "tag": "병원마케팅",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:15:42.397Z"
+    },
+    {
+      "username": "heimglobal",
+      "url": "https://www.instagram.com/heimglobal/",
+      "tag": "병원마케팅",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:16:21.790Z"
+    },
+    {
+      "username": "adresult_mapo",
+      "url": "https://www.instagram.com/adresult_mapo/",
+      "tag": "병원마케팅",
+      "reason": "no_msg_btn [mapo.adresult.kr 외 1개,팔로잉]",
+      "at": "2026-05-28T06:17:16.632Z"
+    },
+    {
+      "username": "adlike_official",
+      "url": "https://www.instagram.com/adlike_official/",
+      "tag": "병원마케팅",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:18:01.476Z"
+    },
+    {
+      "username": "seoul_surgery_stemcell_center",
+      "url": "https://www.instagram.com/seoul_surgery_stemcell_center/",
+      "tag": "병원마케팅",
+      "reason": "no_msg_btn [팔로우]",
+      "at": "2026-05-28T06:18:43.801Z"
+    },
+    {
+      "username": "logo._.first",
+      "url": "https://www.instagram.com/logo._.first/",
+      "tag": "기업브랜딩",
+      "reason": "no_msg_btn [맞팔로우,맞팔로우,팔로잉]",
+      "at": "2026-05-28T06:19:35.042Z"
+    },
+    {
+      "username": "onope_daily",
+      "url": "https://www.instagram.com/onope_daily/",
+      "tag": "기업브랜딩",
+      "reason": "no_msg_btn [팔로잉]",
+      "at": "2026-05-28T06:20:26.702Z"
+    },
+    {
+      "username": "sihyunhada_business",
+      "url": "https://www.instagram.com/sihyunhada_business/",
+      "tag": "기업브랜딩",
+      "reason": "no_msg_btn [m.search.naver.com/search.naver?query=%25EC%259C%25A4%25EC%2588%2598%25EC%25A7%2584+%25EA%25B8%25B0%25EC%2583%2581%25EC%25BA%2590%25EC%258A%25A4%25ED%2584%25B0&where=m&sm=mob_hty&ackey=9ca2fdb8&qdt=1 외 1개,팔로잉]",
+      "at": "2026-05-28T06:21:16.248Z"
+    },
+    {
+      "username": "pymcreative_official",
+      "url": "https://www.instagram.com/pymcreative_official/",
+      "tag": "기업브랜딩",
+      "reason": "page.evaluate: Execution context was destroyed, most likely because of a navigat",
+      "at": "2026-05-28T06:25:22.341Z"
+    },
+    {
+      "username": "ceo_archive",
+      "url": "https://www.instagram.com/ceo_archive/",
+      "tag": "기업브랜딩",
+      "reason": "no_msg_btn []",
+      "at": "2026-05-28T06:26:15.177Z"
+    },
+    {
+      "username": "admirror_official",
+      "url": "https://www.instagram.com/admirror_official/",
+      "tag": "기업브랜딩",
+      "reason": "no_msg_btn [팔로잉,앱 사용]",
+      "at": "2026-05-28T06:26:59.460Z"
+    },
+    {
+      "username": "the.watermelon_seoul",
+      "url": "https://www.instagram.com/the.watermelon_seoul/",
+      "tag": "브랜드영상",
+      "reason": "no_msg_btn [팔로잉,앱 사용]",
+      "at": "2026-05-28T06:27:46.367Z"
+    },
+    {
+      "username": "ninemestudio",
+      "url": "https://www.instagram.com/ninemestudio/",
+      "tag": "브랜드영상",
+      "reason": "no_msg_btn [팔로잉,앱 사용]",
+      "at": "2026-05-28T06:28:41.271Z"
+    },
+    {
+      "username": "dir.noh",
+      "url": "https://www.instagram.com/dir.noh/",
+      "tag": "브랜드영상",
+      "reason": "no_msg_btn []",
+      "at": "2026-05-28T06:29:22.973Z"
+    },
+    {
+      "username": "3d_studio99",
+      "url": "https://www.instagram.com/3d_studio99/",
+      "tag": "브랜드영상",
+      "reason": "page.evaluate: Execution context was destroyed, most likely because of a navigat",
+      "at": "2026-05-28T06:30:03.558Z"
+    },
+    {
+      "username": "wonkyungjang",
+      "url": "https://www.instagram.com/wonkyungjang/",
+      "tag": "브랜드영상",
+      "reason": "no_msg_btn [youtu.be/y5xHKepIwmE 외 3개,팔로잉,앱 사용]",
+      "at": "2026-05-28T06:30:52.744Z"
+    },
+    {
+      "username": "dewy.frame",
+      "url": "https://www.instagram.com/dewy.frame/",
+      "tag": "브랜드영상",
+      "reason": "page.evaluate: Execution context was destroyed, most likely because of a navigat",
+      "at": "2026-05-28T06:31:39.897Z"
+    },
+    {
+      "username": "gabistudio_official",
+      "url": "https://www.instagram.com/gabistudio_official/",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Execution context was destroyed, most likely because of a navigat",
+      "at": "2026-05-28T06:32:24.001Z"
+    },
+    {
+      "username": "brandrise_kr",
+      "url": "https://www.instagram.com/brandrise_kr/",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:37:29.333Z"
+    },
+    {
+      "username": "startupted",
+      "url": "https://www.instagram.com/startupted/",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:38:28.141Z"
+    },
+    {
+      "username": "busanstartup",
+      "url": "https://www.instagram.com/busanstartup/",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:39:11.245Z"
+    },
+    {
+      "username": "everydayworks.club",
+      "url": "https://www.instagram.com/everydayworks.club/",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:40:08.578Z"
+    },
+    {
+      "username": "sbs_mkt__official",
+      "url": "https://www.instagram.com/sbs_mkt__official/",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:41:00.012Z"
+    },
+    {
+      "username": "shakewake_studio",
+      "url": "https://www.instagram.com/shakewake_studio/",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:42:01.201Z"
+    },
+    {
+      "username": "kppa.co",
+      "url": "https://www.instagram.com/kppa.co/",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:42:58.808Z"
+    },
+    {
+      "username": "dhyeon_voice",
+      "url": "https://www.instagram.com/dhyeon_voice/",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:43:53.203Z"
+    },
+    {
+      "username": "jeenie_mc",
+      "url": "https://www.instagram.com/jeenie_mc/",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:44:43.117Z"
+    },
+    {
+      "username": "apcorporation_official",
+      "url": "https://www.instagram.com/apcorporation_official/",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:45:37.935Z"
+    },
+    {
+      "username": "lizzyconnect",
+      "url": "https://www.instagram.com/lizzyconnect/",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:49:48.923Z"
+    },
+    {
+      "username": "0starrrr",
+      "url": "https://www.instagram.com/0starrrr/",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:50:38.473Z"
+    },
+    {
+      "username": "contents.maker_ing",
+      "url": "https://www.instagram.com/contents.maker_ing/",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:51:28.096Z"
+    },
+    {
+      "username": "mongbee_marketing",
+      "url": "https://www.instagram.com/mongbee_marketing/",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:52:29.158Z"
+    },
+    {
+      "username": "mindrepublic_",
+      "url": "https://www.instagram.com/mindrepublic_/",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:53:21.303Z"
+    },
+    {
+      "username": "winaid_marketing",
+      "url": "https://www.instagram.com/winaid_marketing/",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:54:07.568Z"
+    },
+    {
+      "username": "fighting_orthopaedic_clinic",
+      "url": "https://www.instagram.com/fighting_orthopaedic_clinic/",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:54:57.775Z"
+    },
+    {
+      "username": "platemedia_official",
+      "url": "https://www.instagram.com/platemedia_official/",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:55:44.891Z"
+    },
+    {
+      "username": "medical_flx",
+      "url": "https://www.instagram.com/medical_flx/",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:56:31.249Z"
+    },
+    {
+      "username": "ollin_corp",
+      "url": "https://www.instagram.com/ollin_corp/",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T06:57:13.553Z"
+    },
+    {
+      "username": "nexv_marketing",
+      "url": "https://www.instagram.com/nexv_marketing/",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:02:31.644Z"
+    },
+    {
+      "username": "medifilm.st",
+      "url": "https://www.instagram.com/medifilm.st/",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:03:14.212Z"
+    },
+    {
+      "username": "topclick_marketing",
+      "url": "https://www.instagram.com/topclick_marketing/",
+      "tag": "의원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:04:02.146Z"
+    },
+    {
+      "username": "_dameun",
+      "url": "https://www.instagram.com/_dameun/",
+      "tag": "의원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:04:47.859Z"
+    },
+    {
+      "username": "triup_",
+      "url": "https://www.instagram.com/triup_/",
+      "tag": "의원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:05:47.338Z"
+    },
+    {
+      "username": "rebizer_marketing",
+      "url": "https://www.instagram.com/rebizer_marketing/",
+      "tag": "의원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:06:41.403Z"
+    },
+    {
+      "username": "topclassmkt",
+      "url": "https://www.instagram.com/topclassmkt/",
+      "tag": "의원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:07:37.803Z"
+    },
+    {
+      "username": "vesplus_hcb",
+      "url": "https://www.instagram.com/vesplus_hcb/",
+      "tag": "부동산마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:08:29.195Z"
+    },
+    {
+      "username": "h2mg.im",
+      "url": "https://www.instagram.com/h2mg.im/",
+      "tag": "부동산마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:09:16.136Z"
+    },
+    {
+      "username": "_highend_official",
+      "url": "https://www.instagram.com/_highend_official/",
+      "tag": "부동산마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:10:06.263Z"
+    },
+    {
+      "username": "ij_dnm_official",
+      "url": "https://www.instagram.com/ij_dnm_official/",
+      "tag": "부동산마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:14:24.100Z"
+    },
+    {
+      "username": "stone_potatoes",
+      "url": "https://www.instagram.com/stone_potatoes/",
+      "tag": "기업영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:15:07.619Z"
+    },
+    {
+      "username": "mdlstudio_",
+      "url": "https://www.instagram.com/mdlstudio_/",
+      "tag": "기업영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:16:00.855Z"
+    },
+    {
+      "username": "creative_raup",
+      "url": "https://www.instagram.com/creative_raup/",
+      "tag": "기업영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:17:00.770Z"
+    },
+    {
+      "username": "iambalcony",
+      "url": "https://www.instagram.com/iambalcony/",
+      "tag": "기업영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:17:56.911Z"
+    },
+    {
+      "username": "realhype_production",
+      "url": "https://www.instagram.com/realhype_production/",
+      "tag": "기업영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed",
+      "at": "2026-05-28T07:18:50.096Z"
+    }
+  ]
+}

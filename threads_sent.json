@@ -1,0 +1,660 @@
+{
+  "failed": [
+    {
+      "username": "frame__marketing",
+      "url": "https://www.threads.com/@frame__marketing",
+      "tag": "금융마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "miracle_moon.meta",
+      "url": "https://www.threads.com/@miracle_moon.meta",
+      "tag": "금융마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "donjalnam",
+      "url": "https://www.threads.com/@donjalnam",
+      "tag": "금융마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "aether_mkt",
+      "url": "https://www.threads.com/@aether_mkt",
+      "tag": "금융마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "dadokga",
+      "url": "https://www.threads.com/@dadokga",
+      "tag": "금융마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "janie_o3o",
+      "url": "https://www.threads.com/@janie_o3o",
+      "tag": "금융마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "lifetimebds",
+      "url": "https://www.threads.com/@lifetimebds",
+      "tag": "부동산마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "j.real_o",
+      "url": "https://www.threads.com/@j.real_o",
+      "tag": "부동산마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "qgis_highlighter",
+      "url": "https://www.threads.com/@qgis_highlighter",
+      "tag": "부동산마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "developer_gold",
+      "url": "https://www.threads.com/@developer_gold",
+      "tag": "부동산마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "hu9inn",
+      "url": "https://www.threads.com/@hu9inn",
+      "tag": "병원마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "opndoctor",
+      "url": "https://www.threads.com/@opndoctor",
+      "tag": "병원마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "sungmin_daum",
+      "url": "https://www.threads.com/@sungmin_daum",
+      "tag": "병원마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "mediincompany_threads",
+      "url": "https://www.threads.com/@mediincompany_threads",
+      "tag": "병원마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "gangnamwdentalclinic",
+      "url": "https://www.threads.com/@gangnamwdentalclinic",
+      "tag": "병원마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "leewonsung",
+      "url": "https://www.threads.com/@leewonsung",
+      "tag": "병원마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "se_ryn_2",
+      "url": "https://www.threads.com/@se_ryn_2",
+      "tag": "병원마케팅",
+      "reason": "no_input"
+    },
+    {
+      "username": "lee.mihwa",
+      "url": "https://www.threads.com/@lee.mihwa",
+      "tag": "기업브랜딩",
+      "reason": "no_input"
+    },
+    {
+      "username": "ecommerce_jin",
+      "url": "https://www.threads.com/@ecommerce_jin",
+      "tag": "기업브랜딩",
+      "reason": "no_input"
+    },
+    {
+      "username": "frame__marketing",
+      "url": "https://www.threads.com/@frame__marketing",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn []"
+    },
+    {
+      "username": "miracle_moon.meta",
+      "url": "https://www.threads.com/@miracle_moon.meta",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn []"
+    },
+    {
+      "username": "donjalnam",
+      "url": "https://www.threads.com/@donjalnam",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn []"
+    },
+    {
+      "username": "aether_mkt",
+      "url": "https://www.threads.com/@aether_mkt",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn []"
+    },
+    {
+      "username": "dadokga",
+      "url": "https://www.threads.com/@dadokga",
+      "tag": "금융마케팅",
+      "reason": "no_msg_btn []"
+    },
+    {
+      "username": "frame__marketing",
+      "url": "https://www.threads.com/@frame__marketing",
+      "tag": "금융마케팅",
+      "reason": "no_msgbox @ hyyl.kr"
+    },
+    {
+      "username": "miracle_moon.meta",
+      "url": "https://www.threads.com/@miracle_moon.meta",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "donjalnam",
+      "url": "https://www.threads.com/@donjalnam",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "aether_mkt",
+      "url": "https://www.threads.com/@aether_mkt",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "dadokga",
+      "url": "https://www.threads.com/@dadokga",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "janie_o3o",
+      "url": "https://www.threads.com/@janie_o3o",
+      "tag": "금융마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "lifetimebds",
+      "url": "https://www.threads.com/@lifetimebds",
+      "tag": "부동산마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "j.real_o",
+      "url": "https://www.threads.com/@j.real_o",
+      "tag": "부동산마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "qgis_highlighter",
+      "url": "https://www.threads.com/@qgis_highlighter",
+      "tag": "부동산마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "developer_gold",
+      "url": "https://www.threads.com/@developer_gold",
+      "tag": "부동산마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "hu9inn",
+      "url": "https://www.threads.com/@hu9inn",
+      "tag": "병원마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "opndoctor",
+      "url": "https://www.threads.com/@opndoctor",
+      "tag": "병원마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "sungmin_daum",
+      "url": "https://www.threads.com/@sungmin_daum",
+      "tag": "병원마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "mediincompany_threads",
+      "url": "https://www.threads.com/@mediincompany_threads",
+      "tag": "병원마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "gangnamwdentalclinic",
+      "url": "https://www.threads.com/@gangnamwdentalclinic",
+      "tag": "병원마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "leewonsung",
+      "url": "https://www.threads.com/@leewonsung",
+      "tag": "병원마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "se_ryn_2",
+      "url": "https://www.threads.com/@se_ryn_2",
+      "tag": "병원마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "lee.mihwa",
+      "url": "https://www.threads.com/@lee.mihwa",
+      "tag": "기업브랜딩",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "ecommerce_jin",
+      "url": "https://www.threads.com/@ecommerce_jin",
+      "tag": "기업브랜딩",
+      "reason": "no_msg_btn []"
+    },
+    {
+      "username": "positive_lab",
+      "url": "https://www.threads.com/@positive_lab",
+      "tag": "기업브랜딩",
+      "reason": "no_msgbox @ autovee_ai"
+    },
+    {
+      "username": "kakapal_",
+      "url": "https://www.threads.com/@kakapal_",
+      "tag": "기업브랜딩",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "brandbuilder_bb",
+      "url": "https://www.threads.com/@brandbuilder_bb",
+      "tag": "기업브랜딩",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "mijeongyun_kr",
+      "url": "https://www.threads.com/@mijeongyun_kr",
+      "tag": "스타트업마케팅",
+      "reason": "elementHandle.click: Element is not attached to the DOM"
+    },
+    {
+      "username": "donjalnam",
+      "url": "https://www.threads.com/@donjalnam",
+      "tag": "금융마케팅",
+      "reason": "no_msgbox @ songjian9914"
+    },
+    {
+      "username": "aether_mkt",
+      "url": "https://www.threads.com/@aether_mkt",
+      "tag": "금융마케팅",
+      "reason": "keyboard.type: Target page, context or browser has been closed"
+    },
+    {
+      "username": "dadokga",
+      "url": "https://www.threads.com/@dadokga",
+      "tag": "금융마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "janie_o3o",
+      "url": "https://www.threads.com/@janie_o3o",
+      "tag": "금융마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "lifetimebds",
+      "url": "https://www.threads.com/@lifetimebds",
+      "tag": "부동산마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "j.real_o",
+      "url": "https://www.threads.com/@j.real_o",
+      "tag": "부동산마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "qgis_highlighter",
+      "url": "https://www.threads.com/@qgis_highlighter",
+      "tag": "부동산마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "developer_gold",
+      "url": "https://www.threads.com/@developer_gold",
+      "tag": "부동산마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "hu9inn",
+      "url": "https://www.threads.com/@hu9inn",
+      "tag": "병원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "opndoctor",
+      "url": "https://www.threads.com/@opndoctor",
+      "tag": "병원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "sungmin_daum",
+      "url": "https://www.threads.com/@sungmin_daum",
+      "tag": "병원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "mediincompany_threads",
+      "url": "https://www.threads.com/@mediincompany_threads",
+      "tag": "병원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "gangnamwdentalclinic",
+      "url": "https://www.threads.com/@gangnamwdentalclinic",
+      "tag": "병원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "leewonsung",
+      "url": "https://www.threads.com/@leewonsung",
+      "tag": "병원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "se_ryn_2",
+      "url": "https://www.threads.com/@se_ryn_2",
+      "tag": "병원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "lee.mihwa",
+      "url": "https://www.threads.com/@lee.mihwa",
+      "tag": "기업브랜딩",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "ecommerce_jin",
+      "url": "https://www.threads.com/@ecommerce_jin",
+      "tag": "기업브랜딩",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "positive_lab",
+      "url": "https://www.threads.com/@positive_lab",
+      "tag": "기업브랜딩",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "kakapal_",
+      "url": "https://www.threads.com/@kakapal_",
+      "tag": "기업브랜딩",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "brandbuilder_bb",
+      "url": "https://www.threads.com/@brandbuilder_bb",
+      "tag": "기업브랜딩",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "mijeongyun_kr",
+      "url": "https://www.threads.com/@mijeongyun_kr",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "colorfulperspective_",
+      "url": "https://www.threads.com/@colorfulperspective_",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "hsy.ep0",
+      "url": "https://www.threads.com/@hsy.ep0",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "flotter.io",
+      "url": "https://www.threads.com/@flotter.io",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "hail.kr",
+      "url": "https://www.threads.com/@hail.kr",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "despace.official",
+      "url": "https://www.threads.com/@despace.official",
+      "tag": "스타트업마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "jhallenge",
+      "url": "https://www.threads.com/@jhallenge",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "hyyl.kr",
+      "url": "https://www.threads.com/@hyyl.kr",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "pulselift1",
+      "url": "https://www.threads.com/@pulselift1",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "ceotalking",
+      "url": "https://www.threads.com/@ceotalking",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "toy_mk_1",
+      "url": "https://www.threads.com/@toy_mk_1",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "jang_reean",
+      "url": "https://www.threads.com/@jang_reean",
+      "tag": "기업홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "zennpresso_official",
+      "url": "https://www.threads.com/@zennpresso_official",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "kim__y_c_",
+      "url": "https://www.threads.com/@kim__y_c_",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "leadgen.lab",
+      "url": "https://www.threads.com/@leadgen.lab",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "gonteamjang",
+      "url": "https://www.threads.com/@gonteamjang",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "godo.kim",
+      "url": "https://www.threads.com/@godo.kim",
+      "tag": "마케팅대행사",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "mss.go.kr",
+      "url": "https://www.threads.com/@mss.go.kr",
+      "tag": "에듀테크",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "hojin_t.ai",
+      "url": "https://www.threads.com/@hojin_t.ai",
+      "tag": "에듀테크",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "chem__is_try_",
+      "url": "https://www.threads.com/@chem__is_try_",
+      "tag": "에듀테크",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "chungse00",
+      "url": "https://www.threads.com/@chungse00",
+      "tag": "에듀테크",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "runclear_yedam",
+      "url": "https://www.threads.com/@runclear_yedam",
+      "tag": "이러닝",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "shaykim",
+      "url": "https://www.threads.com/@shaykim",
+      "tag": "이러닝",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "kirena0909",
+      "url": "https://www.threads.com/@kirena0909",
+      "tag": "이러닝",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "ch.juuoon",
+      "url": "https://www.threads.com/@ch.juuoon",
+      "tag": "이러닝",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "ausn1569",
+      "url": "https://www.threads.com/@ausn1569",
+      "tag": "이러닝",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "foodieaiden",
+      "url": "https://www.threads.com/@foodieaiden",
+      "tag": "브랜드영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "autovee_ai",
+      "url": "https://www.threads.com/@autovee_ai",
+      "tag": "브랜드영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "skylarsungjin",
+      "url": "https://www.threads.com/@skylarsungjin",
+      "tag": "브랜드영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "blink___ai",
+      "url": "https://www.threads.com/@blink___ai",
+      "tag": "브랜드영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "dcychair",
+      "url": "https://www.threads.com/@dcychair",
+      "tag": "브랜드영상",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "adlike_official",
+      "url": "https://www.threads.com/@adlike_official",
+      "tag": "의원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "choifact_ceo",
+      "url": "https://www.threads.com/@choifact_ceo",
+      "tag": "의원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "ai_margin_",
+      "url": "https://www.threads.com/@ai_margin_",
+      "tag": "의원마케팅",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "siheung_365",
+      "url": "https://www.threads.com/@siheung_365",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "songjian9914",
+      "url": "https://www.threads.com/@songjian9914",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "daall_connect",
+      "url": "https://www.threads.com/@daall_connect",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "woori_mk",
+      "url": "https://www.threads.com/@woori_mk",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    },
+    {
+      "username": "jun_hyoung__",
+      "url": "https://www.threads.com/@jun_hyoung__",
+      "tag": "병원홍보",
+      "reason": "page.evaluate: Target page, context or browser has been closed"
+    }
+  ],
+  "sent": [
+    {
+      "username": "polyclover",
+      "url": "https://www.threads.com/@polyclover",
+      "tag": "기업브랜딩",
+      "repliedAt": "2026-05-28T07:45:46.901Z"
+    },
+    {
+      "username": "frame__marketing",
+      "url": "https://www.threads.com/@frame__marketing",
+      "tag": "금융마케팅",
+      "sentAt": "2026-05-28T07:55:55.551Z"
+    },
+    {
+      "username": "miracle_moon.meta",
+      "url": "https://www.threads.com/@miracle_moon.meta",
+      "tag": "금융마케팅",
+      "sentAt": "2026-05-28T07:56:44.478Z"
+    }
+  ]
+}

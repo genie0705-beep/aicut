@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 966px; height: 966px; overflow: hidden;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+  .card {
+    width: 966px; height: 966px;
+    background: linear-gradient(145deg, #0D1630 0%, #1a1f4e 100%);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 60px;
+  }
+  .glow { position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,185,66,0.2) 0%, transparent 65%);
+    width: 700px; height: 700px; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); }
+  .tag { color: #F4B942; font-size: 32px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 36px; z-index: 2; position: relative; }
+  .title { color: #fff; font-size: 60px; font-weight: 900;
+    line-height: 1.2; letter-spacing: -2px;
+    z-index: 2; position: relative; margin-bottom: 50px; }
+  .row { width: 100%; display: flex; gap: 20px; z-index: 2; position: relative;
+    margin-bottom: 20px; }
+  .box { flex: 1; background: rgba(255,255,255,0.07); border-radius: 20px;
+    padding: 30px 20px; border: 1px solid rgba(244,185,66,0.2); }
+  .box-label { color: #F4B942; font-size: 26px; font-weight: 700; margin-bottom: 16px; }
+  .box-val { color: #fff; font-size: 34px; font-weight: 800; line-height: 1.4; }
+  .note { color: rgba(255,255,255,0.5); font-size: 26px; z-index: 2; position: relative;
+    margin-top: 10px; }
+  .brand { position: absolute; right: 60px; bottom: 56px;
+    color: rgba(255,255,255,0.3); font-size: 28px; font-weight: 900;
+    letter-spacing: 4px; z-index: 2; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow"></div>
+  <div class="tag">프리랜서 편집 실제 비용</div>
+  <div class="title">눈에 보이지 않는<br>비용이 더 크다</div>
+  <div class="row">
+    <div class="box">
+      <div class="box-label">숏폼 1편</div>
+      <div class="box-val">3만~8만 원</div>
+    </div>
+    <div class="box">
+      <div class="box-label">5~10분 영상</div>
+      <div class="box-val">5만~15만 원</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="box" style="flex:none; width:100%;">
+      <div class="box-label">월 10편 기준</div>
+      <div class="box-val">50만~150만 원<br><span style="font-size:26px; color:#F4B942;">+ 브리핑 반복 + 납기 지연 리스크</span></div>
+    </div>
+  </div>
+  <div class="note">건당 단가 외 숨은 비용이 핵심이다</div>
+  <div class="brand">AICUT</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 700px; height: 700px; overflow: hidden; margin: 0 auto;
+    font-family: 'Noto Sans KR', sans-serif; }
+  .card { width: 700px; height: 700px; position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #0D1630, #1a1f4e, #2d1b69);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 60px; }
+  .glow { position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(92,61,232,0.5) 0%, transparent 60%);
+    width: 450px; height: 450px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .badge { display: inline-block; background: rgba(167,139,250,0.15);
+    color: #a78bfa; font-size: 18px; font-weight: 700; padding: 8px 24px;
+    border: 1px solid rgba(167,139,250,0.3); border-radius: 30px;
+    margin-bottom: 28px; z-index: 2; position: relative; }
+  .main { color: #fff; font-size: 48px; font-weight: 800; line-height: 1.4;
+    z-index: 2; position: relative; margin-bottom: 16px;
+    word-break: keep-all; letter-spacing: -1px; }
+  .main em { color: #a78bfa; font-style: normal; }
+  .sub { color: rgba(255,255,255,0.6); font-size: 20px; font-weight: 500; line-height: 1.5;
+    z-index: 2; position: relative; margin-bottom: 32px; word-break: keep-all; }
+  .cta { background: linear-gradient(135deg, #5c3de8, #7c5cf6); color: #fff;
+    font-size: 20px; font-weight: 700; padding: 14px 48px; border-radius: 50px;
+    z-index: 2; position: relative; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="glow"></div>
+  <div class="badge">⚖️ 전문직 마케팅</div>
+  <div class="main">변호사·세무사·<br>보험설계사라면<br><em>영상 마케팅</em>을<br>고민해야 하는 이유</div>
+  <div class="sub">신뢰는 텍스트가 아니라 영상으로 쌓인다</div>
+  <div class="cta">AICUT 무료상담 →</div>
+</div>
+</body>
+</html>
