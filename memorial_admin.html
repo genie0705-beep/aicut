@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
 <style>
   :root{
+    --text-xs: 11px;
+    --text-sm: 12px;
+    --text-base: 13px;
+    --text-md: 14px;
+    --text-lg: 16px;
+    --text-xl: 20px;
     --stone-50:#F7F8FA;
     --surface:#FFFFFF;
     --stone-200:#EEF0F4;
@@ -34,6 +40,19 @@
     --radius-sm:8px;
     --radius-md:14px;
     --shadow-card:0 1px 2px rgba(15,17,23,.04), 0 4px 16px rgba(15,17,23,.06);
+    --text-xs:11px;
+    --text-sm:12px;
+    --text-base:13px;
+    --text-md:14px;
+    --text-lg:16px;
+    --text-xl:20px;
+    --radius-xs:4px;
+    --space-1:4px;
+    --space-2:8px;
+    --space-3:12px;
+    --space-4:16px;
+    --space-5:20px;
+    --space-6:24px;
   }
 
   *{box-sizing:border-box;}
@@ -60,7 +79,7 @@
   }
   .brand{
     font-weight:800;
-    font-size:17px;
+    font-size:16px;
     letter-spacing:-.01em;
     padding:4px 10px 18px;
     border-bottom:1px solid var(--border);
@@ -87,7 +106,7 @@
     border-left:3px solid transparent;
     transition:background .15s, color .15s;
   }
-  .nav-item i{font-size:17px; width:18px; text-align:center;}
+  .nav-item i{font-size:16px; width:18px; text-align:center;}
   .nav-item:hover{background:var(--stone-200); color:var(--ink-900);}
   .nav-item.active{
     background:rgba(91,95,239,.1);
@@ -98,7 +117,7 @@
   .sidebar-footer{
     margin-top:auto; padding-top:14px;
     border-top:1px solid var(--border);
-    font-size:11.5px; color:var(--ink-400);
+    font-size:11px; color:var(--ink-400);
   }
 
   /* ---------- Topbar ---------- */
@@ -110,7 +129,7 @@
     background:var(--surface);
     flex-wrap:wrap; gap:10px;
   }
-  .topbar h1{font-size:19px; font-weight:700; margin:0;}
+  .topbar h1{font-size:20px; font-weight:700; margin:0;}
   .top-right{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
   .facility-badge{
     background:var(--jade-100); color:var(--jade-800);
@@ -139,8 +158,9 @@
     display:flex; align-items:center; justify-content:space-between;
     margin-bottom:14px; gap:12px; flex-wrap:wrap;
   }
-  .section-head h2{font-size:15px; font-weight:700; margin:0;}
-  .section-sub{font-size:12.5px; color:var(--ink-400); margin-top:2px;}
+  .section-head h2{font-size:14px; font-weight:700; margin:0;}
+  h2 .ti{font-size:16px; margin-right:6px; vertical-align:-2px; color:var(--jade-700);}
+  .section-sub{font-size:12px; color:var(--ink-400); margin-top:2px;}
 
   /* ---------- Cards / KPI ---------- */
   .card{
@@ -154,13 +174,13 @@
     margin-bottom:20px;
   }
   .kpi-card{padding:16px 18px;}
-  .kpi-label{font-size:12.5px; color:var(--ink-600); margin:0 0 6px;}
-  .kpi-value{font-size:23px; font-weight:700; margin:0; letter-spacing:-.01em;}
+  .kpi-label{font-size:12px; color:var(--ink-600); margin:0 0 6px;}
+  .kpi-value{font-size:20px; font-weight:700; margin:0; letter-spacing:-.01em;}
   .kpi-sub{font-size:12px; color:var(--ink-400); margin:4px 0 0;}
   .kpi-icon{
-    width:34px; height:34px; border-radius:10px;
+    width:34px; height:34px; border-radius:var(--radius-sm);
     display:flex; align-items:center; justify-content:center;
-    font-size:17px; margin-bottom:12px;
+    font-size:16px; margin-bottom:12px;
   }
 
   .grid-2col{display:grid; grid-template-columns:1.3fr 1fr; gap:16px;}
@@ -168,7 +188,7 @@
   /* ---------- Buttons ---------- */
   .btn{
     display:inline-flex; align-items:center; gap:6px;
-    font-size:13.5px; font-weight:600;
+    font-size:13px; font-weight:600;
     padding:8px 14px;
     border-radius:var(--radius-sm);
     border:1px solid transparent;
@@ -178,11 +198,11 @@
   .btn-primary:hover{background:var(--jade-600);}
   .btn-ghost{background:transparent; border-color:var(--border); color:var(--ink-900);}
   .btn-ghost:hover{background:var(--stone-200);}
-  .btn-sm{padding:5px 10px; font-size:12.5px;}
+  .btn-sm{padding:5px 10px; font-size:12px;}
   .link-btn{background:none; border:none; color:var(--jade-700); font-size:13px; font-weight:600; padding:0;}
 
   /* ---------- Badges ---------- */
-  .badge{display:inline-block; padding:3px 10px; border-radius:var(--radius-sm); font-size:12px; font-weight:600;}
+  .badge{font-size:11px; display:inline-block; padding:3px 10px; border-radius:var(--radius-sm); font-size:12px; font-weight:600;}
   .badge-success{background:var(--jade-100); color:var(--jade-800);}
   .badge-warning{background:var(--brass-100); color:var(--brass-800);}
   .badge-danger{background:var(--wine-100); color:var(--wine-800);}
@@ -195,13 +215,13 @@
 
   /* ---------- Table ---------- */
   .table-wrap{overflow-x:auto;}
-  table.data-table{width:100%; border-collapse:collapse; font-size:13.5px; min-width:680px;}
+  table.data-table{width:100%; border-collapse:collapse; font-size:13px; min-width:680px;}
   table.data-table th{
-    text-align:left; font-size:11.5px; font-weight:600; letter-spacing:.04em;
+    text-align:left; font-size:11px; font-weight:600; letter-spacing:.04em;
     text-transform:uppercase; color:var(--ink-400);
     padding:10px 12px; border-bottom:1px solid var(--border);
   }
-  table.data-table td{padding:11px 12px; border-bottom:1px solid var(--stone-200); vertical-align:middle;}
+  table.data-table td{font-size: var(--text-base);padding:11px 12px; border-bottom:1px solid var(--stone-200); vertical-align:middle;}
   table.data-table tr:last-child td{border-bottom:none;}
   table.data-table tbody tr:hover{background:var(--stone-50);}
 
@@ -214,7 +234,7 @@
   .tab-btn.active{background:var(--jade-700); color:#fff; border-color:var(--jade-700);}
 
   /* ---------- Location grid ---------- */
-  .legend{display:flex; gap:16px; margin-bottom:12px; font-size:12.5px; color:var(--ink-600); flex-wrap:wrap;}
+  .legend{display:flex; gap:16px; margin-bottom:12px; font-size:12px; color:var(--ink-600); flex-wrap:wrap;}
   .legend span{display:flex; align-items:center; gap:6px;}
   .swatch{width:10px; height:10px; border-radius:2px; display:inline-block;}
    .loc-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(42px,1fr)); gap:6px;}
@@ -226,7 +246,7 @@
  .loc-tree:hover{transform:translateY(-2px);}
  .loc-cell{
     aspect-ratio:1; display:flex; align-items:center; justify-content:center;
-    font-size:10.5px; font-weight:600; border-radius:var(--radius-sm);
+    font-size:11px; font-weight:600; border-radius:var(--radius-sm);
     cursor:pointer; transition:transform .1s, box-shadow .1s;
     padding:4px;
   }
@@ -234,7 +254,7 @@
   .loc-tooltip{
     position:fixed; z-index:90; pointer-events:none;
     background:var(--surface); border:1px solid var(--border); color:var(--ink-900);
-    font-size:12.5px; padding:10px 12px; border-radius:var(--radius-md);
+    font-size:12px; padding:10px 12px; border-radius:var(--radius-md);
     box-shadow:var(--shadow-card); opacity:0; transform:translateY(4px) scale(.97);
     transition:opacity .12s, transform .12s; min-width:150px; max-width:220px;
     display:none;
@@ -260,23 +280,23 @@
   .fee-name{font-size:14px; font-weight:600; margin:0;}
   .fee-sub{font-size:12px; color:var(--ink-600); margin:2px 0 0;}
   .fee-right{text-align:right; flex-shrink:0;}
-  .fee-date{font-size:11.5px; color:var(--ink-400); margin:4px 0 0;}
+  .fee-date{font-size:11px; color:var(--ink-400); margin:4px 0 0;}
   .urgency-bar{width:84px; height:5px; background:var(--stone-200); border-radius:999px; overflow:hidden; margin:6px 0 0 auto;}
   .urgency-fill{height:100%; border-radius:999px;}
 
   /* ---------- Kanban ---------- */
   .kanban{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
-  .kanban-col-head{font-size:12.5px; padding:6px 10px; border-radius:var(--radius-sm); margin-bottom:8px; font-weight:600;}
+  .kanban-col-head{font-size:12px; padding:6px 10px; border-radius:var(--radius-sm); margin-bottom:8px; font-weight:600;}
   .task-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:10px 12px; margin-bottom:8px;}
-  .task-card p{font-size:13.5px; font-weight:600; margin:0 0 8px;}
+  .task-card p{font-size:13px; font-weight:600; margin:0 0 8px;}
   .task-meta{display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--ink-600);}
   .task-meta .assignee{display:flex; align-items:center; gap:6px;}
-  .mini-avatar{width:17px; height:17px; border-radius:50%; background:var(--stone-200); font-size:9.5px; font-weight:600; display:flex; align-items:center; justify-content:center;}
+  .mini-avatar{width:17px; height:17px; border-radius:50%; background:var(--stone-200); font-size:11px; font-weight:600; display:flex; align-items:center; justify-content:center;}
   .task-card.done{opacity:.65;}
 
   /* ---------- Form ---------- */
   .form-row{margin-bottom:14px;}
-  .form-row label{display:block; font-size:12.5px; font-weight:600; color:var(--ink-600); margin-bottom:5px;}
+  .form-row label{display:block; font-size:12px; font-weight:600; color:var(--ink-600); margin-bottom:5px;}
   .form-row input, .form-row select, .form-row textarea{
     width:100%; padding:8px 10px; border:1px solid var(--border); border-radius:var(--radius-sm);
     background:#fff; color:var(--ink-900);
@@ -284,10 +304,10 @@
   .form-grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
   .search-input{
     padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm);
-    font-size:13.5px; width:220px; background:#fff;
+    font-size:13px; width:220px; background:#fff;
   }
   .radio-row{display:flex; gap:18px; align-items:center;}
-  .radio-row label{display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:500; color:var(--ink-900);}
+  .radio-row label{display:flex; align-items:center; gap:6px; font-size:13px; font-weight:500; color:var(--ink-900);}
 
   /* ---------- Modal ---------- */
   .modal-overlay{
@@ -296,7 +316,7 @@
   }
   .modal-overlay.open{display:flex;}
   .modal{
-    background:#fff; border-radius:12px; padding:24px;
+    background:#fff; border-radius:var(--radius-sm); padding:24px;
     width:580px; max-width:95vw; max-height:88vh; overflow-y:auto;
   }
   .modal h3{margin:0 0 18px; font-size:16px; font-weight:700;}
@@ -306,7 +326,7 @@
   #toast{
     position:fixed; bottom:24px; right:24px;
     background:var(--ink-900); color:#fff;
-    padding:11px 18px; border-radius:8px; font-size:13.5px;
+    padding:11px 18px; border-radius:8px; font-size:13px;
     opacity:0; transform:translateY(8px); transition:opacity .25s, transform .25s;
     pointer-events:none; z-index:80;
   }
@@ -322,12 +342,12 @@
     @media (max-width:700px){
     .app{flex-direction:column;}
     .sidebar{width:100%; flex-direction:row; align-items:center; padding:10px 12px; gap:14px;}
-    .brand{border-bottom:none; padding:0; margin:0;}
+    .brand{font-size:16px; border-bottom:none; padding:0; margin:0;}
     .brand small{display:none;}
     nav.nav-list{flex-direction:row; overflow-x:auto; gap:4px;}
-    .nav-item{flex-shrink:0; border-left:none; border-bottom:3px solid transparent;}
+    .nav-item{font-size:14px; flex-shrink:0; border-left:none; border-bottom:3px solid transparent;}
     .nav-item.active{border-left:none; border-bottom-color:var(--jade-700); background:transparent;}
-    .sidebar-footer{display:none;}
+    .sidebar-footer{font-size:11px; display:none;}
     main#content{padding:18px 14px 50px;}
     .topbar{padding:14px 16px;}
   }
@@ -379,7 +399,7 @@
     color:var(--ink-400);
   }
   .empty-message i{
-    font-size:32px;
+    font-size:20px;
     display:block;
     margin-bottom:8px;
     opacity:.5;
@@ -393,7 +413,7 @@
     border-left-width:4px !important;
   }
   .executive-view .kpi-value{
-    font-size:28px !important;
+    font-size:20px !important;
   }
   .executive-highlight{
     background:linear-gradient(135deg,rgba(91,95,239,.06),rgba(245,166,35,.06));
@@ -425,12 +445,12 @@
     box-shadow:var(--shadow-card);
   }
   .today-card .count{
-    font-size:28px;
+    font-size:20px;
     font-weight:700;
     margin:6px 0;
   }
   .today-card .label{
-    font-size:12.5px;
+    font-size:12px;
     color:var(--ink-600);
     margin:0;
   }
@@ -486,6 +506,53 @@
   .template-card-collapsed .template-card-arrow{
     transform:rotate(-90deg);
   }
+
+  /* ---------- H2 Icon ---------- */
+  h2 i.ti{font-size:var(--text-lg); margin-right:6px; vertical-align:-2px; color:var(--jade-700);}
+
+  .nav-group-label{
+    font-size:12px; font-weight:700; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--ink-400);
+    padding:14px 10px 4px; margin-top:4px;
+  }
+
+  .empty-state{
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; padding:40px 20px;
+    color:var(--ink-400); text-align:center; gap:8px;
+  }
+  .empty-state i{font-size:20px; color:var(--stone-200); margin-bottom:4px;}
+  .empty-state .empty-title{font-size:14px; font-weight:600; color:var(--ink-600);}
+  .empty-state .empty-sub{font-size:12px; color:var(--ink-400);}
+
+  /* ---------- utilities ---------- */
+  .flex-center{display:flex; align-items:center;}
+  .flex-between{display:flex; align-items:center; justify-content:space-between;}
+  .flex-col{display:flex; flex-direction:column;}
+  .gap-4{gap:4px;}
+  .gap-6{gap:6px;}
+  .gap-8{gap:8px;}
+  .gap-12{gap:12px;}
+  .gap-16{gap:16px;}
+  .mt-4{margin-top:4px;}
+  .mt-8{margin-top:8px;}
+  .mt-12{margin-top:12px;}
+  .mt-16{margin-top:16px;}
+  .mb-8{margin-bottom:8px;}
+  .mb-12{margin-bottom:12px;}
+  .mb-16{margin-bottom:16px;}
+  .text-xs{font-size:11px;}
+  .text-sm{font-size:12px;}
+  .text-base{font-size:13px;}
+  .text-md{font-size:14px;}
+  .text-lg{font-size:16px;}
+  .fw-500{font-weight:500;}
+  .fw-600{font-weight:600;}
+  .fw-700{font-weight:700;}
+  .c-ink-400{color:var(--ink-400);}
+  .c-ink-600{color:var(--ink-600);}
+  .c-jade{color:var(--jade-700);}
+  .c-danger{color:var(--wine-600);}
 </style>
 </head>
 <body>
@@ -515,14 +582,17 @@
   <aside class="sidebar">
     <div class="brand">청솔원<small>메모리얼파크 어드민</small></div>
     <nav class="nav-list">
+      <div class="nav-group-label">핵심 업무</div>
       <button class="nav-item active" data-page="dashboard"><i class="ti ti-layout-dashboard"></i>대시보드</button>
       <button class="nav-item" data-page="locations"><i class="ti ti-map-pin"></i>위치 관리</button>
       <button class="nav-item" data-page="contracts"><i class="ti ti-file-text"></i>계약 관리</button>
       <button class="nav-item" data-page="fees"><i class="ti ti-coin"></i>관리비 관리</button>
       <button class="nav-item" data-page="sales"><i class="ti ti-percentage"></i>영업·정산</button>
+      <div class="nav-group-label">분석·정산</div>
       <button class="nav-item" data-page="revenuemanage"><i class="ti ti-chart-bar"></i>매출 관리</button>
       <button class="nav-item" data-page="staff"><i class="ti ti-id-badge-2"></i>직원 관리</button>
       <button class="nav-item" data-page="customers"><i class="ti ti-users"></i>유족 관리</button>
+      <div class="nav-group-label">설정·관리</div>
       <button class="nav-item" data-page="notifications"><i class="ti ti-bell-ringing"></i>알림 관리</button>
       <button class="nav-item" data-page="logs"><i class="ti ti-history"></i>발송 로그</button>
       <button class="nav-item" data-page="settings"><i class="ti ti-settings"></i>설정</button>
@@ -537,8 +607,8 @@
         <span class="facility-badge" id="facility-badge">수목장</span>
         <span class="operator-name">청솔원 메모리얼파크</span>
         <span class="staff-chip" id="user-chip"><span class="avatar">김</span>김민수 · 관리자</span>
-    <button id="notif-btn" style="background:none; border:none; cursor:pointer; color:var(--ink-400); font-size:16px; padding:4px; position:relative;" title="납부 알림"><i class="ti ti-bell"></i><span id="notif-badge" style="position:absolute; top:-2px; right:-4px; background:var(--wine-600); color:#fff; font-size:9px; font-weight:700; padding:1px 5px; border-radius:999px; min-width:16px; text-align:center; display:none;">0</span></button>
-    <button id="logout-btn" style="background:none; border:none; cursor:pointer; color:var(--ink-400); font-size:14px; padding:4px;" title="로그아웃"><i class="ti ti-logout"></i></button>
+    <button id="notif-btn" aria-label="알림 패널 열기" style="background:none; border:none; cursor:pointer; color:var(--ink-400); font-size:16px; padding:4px; position:relative;" title="납부 알림"><i class="ti ti-bell"></i><span id="notif-badge" style="position:absolute; top:-2px; right:-4px; background:var(--wine-600); color:#fff; font-size:11px; font-weight:700; padding:1px 5px; border-radius:999px; min-width:16px; text-align:center; display:none;">0</span></button>
+    <button id="logout-btn" aria-label="로그아웃" style="background:none; border:none; cursor:pointer; color:var(--ink-400); font-size:14px; padding:4px;" title="로그아웃"><i class="ti ti-logout"></i></button>
       </div>
     </header>
 
@@ -601,7 +671,7 @@
         <div class="card" style="padding:18px 18px 16px; margin-bottom:16px; width:100%;">
           <div class="section-head">
             <div>
-              <h2>📍 위치 현황</h2>
+              <h2><i class='ti ti-map-pin'></i> 위치 현황</h2>
               <p class="section-sub">전체 <span id="dash-stat-total">42</span>구좌 · 구역별/층별 사용률</p>
             </div>
             <button class="link-btn" data-goto="locations">전체 위치 보기 →</button>
@@ -615,7 +685,7 @@
         <div class="card" style="padding:18px; margin-bottom:16px;" id="ceo-dashboard-section">
           <div class="section-head" style="margin-bottom:10px;">
             <div>
-              <h2>🏢 고객사 대표 대시보드 <span class="help-tip" style="font-size:12px;">ⓘ<span class="help-tip-content">매출·영업·수납 핵심 지표를 한눈에 확인하세요. 전월 대비 증감을 표시합니다.</span></span></h2>
+              <h2><i class='ti ti-building-community'></i> 고객사 대표 대시보드 <span class="help-tip" style="font-size:12px;">ⓘ<span class="help-tip-content">매출·영업·수납 핵심 지표를 한눈에 확인하세요. 전월 대비 증감을 표시합니다.</span></span></h2>
               <p class="section-sub">매출 요약 · 직원별 실적 · 전월 대비 증감</p>
             </div>
             <div style="display:flex; gap:6px; align-items:center;">
@@ -649,7 +719,7 @@
           <!-- 직원별 실적 -->
           <div style="margin-top:12px;">
             <div class="section-head" style="margin-bottom:8px;">
-              <h2>👥 직원별 이번달 실적</h2>
+              <h2><i class='ti ti-report-analytics'></i> 직원별 이번달 실적</h2>
               <span style="font-size:11px; color:var(--ink-400);">계약 건수 · 관리비 수납 · 정산 처리</span>
             </div>
             <div id="staff-performance" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;"></div>
@@ -661,7 +731,7 @@
         <div class="grid-2col" style="width:100%;">
           <div class="card" style="padding:18px;">
             <div class="section-head">
-              <h2>💳 다가오는 관리비</h2>
+              <h2><i class='ti ti-calendar-due'></i> 다가오는 관리비</h2>
               <button class="link-btn" data-goto="fees">전체 보기 →</button>
             </div>
             <div id="dash-fee-list"></div>
@@ -669,7 +739,7 @@
 
           <div class="card" style="padding:18px;">
             <div class="section-head">
-              <h2>📋 오늘의 업무</h2>
+              <h2><i class='ti ti-checklist'></i> 오늘의 업무</h2>
               <button class="link-btn" data-goto="staff">전체 보기 →</button>
             </div>
             <div id="dash-task-list"></div>
@@ -679,7 +749,7 @@
         <div class="card" style="padding:18px; margin-top:16px; width:100%;">
           <div class="section-head">
             <div>
-              <h2>🕯️ 다가오는 추모일</h2>
+              <h2><i class='ti ti-candle'></i> 다가오는 추모일</h2>
               <p class="section-sub">고인 사망일 기준 삼우제 · 49제 · 기일 자동 계산</p>
             </div>
           </div>
@@ -695,11 +765,35 @@
           <div style="flex:1; min-width:0;">
             <div class="section-head">
               <div>
-                <h2>🗺️ 위치(구좌) 관리</h2>
+                <h2><i class='ti ti-layout-grid'></i> 위치(구좌) 관리</h2>
                 <p class="section-sub">1구역 · 총 <span id="loc-total-label">42</span>구좌</p>
               </div>
             </div>
-            <div class="tabs" id="loc-filter-tabs">
+            <div id="zone-tabs" style="display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap;">
+              <button class="zone-tab-btn active" data-zone="all" style="display:flex; align-items:center; gap:6px; padding:6px 14px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--jade-700); color:#fff; font-size:13px; font-weight:600; cursor:pointer;">
+                \uc804\uccb4
+                <span style="background:rgba(255,255,255,.2); padding:1px 7px; border-radius:999px; font-size:11px;">42</span>
+              </button>
+              <button class="zone-tab-btn" data-zone="A" style="display:flex; align-items:center; gap:6px; padding:6px 14px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); color:var(--ink-600); font-size:13px; font-weight:600; cursor:pointer;">
+                A\uad6c\uc5ed
+                <span style="background:var(--jade-100); color:var(--jade-800); padding:1px 7px; border-radius:999px; font-size:11px;">21\uad6c\uc88c</span>
+              </button>
+              <button class="zone-tab-btn" data-zone="B" style="display:flex; align-items:center; gap:6px; padding:6px 14px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); color:var(--ink-600); font-size:13px; font-weight:600; cursor:pointer;">
+                B\uad6c\uc5ed
+                <span style="background:var(--brass-100); color:var(--brass-800); padding:1px 7px; border-radius:999px; font-size:11px;">14\uad6c\uc88c</span>
+              </button>
+              <button class="zone-tab-btn" data-zone="C" style="display:flex; align-items:center; gap:6px; padding:6px 14px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); color:var(--ink-600); font-size:13px; font-weight:600; cursor:pointer;">
+                C\uad6c\uc5ed
+                <span style="background:var(--stone-200); color:var(--ink-600); padding:1px 7px; border-radius:999px; font-size:11px;">7\uad6c\uc88c</span>
+              </button>
+            </div>
+            <div id="zone-tabs" style="display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap;">
+              <button class="zone-tab-btn active" data-zone="all" style="display:flex; align-items:center; gap:6px; padding:7px 14px; border-radius:var(--radius-sm); border:1px solid var(--jade-700); background:var(--jade-700); color:#fff; font-size:13px; font-weight:600; cursor:pointer;">전체 <span style="background:rgba(255,255,255,.2); padding:1px 7px; border-radius:999px; font-size:11px;">42</span></button>
+              <button class="zone-tab-btn" data-zone="A" style="display:flex; align-items:center; gap:6px; padding:7px 14px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); color:var(--ink-600); font-size:13px; font-weight:600; cursor:pointer;">A구역 <span style="background:var(--jade-100); color:var(--jade-800); padding:1px 7px; border-radius:999px; font-size:11px; font-weight:600;">21</span></button>
+              <button class="zone-tab-btn" data-zone="B" style="display:flex; align-items:center; gap:6px; padding:7px 14px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); color:var(--ink-600); font-size:13px; font-weight:600; cursor:pointer;">B구역 <span style="background:var(--brass-100); color:var(--brass-800); padding:1px 7px; border-radius:999px; font-size:11px; font-weight:600;">14</span></button>
+              <button class="zone-tab-btn" data-zone="C" style="display:flex; align-items:center; gap:6px; padding:7px 14px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); color:var(--ink-600); font-size:13px; font-weight:600; cursor:pointer;">C구역 <span style="background:var(--stone-200); color:var(--ink-600); padding:1px 7px; border-radius:999px; font-size:11px; font-weight:600;">7</span></button>
+            </div>
+            <div class="tabs" id="loc-filter-tabs" role="tablist" aria-label="위치 상태 필터">
               <button class="tab-btn active" data-filter="all">전체</button>
               <button class="tab-btn" data-filter="occupied">사용중</button>
               <button class="tab-btn" data-filter="reserved">예약중</button>
@@ -721,9 +815,9 @@
             <div style="padding:16px 18px; background:var(--stone-50); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
                 <div>
                   <p style="font-size:11px; color:var(--ink-400); margin:0 0 2px;">위치 상세</p>
-                  <p id="dp-code" style="font-size:17px; font-weight:700; margin:0; color:var(--ink-900);">--</p>
+                  <p id="dp-code" style="font-size:16px; font-weight:700; margin:0; color:var(--ink-900);">--</p>
                 </div>
-                <button id="dp-close" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink-400); padding:6px; border-radius:50%; hover:background:var(--stone-200);">&times;</button>
+                <button id="dp-close" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-400); padding:6px; border-radius:50%; hover:background:var(--stone-200);">&times;</button>
               </div>
               <!-- 상태 배지 -->
               <div style="padding:12px 18px; border-bottom:1px solid var(--stone-200); display:flex; gap:6px; flex-shrink:0;">
@@ -735,15 +829,15 @@
                 <div id="dp-occupied-info" style="margin-bottom:6px; padding:0 16px;">
                   <div style="display:flex; gap:16px; flex-wrap:wrap;">
                     <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">고인</label>
+                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:1px;">고인</label>
                       <p id="dp-occupant" style="font-size:13px; font-weight:600; margin:0;">--</p>
                     </div>
                     <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">계약자</label>
+                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:1px;">계약자</label>
                       <p id="dp-holder" style="font-size:13px; font-weight:600; margin:0;">--</p>
                     </div>
                     <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">계약일</label>
+                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:1px;">계약일</label>
                       <p id="dp-date" style="font-size:13px; margin:0; color:var(--ink-600);">--</p>
                     </div>
                   </div>
@@ -757,11 +851,11 @@
                 <div id="dp-reserved-info" style="display:none; margin-bottom:6px; padding:0 16px;">
                   <div style="display:flex; gap:16px; flex-wrap:wrap;">
                     <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">예약자</label>
+                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:1px;">예약자</label>
                       <p id="dp-reserver" style="font-size:13px; font-weight:600; margin:0;">--</p>
                     </div>
                     <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">예약일</label>
+                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:1px;">예약일</label>
                       <p id="dp-res-date" style="font-size:13px; margin:0; color:var(--ink-600);">--</p>
                     </div>
                   </div>
@@ -769,7 +863,7 @@
                 <!-- 계약 사항 (접힘 기본) -->
                 <div id="dp-contract-info" style="display:none; border-top:1px solid var(--stone-200); padding-top:6px; margin-bottom:6px; padding:6px 16px 0 16px;;">
                   <div onclick="toggleSection('contract-detail')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; padding-left:0; margin-left:0;">
-                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📄 계약 사항 <span class="toggle-icon" id="toggle-contract-detail" style="font-size:10px; color:var(--ink-400);">▼</span></p>
+                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📄 계약 사항 <span class="toggle-icon" id="toggle-contract-detail" style="font-size:11px; color:var(--ink-400);">▼</span></p>
                   </div>
                   <div id="dp-contract-detail" data-section="contract-detail" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; min-width:0;">
                     <div style="min-width:0; overflow:hidden;">
@@ -802,7 +896,7 @@
                 <!-- 관리비 (펼침 기본) -->
                 <div style="border-top:1px solid var(--stone-200); padding-top:6px; margin-bottom:6px; padding:6px 16px 0 16px;">
                   <div onclick="toggleSection('fee-status')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; padding-left:0;">
-                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📋 관리비 납부 현황 <span class="toggle-icon" id="toggle-fee-status" style="font-size:10px; color:var(--ink-400);">▼</span></p>
+                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📋 관리비 납부 현황 <span class="toggle-icon" id="toggle-fee-status" style="font-size:11px; color:var(--ink-400);">▼</span></p>
                   </div>
                   <div id="dp-fee-status" data-section="fee-status" style="display:flex; flex-direction:column; gap:6px;">
                     <p style="font-size:13px; color:var(--ink-600);">--</p>
@@ -811,36 +905,36 @@
                 <!-- 변경이력 (펼침 기본) -->
                 <div style="border-top:1px solid var(--stone-200); padding-top:6px; margin-bottom:6px; padding:6px 16px 0 16px;">
                   <div onclick="toggleSection('history')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; padding-left:0;">
-                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📜 변경이력 <span class="toggle-icon" id="toggle-history" style="font-size:10px; color:var(--ink-400);">▼</span></p>
+                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📜 변경이력 <span class="toggle-icon" id="toggle-history" style="font-size:11px; color:var(--ink-400);">▼</span></p>
                   </div>
                   <div id="dp-history" data-section="history" style="display:flex; flex-direction:column; gap:6px;">
                     <p style="font-size:13px; color:var(--ink-400);">변경 이력이 없습니다.</p>
                   </div>
                   <div style="margin-top:10px; border-top:1px solid var(--stone-200); padding-top:10px;">
                     <div style="display:flex; gap:6px;">
-                      <input id="dp-history-input" type="text" placeholder="비고/사유 입력..." style="flex:1; padding:7px 0 7px 0; border:1px solid var(--border); border-radius:var(--radius-sm); font-size:12.5px; text-indent:10px;">
+                      <input id="dp-history-input" type="text" placeholder="비고/사유 입력..." style="flex:1; padding:7px 0 7px 0; border:1px solid var(--border); border-radius:var(--radius-sm); font-size:12px; text-indent:10px;">
                       <button id="dp-history-add" class="btn btn-primary btn-sm" style="white-space:nowrap;">등록</button>
                     </div>
-                    <p style="font-size:10.5px; color:var(--ink-400); margin:5px 0 0;">관리자 메모는 브라우저에 저장됩니다</p>
+                    <p style="font-size:11px; color:var(--ink-400); margin:5px 0 0;">관리자 메모는 브라우저에 저장됩니다</p>
                   </div>
                 </div>
                 <!-- 알림톡 발송 (펼침 기본) -->
                 <div style="border-top:1px solid var(--stone-200); padding-top:6px; margin-bottom:0; padding:6px 16px 0 16px;">
                   <div onclick="toggleSection('kakao')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; padding-left:0;">
-                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📬 알림톡 발송 <span class="toggle-icon" id="toggle-kakao" style="font-size:10px; color:var(--ink-400);">▼</span></p>
+                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📬 알림톡 발송 <span class="toggle-icon" id="toggle-kakao" style="font-size:11px; color:var(--ink-400);">▼</span></p>
                   </div>
                   <div data-section="kakao" style="display:block;">
                   <div style="display:flex; flex-direction:column; gap:6px;">
-                    <button class="dp-kakao-btn" data-type="fee" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); cursor:pointer; font-size:12.5px; font-weight:500; color:var(--ink-900); text-align:left; width:100%;" onmouseenter="this.style.background='var(--stone-50)'" onmouseleave="this.style.background='var(--surface)'">
+                    <button class="dp-kakao-btn" data-type="fee" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); cursor:pointer; font-size:12px; font-weight:500; color:var(--ink-900); text-align:left; width:100%;" onmouseenter="this.style.background='var(--stone-50)'" onmouseleave="this.style.background='var(--surface)'">
                       <span style="width:28px; height:28px; border-radius:50%; background:#FEE500; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">💛</span>
                       <div><p style="margin:0; font-weight:600;">관리비 납부 안내</p><p style="margin:0; font-size:11px; color:var(--ink-400);">계약자에게 관리비 납부 안내 전송</p></div>
                     </button>
-                    <button class="dp-kakao-btn" data-type="memorial" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); cursor:pointer; font-size:12.5px; font-weight:500; color:var(--ink-900); text-align:left; width:100%;" onmouseenter="this.style.background='var(--stone-50)'" onmouseleave="this.style.background='var(--surface)'">
+                    <button class="dp-kakao-btn" data-type="memorial" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); cursor:pointer; font-size:12px; font-weight:500; color:var(--ink-900); text-align:left; width:100%;" onmouseenter="this.style.background='var(--stone-50)'" onmouseleave="this.style.background='var(--surface)'">
                       <span style="width:28px; height:28px; border-radius:50%; background:#FEE500; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">💛</span>
                       <div><p style="margin:0; font-weight:600;">추모일 안내</p><p style="margin:0; font-size:11px; color:var(--ink-400);">기일/삼우제/49제 안내 전송</p></div>
                     </button>
                   </div>
-                  <button id="dp-kakao-log-btn" style="background:none; border:none; color:var(--jade-700); font-size:11.5px; font-weight:600; cursor:pointer; padding:0; margin-top:6px;"><i class="ti ti-history"></i> 발송이력 보기</button>
+                  <button id="dp-kakao-log-btn" style="background:none; border:none; color:var(--jade-700); font-size:11px; font-weight:600; cursor:pointer; padding:0; margin-top:6px;"><i class="ti ti-history"></i> 발송이력 보기</button>
                 </div>
               </div>
           </div>
@@ -848,7 +942,7 @@
 
         <div class="section-head" style="margin-top:24px;">
           <div>
-            <h2>📅 예약 현황</h2>
+            <h2><i class='ti ti-calendar'></i> 예약 현황</h2>
             <p class="section-sub">계약 전 단계 · 예약금 입금 고객 관리, 만료 전 계약으로 전환합니다</p>
           </div>
           <button class="btn btn-primary" id="open-reservation-modal"><i class="ti ti-plus"></i>예약 등록</button>
@@ -876,7 +970,7 @@
       <section class="page" data-page="contracts">
         <div class="section-head">
           <div>
-            <h2>📝 계약 관리 <span class="help-tip" style="font-size:12px;">ⓘ<span class="help-tip-content">안치 계약 현황을 관리합니다. 필터/검색으로 원하는 계약을 빠르게 찾을 수 있습니다.</span></span></h2>
+            <h2><i class='ti ti-file-text'></i> 계약 관리 <span class="help-tip" style="font-size:12px;">ⓘ<span class="help-tip-content">안치 계약 현황을 관리합니다. 필터/검색으로 원하는 계약을 빠르게 찾을 수 있습니다.</span></span></h2>
             <p class="section-sub">안치 계약 · 실물 계약서는 보관함 위치만 시스템에서 추적합니다</p>
           </div>
           <div style="display:flex; gap:8px;">
@@ -909,7 +1003,7 @@
           </div>
         </div>
 
-        <div class="tabs" id="contract-filter-tabs">
+        <div class="tabs" id="contract-filter-tabs" role="tablist" aria-label="계약 상태 필터">
           <button class="tab-btn active" data-filter="all">전체</button>
           <button class="tab-btn" data-filter="active">정상</button>
           <button class="tab-btn" data-filter="cancelled">해약</button>
@@ -978,7 +1072,7 @@
 
 
 
-            <h2>➕ 추가안장료 / 진행비</h2>
+            <h2><i class='ti ti-plus'></i> 추가안장료 / 진행비</h2>
             <p class="section-sub">계약금액·관리비 외 추가로 발생하는 비용 항목을 관리합니다</p>
           </div>
           <button class="btn btn-ghost btn-sm" id="open-extracost-modal"><i class="ti ti-plus"></i>추가</button>
@@ -996,7 +1090,7 @@
         <!-- 만료 예정 계약 -->
         <div class="card" style="padding:16px; margin-top:16px;">
           <div class="section-head" style="margin-bottom:10px;">
-            <h2>⏳ 관리비 주기 만료 예정</h2>
+            <h2><i class='ti ti-clock'></i> 관리비 주기 만료 예정</h2>
             <span style="font-size:11px; color:var(--ink-400);">3년/5년 주기 기준 · 계약갱신 또는 만료 처리 필요</span>
           </div>
           <div id="ct-expiring-list" style="display:flex; flex-direction:column; gap:6px;"></div>
@@ -1008,8 +1102,28 @@
         <div class="section-head">
           <div>
             <button id="newcontract-back" class="btn btn-ghost" style="margin-bottom:8px;"><i class="ti ti-arrow-left"></i> 계약 관리로 돌아가기</button>
-            <h2>📝 신규 계약 작성</h2>
+            <h2><i class='ti ti-file-plus'></i> 신규 계약 작성</h2>
             <p class="section-sub">새로운 안치 계약을 등록합니다</p>
+          </div>
+        </div>
+
+        <div id="nc-step-bar" style="display:flex; align-items:center; margin-bottom:24px; padding:16px 20px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); gap:0;">
+          <div class="nc-step active" data-step="1" style="flex:1; text-align:center;">
+            <div style="width:28px; height:28px; border-radius:50%; background:var(--jade-700); color:#fff; font-size:13px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; margin-bottom:5px;">1</div>
+            <p style="font-size:12px; font-weight:600; color:var(--jade-700); margin:0;">\uace0\uc778 \u00b7 \uc704\uce58</p>
+            <p style="font-size:11px; color:var(--ink-400); margin:2px 0 0;">\uae30\ubcf8 \uc815\ubcf4</p>
+          </div>
+          <div style="flex:1; height:2px; background:var(--stone-200); margin-bottom:18px;"></div>
+          <div class="nc-step" data-step="2" style="flex:1; text-align:center;">
+            <div style="width:28px; height:28px; border-radius:50%; background:var(--stone-200); color:var(--ink-400); font-size:13px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; margin-bottom:5px;">2</div>
+            <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0;">\uacc4\uc57d\uc790 \u00b7 \ub3d9\uc758</p>
+            <p style="font-size:11px; color:var(--ink-400); margin:2px 0 0;">\uc5f0\ub77d\ucc98 \u00b7 \uc11c\uba85</p>
+          </div>
+          <div style="flex:1; height:2px; background:var(--stone-200); margin-bottom:18px;"></div>
+          <div class="nc-step" data-step="3" style="flex:1; text-align:center;">
+            <div style="width:28px; height:28px; border-radius:50%; background:var(--stone-200); color:var(--ink-400); font-size:13px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; margin-bottom:5px;">3</div>
+            <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0;">\ub0a9\ubd80 \u00b7 \uc644\ub8cc</p>
+            <p style="font-size:11px; color:var(--ink-400); margin:2px 0 0;">\uae08\uc561 \u00b7 \uacc4\uc57d\uc11c</p>
           </div>
         </div>
 
@@ -1051,7 +1165,7 @@
             <div class="form-row">
               <label>사망일</label>
               <input id="nc-death-date" type="date">
-              <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin-top:6px; font-size:12.5px; color:var(--ink-600);">
+              <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin-top:6px; font-size:12px; color:var(--ink-600);">
                 <input type="checkbox" id="nc-lunar" style="width:auto;">음력 날짜로 입력
               </label>
             </div>
@@ -1144,7 +1258,7 @@
       <section class="page" data-page="fees">
         <div class="section-head">
           <div>
-            <h2>💰 관리비 관리 <span class="help-tip" style="font-size:12px;">ⓘ<span class="help-tip-content">계약별 관리비 납부 현황을 실시간으로 확인하고 연체 시 일괄 알림을 발송할 수 있습니다.</span></span></h2>
+            <h2><i class='ti ti-coin'></i> 관리비 관리 <span class="help-tip" style="font-size:12px;">ⓘ<span class="help-tip-content">계약별 관리비 납부 현황을 실시간으로 확인하고 연체 시 일괄 알림을 발송할 수 있습니다.</span></span></h2>
             <p class="section-sub">계약일 + 주기 기준 자동 산정된 회차별 납부 현황</p>
           </div>
           <button class="btn btn-ghost btn-sm" id="fee-bulk-notify" style="font-size:12px;"><i class="ti ti-bell-ringing"></i> 연체 일괄 알림</button>
@@ -1174,7 +1288,7 @@
           </div>
         </div>
 
-        <div class="tabs" id="fee-filter-tabs">
+        <div class="tabs" id="fee-filter-tabs" role="tablist" aria-label="관리비 상태 필터">
           <button class="tab-btn active" data-filter="all">전체</button>
           <button class="tab-btn" data-filter="overdue">연체</button>
           <button class="tab-btn" data-filter="upcoming">예정</button>
@@ -1191,7 +1305,7 @@
       <section class="page" data-page="sales">
         <div class="section-head">
           <div>
-            <h2>👥 영업자 관리</h2>
+            <h2><i class='ti ti-users-group'></i> 영업자 관리</h2>
             <p class="section-sub">내부 직원 / 외부 소개자 모두 등록, 수수료는 영업자별 개별 설정</p>
           </div>
           <button class="btn btn-primary" id="add-agent-btn"><i class="ti ti-plus"></i>영업자 추가</button>
@@ -1210,7 +1324,7 @@
 
         <div class="section-head">
           <div>
-            <h2>🧾 수수료 정산</h2>
+            <h2><i class='ti ti-receipt'></i> 수수료 정산</h2>
             <p class="section-sub">2026년 6월 · 영업자별 미정산 합계</p>
           </div>
         </div>
@@ -1240,7 +1354,7 @@
 
         <div class="section-head" style="margin-top:24px;">
           <div>
-            <h2>✅ 관리비 납부 내역</h2>
+            <h2><i class='ti ti-list-check'></i> 관리비 납부 내역</h2>
             <p class="section-sub">자동 매칭 및 확인된 납부 데이터 · 최근 20건</p>
           </div>
           <button class="btn btn-ghost btn-sm" id="clear-pay-logs" style="color:var(--ink-400);"><i class="ti ti-trash"></i> 전체삭제</button>
@@ -1259,7 +1373,7 @@
       <section class="page" data-page="revenuemanage">
         <div class="section-head">
           <div>
-            <h2>📊 매출 관리</h2>
+            <h2><i class='ti ti-chart-bar'></i> 매출 관리</h2>
             <p class="section-sub">매출·매입·순이익 현황 및 예상 납부 일정 통합 관리</p>
           </div>
           <div style="display:flex; gap:6px;">
@@ -1290,58 +1404,58 @@
         <div class="grid-2col" style="grid-template-columns:1.3fr 1fr; margin-bottom:16px;">
           <div class="card" style="padding:16px;">
             <div class="section-head" style="margin-bottom:10px;">
-              <h2>📅 납부 예정 달력</h2>
+              <h2><i class='ti ti-calendar-event'></i> 납부 예정 달력</h2>
               <span id="rm-month-summary" style="font-size:11px; color:var(--ink-400);">6월 예상 ₩0</span>
             </div>
             <div id="rm-calendar" style="font-size:11px;"></div>
           </div>
           <div class="card" style="padding:16px;">
             <div class="section-head" style="margin-bottom:10px;">
-              <h2>📈 월간 매출 추이</h2>
+              <h2><i class='ti ti-trending-up'></i> 월간 매출 추이</h2>
               <span id="rm-chart-total" style="font-size:11px; color:var(--ink-400);">1~6월 합계 ₩0</span>
             </div>
             <div id="rm-chart-v2" style="display:flex; gap:4px; height:120px; padding:0 2px;">
               <div style="flex:1; display:flex; flex-direction:column; align-items:center;" data-month="1월">
-                <span style="font-size:8px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
+                <span style="font-size:11px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
                 <div class="chart-bar-wrap" style="flex:1; width:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; padding:0 6px 0 6px; box-sizing:border-box;">
-                  <div style="width:100%; background:var(--jade-700); border-radius:4px 4px 0 0; height:0; transition:height .3s;"></div>
+                  <div style="width:100%; background:var(--jade-700); border-radius:var(--radius-xs) 4px 0 0; height:0; transition:height .3s;"></div>
                 </div>
-                <span style="font-size:10px; color:var(--ink-600); font-weight:600; flex-shrink:0;">1월</span>
+                <span style="font-size:11px; color:var(--ink-600); font-weight:600; flex-shrink:0;">1월</span>
               </div>
               <div style="flex:1; display:flex; flex-direction:column; align-items:center;" data-month="2월">
-                <span style="font-size:8px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
+                <span style="font-size:11px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
                 <div class="chart-bar-wrap" style="flex:1; width:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; padding:0 6px; box-sizing:border-box;">
-                  <div style="width:100%; background:var(--jade-700); border-radius:4px 4px 0 0; height:0; transition:height .3s;"></div>
+                  <div style="width:100%; background:var(--jade-700); border-radius:var(--radius-xs) 4px 0 0; height:0; transition:height .3s;"></div>
                 </div>
-                <span style="font-size:10px; color:var(--ink-600); font-weight:600; flex-shrink:0;">2월</span>
+                <span style="font-size:11px; color:var(--ink-600); font-weight:600; flex-shrink:0;">2월</span>
               </div>
               <div style="flex:1; display:flex; flex-direction:column; align-items:center;" data-month="3월">
-                <span style="font-size:8px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
+                <span style="font-size:11px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
                 <div class="chart-bar-wrap" style="flex:1; width:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; padding:0 6px; box-sizing:border-box;">
-                  <div style="width:100%; background:var(--jade-700); border-radius:4px 4px 0 0; height:0; transition:height .3s;"></div>
+                  <div style="width:100%; background:var(--jade-700); border-radius:var(--radius-xs) 4px 0 0; height:0; transition:height .3s;"></div>
                 </div>
-                <span style="font-size:10px; color:var(--ink-600); font-weight:600; flex-shrink:0;">3월</span>
+                <span style="font-size:11px; color:var(--ink-600); font-weight:600; flex-shrink:0;">3월</span>
               </div>
               <div style="flex:1; display:flex; flex-direction:column; align-items:center;" data-month="4월">
-                <span style="font-size:8px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
+                <span style="font-size:11px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
                 <div class="chart-bar-wrap" style="flex:1; width:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; padding:0 6px; box-sizing:border-box;">
-                  <div style="width:100%; background:var(--jade-700); border-radius:4px 4px 0 0; height:0; transition:height .3s;"></div>
+                  <div style="width:100%; background:var(--jade-700); border-radius:var(--radius-xs) 4px 0 0; height:0; transition:height .3s;"></div>
                 </div>
-                <span style="font-size:10px; color:var(--ink-600); font-weight:600; flex-shrink:0;">4월</span>
+                <span style="font-size:11px; color:var(--ink-600); font-weight:600; flex-shrink:0;">4월</span>
               </div>
               <div style="flex:1; display:flex; flex-direction:column; align-items:center;" data-month="5월">
-                <span style="font-size:8px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
+                <span style="font-size:11px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
                 <div class="chart-bar-wrap" style="flex:1; width:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; padding:0 6px; box-sizing:border-box;">
-                  <div style="width:100%; background:var(--jade-700); border-radius:4px 4px 0 0; height:0; transition:height .3s;"></div>
+                  <div style="width:100%; background:var(--jade-700); border-radius:var(--radius-xs) 4px 0 0; height:0; transition:height .3s;"></div>
                 </div>
-                <span style="font-size:10px; color:var(--ink-600); font-weight:600; flex-shrink:0;">5월</span>
+                <span style="font-size:11px; color:var(--ink-600); font-weight:600; flex-shrink:0;">5월</span>
               </div>
               <div style="flex:1; display:flex; flex-direction:column; align-items:center;" data-month="6월">
-                <span style="font-size:8px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
+                <span style="font-size:11px; color:var(--ink-400); font-weight:600; flex-shrink:0;">₩0</span>
                 <div class="chart-bar-wrap" style="flex:1; width:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; padding:0 6px; box-sizing:border-box;">
-                  <div style="width:100%; background:var(--jade-600); border-radius:4px 4px 0 0; height:0; transition:height .3s; position:relative;"></div>
+                  <div style="width:100%; background:var(--jade-600); border-radius:var(--radius-xs) 4px 0 0; height:0; transition:height .3s; position:relative;"></div>
                 </div>
-                <span style="font-size:10px; color:var(--ink-600); font-weight:700; flex-shrink:0;">6월</span>
+                <span style="font-size:11px; color:var(--ink-600); font-weight:700; flex-shrink:0;">6월</span>
               </div>
             </div>
           </div>
@@ -1376,11 +1490,11 @@
         <!-- 하단 2열: 계약 현황 + 연체 현황 -->
         <div class="grid-2col" style="margin-bottom:16px;">
           <div class="card" style="padding:18px;">
-            <div class="section-head"><h2>📋 계약 현황 요약</h2></div>
+            <div class="section-head"><h2><i class='ti ti-report'></i> 계약 현황 요약</h2></div>
             <div id="rm-contract-summary" style="display:flex; flex-direction:column; gap:8px;"></div>
           </div>
           <div class="card" style="padding:18px;">
-            <div class="section-head"><h2>⛔ 연체 관리</h2></div>
+            <div class="section-head"><h2><i class='ti ti-alert-circle'></i> 연체 관리</h2></div>
             <div id="rm-overdue-list" style="display:flex; flex-direction:column; gap:6px;"></div>
           </div>
         </div>
@@ -1390,7 +1504,7 @@
       <section class="page" data-page="staff">
         <div class="section-head">
           <div>
-            <h2>👤 직원 목록 <span class="help-tip" style="font-size:12px;">ⓘ<span class="help-tip-content">직원별 권한과 담당 구역을 설정합니다. 마스터 계정만 설정 페이지에 접근할 수 있습니다.</span></span></h2>
+            <h2><i class='ti ti-id-badge-2'></i> 직원 목록 <span class="help-tip" style="font-size:12px;">ⓘ<span class="help-tip-content">직원별 권한과 담당 구역을 설정합니다. 마스터 계정만 설정 페이지에 접근할 수 있습니다.</span></span></h2>
             <p class="section-sub">권한·담당구역 관리</p>
           </div>
           <button class="btn btn-primary" id="open-staff-modal"><i class="ti ti-plus"></i>직원 추가</button>
@@ -1410,7 +1524,7 @@
 
         <div class="section-head">
           <div>
-            <h2>📌 업무지시</h2>
+            <h2><i class='ti ti-subtask'></i> 업무지시</h2>
             <p class="section-sub">직원별 업무 배정 · 진행상태 관리</p>
           </div>
           <button class="btn btn-primary" id="open-task-modal"><i class="ti ti-plus"></i>업무 추가</button>
@@ -1460,21 +1574,21 @@
         <!-- 출퇴근 현황 -->
         <div class="card" style="padding:16px; margin-bottom:16px;">
           <div class="section-head" style="margin-bottom:10px;">
-            <h2>⏰ 오늘 출퇴근 현황</h2>
+            <h2><i class='ti ti-clock-check'></i> 오늘 출퇴근 현황</h2>
             <span id="staff-attend-date" style="font-size:11px; color:var(--ink-400);"></span>
           </div>
           <div id="staff-attendance" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:8px;"></div>
           <div style="margin-top:10px; display:flex; gap:4px;">
             <button class="btn btn-ghost btn-sm" id="staff-clock-in" style="font-size:11px;"><i class="ti ti-login"></i> 출근</button>
             <button class="btn btn-ghost btn-sm" id="staff-clock-out" style="font-size:11px;"><i class="ti ti-logout"></i> 퇴근</button>
-            <span style="font-size:10px; color:var(--ink-400); margin-left:4px; align-self:center;">※ 테스트용 — 현재 계정 기준 기록</span>
+            <span style="font-size:11px; color:var(--ink-400); margin-left:4px; align-self:center;">※ 테스트용 — 현재 계정 기준 기록</span>
           </div>
         </div>
 
         <!-- 휴가/부재 -->
         <div class="card" style="padding:16px;">
           <div class="section-head" style="margin-bottom:10px;">
-            <h2>🏖️ 휴가·부재 일정</h2>
+            <h2><i class='ti ti-beach'></i> 휴가·부재 일정</h2>
             <button class="btn btn-ghost btn-sm" id="open-vacation-modal"><i class="ti ti-plus"></i> 휴가 등록</button>
           </div>
           <div id="staff-vacation-list" style="display:flex; flex-direction:column; gap:6px;"></div>
@@ -1485,7 +1599,7 @@
       <section class="page" data-page="customers">
         <div class="section-head">
           <div>
-            <h2>👪 유족(고객) 관리</h2>
+            <h2><i class='ti ti-users'></i> 유족(고객) 관리</h2>
             <p class="section-sub">계약자 연락처 및 계약 이력 · 추모일 관리</p>
           </div>
         </div>
@@ -1526,11 +1640,11 @@
           </div>
           <div style="width:320px; flex-shrink:0;">
             <div class="card" style="padding:16px;">
-              <div class="section-head"><h2>📋 최근 방문 기록</h2></div>
+              <div class="section-head"><h2><i class='ti ti-history'></i> 최근 방문 기록</h2></div>
               <div id="cust-visit-log" style="display:flex; flex-direction:column; gap:6px;"></div>
             </div>
             <div class="card" style="padding:16px; margin-top:12px;">
-              <div class="section-head"><h2>📝 유족 메모</h2></div>
+              <div class="section-head"><h2><i class='ti ti-notes'></i> 유족 메모</h2></div>
               <div id="cust-memo-list" style="display:flex; flex-direction:column; gap:6px;"></div>
               <div style="margin-top:8px; display:flex; gap:4px;">
                 <input id="cust-memo-input" placeholder="새 메모 입력..." style="flex:1; font-size:12px; padding:6px 8px; border:1px solid var(--border); border-radius:var(--radius-sm);">
@@ -1545,7 +1659,7 @@
       <section class="page" data-page="notifications">
         <div class="section-head">
           <div>
-            <h2>🔔 알림 템플릿 관리</h2>
+            <h2><i class='ti ti-bell'></i> 알림 템플릿 관리</h2>
             <p class="section-sub">카카오 알림톡 + SMS 문자 발송 템플릿 관리</p>
           </div>
           <button class="btn btn-primary" id="add-template-btn"><i class="ti ti-plus"></i>템플릿 추가</button>
@@ -1567,7 +1681,7 @@
             <!-- 주제별 예시 문구 -->
             <div class="card" style="padding:16px; margin-top:16px;">
               <div class="section-head" style="margin-bottom:10px;">
-                <h2>📝 주제별 예시 문구</h2>
+                <h2><i class='ti ti-message'></i> 주제별 예시 문구</h2>
                 <span style="font-size:11px; color:var(--ink-400);">발송 목적에 맞게 선택하여 템플릿으로 등록하세요</span>
               </div>
               <div id="notif-examples" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;"></div>
@@ -1578,33 +1692,33 @@
           <div style="width:340px; flex-shrink:0; position:sticky; top:80px;">
             <div class="card" style="padding:14px;">
               <div class="section-head" style="margin-bottom:10px;">
-                <h2>📱 발송 미리보기</h2>
-                <span style="font-size:10px; color:var(--ink-400);">템플릿 클릭 시 미리보기</span>
+                <h2><i class='ti ti-device-mobile'></i> 발송 미리보기</h2>
+                <span style="font-size:11px; color:var(--ink-400);">템플릿 클릭 시 미리보기</span>
               </div>
               <div id="mobile-preview" style="background:var(--stone-100); border-radius:16px; padding:12px 10px; border:2px solid var(--stone-300); box-shadow:0 2px 8px rgba(0,0,0,.08);">
                 <!-- 헤더 -->
                 <div style="display:flex; align-items:center; gap:6px; padding-bottom:8px; border-bottom:1px solid var(--stone-200); margin-bottom:8px;">
                   <span id="mp-channel-icon" style="font-size:16px;">💛</span>
                   <span id="mp-channel-name" style="font-size:11px; font-weight:600; color:var(--ink-600);">카카오 알림톡</span>
-                  <span style="margin-left:auto; font-size:9px; color:var(--ink-400);">방금 전</span>
+                  <span style="margin-left:auto; font-size:11px; color:var(--ink-400);">방금 전</span>
                 </div>
                 <!-- 프로필 -->
                 <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
                   <div style="width:32px; height:32px; border-radius:50%; background:var(--jade-700); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700;">청</div>
-                  <div><p style="margin:0; font-size:11px; font-weight:700;">청솔원 메모리얼파크</p><p style="margin:0; font-size:9px; color:var(--ink-400);">알림톡</p></div>
+                  <div><p style="margin:0; font-size:11px; font-weight:700;">청솔원 메모리얼파크</p><p style="margin:0; font-size:11px; color:var(--ink-400);">알림톡</p></div>
                 </div>
                 <!-- 말풍선 -->
                 <div id="mp-bubble" style="background:#fff; border-radius:0 12px 12px 12px; padding:12px 14px; font-size:12px; line-height:1.7; color:var(--ink-800); white-space:pre-wrap; box-shadow:0 1px 3px rgba(0,0,0,.06);">
                   템플릿을 선택해주세요.
                 </div>
                 <!-- SMS 하단 -->
-                <div id="mp-sms-footer" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid var(--stone-200); font-size:9px; color:var(--ink-400); text-align:center;">
+                <div id="mp-sms-footer" style="display:none; margin-top:8px; padding-top:8px; border-top:1px solid var(--stone-200); font-size:11px; color:var(--ink-400); text-align:center;">
                   본 메시지는 SMS로 발송됩니다 · 수신거부 000-0000-0000
                 </div>
               </div>
               <div style="margin-top:8px; display:flex; gap:4px; align-items:center;">
-                <span style="font-size:9px; color:var(--ink-400);">발송처:</span>
-                <input id="mp-sender" value="청솔원" style="font-size:10px; padding:3px 6px; border:1px solid var(--border); border-radius:4px; width:70px;">
+                <span style="font-size:11px; color:var(--ink-400);">발송처:</span>
+                <input id="mp-sender" value="청솔원" style="font-size:11px; padding:3px 6px; border:1px solid var(--border); border-radius:var(--radius-xs); width:70px;">
               </div>
             </div>
           </div>
@@ -1613,82 +1727,82 @@
         <!-- 자동 발송 설정 -->
         <div class="card" style="padding:18px; margin-top:16px; margin-bottom:16px;">
           <div class="section-head" style="margin-bottom:12px;">
-            <h2>⏰ 자동 발송 설정</h2>
+            <h2><i class='ti ti-robot'></i> 자동 발송 설정</h2>
             <span style="font-size:11px; color:var(--ink-400);">계약일/추모일 기준 N일 전 자동 발송 · 실제 연동 시 적용</span>
           </div>
           <div id="auto-send-config" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
             <div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:12px;">
               <p style="margin:0 0 6px; font-size:12px; font-weight:700;">💳 관리비 납부</p>
               <div style="display:flex; align-items:center; gap:4px; margin-bottom:6px;">
-                <span style="font-size:10px; color:var(--ink-400);">발송 시점</span>
-                <select class="as-timing" data-key="fee-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:4px;">
+                <span style="font-size:11px; color:var(--ink-400);">발송 시점</span>
+                <select class="as-timing" data-key="fee-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:var(--radius-xs);">
                   <option value="1">1일 전</option><option value="3">3일 전</option><option value="7" selected>7일 전</option><option value="14">14일 전</option><option value="30">30일 전</option>
                 </select>
               </div>
               <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="fee-kakao" checked> 💛 카카오</label>
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="fee-sms" checked> 📱 SMS</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="fee-kakao" checked> 💛 카카오</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="fee-sms" checked> 📱 SMS</label>
               </div>
             </div>
             <div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:12px;">
               <p style="margin:0 0 6px; font-size:12px; font-weight:700;">⚠️ 관리비 연체</p>
               <div style="display:flex; align-items:center; gap:4px; margin-bottom:6px;">
-                <span style="font-size:10px; color:var(--ink-400);">발송 시점</span>
-                <select class="as-timing" data-key="overdue-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:4px;">
+                <span style="font-size:11px; color:var(--ink-400);">발송 시점</span>
+                <select class="as-timing" data-key="overdue-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:var(--radius-xs);">
                   <option value="3" selected>3일 경과</option><option value="7">7일 경과</option><option value="14">14일 경과</option><option value="30">30일 경과</option>
                 </select>
               </div>
               <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="overdue-kakao" checked> 💛 카카오</label>
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="overdue-sms" checked> 📱 SMS</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="overdue-kakao" checked> 💛 카카오</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="overdue-sms" checked> 📱 SMS</label>
               </div>
             </div>
             <div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:12px;">
               <p style="margin:0 0 6px; font-size:12px; font-weight:700;">🕯️ 추모일 안내</p>
               <div style="display:flex; align-items:center; gap:4px; margin-bottom:6px;">
-                <span style="font-size:10px; color:var(--ink-400);">발송 시점</span>
-                <select class="as-timing" data-key="memorial-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:4px;">
+                <span style="font-size:11px; color:var(--ink-400);">발송 시점</span>
+                <select class="as-timing" data-key="memorial-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:var(--radius-xs);">
                   <option value="1">1일 전</option><option value="3" selected>3일 전</option><option value="7">7일 전</option><option value="14">14일 전</option>
                 </select>
               </div>
               <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="memorial-kakao" checked> 💛 카카오</label>
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="memorial-sms"> 📱 SMS</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="memorial-kakao" checked> 💛 카카오</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="memorial-sms"> 📱 SMS</label>
               </div>
             </div>
             <div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:12px;">
               <p style="margin:0 0 6px; font-size:12px; font-weight:700;">📋 계약 갱신</p>
               <div style="display:flex; align-items:center; gap:4px; margin-bottom:6px;">
-                <span style="font-size:10px; color:var(--ink-400);">발송 시점</span>
-                <select class="as-timing" data-key="renew-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:4px;">
+                <span style="font-size:11px; color:var(--ink-400);">발송 시점</span>
+                <select class="as-timing" data-key="renew-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:var(--radius-xs);">
                   <option value="7">7일 전</option><option value="14">14일 전</option><option value="30" selected>30일 전</option><option value="60">60일 전</option>
                 </select>
               </div>
               <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="renew-kakao" checked> 💛 카카오</label>
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="renew-sms"> 📱 SMS</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="renew-kakao" checked> 💛 카카오</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="renew-sms"> 📱 SMS</label>
               </div>
             </div>
             <div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:12px;">
               <p style="margin:0 0 6px; font-size:12px; font-weight:700;">🆕 신규 계약</p>
               <div style="display:flex; align-items:center; gap:4px; margin-bottom:6px;">
-                <span style="font-size:10px; color:var(--ink-400);">발송 시점</span>
-                <select class="as-timing" data-key="newcontract-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:4px;">
+                <span style="font-size:11px; color:var(--ink-400);">발송 시점</span>
+                <select class="as-timing" data-key="newcontract-timing" style="flex:1; font-size:11px; padding:3px 5px; border:1px solid var(--border); border-radius:var(--radius-xs);">
                   <option value="0" selected>즉시</option><option value="1">1일 후</option>
                 </select>
               </div>
               <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="newcontract-kakao" checked> 💛 카카오</label>
-                <label style="font-size:10px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="newcontract-sms"> 📱 SMS</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="newcontract-kakao" checked> 💛 카카오</label>
+                <label style="font-size:11px; display:flex; align-items:center; gap:3px; cursor:pointer;"><input type="checkbox" class="as-channel" data-key="newcontract-sms"> 📱 SMS</label>
               </div>
             </div>
           </div>
           <div style="margin-top:10px; display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
-            <span style="font-size:10px; color:var(--ink-400);">⚙️ 자동 발송 엔진:</span>
-            <span id="auto-engine-status" style="font-size:10px; font-weight:600; color:var(--ink-400);">● 중지</span>
-            <button id="auto-engine-toggle" class="btn btn-ghost btn-sm" style="font-size:10px;">▶ 시작</button>
-            <span id="auto-engine-log" style="font-size:9px; color:var(--ink-400);"></span>
-            <span style="font-size:9px; color:var(--ink-400); margin-left:4px;">※ MVP — 30초 주기 시뮬레이션</span>
+            <span style="font-size:11px; color:var(--ink-400);">⚙️ 자동 발송 엔진:</span>
+            <span id="auto-engine-status" style="font-size:11px; font-weight:600; color:var(--ink-400);">● 중지</span>
+            <button id="auto-engine-toggle" class="btn btn-ghost btn-sm" style="font-size:11px;">▶ 시작</button>
+            <span id="auto-engine-log" style="font-size:11px; color:var(--ink-400);"></span>
+            <span style="font-size:11px; color:var(--ink-400); margin-left:4px;">※ MVP — 30초 주기 시뮬레이션</span>
           </div>
         </div>
       
@@ -1699,7 +1813,7 @@
       <section class="page" data-page="logs">
         <div class="section-head">
           <div>
-            <h2>📋 발송 로그</h2>
+            <h2><i class='ti ti-list'></i> 발송 로그</h2>
             <p class="section-sub">카카오 알림톡(💛) 및 SMS 문자(📱) 발송 내역 · 최근 100건</p>
           </div>
           <button class="btn btn-ghost btn-sm" id="logs-clear" style="font-size:11px;"><i class="ti ti-trash"></i> 전체 삭제</button>
@@ -1726,7 +1840,7 @@
         <!-- 예시 데이터 안내 -->
         <div class="card" style="padding:16px; margin-top:14px; background:var(--stone-50);">
           <div class="section-head" style="margin-bottom:8px;">
-            <h2>📌 발송 로그 예시</h2>
+            <h2><i class='ti ti-pin'></i> 발송 로그 예시</h2>
             <span style="font-size:11px; color:var(--ink-400);">실제 발송 시 아래와 같은 형태로 기록됩니다</span>
           </div>
           <div style="display:flex; flex-direction:column; gap:10px;">
@@ -1735,10 +1849,10 @@
               <div style="flex:1;">
                 <div style="display:flex; gap:6px; align-items:center; margin-bottom:2px;">
                   <span style="font-size:11px; font-weight:600;">💳 관리비 납부 안내</span>
-                  <span class="badge badge-primary" style="font-size:9px; padding:1px 6px;">💛 카카오</span>
-                  <span style="margin-left:auto; font-size:10px; color:var(--ink-400);">2026-06-23 10:30</span>
+                  <span class="badge badge-primary" style="font-size:11px; padding:1px 6px;">💛 카카오</span>
+                  <span style="margin-left:auto; font-size:11px; color:var(--ink-400);">2026-06-23 10:30</span>
                 </div>
-                <p style="margin:0; font-size:11.5px; color:var(--ink-600);">대상: 이서영</p>
+                <p style="margin:0; font-size:11px; color:var(--ink-600);">대상: 이서영</p>
                 <p style="margin:2px 0 0; font-size:11px; color:var(--ink-400);">💛카카오톡 자동 발송 (7일 전 설정)</p>
               </div>
             </div>
@@ -1747,10 +1861,10 @@
               <div style="flex:1;">
                 <div style="display:flex; gap:6px; align-items:center; margin-bottom:2px;">
                   <span style="font-size:11px; font-weight:600;">🕯️ 삼우제 안내</span>
-                  <span class="badge badge-warning" style="font-size:9px; padding:1px 6px;">📱 SMS</span>
-                  <span style="margin-left:auto; font-size:10px; color:var(--ink-400);">2026-06-23 09:15</span>
+                  <span class="badge badge-warning" style="font-size:11px; padding:1px 6px;">📱 SMS</span>
+                  <span style="margin-left:auto; font-size:11px; color:var(--ink-400);">2026-06-23 09:15</span>
                 </div>
-                <p style="margin:0; font-size:11.5px; color:var(--ink-600);">대상: 한지민</p>
+                <p style="margin:0; font-size:11px; color:var(--ink-600);">대상: 한지민</p>
                 <p style="margin:2px 0 0; font-size:11px; color:var(--ink-400);">📱SMS 발송 (3일 전 설정)</p>
               </div>
             </div>
@@ -1759,10 +1873,10 @@
               <div style="flex:1;">
                 <div style="display:flex; gap:6px; align-items:center; margin-bottom:2px;">
                   <span style="font-size:11px; font-weight:600;">⚠️ 관리비 연체 안내</span>
-                  <span class="badge badge-primary" style="font-size:9px; padding:1px 6px;">💛 카카오</span>
-                  <span style="margin-left:auto; font-size:10px; color:var(--ink-400);">2026-06-22 14:00</span>
+                  <span class="badge badge-primary" style="font-size:11px; padding:1px 6px;">💛 카카오</span>
+                  <span style="margin-left:auto; font-size:11px; color:var(--ink-400);">2026-06-22 14:00</span>
                 </div>
-                <p style="margin:0; font-size:11.5px; color:var(--ink-600);">대상: 박OO 유족</p>
+                <p style="margin:0; font-size:11px; color:var(--ink-600);">대상: 박OO 유족</p>
                 <p style="margin:2px 0 0; font-size:11px; color:var(--ink-400);">💛카카오톡 발송 (3일 경과)</p>
               </div>
             </div>
@@ -1772,7 +1886,7 @@
 
       <!-- ================= 설정 ================= -->
       <section class="page" data-page="settings">
-        <div class="section-head"><h2>⚙️ 사업장 설정</h2></div>
+        <div class="section-head"><h2><i class='ti ti-building'></i> 사업장 설정</h2></div>
         <div class="card" style="padding:20px; margin-bottom:20px;">
           <div class="form-row">
             <label>시설 유형</label>
@@ -1796,7 +1910,7 @@
               <div class="form-row"><label>구역 수</label><input id="lq-zones" type="number" value="3" min="1" max="20"></div>
               <div class="form-row"><label>구역별 구좌 수</label><input id="lq-per-zone" type="number" value="14" min="1" max="99"></div>
             </div>
-            <p style="font-size:12.5px; color:var(--ink-600); margin:6px 0 0;">예상 총 구좌: <strong id="lq-total">42</strong>개</p>
+            <p style="font-size:12px; color:var(--ink-600); margin:6px 0 0;">예상 총 구좌: <strong id="lq-total">42</strong>개</p>
           </div>
           <div class="form-grid-2">
             <div class="form-row"><label>사업자등록번호</label><input value="123-45-67890"></div>
@@ -1813,7 +1927,7 @@
         </div>
         
         <div class="card" style="padding:20px; margin-bottom:20px;">
-          <div class="section-head"><h2>💵 관리비 기본 설정</h2></div>
+          <div class="section-head"><h2><i class='ti ti-settings-2'></i> 관리비 기본 설정</h2></div>
           <div class="form-grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
             <div class="form-row">
               <label>최초 납부 금액</label>
@@ -1851,7 +1965,7 @@
 
         <div class="section-head">
           <div>
-            <h2>📨 관리비 알림톡 발송 단계</h2>
+            <h2><i class='ti ti-send'></i> 관리비 알림톡 발송 단계</h2>
             <p class="section-sub">납부예정일 기준 발송 시점과 메시지를 설정합니다</p>
           </div>
           <button class="btn btn-ghost btn-sm" id="add-stage-btn"><i class="ti ti-plus"></i>단계 추가</button>
@@ -1870,7 +1984,7 @@
 
         <div class="section-head">
           <div>
-            <h2>🕊️ 추모일 알림톡 발송 단계</h2>
+            <h2><i class='ti ti-feather'></i> 추모일 알림톡 발송 단계</h2>
             <p class="section-sub">고인의 사망일 기준 삼우제 · 49제 · 기일을 자동 계산해 유가족에게 안내합니다</p>
           </div>
           <button class="btn btn-ghost btn-sm" id="add-memorial-stage-btn"><i class="ti ti-plus"></i>단계 추가</button>
@@ -1888,7 +2002,7 @@
 
         <div class="section-head">
           <div>
-            <h2>📤 법정 신고 · 데이터 백업</h2>
+            <h2><i class='ti ti-database-export'></i> 법정 신고 · 데이터 백업</h2>
             <p class="section-sub">보건복지부 e하늘 장사정보시스템 및 지자체 제출용 자료를 엑셀로 자동 변환합니다</p>
           </div>
         </div>
@@ -1900,7 +2014,7 @@
 
         <div class="section-head">
           <div>
-            <h2>📂 과거 데이터 가져오기</h2>
+            <h2><i class='ti ti-file-import'></i> 과거 데이터 가져오기</h2>
             <p class="section-sub">CSV 파일로 기존 계약·고객·위치 데이터를 일괄 업로드합니다 (최대 500건)</p>
           </div>
         </div>
@@ -1911,7 +2025,7 @@
             <a id="csv-sample-link" href="#" style="font-size:12px; color:var(--jade-700);">📄 샘플 파일 다운로드</a>
           </div>
           <div id="csv-upload-result" style="display:none; margin-top:10px; padding:10px 12px; border-radius:var(--radius-sm); font-size:13px;"></div>
-          <p style="font-size:11.5px; color:var(--ink-400); margin:8px 0 0;">CSV 형식: 계약번호,계약일,계약자,고인,위치,계약금액,상태 / 첫 행은 헤더로 인식합니다.</p>
+          <p style="font-size:11px; color:var(--ink-400); margin:8px 0 0;">CSV 형식: 계약번호,계약일,계약자,고인,위치,계약금액,상태 / 첫 행은 헤더로 인식합니다.</p>
         </div>
 
         <button class="btn btn-primary" id="save-settings-btn"><i class="ti ti-device-floppy"></i>설정 저장</button>
@@ -1919,13 +2033,12 @@
 
     </main>
   </div>
-</div>
 
 <!-- ================= 납부 알림 패널 ================= -->
 <div id="notif-panel" style="display:none; position:fixed; top:0; right:0; width:380px; max-width:90vw; height:100vh; z-index:70; background:var(--surface); box-shadow:-4px 0 20px rgba(0,0,0,.1); overflow-y:auto;">
   <div style="padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; background:var(--stone-50);">
     <div><p style="font-size:14px; font-weight:700; margin:0;">🔔 납부 알림</p><p style="font-size:11px; color:var(--ink-400); margin:2px 0 0;">입금 확인 및 미확인 건</p></div>
-    <button id="notif-close" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-400);">&times;</button>
+    <button id="notif-close" aria-label="알림 패널 닫기" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-400);">&times;</button>
   </div>
   <div id="notif-list" style="padding:10px;">
     <p style="font-size:13px; color:var(--ink-400); text-align:center; padding:30px 0;">알림이 없습니다.</p>
@@ -1936,7 +2049,7 @@
 </div>
 
 <!-- ================= 입금 확인 모달 ================= -->
-<div class="modal-overlay" id="pay-confirm-modal">
+<div class="modal-overlay" id="pay-confirm-modal" role="dialog" aria-modal="true" aria-label="관리비 납부 확인">
   <div class="modal">
     <h3>💳 입금 확인</h3>
     <p class="section-sub" style="margin:-10px 0 14px;">입금자명과 금액을 입력하면 시스템에서 매칭되는 계약을 찾습니다.</p>
@@ -2001,7 +2114,7 @@
       <div class="form-row">
         <label>사망일</label>
         <input id="f-death-date" type="date">
-        <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin-top:6px; font-size:12.5px; color:var(--ink-600);">
+        <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin-top:6px; font-size:12px; color:var(--ink-600);">
           <input type="checkbox" id="f-lunar" style="width:auto;">음력 날짜로 입력
         </label>
       </div>
@@ -2067,7 +2180,7 @@
         <input type="checkbox" id="f-privacy-required" style="width:auto; margin-top:2px;">
         <div>
           <label for="f-privacy-required" style="font-weight:700; font-size:13px; color:var(--jade-700); cursor:pointer;">[필수] 개인정보 수집·이용 동의</label>
-          <div style="margin-top:4px; padding:8px 10px; background:#fff; border:1px solid var(--stone-200); border-radius:var(--radius-sm); font-size:11.5px; color:var(--ink-600); line-height:1.6;">
+          <div style="margin-top:4px; padding:8px 10px; background:#fff; border:1px solid var(--stone-200); border-radius:var(--radius-sm); font-size:11px; color:var(--ink-600); line-height:1.6;">
             <strong>수집 항목:</strong> 성명, 연락처(전화번호), 주소, 관계<br>
             <strong>수집 목적:</strong> 안치 계약 관리, 관리비 납부 안내, 추모일(삼우제/49제/기일) 안내, 고객 상담 및 민원 대응<br>
             <strong>보유 기간:</strong> 계약 종료 후 5년 (관계 법령에 따라 보관)<br>
@@ -2080,7 +2193,7 @@
         <input type="checkbox" id="f-privacy-thirdparty" style="width:auto; margin-top:2px;">
         <div>
           <label for="f-privacy-thirdparty" style="font-weight:700; font-size:13px; color:var(--ink-900); cursor:pointer;">[선택] 개인정보 제3자 제공 동의 (알림톡 발송)</label>
-          <p style="font-size:11.5px; color:var(--ink-400); margin:4px 0 0;">카카오 비즈니스 채널을 통한 관리비 납부 안내, 추모일 안내 알림톡 발송을 위해 이름, 연락처를 제3자(카카오)에게 제공합니다.</p>
+          <p style="font-size:11px; color:var(--ink-400); margin:4px 0 0;">카카오 비즈니스 채널을 통한 관리비 납부 안내, 추모일 안내 알림톡 발송을 위해 이름, 연락처를 제3자(카카오)에게 제공합니다.</p>
         </div>
       </div>
       
@@ -2088,7 +2201,7 @@
         <input type="checkbox" id="f-kakao-consent" style="width:auto; margin-top:2px;" checked>
         <div>
           <label for="f-kakao-consent" style="font-weight:600; font-size:13px; color:var(--jade-700); cursor:pointer;">📬 카카오 알림톡 수신 동의 (계약자)</label>
-          <p style="font-size:11.5px; color:var(--ink-400); margin:4px 0 0;">관리비 납부 안내, 추모일(삼우제/49제/기일) 안내를 카카오톡 알림톡으로 수신합니다.</p>
+          <p style="font-size:11px; color:var(--ink-400); margin:4px 0 0;">관리비 납부 안내, 추모일(삼우제/49제/기일) 안내를 카카오톡 알림톡으로 수신합니다.</p>
         </div>
       </div>
     </div>
@@ -2120,7 +2233,7 @@
     </div>
     <div class="form-row">
       <label>고객 서명 <span style="color:var(--ink-400); font-weight:400;">· 화면에 직접 서명을 받습니다</span></label>
-      <p style="font-size:11.5px; color:var(--ink-400); margin:0 0 6px;">위 서명은 계약 내용 및 카카오 알림톡 수신에 동의함을 의미합니다.</p>
+      <p style="font-size:11px; color:var(--ink-400); margin:0 0 6px;">위 서명은 계약 내용 및 카카오 알림톡 수신에 동의함을 의미합니다.</p>
       <div style="border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden;">
         <canvas id="sign-pad" width="412" height="120" style="display:block; width:100%; height:120px; touch-action:none; background:#fff; cursor:crosshair;"></canvas>
       </div>
@@ -2136,7 +2249,7 @@
 </div>
 
 <!-- ================= 업무 추가 모달 ================= -->
-<div class="modal-overlay" id="task-modal">
+<div class="modal-overlay" id="task-modal" role="dialog" aria-modal="true" aria-label="업무 추가">
   <div class="modal">
     <h3>업무 추가</h3>
     <div class="form-row"><label>업무 제목</label><input id="t-title" placeholder="예: 6월 미납 고객 전화안내"></div>
@@ -2160,7 +2273,7 @@
 </div>
 
 <!-- ================= 변경이력 모달 ================= -->
-<div class="modal-overlay" id="changelog-modal">
+<div class="modal-overlay" id="changelog-modal" role="dialog" aria-modal="true" aria-label="변경 이력">
   <div class="modal" style="width:560px;">
     <h3>안장변경현황 · 변경이력</h3>
     <p class="section-sub" style="margin:-10px 0 14px;">계약 내용이 수정될 때마다 수정 전/후 내용이 자동으로 기록됩니다</p>
@@ -2177,7 +2290,7 @@
 </div>
 
 <!-- ================= 예약 등록 모달 ================= -->
-<div class="modal-overlay" id="reservation-modal">
+<div class="modal-overlay" id="reservation-modal" role="dialog" aria-modal="true" aria-label="예약 등록">
   <div class="modal">
     <h3>예약 등록</h3>
     <div class="form-grid-2">
@@ -2229,12 +2342,12 @@
     <div class="form-row">
       <label>사용 권한</label>
       <div style="display:flex; flex-direction:column; gap:8px; border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px;">
-        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13.5px;"><input type="checkbox" class="s-perm" checked style="width:auto;">안장현황 조회</label>
-        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13.5px;"><input type="checkbox" class="s-perm" checked style="width:auto;">안장현황 등록(계약 작성)</label>
-        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13.5px;"><input type="checkbox" class="s-perm" style="width:auto;">봉안단 관리(수납 처리)</label>
-        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13.5px;"><input type="checkbox" class="s-perm" style="width:auto;">관리비 납부 처리</label>
-        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13.5px;"><input type="checkbox" class="s-perm" checked style="width:auto;">자료 검색</label>
-        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13.5px;"><input type="checkbox" class="s-perm" style="width:auto;">자료 관리(수정·삭제)</label>
+        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13px;"><input type="checkbox" class="s-perm" checked style="width:auto;">안장현황 조회</label>
+        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13px;"><input type="checkbox" class="s-perm" checked style="width:auto;">안장현황 등록(계약 작성)</label>
+        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13px;"><input type="checkbox" class="s-perm" style="width:auto;">봉안단 관리(수납 처리)</label>
+        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13px;"><input type="checkbox" class="s-perm" style="width:auto;">관리비 납부 처리</label>
+        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13px;"><input type="checkbox" class="s-perm" checked style="width:auto;">자료 검색</label>
+        <label style="display:flex; align-items:center; gap:8px; font-weight:400; font-size:13px;"><input type="checkbox" class="s-perm" style="width:auto;">자료 관리(수정·삭제)</label>
       </div>
     </div>
     <div class="modal-actions">
@@ -2264,7 +2377,7 @@
 </div>
 
 <!-- ================= 안장위치 이동 모달 ================= -->
-<div class="modal-overlay" id="relocate-modal">
+<div class="modal-overlay" id="relocate-modal" role="dialog" aria-modal="true" aria-label="안장위치 이동">
   <div class="modal">
     <h3>안장위치 이동</h3>
     <p class="section-sub" style="margin:-10px 0 14px;">이동 처리 시 변경이력에 자동으로 기록됩니다</p>
@@ -2296,12 +2409,12 @@
 <div class="modal-overlay" id="file-upload-modal">
   <div class="modal" style="width:520px;">
     <h3>📎 계약서 파일 첨부</h3>
-    <p id="fu-target-contract" style="font-size:12.5px; color:var(--ink-600); margin:-8px 0 14px;"></p>
+    <p id="fu-target-contract" style="font-size:12px; color:var(--ink-600); margin:-8px 0 14px;"></p>
     <div style="border:2px dashed var(--stone-200); border-radius:var(--radius-md); padding:24px; text-align:center; margin-bottom:14px;" id="fu-dropzone">
       <p style="font-size:14px; color:var(--ink-400); margin:0 0 6px;">📸 스캔 또는 촬영한 파일을 여기에 드래그하거나</p>
       <input type="file" id="fu-file-input" accept="image/*,.pdf" style="display:none;" multiple>
       <button class="btn btn-primary" id="fu-select-btn"><i class="ti ti-plus"></i> 파일 선택</button>
-      <p style="font-size:11.5px; color:var(--ink-400); margin:8px 0 0;">JPG, PNG, PDF 지원 · 건당 최대 5개 파일</p>
+      <p style="font-size:11px; color:var(--ink-400); margin:8px 0 0;">JPG, PNG, PDF 지원 · 건당 최대 5개 파일</p>
     </div>
     <div id="fu-file-list" style="display:flex; flex-direction:column; gap:6px; margin-bottom:10px;"></div>
     <div class="modal-actions">
@@ -2330,6 +2443,18 @@ document.querySelectorAll('.nav-item').forEach(function(btn){
 document.querySelectorAll('[data-goto]').forEach(function(btn){
   btn.addEventListener('click', function(){ goPage(btn.dataset.goto); });
 });
+
+/* ---------- Empty State ---------- */
+function emptyState(icon, title, sub, actionLabel, actionFn){
+  var btn = actionLabel
+    ? '<button class="btn btn-primary" style="margin-top:8px;" onclick="(' + actionFn + ')()">'+actionLabel+'</button>'
+    : '';
+  return '<div class="empty-state">'
+    + '<i class="ti ti-' + icon + '"></i>'
+    + '<p class="empty-title">' + title + '</p>'
+    + '<p class="empty-sub">' + sub + '</p>'
+    + btn + '</div>';
+}
 
 /* ---------- 토스트 ---------- */
 function showToast(msg){
@@ -2396,7 +2521,7 @@ function buildLocationGrid(containerId, count){
         cell.style.color = fg;
         
         cell.dataset.code = '소나무' + (t + 1) + '-' + (b + 1) + '구좌';
-        cell.innerHTML = '<span style="font-size:10px; opacity:0.6;">' + (b + 1) + '구좌</span><span style="font-weight:700;">' + occupantCount + '/' + capacity + '</span>';
+        cell.innerHTML = '<span style="font-size:11px; opacity:0.6;">' + (b + 1) + '구좌</span><span style="font-weight:700;">' + occupantCount + '/' + capacity + '</span>';
         
         if(occupantCount > 0){
           var names = [];
@@ -2444,7 +2569,7 @@ function buildLocationGrid(containerId, count){
       var floorNum = document.createElement('div');
       var isEven = fl % 2 === 1;
       floorNum.style.cssText = 'width:44px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; cursor:pointer; background:' + (isEven ? 'var(--stone-50)' : '#fff') + '; border-right:1px solid var(--stone-200); font-size:12px; font-weight:700; color:var(--ink-600);';
-      floorNum.innerHTML = '<span>' + (fl + 1) + '</span><span style="font-size:8px; font-weight:400; color:var(--ink-400);">F</span><span class="floor-toggle-icon" style="font-size:7px; color:var(--ink-400);">▲</span>';
+      floorNum.innerHTML = '<span>' + (fl + 1) + '</span><span style="font-size:11px; font-weight:400; color:var(--ink-400);">F</span><span class="floor-toggle-icon" style="font-size:11px; color:var(--ink-400);">▲</span>';
       floorNum.title = '클릭하여 접기/펼치기';
       floorRow.appendChild(floorNum);
       
@@ -2471,7 +2596,7 @@ function buildLocationGrid(containerId, count){
         
         // 구역명
         var wingLabel = document.createElement('div');
-        wingLabel.style.cssText = 'font-size:9px; font-weight:600; color:var(--ink-400); margin-bottom:2px; text-align:center;';
+        wingLabel.style.cssText = 'font-size:11px; font-weight:600; color:var(--ink-400); margin-bottom:2px; text-align:center;';
         wingLabel.textContent = zoneLabel + '구역';
         wing.appendChild(wingLabel);
         
@@ -2482,7 +2607,7 @@ function buildLocationGrid(containerId, count){
           
           // 동 라벨 (작게)
           var lineLabel = document.createElement('div');
-          lineLabel.style.cssText = 'font-size:7px; font-weight:600; color:var(--ink-400); width:14px; flex-shrink:0; text-align:center;';
+          lineLabel.style.cssText = 'font-size:11px; font-weight:600; color:var(--ink-400); width:14px; flex-shrink:0; text-align:center;';
           lineLabel.textContent = (ln + 1) + '동';
           lineRow.appendChild(lineLabel);
           
@@ -2491,7 +2616,7 @@ function buildLocationGrid(containerId, count){
             var cellIdx = fl * zoneCount * lines * perLine + z * lines * perLine + ln * perLine + p;
             var cell = document.createElement('div');
             cell.className = 'loc-cell';
-            cell.style.cssText = 'width:22px; height:22px; font-size:7px; display:flex; align-items:center; justify-content:center; font-weight:600; border-radius:3px; cursor:pointer; border:1px solid transparent; transition:all .12s;';
+            cell.style.cssText = 'width:22px; height:22px; font-size:11px; display:flex; align-items:center; justify-content:center; font-weight:600; border-radius:3px; cursor:pointer; border:1px solid transparent; transition:all .12s;';
             
             var status = cellIdx % 9 === 0 ? 'empty' : (cellIdx % 7 === 3 ? 'reserved' : 'occupied');
             
@@ -2530,7 +2655,7 @@ function buildLocationGrid(containerId, count){
     
     // 건물 바닥
     var ground = document.createElement('div');
-    ground.style.cssText = 'background:var(--stone-200); padding:4px 14px; font-size:9px; font-weight:500; color:var(--ink-400); text-align:center;';
+    ground.style.cssText = 'background:var(--stone-200); padding:4px 14px; font-size:11px; font-weight:500; color:var(--ink-400); text-align:center;';
     ground.textContent = '▼ ' + zoneCount + '개 구역 · 총 ' + (floors * zoneCount * lines * perLine) + '구좌';
     building.appendChild(ground);
     
@@ -2769,10 +2894,10 @@ function renderDashboardStats(){
       var fPct = Math.round(fOcc / perFloor * 100);
       html += '<div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:8px 10px; text-align:center;">';
       html += '<p style="font-size:11px; font-weight:600; margin:0 0 4px; color:var(--ink-600);">' + (f + 1) + '층</p>';
-      html += '<p style="font-size:15px; font-weight:700; margin:0; color:var(--ink-900);">' + fOcc + '/' + perFloor + '</p>';
+      html += '<p style="font-size:14px; font-weight:700; margin:0; color:var(--ink-900);">' + fOcc + '/' + perFloor + '</p>';
       html += '<div style="margin-top:4px; height:4px; background:var(--stone-200); border-radius:999px; overflow:hidden;">';
       html += '<div style="width:' + fPct + '%; height:100%; background:' + (fPct > 80 ? 'var(--jade-700)' : (fPct > 60 ? 'var(--brass-500)' : 'var(--wine-600)')) + ';"></div>';
-      html += '</div><p style="font-size:10px; color:var(--ink-400); margin:3px 0 0;">' + fPct + '%</p></div>';
+      html += '</div><p style="font-size:11px; color:var(--ink-400); margin:3px 0 0;">' + fPct + '%</p></div>';
     }
     html += '</div>';
   } else if(type === 'simple' || type === 'tier'){
@@ -2783,7 +2908,7 @@ function renderDashboardStats(){
       var zOcc = Math.round((total / zoneCount) * (0.6 + Math.random() * 0.3));
       html += '<div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:8px 10px; text-align:center;">';
       html += '<p style="font-size:11px; font-weight:600; margin:0 0 4px; color:var(--ink-600);">' + (labels[z] || (z+1)) + '구역</p>';
-      html += '<p style="font-size:15px; font-weight:700; margin:0; color:var(--ink-900);">' + zOcc + '/' + Math.round(total / zoneCount) + '</p>';
+      html += '<p style="font-size:14px; font-weight:700; margin:0; color:var(--ink-900);">' + zOcc + '/' + Math.round(total / zoneCount) + '</p>';
       html += '<div style="margin-top:4px; height:4px; background:var(--stone-200); border-radius:999px; overflow:hidden;">';
       html += '<div style="width:' + Math.round(zOcc / (total/zoneCount) * 100) + '%; height:100%; background:var(--jade-700);"></div>';
       html += '</div></div>';
@@ -2825,6 +2950,56 @@ document.querySelectorAll('#loc-filter-tabs .tab-btn').forEach(function(btn){
     document.querySelectorAll('#full-loc-grid .loc-cell').forEach(function(cell){
       cell.style.display = (f==='all' || cell.dataset.status===f) ? '' : 'none';
     });
+  });
+});
+
+/* ---------- 구역 탭 ---------- */
+document.querySelectorAll('.zone-tab-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.zone-tab-btn').forEach(function(b){
+      b.style.background = 'var(--surface)';
+      b.style.color = 'var(--ink-600)';
+      b.style.borderColor = 'var(--border)';
+    });
+    btn.style.background = 'var(--jade-700)';
+    btn.style.color = '#fff';
+    btn.style.borderColor = 'var(--jade-700)';
+    var zone = btn.dataset.zone;
+    document.querySelectorAll('#full-loc-grid .loc-cell').forEach(function(cell){
+      if(zone === 'all'){
+        cell.style.display = '';
+      } else {
+        var code = cell.dataset.code || cell.textContent;
+        cell.style.display = code.indexOf(zone) > -1 ? '' : 'none';
+      }
+    });
+    document.querySelectorAll('#loc-filter-tabs .tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    var allBtn = document.querySelector('#loc-filter-tabs .tab-btn[data-filter="all"]');
+    if(allBtn) allBtn.classList.add('active');
+  });
+});
+
+/* zone tabs */
+document.querySelectorAll('.zone-tab-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.zone-tab-btn').forEach(function(b){
+      b.style.background = 'var(--surface)';
+      b.style.color = 'var(--ink-600)';
+      b.style.borderColor = 'var(--border)';
+    });
+    btn.style.background = 'var(--jade-700)';
+    btn.style.color = '#fff';
+    btn.style.borderColor = 'var(--jade-700)';
+    var zone = btn.dataset.zone;
+    document.querySelectorAll('#full-loc-grid .loc-cell').forEach(function(cell){
+      var code = cell.dataset.code || cell.textContent || '';
+      cell.style.display = (zone === 'all' || code.indexOf(zone) > -1) ? '' : 'none';
+    });
+    document.querySelectorAll('#loc-filter-tabs .tab-btn').forEach(function(b){
+      b.classList.remove('active');
+    });
+    var allBtn = document.querySelector('#loc-filter-tabs .tab-btn[data-filter="all"]');
+    if(allBtn) allBtn.classList.add('active');
   });
 });
 
@@ -2899,7 +3074,7 @@ function showLocationDetail(cell){
       feeHtml += '<div style="flex:1; height:100%; background:' + fb + '; border-right:1px solid #fff;"></div>';
     }
     feeHtml += '</div>';
-    feeHtml += '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--ink-400); margin-top:3px;">';  
+    feeHtml += '<div style="display:flex; justify-content:space-between; font-size:11px; color:var(--ink-400); margin-top:3px;">';  
     feeHtml += '<span>✅ 완납</span><span>⏳ 이번회차</span><span>⬜ 예정</span>';
     feeHtml += '</div>';
     feeHtml += '</div>';
@@ -3120,10 +3295,10 @@ document.getElementById('dp-kakao-log-btn').addEventListener('click', function()
     ? '<p style="font-size:13px; color:var(--ink-400); padding:20px; text-align:center;">발송 이력이 없습니다.</p>'
     : logs.slice(0, 20).map(function(log){
       var icon = log.type.includes('관리비') ? '💳' : '🕯️';
-      return '<div style="display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid var(--stone-200); font-size:12.5px;">' +
+      return '<div style="display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid var(--stone-200); font-size:12px;">' +
         '<span style="font-size:16px;">' + icon + '</span>' +
         '<div><p style="margin:0; font-weight:600;">' + log.type + '</p>' +
-        '<p style="margin:0; color:var(--ink-400); font-size:11.5px;">' + log.date + ' ' + log.time + ' · ' + log.target + '</p>' +
+        '<p style="margin:0; color:var(--ink-400); font-size:11px;">' + log.date + ' ' + log.time + ' · ' + log.target + '</p>' +
         '<p style="margin:2px 0 0; color:var(--ink-600); font-size:12px;">' + log.message + '</p></div></div>';
     }).join('');
   
@@ -3134,9 +3309,9 @@ document.getElementById('dp-kakao-log-btn').addEventListener('click', function()
   var modal = document.createElement('div');
   modal.id = 'kakao-log-modal';
   modal.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:80; display:flex; align-items:center; justify-content:center; padding:20px;';
-  modal.innerHTML = '<div style="background:#fff; border-radius:12px; width:500px; max-width:100%; max-height:70vh; overflow-y:auto;">' +
+  modal.innerHTML = '<div style="background:#fff; border-radius:var(--radius-sm); width:500px; max-width:100%; max-height:70vh; overflow-y:auto;">' +
     '<div style="padding:15px 18px; border-bottom:1px solid var(--stone-200); display:flex; align-items:center; justify-content:space-between;">' +
-    '<h3 style="margin:0; font-size:15px;">💛 알림톡 발송이력</h3>' +
+    '<h3 style="margin:0; font-size:14px;">💛 알림톡 발송이력</h3>' +
     '<button class="modal-close-btn" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink-400);">&times;</button></div>' +
     '<div>' + html + '</div></div>';
   document.body.appendChild(modal);
@@ -3146,14 +3321,14 @@ document.getElementById('dp-kakao-log-btn').addEventListener('click', function()
 
 /* ---------- 관리비 리스트 ---------- */
 var feeData = [
-  {name:'박OO 유족', sub:'고인 최OO · 위치 B-12', daysLeft:-5, date:'2026-06-18'},
-  {name:'이OO 유족', sub:'고인 김OO · 위치 A-05', daysLeft:3, date:'2026-06-26'},
-  {name:'최OO 유족', sub:'고인 정OO · 위치 A-18', daysLeft:12, date:'2026-07-05'},
-  {name:'한OO 유족', sub:'고인 송OO · 위치 C-02', daysLeft:25, date:'2026-07-18'},
-  {name:'윤OO 유족', sub:'고인 강OO · 위치 A-31', daysLeft:58, date:'2026-08-20'},
-  {name:'장OO 유족', sub:'고인 오OO · 위치 B-07', daysLeft:90, date:'2026-09-21'},
-  {name:'배OO 유족', sub:'고인 임OO · 위치 A-09', daysLeft:null, date:'2026-06-10'},
-  {name:'서OO 유족', sub:'고인 황OO · 위치 B-21', daysLeft:null, date:'2026-06-08'}
+  {name:'\ubc15OO \uc871', sub:'\uace0\uc778 \ucd5cOO \u00b7 \uc704\uce58 B-12', daysLeft:-5, date:'2026-06-18', amount:360000},
+  {name:'\uc774OO \uc871', sub:'\uace0\uc778 \uae40OO \u00b7 \uc704\uce58 A-05', daysLeft:3, date:'2026-06-26', amount:360000},
+  {name:'\ucd5cOO \uc871', sub:'\uace0\uc778 \uc815OO \u00b7 \uc704\uce58 A-18', daysLeft:12, date:'2026-07-05', amount:720000},
+  {name:'\ud55cOO \uc871', sub:'\uace0\uc778 \uc1a1OO \u00b7 \uc704\uce58 C-02', daysLeft:25, date:'2026-07-18', amount:360000},
+  {name:'\uc724OO \uc871', sub:'\uace0\uc778 \uac15OO \u00b7 \uc704\uce58 A-31', daysLeft:58, date:'2026-08-20', amount:360000},
+  {name:'\uc7a5OO \uc871', sub:'\uace0\uc778 \uc624OO \u00b7 \uc704\uce58 B-07', daysLeft:90, date:'2026-09-21', amount:720000},
+  {name:'\ubc30OO \uc871', sub:'\uace0\uc778 \uc784OO \u00b7 \uc704\uce58 A-09', daysLeft:null, date:'2026-06-10', amount:360000},
+  {name:'\uc11cOO \uc871', sub:'\uace0\uc778 \ud669OO \u00b7 \uc704\uce58 B-21', daysLeft:null, date:'2026-06-08', amount:360000}
 ];
 
 function getFeeVisual(daysLeft){
@@ -3187,10 +3362,12 @@ function renderFeeRow(item, withAction){
     ? '<div class="urgency-bar" title="납부 임박도"><div class="urgency-fill" style="width:'+v.fill+'%; background:'+tierFillColor(v.tier)+';"></div></div>'
     : '';
   var borderColor = v.tier === 'danger' ? 'var(--wine-600)' : (v.tier === 'warning' ? 'var(--brass-500)' : (v.tier === 'success' ? 'var(--jade-700)' : 'var(--stone-200)'));
-  return '<div class="fee-row" data-status="'+v.filterStatus+'" style="border-left-color:'+borderColor+';">' +
+  var amount = item.amount || 360000;
+  return '<div class="fee-row" data-status="'+v.filterStatus+'" style="border-left-color:'+borderColor+'; border-left-width:4px; padding-left:14px; min-height:72px;">' +
     '<div class="fee-left"><div class="fee-icon"><i class="ti ti-user"></i></div>' +
     '<div><p class="fee-name">'+item.name+'</p><p class="fee-sub">'+item.sub+'</p></div></div>' +
     '<div class="fee-right"><span class="badge '+cls+'" data-role="status-badge">'+v.badge+'</span>' +
+    '<p style="font-size:13px; font-weight:700; color:var(--ink-900); margin:5px 0 0;">\u20a9 ' + amount.toLocaleString('ko-KR') + '</p>' +
     barHtml +
     '<p class="fee-date">'+item.date+'</p>' + (actionHtml ? '<div style="margin-top:6px;">'+actionHtml+'</div>' : '') +
     '</div></div>';
@@ -3212,7 +3389,11 @@ function renderFullFeeList(filter){
     return filter==='all' || v.filterStatus===filter;
   });
   var html = list.map(function(i){ return renderFeeRow(i, true); }).join('');
-  document.getElementById('fee-list').innerHTML = '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:4px;">' + html + '</div>';
+  if(html){
+    document.getElementById('fee-list').innerHTML = '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:4px;">' + html + '</div>';
+  } else {
+    document.getElementById('fee-list').innerHTML = emptyState('coin-off', '\ud574\ub2f9 \uad00\ub9ac\ube44 \ub0b4\uc5ed\uc774 \uc5c6\uc2b5\ub2c8\ub2e4', '\ub2e4\ub978 \ud544\ud130\ub97c \uc120\ud0dd\ud574\ubcf4\uc138\uc694', null, null);
+  }
   attachFeePayHandlers();
 }
 function attachFeePayHandlers(){
@@ -3252,7 +3433,7 @@ var dashTasks = [
 ];
 function renderDashTasks(){
   var html = dashTasks.map(function(t, idx){
-    return '<label style="display:flex; align-items:center; gap:10px; padding:7px 2px; font-size:13.5px; cursor:pointer;'+(t.done?' color:var(--ink-400); text-decoration:line-through;':'')+'">' +
+    return '<label style="display:flex; align-items:center; gap:10px; padding:7px 2px; font-size:13px; cursor:pointer;'+(t.done?' color:var(--ink-400); text-decoration:line-through;':'')+'">' +
       '<input type="checkbox" data-idx="'+idx+'" class="dash-task-check" '+(t.done?'checked':'')+'>' +
       t.label + ' <span style="color:var(--ink-400); font-size:12px;">· '+t.who+'</span></label>';
   }).join('');
@@ -3320,8 +3501,8 @@ function renderAttendance(){
     
     html += '<div style="display:flex; align-items:center; gap:8px; padding:8px 10px; background:var(--stone-50); border-radius:var(--radius-sm);">' +
       '<div class="mini-avatar" style="background:' + (todayCheck ? 'var(--jade-700)' : 'var(--stone-300)') + ';">' + name[0] + '</div>' +
-      '<div style="flex:1;"><p style="margin:0; font-size:12.5px; font-weight:600;">' + name + '</p>' +
-      '<p style="margin:0; font-size:10px; color:var(--ink-400);">' + icon + ' <span style="color:' + statusColor + ';">' + d.status + '</span> · ' + (d.in ? '출근 ' + inTime : '미출근') + (d.out ? ' · 퇴근 ' + outTime : '') + '</p></div>' +
+      '<div style="flex:1;"><p style="margin:0; font-size:12px; font-weight:600;">' + name + '</p>' +
+      '<p style="margin:0; font-size:11px; color:var(--ink-400);">' + icon + ' <span style="color:' + statusColor + ';">' + d.status + '</span> · ' + (d.in ? '출근 ' + inTime : '미출근') + (d.out ? ' · 퇴근 ' + outTime : '') + '</p></div>' +
       '<span style="font-size:16px;">' + (todayCheck ? '🟢' : '⭕') + '</span></div>';
   });
   container.innerHTML = html;
@@ -3377,7 +3558,7 @@ function renderVacation(){
     var typeIcon = v.type === '연차' ? '🏖️' : '⏳';
     html += '<div style="display:flex; align-items:center; justify-content:space-between; padding:8px 10px; background:var(--stone-50); border-radius:var(--radius-sm);">' +
       '<div><p style="margin:0; font-size:12px; font-weight:600;">' + typeIcon + ' ' + v.name + ' · ' + v.type + '</p>' +
-      '<p style="margin:0; font-size:10px; color:var(--ink-400);">' + v.start + ' ~ ' + v.end + ' · ' + v.reason + '</p></div>' +
+      '<p style="margin:0; font-size:11px; color:var(--ink-400);">' + v.start + ' ~ ' + v.end + ' · ' + v.reason + '</p></div>' +
       '<div style="text-align:right;"><span class="badge badge-warning">' + dday + '</span></div></div>';
   });
   container.innerHTML = html;
@@ -3438,7 +3619,7 @@ function renderCustTable(){
       '<td>' + c.loc + '</td>' +
       '<td style="color:var(--ink-500);">' + c.phone + '</td>' +
       '<td style="font-size:12px;">' + c.lastVisit + '</td>' +
-      '<td><button class="btn btn-ghost btn-sm cust-msg-btn" data-name="' + c.name + '" data-phone="' + c.phone + '" style="font-size:10px; padding:2px 8px;">💬 연락</button></td>' +
+      '<td><button class="btn btn-ghost btn-sm cust-msg-btn" data-name="' + c.name + '" data-phone="' + c.phone + '" style="font-size:11px; padding:2px 8px;">💬 연락</button></td>' +
       '</tr>';
   });
   tbody.innerHTML = html;
@@ -3460,7 +3641,7 @@ function renderCustVisitLog(){
     html += '<div style="display:flex; gap:8px; padding:6px 8px; background:var(--stone-50); border-radius:var(--radius-sm); font-size:12px;">' +
       '<span style="font-size:14px;">' + icon + '</span>' +
       '<div><p style="margin:0; font-weight:600;">' + v.name + ' · ' + v.type + '</p>' +
-      '<p style="margin:2px 0 0; color:var(--ink-400); font-size:10.5px;">' + v.date + ' · ' + v.memo + '</p></div></div>';
+      '<p style="margin:2px 0 0; color:var(--ink-400); font-size:11px;">' + v.date + ' · ' + v.memo + '</p></div></div>';
   });
   container.innerHTML = html;
 }
@@ -3476,8 +3657,8 @@ function renderCustMemos(){
   custMemos.forEach(function(m){
     var statusColor = m.text.includes('연체') ? 'var(--wine-600)' : 'var(--ink-600)';
     html += '<div style="padding:6px 8px; background:var(--stone-50); border-radius:var(--radius-sm); border-left:3px solid ' + statusColor + ';">' +
-      '<p style="margin:0; font-size:11.5px;">' + m.text + '</p>' +
-      '<p style="margin:2px 0 0; font-size:9.5px; color:var(--ink-400);">' + m.name + ' · ' + m.author + ' · ' + m.date + '</p></div>';
+      '<p style="margin:0; font-size:11px;">' + m.text + '</p>' +
+      '<p style="margin:2px 0 0; font-size:11px; color:var(--ink-400);">' + m.name + ' · ' + m.author + ' · ' + m.date + '</p></div>';
   });
   container.innerHTML = html;
 }
@@ -3551,10 +3732,10 @@ function renderExpiringContracts(){
       '<div style="display:flex; align-items:center; gap:10px;">' +
       '<span class="badge ' + (urgency === 'danger' ? 'badge-danger' : 'badge-warning') + '">D-' + e.dday + '</span>' +
       '<div><p style="margin:0; font-size:12px; font-weight:600;">' + e.contract + ' · ' + e.customer + '</p>' +
-      '<p style="margin:0; font-size:10px; color:var(--ink-400);">고인 ' + e.deceased + ' · ' + e.loc + ' · ' + e.cycle + '주기 만료 ' + e.expireDate + '</p></div></div>' +
+      '<p style="margin:0; font-size:11px; color:var(--ink-400);">고인 ' + e.deceased + ' · ' + e.loc + ' · ' + e.cycle + '주기 만료 ' + e.expireDate + '</p></div></div>' +
       '<div style="display:flex; gap:4px;">' +
-      '<button class="btn btn-ghost btn-sm ct-renew-btn" style="font-size:10px; padding:3px 10px;">계약갱신</button>' +
-      '<button class="btn btn-ghost btn-sm ct-notify-btn" style="font-size:10px; padding:3px 10px;">알림톡</button></div></div>';
+      '<button class="btn btn-ghost btn-sm ct-renew-btn" style="font-size:11px; padding:3px 10px;">계약갱신</button>' +
+      '<button class="btn btn-ghost btn-sm ct-notify-btn" style="font-size:11px; padding:3px 10px;">알림톡</button></div></div>';
   });
   container.innerHTML = html;
   
@@ -3695,8 +3876,8 @@ function renderExpectedPayments(){
     var label = d === 0 ? '오늘' : (d === 1 ? '내일' : (d === 2 ? '모레' : dateStr + '(' + dayName + ')'));
     var amount = estimatedDaily + Math.floor(Math.random() * 50000 - 25000);
     
-    html += '<div style="display:flex; align-items:center; justify-content:space-between; padding:5px 8px; background:var(--stone-50); border-radius:4px;">' +
-      '<div><p style="margin:0; font-size:11px; font-weight:600;">' + label + '</p><p style="margin:0; font-size:9px; color:var(--ink-400);">예상 ' + activeContracts + '건</p></div>' +
+    html += '<div style="display:flex; align-items:center; justify-content:space-between; padding:5px 8px; background:var(--stone-50); border-radius:var(--radius-xs);">' +
+      '<div><p style="margin:0; font-size:11px; font-weight:600;">' + label + '</p><p style="margin:0; font-size:11px; color:var(--ink-400);">예상 ' + activeContracts + '건</p></div>' +
       '<p style="margin:0; font-size:12px; font-weight:700; color:var(--jade-700);">₩' + amount.toLocaleString() + '</p></div>';
   }
   container.innerHTML = html;
@@ -3756,7 +3937,7 @@ function renderRMSchedule(mode){
     var multiplier = mode === 'day' ? 1 : (mode === 'week' ? 7 : 30);
     var amount = estimatedDaily * multiplier + Math.floor(Math.random() * 50000 * multiplier - 25000 * multiplier);
     html += '<div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background:var(--stone-50); border-radius:var(--radius-sm);">' +
-      '<div><p style="margin:0; font-size:11.5px; font-weight:600;">' + label + '</p><p style="margin:0; font-size:9px; color:var(--ink-400);">예상 ' + (mode === 'day' ? activeContracts : activeContracts * multiplier) + '건</p></div>' +
+      '<div><p style="margin:0; font-size:11px; font-weight:600;">' + label + '</p><p style="margin:0; font-size:11px; color:var(--ink-400);">예상 ' + (mode === 'day' ? activeContracts : activeContracts * multiplier) + '건</p></div>' +
       '<p style="margin:0; font-size:13px; font-weight:700; color:var(--jade-700);">₩' + amount.toLocaleString() + '</p></div>';
   }
   container.innerHTML = html;
@@ -3784,7 +3965,7 @@ function renderCalendar(){
   // 요일 헤더
   for(var i=0; i<7; i++){
     var isSun = i === 0, isSat = i === 6;
-    html += '<div style="text-align:center; padding:5px 0; font-size:10px; font-weight:700; color:' + (isSun ? 'var(--wine-600)' : isSat ? 'var(--blue-600)' : 'var(--ink-400)') + ';">' + dayNames[i] + '</div>';
+    html += '<div style="text-align:center; padding:5px 0; font-size:11px; font-weight:700; color:' + (isSun ? 'var(--wine-600)' : isSat ? 'var(--blue-600)' : 'var(--ink-400)') + ';">' + dayNames[i] + '</div>';
   }
   
   // 빈 칸
@@ -3809,10 +3990,10 @@ function renderCalendar(){
     html += '<div style="' + bg + opacity + 'border-radius:6px; padding:5px 3px; text-align:center; min-height:50px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;">' +
       '<span style="font-size:11px; font-weight:' + (isToday ? '700' : '600') + '; color:' + (isSun ? 'var(--wine-600)' : isSat ? 'var(--blue-600)' : 'var(--ink-900)') + ';">' + d + '</span>' +
       (isPast 
-        ? '<span style="font-size:7px; color:var(--ink-300);">-</span>'
-        : '<span style="font-size:7px; font-weight:700; color:var(--jade-700);">₩' + amount.toLocaleString() + '</span>'
+        ? '<span style="font-size:11px; color:var(--ink-300);">-</span>'
+        : '<span style="font-size:11px; font-weight:700; color:var(--jade-700);">₩' + amount.toLocaleString() + '</span>'
       ) +
-      (isToday ? '<span style="font-size:6px; font-weight:700; color:#fff; background:var(--jade-700); padding:1px 5px; border-radius:999px;">TODAY</span>' : '') +
+      (isToday ? '<span style="font-size:11px; font-weight:700; color:#fff; background:var(--jade-700); padding:1px 5px; border-radius:999px;">TODAY</span>' : '') +
       '</div>';
   }
   html += '</div>';
@@ -3864,7 +4045,7 @@ function updateRMChart(){
           if(!existing){
             var badge = document.createElement('span');
             badge.textContent = '▲';
-            badge.style.cssText = 'position:absolute; top:-14px; left:50%; transform:translateX(-50%); font-size:8px; color:var(--brass-600); font-weight:700;';
+            badge.style.cssText = 'position:absolute; top:-14px; left:50%; transform:translateX(-50%); font-size:11px; color:var(--brass-600); font-weight:700;';
             bar.style.position = 'relative';
             bar.appendChild(badge);
           }
@@ -3948,11 +4129,11 @@ function renderRMSubMetrics(){
   overdueItems.forEach(function(item){
     var borderColor = item.tier === 'danger' ? 'var(--wine-600)' : 'var(--brass-500)';
     overdueHtml += '<div style="display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border-left:3px solid ' + borderColor + '; background:var(--stone-50); border-radius:var(--radius-sm);">' +
-      '<div><p style="margin:0; font-size:12px; font-weight:600;">' + item.name + '</p><p style="margin:0; font-size:10px; color:var(--ink-400);">' + item.location + ' · 연체 ' + item.days + '일차</p></div>' +
+      '<div><p style="margin:0; font-size:12px; font-weight:600;">' + item.name + '</p><p style="margin:0; font-size:11px; color:var(--ink-400);">' + item.location + ' · 연체 ' + item.days + '일차</p></div>' +
       '<div style="text-align:right;"><p style="margin:0; font-size:13px; font-weight:700; color:var(--wine-600);">₩' + item.amount.toLocaleString() + '</p>' +
-      '<button class="btn btn-ghost btn-sm" style="margin-top:2px; font-size:10px; padding:2px 8px;">알림톡 발송</button></div></div>';
+      '<button class="btn btn-ghost btn-sm" style="margin-top:2px; font-size:11px; padding:2px 8px;">알림톡 발송</button></div></div>';
   });
-  document.getElementById('rm-overdue-list').innerHTML = overdueHtml || '<p style="color:var(--ink-400); font-size:13px; padding:8px 0;">✅ 연체 내역이 없습니다.</p>';
+  document.getElementById('rm-overdue-list').innerHTML = overdueHtml || emptyState('circle-check', '\uc5f0\uccb4 \ub0b4\uc5ed\uc774 \uc5c6\uc2b5\ub2c8\ub2e4', '\ubaa8\ub4e0 \uad00\ub9ac\ube44\uac00 \uc815\uc0c1 \ub0a9\ubd80\ub418\uc5c8\uc2b5\ub2c8\ub2e4', null, null);
   
   // 연체 항목 알림톡 버튼 핸들러
   document.querySelectorAll('#rm-overdue-list .btn').forEach(function(btn){
@@ -4089,7 +4270,7 @@ function renderFuFileList(){
     var icon = f.type.includes('pdf') ? '📄' : '🖼️';
     return '<div style="display:flex; align-items:center; gap:8px; padding:6px 10px; background:var(--stone-50); border-radius:var(--radius-sm);">' +
       '<span>' + icon + '</span>' +
-      '<span style="flex:1; font-size:12.5px;">' + f.name + ' (' + Math.round(f.size/1024) + 'KB)</span>' +
+      '<span style="flex:1; font-size:12px;">' + f.name + ' (' + Math.round(f.size/1024) + 'KB)</span>' +
       '<button class="fu-remove-btn" data-idx="' + i + '" style="background:none; border:none; cursor:pointer; color:var(--wine-600); font-size:14px;">&times;</button></div>';
   }).join('');
   document.querySelectorAll('.fu-remove-btn').forEach(function(btn){
@@ -4114,6 +4295,16 @@ document.getElementById('fu-upload-btn').addEventListener('click', function(){
 // 초기 파일 버튼 생성
 updateContractFileButtons();
 
+// 계약 테이블 빈 상태 체크
+(function(){
+  var tbody = document.querySelector('#contract-table tbody');
+  if(tbody && tbody.querySelectorAll('tr').length === 0){
+    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:0;">' +
+      emptyState('file-off', '등록된 계약이 없습니다', '새 계약을 작성하면 여기에 표시됩니다', '+ 신규 계약 작성', "function(){ goPage('newcontract'); }") +
+      '</td></tr>';
+  }
+})();
+
 /* ---------- 안장변경현황 (변경이력) ---------- */
 var changeLogData = [
   {time:'2026-06-22 11:30', contract:'CT-2026-041', staff:'김민수', detail:'관리비 납부 방식 변경 (합산→분리)'},
@@ -4129,7 +4320,7 @@ function renderChangeLog(filterContract){
   }
   var tbody = document.querySelector('#changelog-table tbody');
   if(rows.length === 0){
-    tbody.innerHTML = '<tr><td colspan="4" style="color:var(--ink-400); text-align:center; padding:20px 0;">해당 계약의 변경 이력이 없습니다.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:0;">' + emptyState('history-off', '\ubcc0\uacbd \uc774\ub825\uc774 \uc5c6\uc2b5\ub2c8\ub2e4', '\uacc4\uc57d \ub0b4\uc6a9\uc774 \uc218\uc815\ub418\uba74 \uc790\ub3d9\uc73c\ub85c \uae30\ub85d\ub429\ub2c8\ub2e4', null, null) + '</td></tr>';
     return;
   }
   tbody.innerHTML = rows.map(function(r){
@@ -4151,7 +4342,7 @@ document.getElementById('open-changelog-modal').addEventListener('click', functi
   var canvas = document.getElementById('sign-pad');
   if(!canvas) return;
   var ctx = canvas.getContext('2d');
-  ctx.strokeStyle = '#1C1F1E';
+  ctx.strokeStyle = 'var(--ink-900)';
   ctx.lineWidth = 2;
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
@@ -4602,10 +4793,10 @@ function renderNotifPanel(){
     var icon = log.status === 'confirmed' ? '✅' : '⏳';
     var statusText = log.status === 'confirmed' ? '납부완료' : '미확인';
     return '<div style="display:flex; gap:10px; padding:10px 8px; border-bottom:1px solid var(--stone-200);">' +
-      '<span style="font-size:18px;">' + icon + '</span>' +
+      '<span style="font-size:16px;">' + icon + '</span>' +
       '<div style="flex:1;">' +
       '<p style="margin:0; font-weight:600; font-size:13px;">' + log.payer + ' · ₩' + Number(log.amount).toLocaleString() + '</p>' +
-      '<p style="margin:2px 0 0; font-size:11.5px; color:var(--ink-400);">' + log.date + ' ' + log.time + ' · ' + (log.location || '--') + '</p>' +
+      '<p style="margin:2px 0 0; font-size:11px; color:var(--ink-400);">' + log.date + ' ' + log.time + ' · ' + (log.location || '--') + '</p>' +
       '<p style="margin:2px 0 0;"><span class="badge ' + (log.status === 'confirmed' ? 'badge-success' : 'badge-warning') + '">' + statusText + '</span></p></div></div>';
   }).join('');
 }
@@ -4704,10 +4895,10 @@ function showPaymentPopup(pay){
   overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:90; display:flex; align-items:center; justify-content:center; padding:20px;';
   overlay.innerHTML = '<div style="background:#fff; border-radius:16px; padding:28px; width:380px; max-width:100%; text-align:center; box-shadow:0 8px 40px rgba(0,0,0,.12);">' +
     '<div style="font-size:40px; margin-bottom:10px;">💳</div>' +
-    '<h3 style="margin:0 0 4px; font-size:17px;">입금 확인되었습니다</h3>' +
+    '<h3 style="margin:0 0 4px; font-size:16px;">입금 확인되었습니다</h3>' +
     '<p style="margin:0 0 16px; font-size:13px; color:var(--ink-400);">자동 매칭이 완료되었습니다.</p>' +
-    '<div style="background:var(--jade-100); border-radius:10px; padding:12px; margin-bottom:16px;">' +
-    '<p style="margin:0; font-size:18px; font-weight:700; color:var(--jade-800);">' + pay.payer + '</p>' +
+    '<div style="background:var(--jade-100); border-radius:var(--radius-sm); padding:12px; margin-bottom:16px;">' +
+    '<p style="margin:0; font-size:16px; font-weight:700; color:var(--jade-800);">' + pay.payer + '</p>' +
     '<p style="margin:4px 0 0; font-size:14px; color:var(--jade-800);">₩' + Number(pay.amount).toLocaleString() + '</p>' +
     '<p style="margin:4px 0 0; font-size:12px; color:var(--jade-800);">' + (pay.account || '농협') + '</p></div>' +
     '<p style="font-size:12px; color:var(--ink-400); margin:0 0 14px;">' + pay.date + ' ' + pay.time + ' 입금</p>' +
@@ -4936,25 +5127,25 @@ function renderTemplates(){
   container.innerHTML = filtered.map(function(t, fi){
     // 원본 배열에서 실제 인덱스 찾기
     var realIdx = templates.indexOf(t);
-    var channelIcon = t.channel === 'sms' ? '<span class="badge badge-warning" style="font-size:10px;">📱 SMS</span>' : '<span class="badge badge-primary" style="font-size:10px;">💛 카카오</span>';
+    var channelIcon = t.channel === 'sms' ? '<span class="badge badge-warning" style="font-size:11px;">📱 SMS</span>' : '<span class="badge badge-primary" style="font-size:11px;">💛 카카오</span>';
     var categoryIcon = t.category === '납부' ? '💳' : (t.category === '추모' ? '🕯️' : '📋');
     return '<div class="card" style="padding:16px; position:relative;" data-template-idx="' + realIdx + '">' +
       channelIcon +
       '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">' +
         '<div style="display:flex; align-items:center; gap:8px;">' +
-          '<span style="font-size:18px;">' + categoryIcon + '</span>' +
+          '<span style="font-size:16px;">' + categoryIcon + '</span>' +
           '<div><p style="margin:0; font-weight:700; font-size:14px;">' + t.name + '</p>' +
-          '<p style="margin:0; font-size:11.5px; color:var(--ink-400);">' + t.category + ' · ' + (t.active ? '🟢 활성' : '🔴 비활성') + '</p></div>' +
+          '<p style="margin:0; font-size:11px; color:var(--ink-400);">' + t.category + ' · ' + (t.active ? '🟢 활성' : '🔴 비활성') + '</p></div>' +
         '</div>' +
         '<div style="display:flex; gap:6px;">' +
           '<button class="template-edit-btn btn btn-ghost btn-sm" data-idx="' + realIdx + '">수정</button>' +
           '<button class="template-duplicate-btn btn btn-ghost btn-sm" data-idx="' + realIdx + '">복사</button>' +
           '<button class="template-toggle-btn btn btn-ghost btn-sm" data-idx="' + realIdx + '">' + (t.active ? '비활성' : '활성') + '</button>' +
           '<button class="template-delete-btn btn btn-ghost btn-sm" style="color:var(--wine-600);" data-idx="' + realIdx + '">삭제</button>' +
-          '<button class="template-preview-btn btn btn-ghost btn-sm" data-idx="' + realIdx + '" style="font-size:10px;">미리보기</button>' +
+          '<button class="template-preview-btn btn btn-ghost btn-sm" data-idx="' + realIdx + '" style="font-size:11px;">미리보기</button>' +
         '</div>' +
       '</div>' +
-      '<div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:10px 12px; font-size:12.5px; color:var(--ink-600); line-height:1.6; white-space:pre-wrap;">' + t.msg + '</div>' +
+      '<div style="background:var(--stone-50); border-radius:var(--radius-sm); padding:10px 12px; font-size:12px; color:var(--ink-600); line-height:1.6; white-space:pre-wrap;">' + t.msg + '</div>' +
     '</div>';
   }).join('');
   
@@ -5044,9 +5235,9 @@ function renderExamples(){
       '<p style="margin:0 0 6px; font-size:12px; font-weight:700; color:var(--ink-700);">📝 ' + group.topic + '</p>';
     group.samples.forEach(function(s, si){
       var preview = s.replace(/\\n/g, ' ').substring(0, 35);
-      html += '<div style="padding:4px 8px; margin-bottom:3px; background:#fff; border-radius:4px; font-size:11px; color:var(--ink-600); border:1px solid var(--stone-200); display:flex; align-items:center; justify-content:space-between;">' +
+      html += '<div style="padding:4px 8px; margin-bottom:3px; background:#fff; border-radius:var(--radius-xs); font-size:11px; color:var(--ink-600); border:1px solid var(--stone-200); display:flex; align-items:center; justify-content:space-between;">' +
         '<span>' + (si+1) + '. ' + preview + (s.length > 35 ? '...' : '') + '</span>' +
-        '<button class="btn btn-ghost btn-sm preview-example-btn" style="font-size:10px; padding:1px 6px;" data-msg="' + s.replace(/"/g,'&quot;') + '">프리뷰</button></div>';
+        '<button class="btn btn-ghost btn-sm preview-example-btn" style="font-size:11px; padding:1px 6px;" data-msg="' + s.replace(/"/g,'&quot;') + '">프리뷰</button></div>';
     });
     html += '</div>';
   });
@@ -5078,7 +5269,7 @@ function showTemplateEditor(idx){
   var t = templates[idx];
   var overlay = document.createElement('div');
   overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:80; display:flex; align-items:center; justify-content:center; padding:20px;';
-  overlay.innerHTML = '<div style="background:#fff; border-radius:12px; width:520px; max-width:100%; max-height:80vh; overflow-y:auto; padding:24px;">' +
+  overlay.innerHTML = '<div style="background:#fff; border-radius:var(--radius-sm); width:520px; max-width:100%; max-height:80vh; overflow-y:auto; padding:24px;">' +
     '<h3 style="margin:0 0 16px; font-size:16px;">템플릿 수정</h3>' +
     '<div class="form-row"><label>템플릿명</label><input id="te-name" value="' + t.name.replace(/"/g,'&quot;') + '" style="width:100%;"></div>' +
     '<div class="form-row"><label>카테고리</label>' +
@@ -5235,10 +5426,10 @@ function renderLogs(){
       '<div style="flex:1; min-width:0;">' +
         '<div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">' +
           '<span style="font-size:11px; font-weight:600;">' + log.type + '</span>' +
-          '<span class="badge ' + (isSMS ? 'badge-warning' : 'badge-primary') + '" style="font-size:9px; padding:1px 6px;">' + chanIcon + ' ' + chanLabel + '</span>' +
-          '<span style="margin-left:auto; font-size:10px; color:var(--ink-400);">' + log.date + ' ' + log.time + '</span>' +
+          '<span class="badge ' + (isSMS ? 'badge-warning' : 'badge-primary') + '" style="font-size:11px; padding:1px 6px;">' + chanIcon + ' ' + chanLabel + '</span>' +
+          '<span style="margin-left:auto; font-size:11px; color:var(--ink-400);">' + log.date + ' ' + log.time + '</span>' +
         '</div>' +
-        '<p style="margin:0; font-size:11.5px; color:var(--ink-600);">\uB300\uC0C1: ' + log.target + '</p>' +
+        '<p style="margin:0; font-size:11px; color:var(--ink-600);">\uB300\uC0C1: ' + log.target + '</p>' +
         '<p style="margin:2px 0 0; font-size:11px; color:var(--ink-400);">' + log.message + '</p>' +
       '</div>' +
     '</div>';
@@ -5304,6 +5495,39 @@ function initNewContractForm(){
   if(ncEnshrine && !ncEnshrine.value) ncEnshrine.value = today;
   showToast('신규 계약 작성 폼이 준비되었습니다.');
 }
+
+/* ================= 3\ub2e8\uacc4 \uc9c4\ud589 \ubc14 ================= */
+function updateNCStep(step){
+  document.querySelectorAll('.nc-step').forEach(function(el, i){
+    var circle = el.querySelector('div');
+    var label = el.querySelector('p');
+    var isActive = (i + 1) <= step;
+    var isCurrent = (i + 1) === step;
+    if(circle){
+      circle.style.background = isActive ? 'var(--jade-700)' : 'var(--stone-200)';
+      circle.style.color = isActive ? '#fff' : 'var(--ink-400)';
+    }
+    if(label){
+      label.style.color = isCurrent ? 'var(--jade-700)' : (isActive ? 'var(--ink-600)' : 'var(--ink-400)');
+    }
+  });
+}
+
+['nc-privacy-required', 'nc-pay1-amount'].forEach(function(id, idx){
+  var el = document.getElementById(id);
+  if(!el) return;
+  new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){ updateNCStep(idx + 2); }
+  }, { threshold: 0.5 }).observe(el);
+});
+
+var _origGoPage = goPage;
+goPage = function(page){
+  _origGoPage(page);
+  if(page === 'newcontract'){
+    setTimeout(function(){ updateNCStep(1); }, 100);
+  }
+};
 
 // 뒤로가기
 document.getElementById('newcontract-back').addEventListener('click', function(){ goPage('contracts'); });
@@ -5428,7 +5652,7 @@ function addSendButtonsToContracts(){
       var btn = document.createElement('button');
       btn.className = 'btn btn-ghost btn-sm ct-send-btn';
       btn.textContent = '💬';
-      btn.style.cssText = 'font-size:10px; padding:2px 6px; margin-left:2px;';
+      btn.style.cssText = 'font-size:11px; padding:2px 6px; margin-left:2px;';
       btn.addEventListener('click', function(){
         var contractNo = tr.children[0].textContent;
         var customerName = tr.children[2].textContent;
@@ -5447,8 +5671,8 @@ function showSendModal(contractNo, customerName){
   var tmplOpts = templates.filter(function(t){ return t.active; }).map(function(t, i){
     return '<option value="' + i + '">' + t.name + '</option>';
   }).join('');
-  overlay.innerHTML = '<div style="background:#fff; border-radius:12px; width:420px; padding:24px;">' +
-    '<h3 style="margin:0 0 14px; font-size:15px;">💬 메시지 발송</h3>' +
+  overlay.innerHTML = '<div style="background:#fff; border-radius:var(--radius-sm); width:420px; padding:24px;">' +
+    '<h3 style="margin:0 0 14px; font-size:14px;">💬 메시지 발송</h3>' +
     '<div style="margin-bottom:10px; font-size:12px; color:var(--ink-600);">계약: ' + contractNo + ' · 대상: ' + customerName + '</div>' +
     '<div class="form-row"><label>발송 방식</label><select id="sm-type" style="width:100%;">' + typeOpts + '</select></div>' +
     '<div class="form-row"><label>템플릿</label><select id="sm-tmpl" style="width:100%;">' + tmplOpts + '</select></div>' +
@@ -5755,7 +5979,7 @@ renderTemplates = function(){
       var collapseBtn = document.createElement('span');
       collapseBtn.className = 'template-collapse-btn template-card-arrow';
       collapseBtn.textContent = '▲';
-      collapseBtn.style.cssText = 'cursor:pointer; font-size:10px; color:var(--ink-400); margin-left:auto; padding:4px;';
+      collapseBtn.style.cssText = 'cursor:pointer; font-size:11px; color:var(--ink-400); margin-left:auto; padding:4px;';
       collapseBtn.title = '접기/펼치기';
       topRow.appendChild(collapseBtn);
       

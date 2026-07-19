@@ -1,0 +1,198 @@
+{
+  "document": {
+    "version": "2.10.2",
+    "theme": "default",
+    "language": "ko-KR",
+    "id": "01KXA5W6BGN62FCJV2S9JPHNWS",
+    "components": [
+      {
+        "id": "SE-2496d5cb-2e68-4d59-af2b-12bf582d9e98",
+        "layout": "default",
+        "title": [
+          {
+            "id": "SE-63d5d4b6-4b8a-4bda-abca-25987a355e97",
+            "nodes": [
+              {
+                "id": "SE-b998c53a-4063-4568-b682-94e5561e4752",
+                "value": "보험설계사, 릴스 하나로 2030 고객 만난 썰",
+                "@ctype": "textNode"
+              }
+            ],
+            "@ctype": "paragraph"
+          }
+        ],
+        "subTitle": null,
+        "align": "left",
+        "@ctype": "documentTitle"
+      },
+      {
+        "id": "SE-e4ae17d3-18a2-4bfa-97b4-e678da2573c7",
+        "layout": "default",
+        "src": "https://blogfiles.pstatic.net/MjAyNjA3MTJfMTEz/MDAxNzgzODI2ODkyMjMz.x3ER7QP6wvbOoNK62kNVXupxoI4brSy9c4tgGHppHMog.ttl-WvL-PGc_LxdnpIGwrZSZT2OnEVquGeYblf1NaBUg.PNG/ins_main.png?type=w1",
+        "internalResource": true,
+        "represent": true,
+        "path": "/MjAyNjA3MTJfMTEz/MDAxNzgzODI2ODkyMjMz.x3ER7QP6wvbOoNK62kNVXupxoI4brSy9c4tgGHppHMog.ttl-WvL-PGc_LxdnpIGwrZSZT2OnEVquGeYblf1NaBUg.PNG/ins_main.png",
+        "domain": "https://blogfiles.pstatic.net",
+        "fileSize": 25288,
+        "width": 700,
+        "widthPercentage": 0,
+        "height": 700,
+        "originalWidth": 700,
+        "originalHeight": 700,
+        "fileName": "ins_main.png",
+        "caption": null,
+        "format": "normal",
+        "displayFormat": "normal",
+        "imageLoaded": true,
+        "contentMode": "normal",
+        "origin": {
+          "srcFrom": "local",
+          "@ctype": "imageOrigin"
+        },
+        "ai": false,
+        "@ctype": "image"
+      },
+      {
+        "id": "SE-b0c3ef9d-9f94-4333-a623-444cb8d57aba",
+        "layout": "default",
+        "src": "https://blogfiles.pstatic.net/MjAyNjA3MTJfMTYx/MDAxNzgzODI2OTAwMjQ4.0vor1q00q7jP1DmDD_HrfWko3ohzieJhZS67k_bCKskg.50uPs6kkHNsK7yNhB6xloQlhf74Of2PhEvBTiQdS58Yg.PNG/ins_card1.png?type=w1",
+        "internalResource": true,
+        "represent": false,
+        "path": "/MjAyNjA3MTJfMTYx/MDAxNzgzODI2OTAwMjQ4.0vor1q00q7jP1DmDD_HrfWko3ohzieJhZS67k_bCKskg.50uPs6kkHNsK7yNhB6xloQlhf74Of2PhEvBTiQdS58Yg.PNG/ins_card1.png",
+        "domain": "https://blogfiles.pstatic.net",
+        "fileSize": 10251,
+        "width": 600,
+        "widthPercentage": 0,
+        "height": 338,
+        "originalWidth": 600,
+        "originalHeight": 338,
+        "fileName": "ins_card1.png",
+        "caption": null,
+        "format": "normal",
+        "displayFormat": "normal",
+        "imageLoaded": true,
+        "contentMode": "normal",
+        "origin": {
+          "srcFrom": "local",
+          "@ctype": "imageOrigin"
+        },
+        "ai": false,
+        "@ctype": "image"
+      },
+      {
+        "id": "SE-ea95d31f-2836-48bc-b46d-3f65067fe989",
+        "layout": "default",
+        "src": "https://blogfiles.pstatic.net/MjAyNjA3MTJfNjYg/MDAxNzgzODI2OTA4Mjc0.RqTtWF-hgo9vsAOzRofxINNFifBGi6wXzVSdBB-n7kcg.YwKUqYARvAZe9qIzAHeBYLw4bTTW0r-BCiCTxoOs-M8g.PNG/ins_card2.png?type=w1",
+        "internalResource": true,
+        "represent": false,
+        "path": "/MjAyNjA3MTJfNjYg/MDAxNzgzODI2OTA4Mjc0.RqTtWF-hgo9vsAOzRofxINNFifBGi6wXzVSdBB-n7kcg.YwKUqYARvAZe9qIzAHeBYLw4bTTW0r-BCiCTxoOs-M8g.PNG/ins_card2.png",
+        "domain": "https://blogfiles.pstatic.net",
+        "fileSize": 9618,
+        "width": 600,
+        "widthPercentage": 0,
+        "height": 338,
+        "originalWidth": 600,
+        "originalHeight": 338,
+        "fileName": "ins_card2.png",
+        "caption": null,
+        "format": "normal",
+        "displayFormat": "normal",
+        "imageLoaded": true,
+        "contentMode": "normal",
+        "origin": {
+          "srcFrom": "local",
+          "@ctype": "imageOrigin"
+        },
+        "ai": false,
+        "@ctype": "image"
+      },
+      {
+        "id": "SE-8a9dee73-b3f7-4fc0-aca5-b090b8f0dc05",
+        "layout": "default",
+        "src": "https://blogfiles.pstatic.net/MjAyNjA3MTJfMTM5/MDAxNzgzODI2OTE2Mjk2.Yvz0e39Zw9CcxWNgi_Y39yCxEiP5RJDpUtJC9lkwV8sg.XnzBYUfsVbJlIgAdHCu9uRz22PFFV6Vw29T8hpj7zugg.PNG/ins_card3.png?type=w1",
+        "internalResource": true,
+        "represent": false,
+        "path": "/MjAyNjA3MTJfMTM5/MDAxNzgzODI2OTE2Mjk2.Yvz0e39Zw9CcxWNgi_Y39yCxEiP5RJDpUtJC9lkwV8sg.XnzBYUfsVbJlIgAdHCu9uRz22PFFV6Vw29T8hpj7zugg.PNG/ins_card3.png",
+        "domain": "https://blogfiles.pstatic.net",
+        "fileSize": 9614,
+        "width": 600,
+        "widthPercentage": 0,
+        "height": 338,
+        "originalWidth": 600,
+        "originalHeight": 338,
+        "fileName": "ins_card3.png",
+        "caption": null,
+        "format": "normal",
+        "displayFormat": "normal",
+        "imageLoaded": false,
+        "contentMode": "normal",
+        "origin": {
+          "srcFrom": "local",
+          "@ctype": "imageOrigin"
+        },
+        "ai": false,
+        "@ctype": "image"
+      },
+      {
+        "id": "SE-f08b5855-5c71-43ce-9bcb-50036f8c396f",
+        "layout": "default",
+        "src": "https://blogfiles.pstatic.net/MjAyNjA3MTJfNTAg/MDAxNzgzODI2OTI0MzMx.cAmMfk9H-euvzqmlcyQyZv28MIzK7YC6vSHsLqs37oIg.-zZ1QAbVuSvsTDxn4LNb5qAVQGBx42Sp1adq_CqrlNAg.PNG/ins_cta.png?type=w1",
+        "internalResource": true,
+        "represent": false,
+        "path": "/MjAyNjA3MTJfNTAg/MDAxNzgzODI2OTI0MzMx.cAmMfk9H-euvzqmlcyQyZv28MIzK7YC6vSHsLqs37oIg.-zZ1QAbVuSvsTDxn4LNb5qAVQGBx42Sp1adq_CqrlNAg.PNG/ins_cta.png",
+        "domain": "https://blogfiles.pstatic.net",
+        "fileSize": 13848,
+        "width": 600,
+        "widthPercentage": 0,
+        "height": 338,
+        "originalWidth": 600,
+        "originalHeight": 338,
+        "fileName": "ins_cta.png",
+        "caption": null,
+        "format": "normal",
+        "displayFormat": "normal",
+        "imageLoaded": false,
+        "contentMode": "normal",
+        "origin": {
+          "srcFrom": "local",
+          "@ctype": "imageOrigin"
+        },
+        "ai": false,
+        "@ctype": "image"
+      },
+      {
+        "id": "SE-c7b39853-c51d-420d-9773-d243cb8f1067",
+        "layout": "default",
+        "value": [
+          {
+            "id": "SE-4ad0ef3e-4035-4a98-9f54-13a3754e2edd",
+            "nodes": [
+              {
+                "id": "SE-1518ae68-94d8-491f-bd5e-76e3ecd12393",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "@ctype": "paragraph"
+          }
+        ],
+        "@ctype": "text"
+      }
+    ],
+    "di": {
+      "dif": false,
+      "dio": [
+        {
+          "dis": "N",
+          "dia": {
+            "t": 0,
+            "p": 0,
+            "st": 102,
+            "sk": 0
+          }
+        }
+      ]
+    }
+  },
+  "documentId": ""
+}

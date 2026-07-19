@@ -1,0 +1,1741 @@
+{
+  "document": {
+    "version": "2.10.2",
+    "theme": "default",
+    "language": "ko-KR",
+    "id": "01KWZH82WWQR8Z6N0QWNYBB480",
+    "di": {
+      "dif": false,
+      "dio": [
+        {
+          "dis": "N",
+          "dia": {
+            "t": 0,
+            "p": 0,
+            "st": 110005,
+            "sk": 4
+          }
+        },
+        {
+          "dis": "N",
+          "dia": {
+            "t": 0,
+            "p": 0,
+            "st": 21,
+            "sk": 0
+          }
+        }
+      ]
+    },
+    "components": [
+      {
+        "id": "SE-d6e1f212-0f3e-4369-9e3c-e2f9915831b6",
+        "layout": "default",
+        "title": [
+          {
+            "id": "SE-04b3b04e-0115-4578-842c-d0b420da1d90",
+            "nodes": [
+              {
+                "id": "SE-2063a670-82bc-11f1-8ce9-63ce362819f5",
+                "value": "치과 임플란트 마케팅, 하반기 준비는 영상 콘텐츠로 시작하세요",
+                "@ctype": "textNode"
+              }
+            ],
+            "@ctype": "paragraph"
+          }
+        ],
+        "subTitle": null,
+        "align": "left",
+        "@ctype": "documentTitle"
+      },
+      {
+        "id": "SE-147043b2-82bc-11f1-8ce9-3dcb8b90e06f",
+        "layout": "default",
+        "value": [
+          {
+            "id": "SE-813f512e-09a1-4919-b703-c8d59ecc693c",
+            "nodes": [
+              {
+                "id": "SE-2063cd81-82bc-11f1-8ce9-e94adebb9efb",
+                "value": "치과 임플란트 시장이 점점 커지고 있습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-0ca96a6b-e74d-4581-8a90-f57c4a3d4c2d",
+            "nodes": [
+              {
+                "id": "SE-1079003d-9705-4dea-9ae0-b2b485967a45",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-7a8bd438-ed26-489e-be48-2af8208e0daa",
+            "nodes": [
+              {
+                "id": "SE-b7e8e7c2-2b2e-40d6-b278-1a1ff0ad9dc2",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-60df12a9-0f7d-4d91-8444-338dd7f28df2",
+            "nodes": [
+              {
+                "id": "SE-f18c6ce0-73ba-42de-8b5c-49e225d66919",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-5e4d8dbf-7cc1-45fa-9498-c60294bd5035",
+            "nodes": [
+              {
+                "id": "SE-a88626c8-bee6-42c6-8345-741011cc1764",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-6f7e9a9a-fdfe-43c4-b892-f9cb97da9503",
+            "nodes": [
+              {
+                "id": "SE-1485f022-3ba8-48e9-8016-30ec06f43508",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-d77409c2-1cc6-4906-8036-499fb8e5d377",
+            "nodes": [
+              {
+                "id": "SE-2063cd82-82bc-11f1-8ce9-93cf2ff274d3",
+                "value": "환자들은 더 많은 정보를 원하고,",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-3fc29511-0213-4866-9f6b-95fef31ab3d2",
+            "nodes": [
+              {
+                "id": "SE-2063cd83-82bc-11f1-8ce9-8b4c65e10d29",
+                "value": "더 신뢰할 수 있는 병원을 찾고 있습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-ac98790e-360d-4393-a145-97efb2b17ca3",
+            "nodes": [
+              {
+                "id": "SE-2063cd84-82bc-11f1-8ce9-2ba9f560e961",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-a8101f1b-724e-4d3e-ba7c-2e55df22664b",
+            "nodes": [
+              {
+                "id": "SE-2063cd85-82bc-11f1-8ce9-9b24e333c8a0",
+                "value": "텍스트만으로는 부족합니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-afb215d7-036f-4ceb-b232-b4447ece64ce",
+            "nodes": [
+              {
+                "id": "SE-2063cd86-82bc-11f1-8ce9-3f0de811e787",
+                "value": "환자는 직접 눈으로 보고 싶어 합니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-2b94c1fb-5236-4e82-afdd-3267d3c4db35",
+            "nodes": [
+              {
+                "id": "SE-2063cd87-82bc-11f1-8ce9-5333dbe88b83",
+                "value": "수술 과정, 시술 결과, 원장님의 전문성까지.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-c4249870-c815-4662-89f1-8d6b21fa7d8f",
+            "nodes": [
+              {
+                "id": "SE-2063cd88-82bc-11f1-8ce9-d5069f23824a",
+                "value": "영상이 그 모든 걸 보여줄 수 있습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-08c1287c-7ce5-4ff6-887b-214b07ca1471",
+            "nodes": [
+              {
+                "id": "SE-2063cd89-82bc-11f1-8ce9-517f134ebf6a",
+                "value": "영상 마케팅이 선택이 아닌 필수인 이유입니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-d0cef6d8-a1a5-47bd-a9d9-2526eacb0600",
+            "nodes": [
+              {
+                "id": "SE-2063cd8a-82bc-11f1-8ce9-9344dfb9c090",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-81ce4be1-df4f-4ad2-8364-691a17ec4d3b",
+            "nodes": [
+              {
+                "id": "SE-8d71f554-e449-4560-93d6-42cc14351c9f",
+                "value": "☀️ 치과 임플란트, 영상 마케팅이 필요한 시대",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-b4a264ad-4878-4a75-989f-ef9933452a62",
+            "nodes": [
+              {
+                "id": "SE-2063cd8c-82bc-11f1-8ce9-396db1bf3d20",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-fb40bf42-ba3d-4923-a128-539b7bcb99b8",
+            "nodes": [
+              {
+                "id": "SE-20781cfe-961c-4fb3-8ca3-18abf8e7b734",
+                "value": "📋 임플란트 수술 영상이 주는 신뢰감",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-02164f60-04c9-4a1d-bab2-39b2784a693b",
+            "nodes": [
+              {
+                "id": "SE-2063cd8e-82bc-11f1-8ce9-7d2d9846e36d",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-8f60c4ab-f90f-4166-82a8-5709173980f5",
+            "nodes": [
+              {
+                "id": "SE-2063cd8f-82bc-11f1-8ce9-9d112bf3bcd5",
+                "value": "환자들이 가장 궁금해하는 것은",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-af4a7b38-ad99-4b2a-9016-b37ca251a7dc",
+            "nodes": [
+              {
+                "id": "SE-2063cd90-82bc-11f1-8ce9-63373dbff807",
+                "value": "\"임플란트 수술, 어떻게 진행되나요?\"입니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-87ce1877-8d01-465c-be7a-9efeb25c25f3",
+            "nodes": [
+              {
+                "id": "SE-2063cd91-82bc-11f1-8ce9-178e95acb245",
+                "value": "수술 과정을 영상으로 보여주면 어떨까요?",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-b6135201-0f8a-4357-990f-2d68b4d451e1",
+            "nodes": [
+              {
+                "id": "SE-2063cd92-82bc-11f1-8ce9-673d6a4059a5",
+                "value": "실제 수술 장면, CT 분석, 식립 과정,",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-fc111106-2ddd-4d65-ac53-9d95153b329e",
+            "nodes": [
+              {
+                "id": "SE-2063cd93-82bc-11f1-8ce9-a508e11cb644",
+                "value": "치유 과정까지 한눈에 보여줄 수 있습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-085da2de-7121-4384-b4d7-b5b3743d02ab",
+            "nodes": [
+              {
+                "id": "SE-2063cd94-82bc-11f1-8ce9-d97be6065d09",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-ab3d590b-ceda-4bd8-bdb8-a4c63fe0e05f",
+            "nodes": [
+              {
+                "id": "SE-2063cd95-82bc-11f1-8ce9-6159d4bcb8e9",
+                "value": "환자는 영상을 보며 안심합니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-86fe5763-f5dc-4dde-82d1-6198dffc46d0",
+            "nodes": [
+              {
+                "id": "SE-2063cd96-82bc-11f1-8ce9-41b477507d34",
+                "value": "\"이 병원은 정말 전문적이구나\"라는",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-8f2b011f-c017-48ae-81e4-0c536a2ee737",
+            "nodes": [
+              {
+                "id": "SE-2063cd97-82bc-11f1-8ce9-879dcd3e1af2",
+                "value": "신뢰가 자연스럽게 생깁니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-d3108b7d-36ae-4589-8afc-5d1c71a25a57",
+            "nodes": [
+              {
+                "id": "SE-2063cd98-82bc-11f1-8ce9-85aebac9a89a",
+                "value": "임플란트 홍보 영상 하나면",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-962149b8-6a0d-4f56-b2fb-871fc2c1ee6b",
+            "nodes": [
+              {
+                "id": "SE-2063cd99-82bc-11f1-8ce9-cfebbbcfb9ba",
+                "value": "수십 장의 안내문보다 효과적입니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-4d6f1cee-bf30-48b2-ace2-e7607dcff08f",
+            "nodes": [
+              {
+                "id": "SE-2063cd9a-82bc-11f1-8ce9-03e59b6d9b16",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-486bdc20-b0a7-4ac3-a8e3-7f3e4f622c2b",
+            "nodes": [
+              {
+                "id": "SE-017d99e1-9e3c-4fb8-a5e2-a2549c313bee",
+                "value": "🎥 촬영은 해도, 편집이 문제다",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-979d1af6-05a3-499d-8b52-eb0f38afb49e",
+            "nodes": [
+              {
+                "id": "SE-2063cd9c-82bc-11f1-8ce9-319b0447234f",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-b3ce7ad3-d282-4fec-bec8-b8b83a643b13",
+            "nodes": [
+              {
+                "id": "SE-2063cd9d-82bc-11f1-8ce9-13ba81c64550",
+                "value": "\"영상 찍는 건 괜찮은데,",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-19fbf83a-f7ae-43c4-acf9-c7c61fdddf0f",
+            "nodes": [
+              {
+                "id": "SE-2063f4ae-82bc-11f1-8ce9-2f867121edc8",
+                "value": "편집이 너무 어렵습니다.\"",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-7ffa06df-cb3b-4762-bb1c-868e0fda6334",
+            "nodes": [
+              {
+                "id": "SE-2063f4af-82bc-11f1-8ce9-5d2f2321fb8b",
+                "value": "많은 치과 원장님들이 하는 말입니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-55c8f1d3-446e-4752-8161-331a3da5e6b0",
+            "nodes": [
+              {
+                "id": "SE-2063f4b0-82bc-11f1-8ce9-b7124e59e703",
+                "value": "환자 상담, 수술, 진료로 바쁜데",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-8cc85c0e-3233-45ae-b9ac-bd545d394d85",
+            "nodes": [
+              {
+                "id": "SE-2063f4b1-82bc-11f1-8ce9-c14ad1606806",
+                "value": "영상 편집까지 할 시간이 없습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-fb4cd87d-2238-4ed6-a015-942dafe62321",
+            "nodes": [
+              {
+                "id": "SE-2063f4b2-82bc-11f1-8ce9-a13c3ec16abb",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-de09a4b1-0512-4ead-8edc-514da002880b",
+            "nodes": [
+              {
+                "id": "SE-2063f4b3-82bc-11f1-8ce9-49a40dfe7855",
+                "value": "게다가 전문 편집 프로그램은 복잡하고,",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-b53f4dd9-17da-4ca8-8b32-22d9b81d0312",
+            "nodes": [
+              {
+                "id": "SE-2063f4b4-82bc-11f1-8ce9-696f6842f177",
+                "value": "배우는 데 시간이 오래 걸립니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-d6c3680e-cf83-4f94-a52d-73dfca4b9b80",
+            "nodes": [
+              {
+                "id": "SE-2063f4b5-82bc-11f1-8ce9-d756d0f8ffb9",
+                "value": "그렇다고 대충 올리면 오히려 역효과.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-34818578-b806-46c1-872e-a80447c248e6",
+            "nodes": [
+              {
+                "id": "SE-2063f4b6-82bc-11f1-8ce9-8d78a3a8aae8",
+                "value": "이럴 때 필요한 게 바로",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-16c4b8fc-406d-43e3-b34d-ad2a9fa639d7",
+            "nodes": [
+              {
+                "id": "SE-2063f4b7-82bc-11f1-8ce9-131aa6958655",
+                "value": "영상 편집 아웃소싱입니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-8ec8108b-d1c5-4f04-86df-8a04f3f91a0f",
+            "nodes": [
+              {
+                "id": "SE-2063f4b8-82bc-11f1-8ce9-b5cd587c6aae",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-2d764016-d8f3-4fb0-82bc-7544326ace65",
+            "nodes": [
+              {
+                "id": "SE-bb60c8d3-ec19-41f8-80ec-b06e5bddbb30",
+                "value": "✂️ 영상 편집 아웃소싱, 에이컷이 해결합니다",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-6f25db8f-faa5-4977-9e3b-505bb1c17306",
+            "nodes": [
+              {
+                "id": "SE-2063f4ba-82bc-11f1-8ce9-9141205a7bc6",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-496b606d-88f9-4111-b16b-adc7a8119628",
+            "nodes": [
+              {
+                "id": "SE-2063f4bb-82bc-11f1-8ce9-459623b24c38",
+                "value": "에이컷(AICUT)은 영상 편집 전문 서비스입니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-774b337e-1ce0-4ef0-adb6-d0f85feb5a79",
+            "nodes": [
+              {
+                "id": "SE-2063f4bc-82bc-11f1-8ce9-91cf91765347",
+                "value": "치과 원장님이 촬영한 원본 영상을",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-523d6929-2519-4ca5-b5be-b26482b762d7",
+            "nodes": [
+              {
+                "id": "SE-2063f4bd-82bc-11f1-8ce9-690c882126df",
+                "value": "전문 에디터가 완성도 높게 편집해드립니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-17d12910-5eec-4f01-8453-a8c6a54bd640",
+            "nodes": [
+              {
+                "id": "SE-2063f4be-82bc-11f1-8ce9-439c4521faa3",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-d92cb975-3d8e-4203-b1b0-8c9af284c3fb",
+            "nodes": [
+              {
+                "id": "SE-2063f4bf-82bc-11f1-8ce9-177767534a3f",
+                "value": "자막, BGM, 색보정, 인트로/아웃트로까지.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-6ceb3b48-9a11-4eaf-acf2-a91e43f15a3c",
+            "nodes": [
+              {
+                "id": "SE-2063f4c0-82bc-11f1-8ce9-c9e1a40f11d8",
+                "value": "숏폼(릴스, 쇼츠, 틱톡)부터",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-8111a5e2-48fa-4bba-b7be-82a56da3ff69",
+            "nodes": [
+              {
+                "id": "SE-2063f4c1-82bc-11f1-8ce9-d17aa31da7af",
+                "value": "롱폼(수술 과정 소개)까지 모두 가능합니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-9f3e8fe1-6c66-47a6-8e7b-0a7efbb890fd",
+            "nodes": [
+              {
+                "id": "SE-2063f4c2-82bc-11f1-8ce9-a596e1267699",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-0c917c71-ca3e-45ec-8c68-abee63cb661a",
+            "nodes": [
+              {
+                "id": "SE-2063f4c3-82bc-11f1-8ce9-c5ee64b0943d",
+                "value": "월 정기 납품으로 부담 없이 시작하세요.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-855f6b21-5b95-40a4-b4b1-eb1ca3184567",
+            "nodes": [
+              {
+                "id": "SE-2063f4c4-82bc-11f1-8ce9-3b2890908dd0",
+                "value": "주 1~2편, 월 4~10편까지 맞춤 제공합니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-2bf70fb7-fcd3-462e-b1ac-d53a938f3e9b",
+            "nodes": [
+              {
+                "id": "SE-2063f4c5-82bc-11f1-8ce9-2b097a38617f",
+                "value": "원장님은 촬영만 하세요.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-16cb92fd-73a3-4d6f-91c2-44fe44003a74",
+            "nodes": [
+              {
+                "id": "SE-2063f4c6-82bc-11f1-8ce9-d1722440ff2a",
+                "value": "편집은 에이컷이 책임집니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-edc3f320-9681-4b6d-a4ee-81a29787f859",
+            "nodes": [
+              {
+                "id": "SE-2063f4c7-82bc-11f1-8ce9-177bd6324a73",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-49087f79-93dd-4aa8-a6ad-b047c9ace178",
+            "nodes": [
+              {
+                "id": "SE-1882abef-6472-4d2c-a144-2adb7df83483",
+                "value": "📅 하반기 치과 마케팅, 지금 준비해야 하는 이유",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-68bb7f2e-ca96-4608-bb77-358d27f62a6a",
+            "nodes": [
+              {
+                "id": "SE-20641bd9-82bc-11f1-8ce9-1162b3cf8545",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-839fb282-12cd-4e54-97c9-101af5b2a5a0",
+            "nodes": [
+              {
+                "id": "SE-20641bda-82bc-11f1-8ce9-699a95785757",
+                "value": "7월, 하반기가 시작되었습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-aec236ad-21f9-4678-a59c-e3ff7fe8e701",
+            "nodes": [
+              {
+                "id": "SE-20641bdb-82bc-11f1-8ce9-9943674503a9",
+                "value": "지금 준비하지 않으면 올해도 그대로 갑니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-9d2a7c0c-392a-43a3-ba3f-f85567744f51",
+            "nodes": [
+              {
+                "id": "SE-20641bdc-82bc-11f1-8ce9-35ee9d72da7a",
+                "value": "여름 방학 시즌, 임플란트 수요가 늘어납니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-eaf3886e-ce96-443b-b9d4-fbb051ecdac7",
+            "nodes": [
+              {
+                "id": "SE-20641bdd-82bc-11f1-8ce9-8d06a2ec086d",
+                "value": "환자들은 SNS에서 병원을 검색합니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-092a8f17-2ce1-4e16-ac42-3106a8214d46",
+            "nodes": [
+              {
+                "id": "SE-20641bde-82bc-11f1-8ce9-3b5989c64b6b",
+                "value": "릴스, 쇼츠, 틱톡에 병원 영상이",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-0ba1d36d-f1e4-4fd1-9e6a-c1bcf2339348",
+            "nodes": [
+              {
+                "id": "SE-20641bdf-82bc-11f1-8ce9-c72f1a17c5c0",
+                "value": "노출되어야 환자들이 찾습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-d29c587e-5b5d-418d-b8c2-2b4d246d71e0",
+            "nodes": [
+              {
+                "id": "SE-20641be0-82bc-11f1-8ce9-071d3ac5d844",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-eb6d9188-817f-401c-a484-d1e14aa9bf6c",
+            "nodes": [
+              {
+                "id": "SE-20641be1-82bc-11f1-8ce9-e94b2090f9e2",
+                "value": "하반기 마케팅은 지금 준비해야",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-34966024-86b3-47bf-a459-dea275958f5b",
+            "nodes": [
+              {
+                "id": "SE-20641be2-82bc-11f1-8ce9-2151743fa038",
+                "value": "9~12월 성수기에 효과가 나타납니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-61753c7e-3c01-4345-a2cc-78e62fdd5fad",
+            "nodes": [
+              {
+                "id": "SE-20641be3-82bc-11f1-8ce9-71568831ebc4",
+                "value": "영상 콘텐츠를 쌓아두고,",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-4c1883bc-2deb-4d27-860d-eccab39fc6f5",
+            "nodes": [
+              {
+                "id": "SE-20641be4-82bc-11f1-8ce9-85d410bec60a",
+                "value": "꾸준히 발행하는 것이 핵심입니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-250934d0-dc9c-46c4-9d23-d0337ab01c1b",
+            "nodes": [
+              {
+                "id": "SE-20641be5-82bc-11f1-8ce9-c557c84c5b6b",
+                "value": "지금 시작하면 3개월 후,",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-b1710dfd-3b8f-412c-b6ac-98971c078a4c",
+            "nodes": [
+              {
+                "id": "SE-20641be6-82bc-11f1-8ce9-5962cb5be2a9",
+                "value": "경쟁 병원보다 앞서갈 수 있습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-03b6e79c-c9d1-414d-bd12-b134e88bf081",
+            "nodes": [
+              {
+                "id": "SE-20641be7-82bc-11f1-8ce9-87c24adc1e9a",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-977eee44-6da9-4059-b527-7a9b467c6404",
+            "nodes": [
+              {
+                "id": "SE-20641be8-82bc-11f1-8ce9-ffe32881b4cf",
+                "value": "✅ 지금 시작해야 하는 3가지 이유",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-a5f933df-9d3f-407e-b8a1-ee9286cc51b4",
+            "nodes": [
+              {
+                "id": "SE-20641be9-82bc-11f1-8ce9-0b132b5e0a36",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-b2019021-70a3-48c7-bac6-dc6862d0637c",
+            "nodes": [
+              {
+                "id": "SE-20641bea-82bc-11f1-8ce9-39c4b040c188",
+                "value": "첫째, 영상 마케팅은 장기 자산입니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-dc0a8e3a-fb42-46f7-88b6-76f09462962a",
+            "nodes": [
+              {
+                "id": "SE-20641beb-82bc-11f1-8ce9-ed776fb0ddce",
+                "value": "한 번 만든 영상은 계속 사용할 수 있습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-889af4a9-dd05-438b-9de0-0e8dfbd9a30f",
+            "nodes": [
+              {
+                "id": "SE-20641bec-82bc-11f1-8ce9-2d2a798543c3",
+                "value": "블로그, SNS, 홈페이지, 카톡 채널까지.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-76591fe9-d911-4ea2-9938-1ca720e4dae9",
+            "nodes": [
+              {
+                "id": "SE-20641bed-82bc-11f1-8ce9-a9b466146cdd",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-0126d1d4-d552-4de3-a099-9c345912e06e",
+            "nodes": [
+              {
+                "id": "SE-20641bee-82bc-11f1-8ce9-678a157765de",
+                "value": "둘째, 경쟁 병원보다 먼저 시작할수록",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-1fafe57d-e2a4-4768-9d20-bbbad6aaeb49",
+            "nodes": [
+              {
+                "id": "SE-20641bef-82bc-11f1-8ce9-97c4aa99e1b1",
+                "value": "검색 노출과 브랜드 인지도에서 유리합니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-dc816ab9-b0f1-4d1d-b95f-7e4a1594981c",
+            "nodes": [
+              {
+                "id": "SE-20641bf0-82bc-11f1-8ce9-250b0aca43e1",
+                "value": "남들 다 할 때는 이미 늦습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-4703fdc1-db67-4c09-82b5-c16c059f69f0",
+            "nodes": [
+              {
+                "id": "SE-20641bf1-82bc-11f1-8ce9-4189486fe5e5",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-f3102bdd-1315-4484-b4c2-9d6da35f4ae9",
+            "nodes": [
+              {
+                "id": "SE-20641bf2-82bc-11f1-8ce9-8f3be7989276",
+                "value": "셋째, 편집 아웃소싱은 부담이 적습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-ffb863c4-494c-4256-a9f9-deaaca0e130c",
+            "nodes": [
+              {
+                "id": "SE-20641bf3-82bc-11f1-8ce9-117ddbe01dd1",
+                "value": "월 정기권으로 예산 관리가 쉽고,",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-b4804116-dd0f-4d0c-8555-f63e70f08629",
+            "nodes": [
+              {
+                "id": "SE-20641bf4-82bc-11f1-8ce9-739b9d45927a",
+                "value": "전문가 퀄리티를 보장받을 수 있습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-3a340078-0df0-404a-a380-9e1efd63195f",
+            "nodes": [
+              {
+                "id": "SE-20641bf5-82bc-11f1-8ce9-8b6c742af7b3",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-406aa78f-0000-4634-b085-46310041bfbe",
+            "nodes": [
+              {
+                "id": "SE-3973b6a7-4bd0-4fd0-ac98-afe3359641e7",
+                "value": "💬 지금 바로 시작하세요",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-9890e41a-e9ae-460d-b4de-4563ebedc6c5",
+            "nodes": [
+              {
+                "id": "SE-20644307-82bc-11f1-8ce9-d9af4b39be29",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-f18dce0a-efdb-46ce-8ad0-91ea4b4a423a",
+            "nodes": [
+              {
+                "id": "SE-20644308-82bc-11f1-8ce9-8b63c33e1964",
+                "value": "치과 임플란트 마케팅,",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-29f223ca-a37b-48e4-9439-ab25f921eb8a",
+            "nodes": [
+              {
+                "id": "SE-20644309-82bc-11f1-8ce9-4d29ca4b05d5",
+                "value": "더 이상 고민할 시간이 없습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-0682d29b-93a6-43ae-9e9e-a9015d10100b",
+            "nodes": [
+              {
+                "id": "SE-2064430a-82bc-11f1-8ce9-9bbc93b0e2b7",
+                "value": "영상 하나가 당신의 병원을 바꿉니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-04c23167-7470-4e7c-b46e-1174c2198134",
+            "nodes": [
+              {
+                "id": "SE-2064430b-82bc-11f1-8ce9-1f00bc317024",
+                "value": "에이컷이 그 변화를 도와드리겠습니다.",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-7ea42677-8119-479e-bf91-de269b75614b",
+            "nodes": [
+              {
+                "id": "SE-2064430c-82bc-11f1-8ce9-9d47c50ec147",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-aac17542-9314-4476-825f-e2313d11344d",
+            "nodes": [
+              {
+                "id": "SE-2064430d-82bc-11f1-8ce9-11a136f89b8f",
+                "value": "",
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-c283ce55-581a-4b3f-a83b-5b7adbed10a2",
+            "nodes": [
+              {
+                "id": "SE-311e5cc0-dafd-4092-99db-9553d561075f",
+                "value": "📞 카카오톡: ",
+                "style": {
+                  "fontColor": "#333333",
+                  "fontFamily": "system",
+                  "backgroundColor": "#ffffff",
+                  "italic": false,
+                  "@ctype": "nodeStyle"
+                },
+                "@ctype": "textNode"
+              },
+              {
+                "id": "SE-2064430f-82bc-11f1-8ce9-0bdf179a3bc4",
+                "value": "https://pf.kakao.com/_GIesX/chat",
+                "style": {
+                  "fontColor": "#608cba",
+                  "fontFamily": "system",
+                  "backgroundColor": "#ffffff",
+                  "italic": false,
+                  "underline": true,
+                  "@ctype": "nodeStyle"
+                },
+                "link": {
+                  "url": "https://pf.kakao.com/_GIesX/chat",
+                  "@ctype": "urlLink"
+                },
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          }
+        ],
+        "@ctype": "text"
+      },
+      {
+        "id": "SE-bc5f93e7-7e64-4c70-8512-e401929e6b84",
+        "layout": "image",
+        "align": "center",
+        "title": "에이컷(AICUT)",
+        "domain": "pf.kakao.com",
+        "link": "https://pf.kakao.com/_GIesX/chat",
+        "thumbnail": {
+          "src": "http://k.kakaocdn.net/dn/bSUx9G/dJMcagS50Sm/AzGiVd41LQMdYK8zudzrW0/img_m.jpg",
+          "width": 160,
+          "height": 160,
+          "@ctype": "thumbnail"
+        },
+        "description": "48시간 납품 · 전담 에디터 · 무제한 수정",
+        "video": false,
+        "oglinkSign": "UsKY4LOzvn04BAd8zsH_BEp8CykNT99vtVczkL-A1eU__v1.0",
+        "@ctype": "oglink"
+      },
+      {
+        "id": "SE-2320d3cd-e0ca-497c-a096-57bcf0445952",
+        "layout": "default",
+        "value": [
+          {
+            "id": "SE-7339d0a5-651b-40d6-af74-effb89bbe5e2",
+            "nodes": [
+              {
+                "id": "SE-20644310-82bc-11f1-8ce9-61b33d0aacf4",
+                "value": "",
+                "style": {
+                  "fontColor": "#608cba",
+                  "fontFamily": "system",
+                  "backgroundColor": "#ffffff",
+                  "italic": false,
+                  "underline": true,
+                  "@ctype": "nodeStyle"
+                },
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "lineHeight": 1.8,
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-13eb86ae-4c84-4ff4-9c69-2130c049bd5d",
+            "nodes": [
+              {
+                "id": "SE-cf6378b8-df29-47c3-b323-99dd4e538109",
+                "value": "📧 이메일: master@aicut.co.kr",
+                "style": {
+                  "fontColor": "#333333",
+                  "fontFamily": "system",
+                  "backgroundColor": "#ffffff",
+                  "italic": false,
+                  "@ctype": "nodeStyle"
+                },
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "lineHeight": 1.8,
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-29e8e66c-5750-4c7a-88fe-f45ba0e49a58",
+            "nodes": [
+              {
+                "id": "SE-53663a07-3c5c-4b74-bf4d-6d717a683e7d",
+                "value": "🌐 홈페이지: ",
+                "style": {
+                  "fontColor": "#333333",
+                  "fontFamily": "system",
+                  "backgroundColor": "#ffffff",
+                  "italic": false,
+                  "@ctype": "nodeStyle"
+                },
+                "@ctype": "textNode"
+              },
+              {
+                "id": "SE-20646a23-82bc-11f1-8ce9-63a558c76714",
+                "value": "https://aicut.co.kr",
+                "style": {
+                  "fontColor": "#608cba",
+                  "fontFamily": "system",
+                  "backgroundColor": "#ffffff",
+                  "italic": false,
+                  "underline": true,
+                  "@ctype": "nodeStyle"
+                },
+                "link": {
+                  "url": "https://aicut.co.kr/",
+                  "@ctype": "urlLink"
+                },
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "lineHeight": 1.8,
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          }
+        ],
+        "@ctype": "text"
+      },
+      {
+        "id": "SE-51723caf-c5a9-41ed-ac54-5f6bb617ee85",
+        "layout": "large_image",
+        "align": "center",
+        "title": "에이컷 - 기업·브랜드 전용 월정기 영상 편집 파트너",
+        "domain": "aicut.co.kr",
+        "link": "https://aicut.co.kr/",
+        "thumbnail": {
+          "src": "https://genie0705-beep.github.io/aicut/og-image.png",
+          "width": 1200,
+          "height": 630,
+          "@ctype": "thumbnail"
+        },
+        "description": "숏폼 영상 편집 월 정기 아웃소싱. 전담 에디터 배정, D+1 납품, 재계약률 92%. 에이컷(AICUT)",
+        "video": false,
+        "oglinkSign": "TEo4GmZuOIvNVkFaUR2TSuc-fUrffYyTaMt_2pzGP9Q__v1.0",
+        "@ctype": "oglink"
+      },
+      {
+        "id": "SE-147043b0-82bc-11f1-8ce9-07551dd25c76",
+        "layout": "default",
+        "value": [
+          {
+            "id": "SE-8af84db2-9ba8-4dcc-8c1b-c813fa5fb642",
+            "nodes": [
+              {
+                "id": "SE-20646a24-82bc-11f1-8ce9-73e7613f6b01",
+                "value": "",
+                "style": {
+                  "fontColor": "#608cba",
+                  "fontFamily": "system",
+                  "backgroundColor": "#ffffff",
+                  "italic": false,
+                  "underline": true,
+                  "@ctype": "nodeStyle"
+                },
+                "@ctype": "textNode"
+              }
+            ],
+            "style": {
+              "align": "center",
+              "@ctype": "paragraphStyle"
+            },
+            "@ctype": "paragraph"
+          },
+          {
+            "id": "SE-d42fb853-4d79-481d-95f6-22de92970493",
+            "nodes": [
+              {
+                "id": "SE-20646a25-82bc-11f1-8ce9-75ee5836fdc9",
+                "value": "#치과임플란트 #임플란트마케팅 #치과마케팅 #영상마케팅 #영상편집 #숏폼마케팅 #릴스마케팅 #치과영상 #임플란트홍보 #치과광고 #영상편집아웃소싱 #영상외주 #숏폼편집 #하반기마케팅 #여름마케팅 #치과홍보 #치과SNS #치과릴스 #치과쇼츠 #의료영상 #의료마케팅 #영상제작 #치과원장 #임플란트전문 #에이컷 #AICUT #편집아웃소싱 #영상에이전시 #치과브랜딩 #영상콘텐츠",
+                "@ctype": "textNode"
+              }
+            ],
+            "@ctype": "paragraph"
+          }
+        ],
+        "@ctype": "text"
+      }
+    ]
+  },
+  "documentId": "224341544476"
+}

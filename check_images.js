@@ -1,42 +1,36 @@
-const fs = require('fs');
-const c = fs.readFileSync('C:/aicut/index.html', 'utf8');
+const { chromium } = require('playwright');
 
-// Find 'process' section
-const idx = c.indexOf('프로세스');
-if (idx > 0) {
-  const section = c.substring(idx, idx + 8000);
+async function main() {
+  const b = await chromium.connectOverCDP('http://127.0.0.1:9224');
+  const pages = b.contexts()[0].pages();
+  const p = pages[0]; // 탭 0
+  const f = await (await p.$('#mainFrame')).contentFrame();
+
+  const state = await f.evaluate(() => {
+    const ed = SmartEditor._editors['blogpc001'];
+    const d = ed.getDocumentData().document;
+    const c = document.querySelector('.se-canvas');
+    const imgComps = d.components?.filter(x => x.fileName) || [];
+    const canvasImgs = c ? c.querySelectorAll('img').length : 0;
+    return {
+      title: ed.getDocumentTitle(),
+      blocks: d.blocks?.length,
+      imgComponents: imgComps.length,
+      imgDetails: imgComps.map(x => ({ file: x.fileName, w: x.width, h: x.height })),
+      canvasImgs,
+      canvasTextLen: (c?.innerText || '').length,
+    };
+  });
   
-  // Find all image references
-  const imgs = section.match(/<img[^>]+>/g) || [];
-  console.log('Images in process section:', imgs.length);
-  imgs.forEach((img, i) => console.log((i+1) + ': ' + img.substring(0, 200)));
+  console.log('현재 상태:', JSON.stringify(state, null, 2));
   
-  // background-image
-  const bgImgs = section.match(/background-image[^;]+/g) || [];
-  console.log('\nBackground images:', bgImgs.length);
-  bgImgs.forEach(bg => console.log('  ' + bg.substring(0, 150)));
-  
-  // url() references
-  const urls = section.match(/url\([^)]+\)/g) || [];
-  console.log('\nURL references:', urls.length);
-  urls.forEach(u => console.log('  ' + u.substring(0, 150)));
-  
-  // pexels or external image URLs
-  const extUrls = section.match(/https?:\/\/[^"')\s]+\.(jpg|jpeg|png|gif|webp)/gi) || [];
-  console.log('\nExternal image URLs:', extUrls.length);
-  extUrls.forEach(u => console.log('  ' + u));
-  
-  // YouTube iframe
-  const iframes = section.match(/<iframe[^>]+>/g) || [];
-  console.log('\nIframes:', iframes.length);
-  iframes.forEach(f => console.log('  ' + f.substring(0, 200)));
-  
-} else {
-  console.log('Process section not found');
-  // Try to find the index in the whole file
-  const procIdx = c.indexOf('process');
-  if (procIdx > 0) {
-    console.log('Found "process" at position', procIdx);
-    console.log(c.substring(procIdx, procIdx + 500));
+  if (state.canvasImgs < 5) {
+    console.log('\n⚠️ 이미지가 캔버스에 없음. 업로드 필요');
+  } else {
+    console.log('\n✅ 이미지 5장 모두 캔버스에 표시됨');
   }
+  
+  process.exit(0);
 }
+
+main().catch(e => console.error('❌', e.message));

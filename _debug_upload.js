@@ -1,98 +1,99 @@
 const { chromium } = require('playwright');
 const path = require('path');
 const fs = require('fs');
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 (async () => {
   const b = await chromium.connectOverCDP('http://127.0.0.1:9224');
-  const pages = b.contexts()[0].pages();
-  let t = null;
-  for (const p of pages) { if (p.url().includes('PostWriteForm')) { t = p; break } }
-  if (!t) { console.log('NO_TAB'); b.close(); return; }
-  t.on('dialog', async d => { await d.dismiss() });
-  await t.bringToFront();
-  await new Promise(r => setTimeout(r, 2000));
-
-  // Get all file input elements on page
-  const inputsBefore = await t.evaluate(() => {
-    return Array.from(document.querySelectorAll('input[type=file]')).map(i => ({ 
-      id: i.id, 
-      cls: i.className.substring(0, 50),
-      accept: i.accept
-    }));
-  });
-  console.log('FILE INPUTS BEFORE:', JSON.stringify(inputsBefore));
-
-  // Listen for new file inputs
-  await t.evaluate(() => {
-    window.__fileInputs = [];
-    const obs = new MutationObserver((mutations) => {
-      mutations.forEach(m => {
-        m.addedNodes.forEach(n => {
-          if (n.tagName === 'INPUT' && n.type === 'file') {
-            window.__fileInputs.push({ id: n.id, cls: n.className });
-          }
-        });
+  const ctx = b.contexts()[0];
+  const page = await ctx.newPage();
+  
+  try {
+    await page.goto('https://blog.naver.com/aicut/224341544476', { waitUntil: 'load', timeout: 20000 });
+    await sleep(4000);
+    
+    const pf = page.frames().find(f => f.url().includes('PostView'));
+    if (pf) {
+      await pf.evaluate(() => {
+        document.querySelector('a._modifyPost')?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
       });
-    });
-    obs.observe(document.body, { childList: true, subtree: true });
-  });
+    }
+    await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
+    await sleep(5000);
 
-  // Click the image toolbar button
-  const btn = t.locator('button.se-image-toolbar-button');
-  console.log('Clicking image button...');
-  
-  // Set up file chooser listener BEFORE clicking
-  const fcPromise = t.waitForEvent('filechooser', { timeout: 15000 });
+    const editFrame = page.frames().find(f => f.url().includes('PostUpdateForm'));
+    if (!editFrame) { console.log('iframe not found'); return; }
+    console.log('✅ 에디터 진입');
 
-  await btn.click();
-  
-  const fc = await fcPromise.catch(() => null);
-  
-  if (!fc) {
-    console.log('NO FILE CHOOSER');
-    // Check what opened
-    const afterClick = await t.evaluate(() => {
-      const inputs = Array.from(document.querySelectorAll('input[type=file]')).map(i => ({
-        id: i.id,
-        cls: i.className.substring(0, 50),
-        accept: i.accept
-      }));
-      const newInputs = window.__fileInputs || [];
-      return { inputs, newInputs };
-    });
-    console.log('AFTER CLICK:', JSON.stringify(afterClick));
-  } else {
-    console.log('FILE CHOOSER RECEIVED');
-    console.log('Chooser info:', JSON.stringify({
-      elementTag: fc.element()?.tagName,
-      elementClass: await fc.element()?.getAttribute('class')
-    }));
+    // 사진 버튼 찾기
+    for (const sel of ['button:has-text("사진")', 'button span:has-text("사진")', '.se-image-toolbar-button']) {
+      const btn = await editFrame.$(sel).catch(() => null);
+      if (btn) {
+        const visible = await btn.isVisible();
+        if (visible) {
+          console.log(`사진 버튼 발견: "${sel}", visible: ${visible}`);
+          
+          // 화면에서 버튼 위치 확인
+          const box = await btn.boundingBox();
+          console.log(`  위치: x=${box?.x}, y=${box?.y}, w=${box?.width}, h=${box?.height}`);
+        }
+      }
+    }
+
+    // 사진 버튼 클릭 전 스크린샷
+    await page.screenshot({ path: '_debug_before_photo.png' });
     
-    const imgPaths = [
-      path.join(__dirname, 'aicut_blog_5q_thumb.png'),
-      path.join(__dirname, 'aicut_blog_5q_q1.png'),
-      path.join(__dirname, 'aicut_blog_5q_q2.png'),
-      path.join(__dirname, 'aicut_blog_5q_q3.png'),
-      path.join(__dirname, 'aicut_blog_5q_q4.png')
-    ];
-    
-    console.log('Setting files...');
-    await fc.setFiles(imgPaths);
-    console.log('Files set!');
-    
-    // Wait longer for upload
-    console.log('Waiting 15s for upload...');
-    await new Promise(r => setTimeout(r, 15000));
-    
-    // Check for upload progress or images
-    const status = await t.evaluate(() => {
-      const imgs = document.querySelector('.se-component-content')?.querySelectorAll('img')?.length || 0;
-      const loading = document.querySelectorAll('[class*="loading"],[class*="progress"],[class*="upload"]');
-      const text = document.body.innerText.substring(0, 1000);
-      return { imgs, loadings: loading.length, text: text.replace(/\s+/g, ' ').trim().substring(0, 300) };
-    });
-    console.log('UPLOAD STATUS:', JSON.stringify(status));
+    // 사진 버튼 클릭하고 변화 관찰
+    const photoBtn = await editFrame.$('button:has-text("사진")');
+    if (photoBtn) {
+      console.log('\n사진 버튼 클릭...');
+      await photoBtn.click();
+      await sleep(3000);
+      
+      await page.screenshot({ path: '_debug_after_photo.png' });
+      
+      // 새로운 dialog/overlay 확인
+      const dialogInfo = await editFrame.evaluate(() => {
+        const dialogs = document.querySelectorAll('[class*="dialog"], [class*="modal"], [class*="popup"], [class*="overlay"], [class*="layer"]');
+        const inputs = document.querySelectorAll('input[type="file"]');
+        
+        return {
+          dialogCount: dialogs.length,
+          dialogs: Array.from(dialogs).map(d => ({
+            tag: d.tagName,
+            id: d.id,
+            cls: d.className?.substring(0, 80),
+            visible: d.offsetParent !== null,
+            innerText: d.innerText?.substring(0, 100)
+          })),
+          fileInputs: Array.from(inputs).map(i => ({
+            id: i.id,
+            cls: i.className?.substring(0, 50),
+            accept: i.accept,
+            visible: i.offsetParent !== null
+          }))
+        };
+      });
+      
+      console.log('다이얼로그 정보:', JSON.stringify(dialogInfo, null, 2));
+      
+      // 모든 프레임에서 input[type=file] 찾기
+      for (const f of page.frames()) {
+        const inputs = await f.evaluate(() => {
+          return Array.from(document.querySelectorAll('input[type="file"]')).map(i => ({
+            url: window.location.href.substring(0, 80),
+            id: i.id,
+            cls: i.className?.substring(0, 40),
+            accept: i.accept
+          }));
+        });
+        if (inputs.length > 0) {
+          console.log(`  Frame ${f.url().substring(0, 60)}:`, JSON.stringify(inputs));
+        }
+      }
+    }
+
+  } finally {
+    await page.close();
   }
-
-  b.close();
-})().catch(e => console.log('ERR: ' + e.message.substring(0, 300)));
+})();

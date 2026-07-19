@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-25T12:12:57.746Z",
+  "updatedAt": "2026-07-18T23:50:20.277Z",
   "entries": {
     "memory:memory/2026-05-27.md:1:25": {
       "key": "memory:memory/2026-05-27.md:1:25",
@@ -9,13 +9,13 @@
       "endLine": 25,
       "source": "memory",
       "snippet": "# Daily Memory — 2026-05-27 ## 네이버 블로그 에이컷 포스팅 작업 ### 작업 개요 - 요청: 마지막 포스팅(고객사례 도입이야기 카테고리)과 동일 톤앤매너로 신규 포스팅 작성 + 발행 직전까지 처리 ### 포스팅 내용 - **제목:** 영상편집 외주, 매달 다른 사람에게 맡기던 쇼핑몰이 선택한 방법 - **카테고리:** 고객사례 도입이야기 (기존 카테고리 확인됨 — 신규 생성 불필요) - **타겟:** 이커머스 쇼핑몰 1인 마케팅 담당자 - **구조:** Summary → 문제상황 → 도입계기 → 도입 후 변화 → CTA + FAQ + 해시태그 ### 이미지 생성 - 레퍼런스: blog.naver.com/aicut/224291552475 (납기 지연 반복되던 스타트업 포스팅) - 스타일: 다크 네이비(#0D1630) + 우측 퍼플-민트 그라디언트 / 아이보리(#FDFAF2) + 오렌지(#F4B942) 교대 - 이미지 5장 생성: blog_images/ 폴더 - 01_summary.png — 커버/KPI 카드 (다크 네이비) - 02_problem.png — 문제 3가지 (아이보리) - 03_reason.png — 선택 이유 (다크 네이비) - 04_result.png — 도입 결과 KPI (아이보리) - 05_cta.png — 무료상담 CTA (다크 네이비) ### 에디터 작업 현황",
-      "recallCount": 8,
+      "recallCount": 12,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.018530973792076,
-      "maxScore": 0.4298280954360962,
+      "totalScore": 4.697208881094259,
+      "maxScore": 0.5642752525351457,
       "firstRecalledAt": "2026-05-30T04:08:36.791Z",
-      "lastRecalledAt": "2026-06-24T15:23:20.801Z",
+      "lastRecalledAt": "2026-07-12T00:14:50.009Z",
       "queryHashes": [
         "2eacce1937fb",
         "0290e67cbfc4",
@@ -24,7 +24,11 @@
         "524ba44dcc95",
         "4843e1b13be9",
         "95bcdae00a56",
-        "62fa85667773"
+        "62fa85667773",
+        "68a93fe8da40",
+        "c547a9de258b",
+        "77b26641430d",
+        "3774b858dacd"
       ],
       "recallDays": [
         "2026-05-30",
@@ -34,7 +38,11 @@
         "2026-06-21",
         "2026-06-22",
         "2026-06-23",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-06-29",
+        "2026-07-03",
+        "2026-07-09",
+        "2026-07-12"
       ],
       "conceptTags": [
         "퍼플-민트",
@@ -88,19 +96,20 @@
       "endLine": 185,
       "source": "memory",
       "snippet": "- 포인트 컬러: 퍼플(#a78bfa), 시안(#06b6d4), 골드(#F4B942) 교대 - **텍스트는 3줄 이상 금지** (card3 교훈 — 버튼이 화면 밖으로 밀림) ### 제작 완료 카드 (v3 최종) - card1: 납기편집 — \"또 밀렸어요\" (다크+퍼플, CTA: 무료상담) - card2: AI에디터 — \"AI로만 안 해요\" (라이트+퍼플, CTA: 샘플1편무료) - card3: 비용비교 — \"건당보다 월정액이 절반\" (다크+골드, CTA: 요금제보기) - card4: 병원마케팅 — \"영상이 신뢰를 만든다\" (라이트+퍼플, CTA: 병원영상문의) - card5: 부동산유튜브 — \"3개월 후 멈추는 이유\" (다크+시안, CTA: 무료상담) ### 파일 위치 - HTML: `insta_cards/card1~5.html` - PNG: `insta_cards/card1~5_*.png` - 가이드: `insta_cards/CARD_GUIDE.md` ## 스크립트 파일 목록 - threads_post_5d.js: 5번 포스팅 (부동산 유튜브) — 성공한 버전 - threads_comment_v5.js: 본문 맞춤 댓글 - threads_collect_new.js: 신규 타겟 수집 - threads_follow.js: 팔로우 자동화 - insta_post.js: 인스타 게시물 업로드 - insta_comment.js: 인스타",
-      "recallCount": 8,
+      "recallCount": 9,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 3.462200511993118,
-      "maxScore": 0.5282733409055026,
+      "totalScore": 4.462200511993117,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-02T01:51:38.170Z",
-      "lastRecalledAt": "2026-06-25T12:12:57.746Z",
+      "lastRecalledAt": "2026-07-16T02:21:13.863Z",
       "queryHashes": [
         "207cae9ce005",
         "21de61e233a2",
         "c369a72f0b9e",
         "f8ce15527697",
-        "a19d0ee18c48"
+        "a19d0ee18c48",
+        "6bb6923a6fd0"
       ],
       "recallDays": [
         "2026-06-02",
@@ -109,7 +118,8 @@
         "2026-06-15",
         "2026-06-17",
         "2026-06-18",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-16"
       ],
       "conceptTags": [
         "insta-cards/card1",
@@ -129,20 +139,25 @@
       "endLine": 29,
       "source": "memory",
       "snippet": "# Daily Memory — 2026-06-02 ## 오늘 주요 작업 ### 크론 자동화 정비 - 블로그 이웃 추가 스크립트 신규 생성: `blog_neighbor.js` (10:00, 최대 15개/일) - 블로그 이웃 방문+공감 스크립트 신규 생성: `blog_visit.js` (15:00, 최대 15개/일) - Threads/Instagram 타임아웃 원인 파악 및 수정: - 수집+팔로우 크론 분리 (수집: 20:00/20:30, 팔로우: 14:00/14:30) - MAX_FOLLOW=20 상한 추가 - `insta_follow.js` pages[4] 하드코딩 → 동적 탐색으로 수정 - 전체 크론 9개 운영 중 ### 최종 크론 스케줄 | 시간 | 작업 | |------|------| | 03:00 | 워크스페이스 파일 정리 | | 09:30 | 블로그 이웃 방문+공감 (blog_visit.js) | | 10:00 | 블로그 이웃 추가 (blog_neighbor.js) | | 12:00 | Threads 댓글 10개 | | 12:30 | Instagram 댓글 10개 | | 14:00 | Threads 팔로우 (최대 20개) | | 14:30 | Instagram 팔로우 (최대 20개) | | 20:00 | Threads 신규 타겟 수집 | | 20:30 | Instagram 신규 타겟 수집 | ### 네이버",
-      "recallCount": 10,
+      "recallCount": 16,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 5.146279369774445,
-      "maxScore": 0.6112917120287478,
+      "totalScore": 7.857326371066028,
+      "maxScore": 0.6321756425772405,
       "firstRecalledAt": "2026-06-10T21:35:10.117Z",
-      "lastRecalledAt": "2026-06-22T23:06:10.251Z",
+      "lastRecalledAt": "2026-07-18T22:03:52.267Z",
       "queryHashes": [
         "2aa4b7e31f41",
         "ba04882f6e85",
         "ab6e67c1d7ed",
         "828091485ccc",
         "865e7d9c99f2",
-        "95bcdae00a56"
+        "95bcdae00a56",
+        "38dce65be5d4",
+        "c87d813b5dd1",
+        "77b26641430d",
+        "3774b858dacd",
+        "c9b6b70da3f6"
       ],
       "recallDays": [
         "2026-06-11",
@@ -152,7 +167,13 @@
         "2026-06-15",
         "2026-06-17",
         "2026-06-19",
-        "2026-06-23"
+        "2026-06-23",
+        "2026-06-29",
+        "2026-07-01",
+        "2026-07-08",
+        "2026-07-09",
+        "2026-07-12",
+        "2026-07-19"
       ],
       "conceptTags": [
         "blog-neighbor.js",
@@ -172,27 +193,31 @@
       "endLine": 52,
       "source": "memory",
       "snippet": "1. 블로그 포스팅 방식 확정 후 진행 2. 네이버 비즈머니 충전 (이번 주 내 필수) 3. 네이버 DA 캠페인 생성 (비즈채널 승인 여부 확인) 4. UTM 파라미터 전체 적용 (Threads/인스타 프로필 링크) 5. 노출 0 키워드 46개 정리 6. Threads 부동산유튜브 포스팅 확인 필요 ## 시스템 현황 - 크론 정상 운영 중: Threads 댓글 12:00, Instagram 댓글 12:30, Threads 팔로우 14:00, Instagram 팔로우 14:30, 파일 정리 03:00 - Chrome 로그인 세션 유지 중 (재시작 금지) - 스크립트 파일: _naver_analyze.js, _naver_bid_optimize.js, _ga4_analyze.js, _insta_post_now.js, _insta_fix.js, _threads_post_now.js (임시 파일 — 정리 가능)",
-      "recallCount": 7,
+      "recallCount": 9,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.5751809149980547,
-      "maxScore": 0.377464872598648,
+      "totalScore": 3.947920942306519,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-11T23:51:21.827Z",
-      "lastRecalledAt": "2026-06-22T00:49:36.716Z",
+      "lastRecalledAt": "2026-07-18T23:50:20.277Z",
       "queryHashes": [
         "8479005ceb36",
         "ba04882f6e85",
         "ba9b146986dd",
         "c369a72f0b9e",
         "787c569263ed",
-        "4843e1b13be9"
+        "4843e1b13be9",
+        "91519557a899",
+        "f01dcf49ce36"
       ],
       "recallDays": [
         "2026-06-12",
         "2026-06-13",
         "2026-06-15",
         "2026-06-17",
-        "2026-06-22"
+        "2026-06-22",
+        "2026-07-06",
+        "2026-07-19"
       ],
       "conceptTags": [
         "threads/인스타",
@@ -212,20 +237,24 @@
       "endLine": 45,
       "source": "memory",
       "snippet": "### GA4 분석 결과 (5/25~5/31) - 활성 사용자 46명, 세션 94회, 페이지뷰 136회 - Direct 62%, 자연검색 18%, SNS 17% - begin_checkout 1건 발생 - Threads 유입 4회, Instagram 유입 8회 (UTM 미적용으로 Direct에 일부 포함된 것으로 추정) - 개선 필요: UTM 파라미터 미적용, 네이버 광고 랜딩 UTM 누락 ### 인스타그램 @aicut.official - card2(AI에디터), card3(비용비교) 게시 완료 → 총 5장 전부 완료 - 캡션 수정 완료 (수정됨 표시 확인) - 게시물 총 13개 ### Threads @aicut.official - 포스팅 4개 게시: 납기편집, AI에디터, 비용비교, 병원마케팅 (부동산은 실행 중 세션 종료로 미확인) - 이전까지 포스팅 없었음 → 오늘부터 콘텐츠 시작 ### 블로그 작업 - 네이버 블로그 포스팅 논의 중 (세션 종료 시점에 진행 중) - 옵션 A(자동화) vs 옵션 B(초안 작성) 정이사 결정 대기 중 ## 미완료 / 다음 세션 이어서 1. 블로그 포스팅 방식 확정 후 진행 2. 네이버 비즈머니 충전 (이번 주 내 필수) 3. 네이버 DA 캠페인 생성 (비즈채널 승인 여부 확인) 4. UTM 파라미터 전체 적용 (Threads/인스타 프로필 링크) 5. 노출 0 키워드 46개 정리",
-      "recallCount": 2,
+      "recallCount": 4,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7747929126024247,
-      "maxScore": 0.4219513088464737,
+      "totalScore": 2.1472440272569657,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-11T23:51:21.827Z",
-      "lastRecalledAt": "2026-06-17T00:02:27.515Z",
+      "lastRecalledAt": "2026-07-16T23:31:34.816Z",
       "queryHashes": [
         "8479005ceb36",
-        "590bb833506e"
+        "590bb833506e",
+        "77b26641430d",
+        "3389551613d4"
       ],
       "recallDays": [
         "2026-06-12",
-        "2026-06-17"
+        "2026-06-17",
+        "2026-07-09",
+        "2026-07-17"
       ],
       "conceptTags": [
         "5/25",
@@ -245,22 +274,26 @@
       "endLine": 47,
       "source": "memory",
       "snippet": "### 네이버 블로그 포스팅 — 부동산 중개법인 - 주제 선정: \"매물 영상 올리다 지쳐버린 부동산 중개법인이 월 20편 정시 납품으로 바꾼 방법\" - 본문 초안 완성: `projects/aicut/drafts/2026-06-02-realestate-final.md` - 이미지 명세서: `projects/aicut/drafts/2026-06-02-realestate-image-guide.md` - 이미지 5장 자동 생성 완료: `blog_imgs/realestate_01~05.png` (1080×1080, Node.js canvas) - 블로그 에디터 본문 입력 스크립트: `blog_input.js` (CDP 기반) - Canva/미리캔버스 에디터 자동화 → DOM 구조상 불가 확인 ### 운영 정책 업데이트 - 이미지 제작은 정이사님이 직접 처리 (2026-06-02~), 요청 없는 한 이미지 생성 불필요 → MEMORY.md에 이미 기록됨 ## 기술 메모 - Canva/미리캔버스: React + Shadow DOM 기반, 브라우저 자동화로 요소 제어 불가 - Node.js `canvas` 라이브러리로 PNG 직접 생성 가능 (품질 준수) - Chrome CDP: `--remote-debugging-port=9222` 없이 실행 시 연결 불가 → 정이사님이 CDP 모드로 Chrome 실행 중일 때만 브라우저 자동화 가능",
-      "recallCount": 3,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.1695615857839585,
-      "maxScore": 0.42309942841529846,
+      "totalScore": 2.7800807025689718,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-11T23:51:36.251Z",
-      "lastRecalledAt": "2026-06-22T00:49:36.716Z",
+      "lastRecalledAt": "2026-07-18T14:21:59.498Z",
       "queryHashes": [
         "ba04882f6e85",
         "828091485ccc",
-        "4843e1b13be9"
+        "4843e1b13be9",
+        "c87d813b5dd1",
+        "871fede21a1c"
       ],
       "recallDays": [
         "2026-06-12",
         "2026-06-14",
-        "2026-06-22"
+        "2026-06-22",
+        "2026-07-01",
+        "2026-07-18"
       ],
       "conceptTags": [
         "blog-imgs/realestate-01",
@@ -280,13 +313,13 @@
       "endLine": 73,
       "source": "memory",
       "snippet": "- ✅ **blog_visit.js v2** — 공감 버튼 수정 (네이버 리액션 시스템 대응, 랜덤 공감률 50%) - ✅ **insta_dm_targeted.js v2** — 직접 제안형 DM 메시지로 변경 - ✅ **insta_collect.js** — 대기업 블랙리스트 추가 - ✅ **insta_comment.js** — 본문 맞춤 댓글 방식 - ✅ 이미지 생성: `make_blog_img.js` (canvas 라이브러리 사용) ### 블로그 포스팅 (진행 중) - 주제: \"스타트업 CEO가 영상 PD 대신 월정기 편집을 선택한 이유\" - 초안: `projects/aicut/drafts/2026-06-11-startup-blog.md` - 이미지 3장 생성 (886x886 정사각형): - `blog_thumb.png` — 대표 타이틀 이미지 - `blog_content_img.png` — 에이컷 vs 일반 외주 비교표 - `blog_content_img2.png` — 서비스 혜택 3단 - 에디터(SE One)에 제목 + 본문 입력 완료 - 이미지는 정이사님이 직접 업로드 예정 ### 네이버 검색 SEO - aicut.co.kr: 서치어드바이저 등록 확인 (4/7 등록) - 사이트맵 등록됨 BUT `#fragment` URL 문제 - SPA(React) 구조 → 네이버 봇이 빈 페이지로 인식 가능성 높음 - SSR",
-      "recallCount": 13,
+      "recallCount": 27,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 5.358747565746307,
-      "maxScore": 0.44868683815002436,
+      "totalScore": 11.58943542259859,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-11T23:51:36.251Z",
-      "lastRecalledAt": "2026-06-24T15:23:20.801Z",
+      "lastRecalledAt": "2026-07-18T14:21:59.498Z",
       "queryHashes": [
         "ba04882f6e85",
         "ab6e67c1d7ed",
@@ -296,18 +329,38 @@
         "865e7d9c99f2",
         "4843e1b13be9",
         "95bcdae00a56",
-        "62fa85667773"
+        "62fa85667773",
+        "b67b7da0d555",
+        "38dce65be5d4",
+        "c87d813b5dd1",
+        "c547a9de258b",
+        "b14158e9dbbd",
+        "91519557a899",
+        "680c58085740",
+        "a313879e1e69",
+        "77b26641430d",
+        "f5e5f3336696",
+        "9267d3656005",
+        "3774b858dacd",
+        "871fede21a1c"
       ],
       "recallDays": [
-        "2026-06-12",
-        "2026-06-13",
-        "2026-06-14",
-        "2026-06-15",
         "2026-06-17",
         "2026-06-19",
         "2026-06-22",
         "2026-06-23",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-06-28",
+        "2026-06-29",
+        "2026-07-01",
+        "2026-07-03",
+        "2026-07-05",
+        "2026-07-06",
+        "2026-07-08",
+        "2026-07-09",
+        "2026-07-10",
+        "2026-07-12",
+        "2026-07-18"
       ],
       "conceptTags": [
         "blog-visit.js",
@@ -327,13 +380,13 @@
       "endLine": 50,
       "source": "memory",
       "snippet": "- ✅ 팔로우 — 타겟 있을 때만 - ✅ 포스팅 — 정이사님이 직접 - ❌ **DM 발송 중단** — 구조적 한계 (맞팔로우 아니면 메시지 버튼 없음) - ❌ 무리한 타겟 수집 중단 ### 블로그 운영 - **매일 1개 포스팅 원칙** 확정 - 에이든: 초안 작성 + 이미지 생성 - 정이사: 이미지 업로드/배치 + 발행 ### 직급 호칭 - 정이사 (Paul Jung) — 유지 ## 오늘 완료한 작업 ### 오전/오후 마케팅 작업 - ✅ Threads 댓글 7개 (threads_comment_v5.js) - ✅ Instagram 댓글 8개 (insta_comment.js) - ✅ Threads 신규 타겟 45개 수집 + 19명 팔로우 - ✅ 블로그 이웃 방문 15개 + 공감 3개 (blog_visit.js v2) - ✅ GA4 설치 코드 준비 (ga_setup.md) — 정이사님이 직접 `<head>`에 삽입 - ✅ 네이버 서치어드바이저: aicut.co.kr 등록 확인 + 수동 수집 요청 - ✅ 네이버 파워링크: 전환추적 미설치 상태 확인 (개선 필요) ### 스크립트 개선 - ✅ **blog_visit.js v2** — 공감 버튼 수정 (네이버 리액션 시스템 대응, 랜덤 공감률 50%) - ✅ **insta_dm_targeted.js v2** — 직접 제안형 DM 메시지로 변경 - ✅ **insta_collect.js**",
-      "recallCount": 15,
+      "recallCount": 18,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 8.263995674932923,
+      "totalScore": 9.782755042716243,
       "maxScore": 0.6251417586375265,
       "firstRecalledAt": "2026-06-11T23:51:36.251Z",
-      "lastRecalledAt": "2026-06-24T15:23:20.801Z",
+      "lastRecalledAt": "2026-07-05T23:30:37.210Z",
       "queryHashes": [
         "ba04882f6e85",
         "ab6e67c1d7ed",
@@ -344,7 +397,10 @@
         "865e7d9c99f2",
         "7b24031ea99a",
         "b60a41f959be",
-        "62fa85667773"
+        "62fa85667773",
+        "14801d3bbe42",
+        "68a93fe8da40",
+        "91519557a899"
       ],
       "recallDays": [
         "2026-06-12",
@@ -353,7 +409,10 @@
         "2026-06-15",
         "2026-06-17",
         "2026-06-19",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-06-26",
+        "2026-06-29",
+        "2026-07-06"
       ],
       "conceptTags": [
         "업로드/배치",
@@ -373,19 +432,20 @@
       "endLine": 95,
       "source": "memory",
       "snippet": "- threads_comment_v5.js: 본문 맞춤 댓글 (파싱 로직 개선 필요) - threads_collect_new.js: 신규 타겟 수집 - threads_follow.js: 팔로우 자동화 - aicut_ga4_tracking.js: GA4 전환 추적 코드 - threads_targets.json: 138개 타겟 저장됨 - threads_comments_log.json: 댓글 기록 ## 오늘의 교훈 1. Threads 게시 버튼: React UI → `page.mouse.click(x, y)` 좌표 방식 필수 2. 게시 버튼 위치: 모달 내부 y=866 근처 3. 댓글 제출: SVG title=\"답글\" 버튼 4. 포스팅은 하루 1~2개 제한 (과도 시 언팔 유발) 5. GA4 이벤트 목록 반영: 데이터 발생 후 24~48시간 소요 # 2026-05-30 Daily Log ## Threads 운영 작업 ### 포스팅 - 4번 (병원 마케팅): 정이사님 직접 게시버튼 눌러서 완료 - 5번 (부동산 유튜브): 자동 게시 성공 ✅ - 게시 버튼 위치: 모달 내부 y=866 (1205, 884) 좌표 클릭 방식으로 해결 - 핵심 발견: React UI라 `btn.click()`이 아닌 Playwright `page.mouse.click(x, y)` 좌표 클릭 필요 - 1번, 2번, 3번 포스팅은 이전에 완료됨 ###",
-      "recallCount": 10,
+      "recallCount": 11,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 5.4600638560571815,
-      "maxScore": 0.6407610802260042,
+      "totalScore": 6.4600638560571815,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-12T05:03:38.205Z",
-      "lastRecalledAt": "2026-06-19T11:00:35.608Z",
+      "lastRecalledAt": "2026-07-16T02:21:13.863Z",
       "queryHashes": [
         "ddb50a1dcfd7",
         "ba9b146986dd",
         "21de61e233a2",
         "c369a72f0b9e",
-        "38d7195beb93"
+        "38d7195beb93",
+        "6bb6923a6fd0"
       ],
       "recallDays": [
         "2026-06-12",
@@ -394,7 +454,8 @@
         "2026-06-15",
         "2026-06-17",
         "2026-06-18",
-        "2026-06-19"
+        "2026-06-19",
+        "2026-07-16"
       ],
       "conceptTags": [
         "threads-comment-v5.js",
@@ -414,19 +475,21 @@
       "endLine": 95,
       "source": "memory",
       "snippet": "- SPA(React) 구조 → 네이버 봇이 빈 페이지로 인식 가능성 높음 - SSR 도입은 대공사 (Next.js 전환 1~2주) → 당장은 블로그 포스팅으로 우회 - 수동 수집 요청 완료 ### 크론 비활성화 (10개) - workspace_cleanup (03:00) - blog_neighbor (10:00) - blog_visit (09:30 / 15:00) - threads_comment (12:00 / 20:00) - insta_comment (12:30) - insta_follow (14:00) - threads_follow (14:30) - insta_dm (19:00) - threads_collect (20:00) - insta_collect (20:30) ## 기술 메모 - Naver SE One React Editor: 자동화 매우 어려움 (React state 관리, 팝업 레이어, contenteditable non-visible) - 해결: `innerText` + `evaluate`로 DOM 조작 후, 일부 React 이벤트는 `dispatchEvent`로 처리 - 이미지 업로드는 MYBOX(네이버 클라우드) 연동 방식 → 자동화 불가 - 공감 버튼: Naver 리액션 시스템 (공감/칭찬/감사/웃김/놀람/슬픔) → `a.u_likeit_list_button._button.off` (첫 번째 = 공감) -",
-      "recallCount": 9,
+      "recallCount": 11,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 4.855379828917466,
+      "totalScore": 5.584704306828462,
       "maxScore": 0.634934993949554,
       "firstRecalledAt": "2026-06-12T06:00:38.214Z",
-      "lastRecalledAt": "2026-06-25T12:12:57.746Z",
+      "lastRecalledAt": "2026-07-12T00:00:39.064Z",
       "queryHashes": [
         "ab6e67c1d7ed",
         "787c569263ed",
         "76afb26c3796",
         "865e7d9c99f2",
-        "a19d0ee18c48"
+        "a19d0ee18c48",
+        "91519557a899",
+        "9267d3656005"
       ],
       "recallDays": [
         "2026-06-12",
@@ -435,7 +498,9 @@
         "2026-06-15",
         "2026-06-17",
         "2026-06-19",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-06",
+        "2026-07-12"
       ],
       "conceptTags": [
         "next.js",
@@ -491,23 +556,25 @@
       "endLine": 26,
       "source": "memory",
       "snippet": "# 2026-05-30 Daily Log ## Threads 운영 작업 ### 포스팅 - 4번 (병원 마케팅): 정이사님 직접 게시버튼 눌러서 완료 - 5번 (부동산 유튜브): 자동 게시 성공 ✅ - 게시 버튼 위치: 모달 내부 y=866 (1205, 884) 좌표 클릭 방식으로 해결 - 핵심 발견: React UI라 `btn.click()`이 아닌 Playwright `page.mouse.click(x, y)` 좌표 클릭 필요 - 1번, 2번, 3번 포스팅은 이전에 완료됨 ### 팔로우 - 기존 62개: 전원 이미 팔로잉 상태 - 신규 타겟 76개 수집 (총 138개로 확장) - 신규 해시태그: 콘텐츠마케팅, 유튜브마케팅, 쇼핑몰마케팅, 인스타마케팅, 영상마케팅, 소셜미디어마케팅, 디지털마케팅, 퍼포먼스마케팅, 스타트업, 이커머스, 온라인마케팅, 광고대행사 - 76개 신규 팔로우 완료 ✅ ### 댓글 - v4: 10개 완료 (범용 댓글) - v5: 10개 완료 (본문 읽기 시도했으나 파싱 오류 — 네비 텍스트 읽음) - 총 20개 댓글 완료 - 개선 필요: `[data-pressable-container] span` 선택자로 본문 정확히 읽기 가능 (확인됨) - 댓글 제출 버튼: SVG title=\"답글\" 버튼, y=800~1100 범위 ### 자동화 크론 설정 - 매일 10시: Threads 댓글 10개 (th",
-      "recallCount": 4,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.4743547141551971,
-      "maxScore": 0.38265559971332547,
+      "totalScore": 2.474354714155197,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-13T05:00:37.013Z",
-      "lastRecalledAt": "2026-06-18T22:56:25.917Z",
+      "lastRecalledAt": "2026-07-16T02:21:13.863Z",
       "queryHashes": [
         "ba9b146986dd",
         "c369a72f0b9e",
-        "5a16d4879dd8"
+        "5a16d4879dd8",
+        "6bb6923a6fd0"
       ],
       "recallDays": [
         "2026-06-13",
         "2026-06-15",
         "2026-06-17",
-        "2026-06-19"
+        "2026-06-19",
+        "2026-07-16"
       ],
       "conceptTags": [
         "btn.click",
@@ -527,20 +594,21 @@
       "endLine": 75,
       "source": "memory",
       "snippet": "- 아직 미완료 (이벤트 데이터 24시간 반영 대기 중) - 내일 자동 처리 예정 ## GA4 사이트 현황 (지난 7일) - 활성 사용자: 38명 - 유입: Direct 48, Organic Search 16, Social 13 - Threads 유입: 3건 (오늘 작업 반영) - 전환: 0건 (전환 추적 이제 반영됨) ## aicut.co.kr CTA 분석 - CTA 버튼: 무료로 시작하기(네비), 월 정기 계약 문의(y=659), 카카오 상담(y=755), VFX 견적 문의(y=4111), 월 정기 계약 문의(y=8275) - 문제: 폼 필드 너무 많음 → 이탈 원인, 카카오 상담 버튼이 더 효율적 ## 인스타그램 @aicut.official 현황 - 게시물: 6개 (너무 적음) - 팔로워: 45명 - 팔로우: 73명 - 광고: 5개 게시물 동시 홍보 중 (예산 분산 문제) - 반응: 좋아요 0~1개 → 개선 필요 - 개선 포인트: 게시물 15개 이상 채우기, 광고 1~2개로 집중, 타겟 재설정 ## 스크립트 파일 목록 - threads_post_5d.js: 5번 포스팅 (부동산 유튜브) — 성공한 버전 - threads_comment_v5.js: 본문 맞춤 댓글 (파싱 로직 개선 필요) - threads_collect_new.js: 신규 타겟 수집 - threads_follow.js: 팔로우 자동화 - aicut_ga4_",
-      "recallCount": 11,
+      "recallCount": 12,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 5.404492483629232,
-      "maxScore": 0.5675309178102133,
+      "totalScore": 6.404492483629232,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-13T11:00:37.502Z",
-      "lastRecalledAt": "2026-06-19T11:00:35.608Z",
+      "lastRecalledAt": "2026-07-16T02:21:13.863Z",
       "queryHashes": [
         "21de61e233a2",
         "c369a72f0b9e",
         "a35702c08419",
         "38d7195beb93",
         "f8ce15527697",
-        "6d6567960600"
+        "6d6567960600",
+        "6bb6923a6fd0"
       ],
       "recallDays": [
         "2026-06-13",
@@ -548,7 +616,8 @@
         "2026-06-15",
         "2026-06-17",
         "2026-06-18",
-        "2026-06-19"
+        "2026-06-19",
+        "2026-07-16"
       ],
       "conceptTags": [
         "aicut.co.kr",
@@ -568,20 +637,24 @@
       "endLine": 55,
       "source": "memory",
       "snippet": "- 총 20개 댓글 완료 - 개선 필요: `[data-pressable-container] span` 선택자로 본문 정확히 읽기 가능 (확인됨) - 댓글 제출 버튼: SVG title=\"답글\" 버튼, y=800~1100 범위 ### 자동화 크론 설정 - 매일 10시: Threads 댓글 10개 (threads_comment_v5.js) - 매일 11시: 신규 타겟 수집 + 팔로우 (threads_collect_new.js + threads_follow.js) - 내일 10시 1회: GA4 주요 이벤트 별표 ON ## GA4 전환 추적 ### 측정 ID - G-D141VGTF79 - 속성: a227543683p538910436 ### 반영 완료 (정이사님 직접) - index.html에 GA4 측정 ID 반영 - generate_lead 이벤트 연결 - purchase / begin_checkout / sign_up 연결 ### 전환 추적 코드 - 파일: aicut_ga4_tracking.js - 추적 항목: 무료로 시작하기, 월 정기 계약 문의, VFX 견적 문의, 카카오 상담, 이메일 문의, 폼 제출, 스크롤 깊이 ### 주요 이벤트 별표 ON - 아직 미완료 (이벤트 데이터 24시간 반영 대기 중) - 내일 자동 처리 예정 ## GA4 사이트 현황 (지난 7일) - 활성 사용자: 38명 - 유입: Direct 48,",
-      "recallCount": 11,
+      "recallCount": 15,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 5.067358050153455,
-      "maxScore": 0.5350722319345116,
+      "totalScore": 7.202071521089277,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-13T11:00:37.502Z",
-      "lastRecalledAt": "2026-06-19T11:00:35.608Z",
+      "lastRecalledAt": "2026-07-18T15:07:37.544Z",
       "queryHashes": [
         "21de61e233a2",
         "c369a72f0b9e",
         "a35702c08419",
         "38d7195beb93",
         "590bb833506e",
-        "6d6567960600"
+        "6d6567960600",
+        "34d1b8c4b022",
+        "03d653d035cb",
+        "5630b61da21b",
+        "4c9cf865f805"
       ],
       "recallDays": [
         "2026-06-13",
@@ -589,7 +662,11 @@
         "2026-06-15",
         "2026-06-17",
         "2026-06-18",
-        "2026-06-19"
+        "2026-06-19",
+        "2026-07-03",
+        "2026-07-07",
+        "2026-07-10",
+        "2026-07-19"
       ],
       "conceptTags": [
         "data-pressable-container",
@@ -609,20 +686,27 @@
       "endLine": 20,
       "source": "memory",
       "snippet": "# Daily Memory — 2026-06-12 ## 오전 완료 작업 - ✅ 네이버 광고 주간 보고 (6/5~6/11) - 노출 804, 클릭 12, CTR 1.49%, 전환 0 - ✅ 파워링크 18개 키워드 입찰가 조정 - High(1,800원): 영상편집, 동영상편집, 영상제작, 동영상제작, 숏폼영상제작, 숏폼영상편집, 인스타그램릴스 - Medium(1,600원): 영상편집대행, 영상편집가격, 영상마케팅, 유튜브영상편집, 릴스제작, 릴스편집, 인스타그램영상편집, 인스타릴스편집, 컴퓨터영상편집, 영상편집외주, 유튜브동영상편집 - ✅ 블로그 방문+공감 — 2개 방문, 1개 공감 - ✅ 블로그 이웃 추가 — 15명 신규 - ✅📝 블로그 포스팅 초안 완료: \"영상 편집 하나로 달라지는 병원 마케팅\" - ✅ Threads 포스팅 1개 (병원마케팅 주제) - 🔄 Threads 댓글 활동 진행 중 ## 저녁 작업 - ✅ **aicut.co.kr Firebase 전환 완료** — DNS 전파됨, 새 HTML(11KB) 정상 작동 - ✅ 호스팅케이알 DNS 레코드 수정: GitHub IP 4개 삭제, Firebase A 레코드 + TXT 인증 추가 - ✅ 네이버 서치어드바이저: 수집 요청 완료 - ❌ 호스팅케이알 SPA 자동화: 매우 어려움 (MUI React 기반, 여러 번 시도했으나 삭제/저장이 안정적으로 안 됨)",
-      "recallCount": 2,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7470046430826187,
-      "maxScore": 0.3864684998989105,
+      "totalScore": 4.104905775189399,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-14T01:07:27.462Z",
-      "lastRecalledAt": "2026-06-18T22:56:25.917Z",
+      "lastRecalledAt": "2026-07-18T23:50:20.277Z",
       "queryHashes": [
         "828091485ccc",
-        "5a16d4879dd8"
+        "5a16d4879dd8",
+        "39490930b1d2",
+        "3389551613d4",
+        "8c20cad1dcb1",
+        "f01dcf49ce36"
       ],
       "recallDays": [
         "2026-06-14",
-        "2026-06-19"
+        "2026-06-19",
+        "2026-07-07",
+        "2026-07-17",
+        "2026-07-19"
       ],
       "conceptTags": [
         "6/5",
@@ -677,23 +761,27 @@
       "endLine": 47,
       "source": "memory",
       "snippet": "- 비즈머니: 82,688원 (유상 80,731 + 무상 1,957) - 전환 0 (미설치) ## 오후 작업 ### 5. GA4 전환 추적 - 클로드 전달용 지시문 작성 완료 - 네이버 전환추적: 승인 대기 중 (몇일 기다리기로 결정) - GA4만 먼저 설치 예정 ### 6. 블로그 이미지 자동 생성 (HTML+CSS+Playwright 스크린샷 방식) - **최종 결과:** 700×700 정사각형 PNG 6장 - **폰트:** Noto Sans KR (Google Fonts CDN) + Malgun Gothic fallback - **포맷:** PNG 무손실 → Canva 수동 작업으로 결정 - **최종 결정:** 정이사님이 Canva에서 직접 템플릿 제작 후, 그 포맷을 유지해서 자동화 진행하기로 함 ### 7. 힉스필드 릴스 - 로그인 필요로 중단 (정이사님 계정 로그인 안 되어 있음) - 무료 크레딧 29회 남음 ### 8. 광고 입찰가 변경 - 기본 입찰가: 1,500원 → **2,500원** 인상 완료 ✅ - 하루 예산: 30,000원 유지 ## 중요 결정/교훈 - **IG DM 자동화: 완전 중단 확정** — 앞으로 진행하지 않음 (MEMORY.md에도 기록) - **블로그 이미지: HTML+CSS 자동화보다 Canva 템플릿 기반이 더 안정적** - 네이버 Ads 새 UI(ads.naver.com)는 전환추적",
-      "recallCount": 4,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 1.496394708752632,
-      "maxScore": 0.39113457798957824,
+      "totalScore": 2.846452057361603,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-17T00:47:20.547Z",
-      "lastRecalledAt": "2026-06-22T22:35:18.390Z",
+      "lastRecalledAt": "2026-07-18T23:50:20.277Z",
       "queryHashes": [
         "c854d730dcd7",
         "652daa80dc55",
         "3549356b7333",
-        "5ff40bdb21a5"
+        "5ff40bdb21a5",
+        "b13adeb890d9",
+        "f01dcf49ce36"
       ],
       "recallDays": [
         "2026-06-17",
         "2026-06-22",
-        "2026-06-23"
+        "2026-06-23",
+        "2026-07-12",
+        "2026-07-19"
       ],
       "conceptTags": [
         "결정/교훈",
@@ -713,13 +801,13 @@
       "endLine": 29,
       "source": "memory",
       "snippet": "# Daily Memory — 2026-06-14 (일) ## 고정 업무 진행 결과 ### ✅ 완료 - **네이버 광고 현황 확인** (계정 334739) - 파워링크: 에이컷_영상편집_검색 / 운영가능 - 노출 927, 클릭 16, CTR 1.73%, CPC 1,098원, 비용 17,576원 - 비즈머니 83,763원 / 전환 0 - 지난주 대비 노출↑50%, 클릭↑78% - **블로그 포스팅 초안** — \"가맹점 홍보 영상, 본사에서 직접 찍어주나요?\" (프랜차이즈 본사 대상) - **블로그 이웃 방문+공감** — 8개 방문, 2개 공감 - **Instagram 댓글** — 8개 완료 - **Instagram 팔로우** — 기존 72명 팔로우 완료 (추가 타겟 소진) - **에이컷 사이트 체크** — 유튜브링크 PC(5개 iframe) / 모바일(10개 iframe 2열) 모두 정상 노출됨 - 단, 첫 번째 iframe이 왼쪽으로 살짝 벗어난 영역 감지 ### ❌ 미완료 - **Threads 댓글** — 로그인은 되어 있으나 SPA 구조로 게시물 링크 수집 실패 - **Instagram 타겟 수집** — 신규 타겟 없음 (기존 73명 소진) ## 📌 포스팅 작성 필수 반영 사항 - 모든 블로그 포스팅: **센터정렬 + 모바일 최적화 줄바꿈 + 이모티콘** 반영 필수 - `naver_blog_se",
-      "recallCount": 7,
+      "recallCount": 13,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.6125093311071397,
-      "maxScore": 0.4228468775749206,
+      "totalScore": 6.3148822605217845,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-17T00:47:20.547Z",
-      "lastRecalledAt": "2026-06-24T15:23:20.801Z",
+      "lastRecalledAt": "2026-07-18T22:03:39.964Z",
       "queryHashes": [
         "c854d730dcd7",
         "76afb26c3796",
@@ -727,14 +815,26 @@
         "3549356b7333",
         "5ff40bdb21a5",
         "95bcdae00a56",
-        "62fa85667773"
+        "62fa85667773",
+        "68a93fe8da40",
+        "c87d813b5dd1",
+        "39490930b1d2",
+        "3774b858dacd",
+        "3389551613d4",
+        "8c20cad1dcb1"
       ],
       "recallDays": [
         "2026-06-17",
         "2026-06-19",
         "2026-06-22",
         "2026-06-23",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-06-29",
+        "2026-07-01",
+        "2026-07-07",
+        "2026-07-12",
+        "2026-07-17",
+        "2026-07-19"
       ],
       "conceptTags": [
         "에이컷-영상편집-검색",
@@ -789,18 +889,20 @@
       "endLine": 52,
       "source": "memory",
       "snippet": "- **Instagram 타겟 수집** — 신규 타겟 없음 (기존 73명 소진) ## 📌 포스팅 작성 필수 반영 사항 - 모든 블로그 포스팅: **센터정렬 + 모바일 최적화 줄바꿈 + 이모티콘** 반영 필수 - `naver_blog_seo_guide.md` 참조하여 작성 - React 에디터(postwrite)에는 직접 내용 입력 불가 → 정이사님께 붙여넣기 요청 ## ✅ Threads 새 글 작성 프로세스 (2026-06-14 확정) 1. Threads 로그인 확인 (Instagram 세션으로 로그인) 2. 홈 피드에서 \"새로운 소식이 있나요?\" 입력 영역 클릭 3. keyboard.type()으로 텍스트 입력 (이모티콘 포함) 4. \"게시\" 버튼 클릭 또는 Enter 전송 5. 확인: 게시 후 피드로 돌아오면 성공 참고: threads_post_quick.js 실행 ## 📋 에이컷 플랫폼 개선 제안 (2026-06-14) - 출처: 정이사님 제안 - 목표: 사이트 신뢰도 + 전환율 향상 **1순위: Before/After 비교** → 메인 페이지 or 랜딩 페이지 상단 - 영상 편집 전/후 비교 (화질, 자막, 편집 퀄리티) - 수치: 클릭률/조회수/전환율 Before vs After **2순위: FAQ** → 메인 페이지 하단 or 별도 페이지 - 자주 묻는 질문 10~15개 - 구매 장벽 제거 (가격, 납기, 수",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.3636812627315521,
-      "maxScore": 0.3636812627315521,
+      "totalScore": 1.3636812627315522,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-17T07:19:30.044Z",
-      "lastRecalledAt": "2026-06-17T07:19:30.044Z",
+      "lastRecalledAt": "2026-07-18T23:50:20.277Z",
       "queryHashes": [
-        "787c569263ed"
+        "787c569263ed",
+        "f01dcf49ce36"
       ],
       "recallDays": [
-        "2026-06-17"
+        "2026-06-17",
+        "2026-07-19"
       ],
       "conceptTags": [
         "naver-blog-seo-guide.md",
@@ -820,20 +922,22 @@
       "endLine": 198,
       "source": "memory",
       "snippet": "- insta_post.js: 인스타 게시물 업로드 - insta_comment.js: 인스타 댓글 (본문 맞춤) - insta_follow.js: 인스타 팔로우 - insta_collect.js: 인스타 타겟 수집 - insta_replace_posts2.js: 기존 포스팅 삭제 후 새 이미지로 교체 - aicut_ga4_tracking.js: GA4 전환 추적 코드 - threads_targets.json: 138개 타겟 - insta_targets.json: 73개 타겟 ## 오늘의 교훈 1. Threads 게시 버튼: React UI → `page.mouse.click(x, y)` 좌표 방식 필수 2. 게시 버튼 위치: 모달 내부 y=866 근처 3. 댓글 제출: SVG title=\"답글\" 버튼 4. 포스팅은 하루 1~2개 제한 (과도 시 언팔 유발) 5. GA4 이벤트 목록 반영: 데이터 발생 후 24~48시간 소요 6. 인스타 이미지 교체 불가 → 삭제 후 재업로드 방식 사용 7. 카드뉴스 텍스트 3줄 이상 → CTA 버튼 화면 밖 밀림 주의 8. 카드뉴스 최종 포맷 확정: 중앙 대형 텍스트 + 그라디언트 CTA 버튼",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7527681469917298,
-      "maxScore": 0.3960699588060379,
+      "totalScore": 1.7527681469917298,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-17T07:19:30.044Z",
-      "lastRecalledAt": "2026-06-25T12:12:57.746Z",
+      "lastRecalledAt": "2026-07-18T15:07:37.544Z",
       "queryHashes": [
         "787c569263ed",
-        "a19d0ee18c48"
+        "a19d0ee18c48",
+        "4c9cf865f805"
       ],
       "recallDays": [
         "2026-06-17",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-19"
       ],
       "conceptTags": [
         "insta-post.js",
@@ -853,18 +957,26 @@
       "endLine": 13,
       "source": "memory",
       "snippet": "# 2026-06-17 (수) 작업 로그 - 메모리 플러시 ## 운영 원칙 (신규 저장) - **사전 리스크 알림 원칙 (2026-06-17)** — 데이터 처리, 에이전트 동작, 소통 과정에서 문제가 될 소지가 있다고 판단되면 무조건 사전에 정이사님께 미리 알릴 것. 판단을 정이사님께 맡기고 조용히 진행하지 않음. - **자동 진행 금지 원칙 (2026-06-17)** — 크론이나 기존에 설정된 업무라고 하더라도, 정이사님의 명시적 요청 없이 자동으로 작업을 진행하지 않음. 모든 작업은 정이사님 지시에 따라 시작. - **이미지 파일명 규칙 (2026-06-17)** — 모든 생성 이미지 파일명에 `aicut_` prefix 필수 (예: `aicut_blog_shop.png`) ## GA4 분석 (최초 직접 추출 성공) - Chrome DevTools Protocol(port 9222)을 통해 GA4 인사이트 홈 데이터 직접 추출 - **지난 28일:** 활성 사용자 254명, 세션 430회, 신규 254명, 평균 세션 4분 18초 - **유입 채널 (7일):** Paid Social 122세션(+916.7%), Organic Search 64(+611.1%), Direct 53(+10.4%) - **수동 캠페인 (30일):** ig(인스타) 142, naver 36, m.search.naver 34, ad.search.nave",
-      "recallCount": 1,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4189964473247528,
-      "maxScore": 0.4189964473247528,
+      "totalScore": 2.6482480466365814,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-18T02:17:26.632Z",
-      "lastRecalledAt": "2026-06-18T02:17:26.632Z",
+      "lastRecalledAt": "2026-07-18T15:07:37.544Z",
       "queryHashes": [
-        "6d6567960600"
+        "6d6567960600",
+        "34d1b8c4b022",
+        "03d653d035cb",
+        "5630b61da21b",
+        "4c9cf865f805"
       ],
       "recallDays": [
-        "2026-06-18"
+        "2026-06-18",
+        "2026-07-03",
+        "2026-07-07",
+        "2026-07-10",
+        "2026-07-19"
       ],
       "conceptTags": [
         "aicut-blog-shop.png",
@@ -884,18 +996,28 @@
       "endLine": 142,
       "source": "memory",
       "snippet": "- 매일 12:30: Instagram 댓글 10개 (insta_comment.js) - 매일 14:00: Threads 신규 타겟 수집 + 팔로우 - 매일 14:30: Instagram 신규 타겟 수집 + 팔로우 - 내일 10시 1회: GA4 주요 이벤트 별표 ON ## GA4 전환 추적 ### 측정 ID - G-D141VGTF79 - 속성: a227543683p538910436 ### 반영 완료 (정이사님 직접) - index.html에 GA4 측정 ID 반영 - generate_lead 이벤트 연결 - purchase / begin_checkout / sign_up 연결 ### 전환 추적 코드 - 파일: aicut_ga4_tracking.js - 추적 항목: 무료로 시작하기, 월 정기 계약 문의, VFX 견적 문의, 카카오 상담, 이메일 문의, 폼 제출, 스크롤 깊이 ### 주요 이벤트 별표 ON - 아직 미완료 (이벤트 데이터 24시간 반영 대기 중) - 내일 자동 처리 예정 ## GA4 사이트 현황 (지난 7일) - 활성 사용자: 38명 - 유입: Direct 48, Organic Search 16, Social 13 - Threads 유입: 3건 (오늘 작업 반영) - 전환: 0건 (전환 추적 이제 반영됨) ## aicut.co.kr CTA 분석 - CTA 버튼: 무료로 시작하기(네비), 월 정기 계약 문의(y",
-      "recallCount": 1,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.37824209332466124,
-      "maxScore": 0.37824209332466124,
+      "totalScore": 2.82681667804718,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-18T02:17:26.632Z",
-      "lastRecalledAt": "2026-06-18T02:17:26.632Z",
+      "lastRecalledAt": "2026-07-18T15:07:37.544Z",
       "queryHashes": [
-        "6d6567960600"
+        "6d6567960600",
+        "34d1b8c4b022",
+        "03d653d035cb",
+        "5630b61da21b",
+        "b13adeb890d9",
+        "4c9cf865f805"
       ],
       "recallDays": [
-        "2026-06-18"
+        "2026-06-18",
+        "2026-07-03",
+        "2026-07-07",
+        "2026-07-10",
+        "2026-07-12",
+        "2026-07-19"
       ],
       "conceptTags": [
         "insta-comment.js",
@@ -915,25 +1037,27 @@
       "endLine": 27,
       "source": "memory",
       "snippet": "- **지난 28일:** 활성 사용자 254명, 세션 430회, 신규 254명, 평균 세션 4분 18초 - **유입 채널 (7일):** Paid Social 122세션(+916.7%), Organic Search 64(+611.1%), Direct 53(+10.4%) - **수동 캠페인 (30일):** ig(인스타) 142, naver 36, m.search.naver 34, ad.search.naver 12, google 11 - 전환율 0% (GA4 코드 6/16 설치, 데이터 수집 중) - 크롬 원격 디버깅 포트(9222)가 열려 있어 CDP 접속 가능 확인 ## 네이버 광고 현황 (6/15 기준) - 파워링크 1개(에이컷_영상편집_검색), 일평균 소진 2,477원 - 6/8~6/14: 노출 1,042(+69%), 클릭 15(+67%), CTR 1.44%, CPC 1,156원 - 비즈머니: 82,688원 (유상 80,731 + 무상 1,957) - 비즈채널 승인 22일째 지연 (5/27 등록) - DA 광고 미생성, 전환 추적 미설치 상태 지속 ## 블로그 1편 — 스마트스토어 고객사례 (발행 완료) - **제목:** 스마트스토어 숏폼 마케팅, 직원 1명 없이 월 30편으로 매출 2배 올린 방법 - **카테고리:** (처음 발행 시 카테고리 미확인) - **logNo:** 224318774 - **SEO 체크리스트 100%",
-      "recallCount": 5,
+      "recallCount": 6,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 2.301774862479464,
+      "totalScore": 2.662713927101389,
       "maxScore": 0.6378555960379942,
       "firstRecalledAt": "2026-06-18T02:17:26.632Z",
-      "lastRecalledAt": "2026-06-25T07:51:13.710Z",
+      "lastRecalledAt": "2026-07-12T00:14:50.009Z",
       "queryHashes": [
         "6d6567960600",
         "652daa80dc55",
         "3549356b7333",
         "5ff40bdb21a5",
-        "ceda2a8742cf"
+        "ceda2a8742cf",
+        "3774b858dacd"
       ],
       "recallDays": [
         "2026-06-18",
         "2026-06-22",
         "2026-06-23",
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-12"
       ],
       "conceptTags": [
         "916.7",
@@ -986,18 +1110,25 @@
       "endLine": 67,
       "source": "memory",
       "snippet": "| 1 | 영상편집 아웃소싱 FAQ — 가격·납기·수정·저작권 | 📝 오늘 작성 | | 2 | 교육 콘텐츠 영상편집 | ❌ 에디터 입력 필요 | | 3 | 프랜차이즈 영상마케팅 | ❌ 에디터 입력 필요 | --- ### 3순위: 지식iN 답변 활동 🟡 **전략:** - 검색 키워드: \"영상편집\", \"영상편집외주\", \"숏폼제작\", \"릴스편집\", \"쇼핑몰영상\" - 답변 내용: 전문적이고 유용한 정보 중심 (광고성 금지) - 마지막에 자연스럽게 \"영상 편집 아웃소싱 관련 정보는 aicut.co.kr 참고\" 멘션 - 하루 3~5개 답변 목표 **방법:** 1. kin.naver.com 접속 2. 관련 키워드 검색 3. 미답변 질문 찾기 4. 전문성 있는 답변 작성 --- ### 4순위: Threads 주 2회 새 글 🟢 - 월/목 or 화/금 발행 - 포맷: 짧은 팁 or 고객 사례 or 서비스 소개 - 해시태그 3~5개 포함 --- ## 📋 체크리스트 - [ ] 서치어드바이저 수동 수집 요청 - [ ] 블로그 포스팅 작성 + 에디터 입력 - [ ] 지식iN 답변 3~5개 - [ ] 네이버 광고 현황 체크 - [ ] Instagram 댓글 8개 - [ ] Threads 활동 (해당 주차만) - [ ] 블로그 이웃 추가 + 방문 공감",
-      "recallCount": 1,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.36026976108551023,
-      "maxScore": 0.36026976108551023,
+      "totalScore": 2.43433395922184,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-21T04:23:10.126Z",
-      "lastRecalledAt": "2026-06-21T04:23:10.126Z",
+      "lastRecalledAt": "2026-07-16T23:31:34.816Z",
       "queryHashes": [
-        "524ba44dcc95"
+        "524ba44dcc95",
+        "a313879e1e69",
+        "b5acd8d43632",
+        "9267d3656005",
+        "3389551613d4"
       ],
       "recallDays": [
-        "2026-06-21"
+        "2026-06-21",
+        "2026-07-09",
+        "2026-07-12",
+        "2026-07-17"
       ],
       "conceptTags": [
         "2026-06-15-plan.md",
@@ -1017,18 +1148,20 @@
       "endLine": 60,
       "source": "memory",
       "snippet": "- 부동산중개법인: `body_realestate2_result`(월20편), `body_realestate2_rate`(재계약률95%) - 병원: `body_hospital_stat`(원장님영상) ### 센터 정렬 트러블슈팅 - 초기: 모든 요소 flexbox center 정렬 - 문제: 콘텐츠 높이에 따라 수직센터가 14px 쏠림 - 해결: padding을 60px → 74px 60px 46px으로 조정 → 완벽 센터 (차이 0px) ✅ - 추가: body에 `margin: 0 auto` 추가 → 브라우저에서도 중앙 정렬 ### 뷰어 파일 - `blog_viewer.html` 생성 — 16장 전체 갤러리 + HTML 소스 링크 - 각 이미지 아래 파일명 클릭 → HTML 소스로 바로 이동 → F12 CSS 수정 가능 ### 실행한 명령어들 - `gen_all_blog_images.js` — 대표 이미지 6장 PNG 생성 - `gen_body_images.js` + `gen_body_images_png.js` — 본문 이미지 10장 생성 - `check_center.js` — 픽셀 단위 센터 정렬 분석 - `check_font.js` ~ `check_font4.js` — 폰트 로딩 상태 분석 - `blog_paste_image.js` — 쇼핑몰 포스트에 CDN 이미지 삽입 + 발행 ### 네이버 광고 - (조정 없음) ##",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.35087798237800594,
-      "maxScore": 0.35087798237800594,
+      "totalScore": 1.350877982378006,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-22T11:10:52.614Z",
-      "lastRecalledAt": "2026-06-22T11:10:52.614Z",
+      "lastRecalledAt": "2026-07-18T22:03:39.960Z",
       "queryHashes": [
-        "3549356b7333"
+        "3549356b7333",
+        "7462848d7f0e"
       ],
       "recallDays": [
-        "2026-06-22"
+        "2026-06-22",
+        "2026-07-19"
       ],
       "conceptTags": [
         "body-realestate2-result",
@@ -1048,18 +1181,25 @@
       "endLine": 29,
       "source": "memory",
       "snippet": "# Daily Memory — 2026-06-20 (토) ## 오전: 서치어드바이저 데이터 분석 ### 광고 현황 (6/13~6/19, 7일) - 노출: 1,156 (5/19~25 5,288 대비 감소, 6/3~9 617 대비 87%↑ 회복) - 클릭: 16 (CTR 1.38%, 5월 0.23% 대비 6배↑) - 전환: 0 (GA4 전환추적 미연동) - 비즈머니: 71,576원 (유상만, 무상 소진 완료) - 일 소진: ~723원 (99일 운영 가능) ### 서치어드바이저 (aicut.co.kr, 최근 30일) - 노출: 66 (전월 대비 490%↑) - 클릭: 17 (전월 대비 750%↑) - CTR: 25.8% - Top 키워드: 에이컷 영상(9), 에이컷 영상편집(3), 에이컷 편집(3), aicut.co.kr(2) ### 트래픽 증가 요인 분석 1. 블로그 콘텐츠 8배 증가 (5월 1건→6월 8건) 2. 브랜드 검색어 88% 차지 = SNS+블로그 활동으로 인지도↑ 3. 입찰가 인상(700→1,500원, 6/10) 효과로 CTR 6배 개선 ## GA4 전환 추적 - 정이사님이 직접 GA4 코드 aicut.co.kr에 삽입 완료 (6/20 확인) - 광고센터 전환 추적 연동은 미설치 상태 → 방법A(네이버 전환추적 코드 발급→삽입) 또는 방법B(GA4 직접 확인) ## 블로그 포스팅 (영상빡침 #1) - 제목: \"영상",
-      "recallCount": 1,
+      "recallCount": 5,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.612186282449578,
-      "maxScore": 0.612186282449578,
+      "totalScore": 3.3673874582584844,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-22T22:35:18.390Z",
-      "lastRecalledAt": "2026-06-22T22:35:18.390Z",
+      "lastRecalledAt": "2026-07-18T22:03:39.960Z",
       "queryHashes": [
-        "5ff40bdb21a5"
+        "5ff40bdb21a5",
+        "39490930b1d2",
+        "5630b61da21b",
+        "4c9cf865f805",
+        "7462848d7f0e"
       ],
       "recallDays": [
-        "2026-06-23"
+        "2026-06-23",
+        "2026-07-07",
+        "2026-07-10",
+        "2026-07-19"
       ],
       "conceptTags": [
         "6/13",
@@ -1141,18 +1281,20 @@
       "endLine": 139,
       "source": "memory",
       "snippet": "### 스크립트 파일 (저장) - `blog_paste_approach.js` — 클립보드 붙여넣기 자동화 (프로토타입) - `blog_rewrite.js` — \"~라면\" 시리즈 최종 버전 ### MEMORY.md 업데이트 - 블로그 이미지 생성 절대 규칙 — 모바일 최적화 추가 - 네이버 블로그 SEO 핵심 체크리스트 - 네이버 블로그 자동화 방식 (제목 API + 본문 클립보드) ### 금일 교훈 - SmartEditor SE4는 React 가상돔 기반 → 직접 DOM 조작 불가 - 클립보드 붙여넣기가 React 이벤트를 정상 트리거하는 유일한 방식 - PC에 Noto Sans KR 설치 필수 (image_gen.js 사용 시) - CDN 링크는 `file://`에서 충돌 → 절대 금지",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.5481139589063357,
-      "maxScore": 0.5481139589063357,
+      "totalScore": 1.1812407017539712,
+      "maxScore": 0.6331267428476356,
       "firstRecalledAt": "2026-06-25T07:51:13.710Z",
-      "lastRecalledAt": "2026-06-25T07:51:13.710Z",
+      "lastRecalledAt": "2026-07-18T22:03:52.267Z",
       "queryHashes": [
-        "ceda2a8742cf"
+        "ceda2a8742cf",
+        "c9b6b70da3f6"
       ],
       "recallDays": [
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-19"
       ],
       "conceptTags": [
         "blog-paste-approach.js",
@@ -1172,18 +1314,22 @@
       "endLine": 64,
       "source": "memory",
       "snippet": "- `page.keyboard.type(text, {delay: 2})`: 키보드 입력으로 본문 작성 ✅ (delay 없이 type() 하면 React가 이벤트 놓침) - `page.keyboard.insertText()`: React SE4에서 미지원 ❌ - `setComponentList()`, `setDocumentData()`: 내부 validation 실패로 사용 불가 ❌ - `getDocumentData()`: 읽기 전용으로는 사용 가능 ✅ - 이미지 업로드: SE4 사진 버튼이 CDP filechooser 이벤트 트리거 안 함 ❌ - 해시태그: input 태그 찾아 직접 value 설정 + keydown Enter 이벤트 디스패치 ✅ - 정렬 버튼: 드롭다운 UI 클릭 방식, 전체 선택 후 적용 시 선택 풀림 문제 있음 ## 파일 생성/수정 - blog_seasonal_keywords.md: 시즌+핫 키워드 전략 저장 - RULES.md: 섹션 6 \"브라우저 자동화 장애 대응\" 추가 - MEMORY.md: \"블로그 작성 시 필수 반영 파일\" 섹션 + 시즌 키워드 전략 추가 ## 미완료 - 네이버 블로그 이미지 5장 등록 (정이사님 직접) - 센터 정렬 1/34만 적용 (나머지 재시도 or 정이사님 직접) - 네이버 광고 전환 추적 연동 (정이사님이 직접 처리 예정) - 2번(AI 영상) 블로그 저장됨 (사용 안 함,",
-      "recallCount": 1,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.4905270620077145,
-      "maxScore": 0.4905270620077145,
+      "totalScore": 2.0443987861774158,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-25T07:51:23.599Z",
-      "lastRecalledAt": "2026-06-25T07:51:23.599Z",
+      "lastRecalledAt": "2026-07-18T14:21:59.498Z",
       "queryHashes": [
-        "d521327e3d3a"
+        "d521327e3d3a",
+        "96a00fb5aca7",
+        "871fede21a1c"
       ],
       "recallDays": [
-        "2026-06-25"
+        "2026-06-25",
+        "2026-06-29",
+        "2026-07-18"
       ],
       "conceptTags": [
         "page.keyboard.type",
@@ -1297,19 +1443,21 @@
       "endLine": 106,
       "source": "memory",
       "snippet": "node skills/image_gen.js --topic=쇼핑몰 --out=blog_img_shop.png node skills/image_gen.js --topic=부동산 --out=blog_img_realestate.png # 본문 이미지는 generate_cards.js 방식 사용 가능 ``` ### 중요 결정 - **블로그 이미지 포맷:** HTML+CSS+Playwright 스크린샷 방식 유지 - **폰트:** PC에 설치된 Noto Sans KR 사용 (CDN 링크 사용 금지!) - **이미지 등록:** 정이사님이 직접 블로그 에디터에서 업로드 - **센터 정렬:** padding 60px 균일 + flexbox center - **센터 정렬 분석:** check_center.js 실행해서 픽셀 단위 검증 ## 오후 — 블로그 자동화 + 병원 포스트 작성 ### 네이버 SmartEditor SE4 자동화 트러블슈팅 **문제:** SmartEditor가 React SE4(PostWriteForm)로 업그레이드되어 이전 방식(postwrite iframe 접근)이 막힘 - `keyboard.type()` 직접 입력 → React가 가로채서 무시 - `setDocumentData()` API → 데이터는 저장되나 React가 화면 미표시 (발행 시 정상 반영) - `contenteditable` 요소가 화면 밖(-99",
-      "recallCount": 2,
+      "recallCount": 3,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.7921358287334441,
+      "totalScore": 1.1709764838218688,
       "maxScore": 0.4125623255968094,
       "firstRecalledAt": "2026-06-25T08:28:27.908Z",
-      "lastRecalledAt": "2026-06-25T08:40:47.894Z",
+      "lastRecalledAt": "2026-06-25T23:30:37.621Z",
       "queryHashes": [
         "f18b10bee2be",
-        "f75eb5d4b5ab"
+        "f75eb5d4b5ab",
+        "14801d3bbe42"
       ],
       "recallDays": [
-        "2026-06-25"
+        "2026-06-25",
+        "2026-06-26"
       ],
       "conceptTags": [
         "skills/image-gen.js",
@@ -1360,18 +1508,20 @@
       "endLine": 87,
       "source": "memory",
       "snippet": "- (조정 없음) ### 최종 확정 — 블로그 이미지 생성 방식 **⚠️ 핵심 교훈:** - Google Fonts CDN `<link>`는 `file://` 프로토콜에서 충돌 유발 (CDN 차단 → @font-face 만 선언되고 폰트 로딩 실패 → 시스템 폰트도 무시됨) - **CDN 링크 절대 금지!** 시스템에 설치된 폰트만 사용 **확정 방식:** ``` 1. HTML: font-family: 'Noto Sans KR', sans-serif (CDN 링크 없음) 2. 프로토콜: file:// (로컬 서버 불필요) 3. HTML 생성: 기존 파일 편집 금지, 깨끗이 새로 작성 4. 폰트 대기: document.fonts.ready 후 2초 추가 대기 5. PNG: Playwright screenshot (700×700 또는 700×400) ``` **스크립트:** `skills/image_gen.js` — 통합 생성기 - 사용법: `node skills/image_gen.js --topic=쇼핑몰 --out=blog_img_shop.png` - 지원 토픽: 쇼핑몰, 부동산, 변호사, 병원, 교육, 부동산2 - 테마: dark_purple, light_cyan, light_pink, dark_green **재사용 방법:** ```bash # 필요할 때마다 1개씩: node skills/image_gen.js --topi",
-      "recallCount": 1,
+      "recallCount": 2,
       "dailyCount": 0,
       "groundedCount": 0,
-      "totalScore": 0.37882432043552394,
-      "maxScore": 0.37882432043552394,
+      "totalScore": 1.378824320435524,
+      "maxScore": 1,
       "firstRecalledAt": "2026-06-25T08:28:27.908Z",
-      "lastRecalledAt": "2026-06-25T08:28:27.908Z",
+      "lastRecalledAt": "2026-07-18T22:06:38.984Z",
       "queryHashes": [
-        "f18b10bee2be"
+        "f18b10bee2be",
+        "351568de5346"
       ],
       "recallDays": [
-        "2026-06-25"
+        "2026-06-25",
+        "2026-07-19"
       ],
       "conceptTags": [
         "font-face",
@@ -1477,6 +1627,887 @@
         "insta-edit-h2.js",
         "blog-write-h2-v2.js",
         "blog-post-content.js"
+      ]
+    },
+    "memory:memory/2026-05-27.md:39:56": {
+      "key": "memory:memory/2026-05-27.md:39:56",
+      "path": "memory/2026-05-27.md",
+      "startLine": 39,
+      "endLine": 56,
+      "source": "memory",
+      "snippet": "- 에디터 구조: mainFrame(PostWriteForm iframe) 내 contenteditable - 제목 클릭 좌표: (590, 185), 본문: (590, 270) - 발행 버튼: `.publish_btn__m9KHH` - 임시저장 버튼: `.save_btn__bzc5B` - 이미지 삽입: `filechooser` 이벤트 + `.se-image-toolbar-button` 클릭 - 발행 패널: React 오버레이로 CDP 좌표 클릭이 에디터에 흡수됨 → 직접 클릭 필요 ### CDP 접근 - Edge: 127.0.0.1:9222 (기존 실행 중인 Edge에 연결) - `chromium.connectOverCDP('http://127.0.0.1:9222')` - `editorPage.frame({ name: 'mainFrame' })` 으로 에디터 프레임 접근 ## 에이컷 블로그 정보 - Blog ID: aicut - 기존 포스팅 수: 327+ - 고객사례 도입이야기 카테고리: 기존 존재 확인 - 마지막 포스팅 URL: blog.naver.com/aicut/224291552475",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.3798630207777023,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-06-25T23:30:37.621Z",
+      "lastRecalledAt": "2026-07-18T22:03:39.960Z",
+      "queryHashes": [
+        "14801d3bbe42",
+        "7462848d7f0e"
+      ],
+      "recallDays": [
+        "2026-06-26",
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "publish-btn",
+        "save-btn",
+        "se-image-toolbar-button",
+        "127.0.0.1",
+        "chromium.connectovercdp",
+        "editorpage.frame",
+        "에디터",
+        "구조"
+      ]
+    },
+    "memory:memory/2026-06-25.md:21:46": {
+      "key": "memory:memory/2026-06-25.md:21:46",
+      "path": "memory/2026-06-25.md",
+      "startLine": 21,
+      "endLine": 46,
+      "source": "memory",
+      "snippet": "4. `writeTextWithSoftLineBreak(text)` 또는 `write()` + `lineBreak()` ### 이미지 붙여넣기 - 클립보드에 `image/png` MIME 타입으로 적재 → contenteditable focus + 커서 끝 → `page.keyboard.press('Control+v')` - SE4 1.77.0에서도 이미지 paste는 정상 동작 확인됨 (텍스트 paste만 차단) ### 4-0-1 구조 (224324428697 방식 재현 성공) - **순서:** write() 텍스트 → 이미지 paste → write() 텍스트 → 이미지 paste → ... (5회 반복) - 최종: image→title→text→image→text→image→text→image→text→image→text→image→text (13컴포넌트) - 정확한 image→text 번갈아 배치 구조 완성 ## 📸 이미지 생성 ### 월드컵 주제 이미지 5장 (image_gen.js 방식) - aicut_worldcup_main.png (700×700, 188KB) — dark_purple - aicut_worldcup_01.png (800×450, 146KB) — light_cyan (플랫폼별 비교) - aicut_worldcup_02.png (800×450, 177KB) — dark_green (경기 하이라이트)",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.3540489703416825,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-06-27T02:30:51.418Z",
+      "lastRecalledAt": "2026-07-18T22:06:38.984Z",
+      "queryHashes": [
+        "1ddf6b9cd5e8",
+        "351568de5346"
+      ],
+      "recallDays": [
+        "2026-06-27",
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "image/png",
+        "page.keyboard.press",
+        "1.77.0에서도",
+        "4-0-1",
+        "image-gen.js",
+        "aicut-worldcup-main.png",
+        "dark-purple",
+        "aicut-worldcup-01.png"
+      ]
+    },
+    "memory:memory/2026-06-24.md:17:41": {
+      "key": "memory:memory/2026-06-24.md:17:41",
+      "path": "memory/2026-06-24.md",
+      "startLine": 17,
+      "endLine": 41,
+      "source": "memory",
+      "snippet": "- renderLogs 필터 channel 기반으로 개선 ## 💾 파일 백업 - `memorial_admin_logs.html` — 어제 발송 로그 버전 저장 (오늘 수정분 제거) - `memorial_admin_logs_today.html` — 오늘 수정본 백업 ## 📊 에이컷 마케팅 통합 대시보드 제작 - **파일:** `aicut_marketing_dashboard.html` - **구조:** 오버뷰 / 네이버 / 인스타그램 / 블로그 / GA4 / 지식iN / 업무관리 / 콘텐츠 / 데이터관리 / 회의록 / 설정 (11페이지) - **데이터 레이어:** DataStore(localStorage), ApiService(Mock/Live 모드), blogStore, meetingStore, taskStore - **디자인:** 다크 네이비 사이드바 + 퍼플 액센트, Pretendard 폰트 - **팀 배지:** 개발/기획/리서치/디자인/마케팅 각각 컬러 코드 ## 🖼️ 블로그 페이지 고도화 (subagent) - 발행 5단계 프로세스 시각화 (step-flow) - 포스팅별 진행률 바 (프로그레스) - 시즌 키워드 18종 (시즌6+핫6+업종6) - 발행 캘린더 뷰 (월간 그리드) - SEO 체크리스트 완료율 - 채널 재활용 현황 (블로그→인스타) - 아이디어 보드 (등록/삭제/포스팅 전환) - 이미지 톤앤매너 가이드 -",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.013402810812592,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-06-27T16:30:00.027Z",
+      "lastRecalledAt": "2026-07-18T22:03:39.964Z",
+      "queryHashes": [
+        "b67b7da0d555",
+        "aa6c5bbd6304",
+        "3389551613d4",
+        "8c20cad1dcb1"
+      ],
+      "recallDays": [
+        "2026-06-28",
+        "2026-07-02",
+        "2026-07-17",
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "백업",
+        "memorial-admin-logs.html",
+        "memorial-admin-logs-today.html",
+        "aicut-marketing-dashboard.html",
+        "mock/live",
+        "개발/기획/리서치/디자인/마케팅",
+        "step-flow",
+        "등록/삭제/포스팅"
+      ]
+    },
+    "memory:memory/2026-06-26.md:16:37": {
+      "key": "memory:memory/2026-06-26.md:16:37",
+      "path": "memory/2026-06-26.md",
+      "startLine": 16,
+      "endLine": 37,
+      "source": "memory",
+      "snippet": "- 인스타그램 Graph API 연동 계획(v2) **전체 폐기** - 새 방향: **콘텐츠 파이프라인 구조** - 블로그 → 콘텐츠 자산 → 인스타/쓰레드 재가공 배포 - 통계 ❌, 등록 여부 + 출처 블로그 글만 추적 - 쓰레드 탭 신규 필요 - 블로그 주제 추천 → **4번 선택: \"여름 시즌 오픈, 업종별 영상 마케팅 체크리스트\"** ## ✍️ 블로그 작성 (09:00~11:00) - 블로그 본문 HTML 작성 (4개 업종 체크리스트) - 이미지 5장 생성: image_gen.js → dark_purple/light_cyan/dark_green/light_pink 테마 - SmartEditor SE4 자동화 테스트 완료 (제목/본문/저장 모두 정상) - 기존 포스팅 스타일(224324428697) 참고하여 모바일 톤으로 2차 수정 - 기존 포스팅 스타일(224326578253, 월드컵) 참고하여 이미지 스타일 3차 수정 ## 📊 대시보드 점검 및 정리 (12:00~13:00) - 전체 탭/기능별 상태 점검 → 표로 정리 - Hardcoded 값 → `—` (연동 전) 표시로 교체 - 미구현 버튼 → disabled + '준비 중' 처리 - localStorage 옛 값 DB에서 null로 강제 덮어쓰도록 DataStore 수정 - JSON 백업 생성: `aicut_blog_posts`, `aicut_meetin",
+      "recallCount": 13,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 7.689797950147717,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-06-28T23:30:38.930Z",
+      "lastRecalledAt": "2026-07-18T22:03:39.964Z",
+      "queryHashes": [
+        "68a93fe8da40",
+        "c87d813b5dd1",
+        "c547a9de258b",
+        "91519557a899",
+        "39490930b1d2",
+        "680c58085740",
+        "77b26641430d",
+        "9267d3656005",
+        "3774b858dacd",
+        "3389551613d4",
+        "c95eb9c9fb6f",
+        "2132079496b0",
+        "8c20cad1dcb1"
+      ],
+      "recallDays": [
+        "2026-06-29",
+        "2026-07-01",
+        "2026-07-03",
+        "2026-07-06",
+        "2026-07-07",
+        "2026-07-08",
+        "2026-07-09",
+        "2026-07-12",
+        "2026-07-17",
+        "2026-07-18",
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "백업",
+        "인스타/쓰레드",
+        "image-gen.js",
+        "제목/본문/저장",
+        "탭/기능별",
+        "aicut-blog-posts",
+        "aicut-meetin",
+        "인스타그램"
+      ]
+    },
+    "memory:memory/2026-06-20.md:25:46": {
+      "key": "memory:memory/2026-06-20.md:25:46",
+      "path": "memory/2026-06-20.md",
+      "startLine": 25,
+      "endLine": 46,
+      "source": "memory",
+      "snippet": "- 광고센터 전환 추적 연동은 미설치 상태 → 방법A(네이버 전환추적 코드 발급→삽입) 또는 방법B(GA4 직접 확인) ## 블로그 포스팅 (영상빡침 #1) - 제목: \"영상편집 클린트 5번, 수정 요청 30회... 프리랜서 편집러와 작별한 이유\" - 본문: 674자 (keyboard.type() 방식으로 입력) - 해시태그: 30개 - 저장 완료 - 이미지 5장: 미등록 (정이사님이 직접 사진 버튼으로 등록 필요) - 센터 정렬: 1/34만 적용 (재시도 필요) - 이미지 파일: aicut_blog_freelancer_thumb.png, aicut_blog_freelancer_01~03.png, aicut_blog_freelancer_cta.png ## 인스타 카드뉴스 업로드 - \"릴스 조회수, 3일 만든 영상보다 3시간 만든 영상이 더 잘 나가는 이유\" - 4장 카드뉴스 업로드 + 캡션 작성 - 정이사님이 직접 발행 처리 완료 ## 기술 발견: SmartEditor SE4 자동화 - `setDocumentTitle('...')`: 제목 설정 API ✅ - `page.keyboard.type(text, {delay: 2})`: 키보드 입력으로 본문 작성 ✅ (delay 없이 type() 하면 React가 이벤트 놓침) - `page.keyboard.insertText()`: React SE4에서 미지원 ❌ - `setCompo",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.550723851169387,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-06-28T23:30:38.930Z",
+      "lastRecalledAt": "2026-07-18T22:03:39.960Z",
+      "queryHashes": [
+        "68a93fe8da40",
+        "6bb6923a6fd0",
+        "7462848d7f0e"
+      ],
+      "recallDays": [
+        "2026-06-29",
+        "2026-07-16",
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "keyboard.type",
+        "1/34만",
+        "aicut-blog-freelancer-thumb.png",
+        "aicut-blog-freelancer-01",
+        "03.png",
+        "aicut-blog-freelancer-cta.png",
+        "page.keyboard.type",
+        "page.keyboard.inserttext"
+      ]
+    },
+    "memory:memory/2026-06-26.md:48:73": {
+      "key": "memory:memory/2026-06-26.md:48:73",
+      "path": "memory/2026-06-26.md",
+      "startLine": 48,
+      "endLine": 73,
+      "source": "memory",
+      "snippet": "1. `--new` → 주제 5개 제안 (topic_proposed + draft_approval) ✅ 2. 승인 → topic_approved ✅ 3. blog.js 재실행 → 키워드 전략 제안 (keyword_proposed + keyword_approval) ✅ 4. 승인 → keyword_approved ✅ 5. blog.js 재실행 → 본문 5장 생성 + HTML (draft_writing → draft_review) ✅ 6. 현재 draft_review (검토 대기) 상태 ### 대시보드 UI (F번) - 블로그 탭에 pipeline 카드 섹션 추가 - Step Flow 시각화 (5단계: 주제→키워드→본문→검토→발행) - 승인/반려 버튼 연동 - 새 포스트 버튼 활성화 ## 🔑 학습/결정사항 - **이미지 스타일**: 월드컵 포스팅 스타일(aicut_worldcup_main.png) = blog_worldcup_v3.js 패턴 확정 - **SMartEditor SE4 자동화 정상 작동 확인** (CDP → iframe → SmartEditor API + 클립보드) - **네이버 API**: HMAC-SHA256 서명, Secret Key base64 디코딩 금지 - **데이터 관리 피드백**: Node.js 백엔드와 공유하는 데이터는 무조건 SQLite, localStorage는 브라우저 전용 ## 📁 파일 변경사",
+      "recallCount": 9,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.8715369334379464,
+      "maxScore": 0.7078074746246237,
+      "firstRecalledAt": "2026-06-29T00:00:38.152Z",
+      "lastRecalledAt": "2026-07-12T00:00:39.064Z",
+      "queryHashes": [
+        "38dce65be5d4",
+        "c547a9de258b",
+        "91519557a899",
+        "e949e600e8b3",
+        "680c58085740",
+        "a313879e1e69",
+        "77b26641430d",
+        "9267d3656005"
+      ],
+      "recallDays": [
+        "2026-06-29",
+        "2026-07-03",
+        "2026-07-06",
+        "2026-07-08",
+        "2026-07-09",
+        "2026-07-12"
+      ],
+      "conceptTags": [
+        "topic-proposed",
+        "draft-approval",
+        "topic-approved",
+        "blog.js",
+        "keyword-proposed",
+        "keyword-approval",
+        "keyword-approved",
+        "draft-writing"
+      ]
+    },
+    "memory:memory/2026-06-27.md:1:20": {
+      "key": "memory:memory/2026-06-27.md:1:20",
+      "path": "memory/2026-06-27.md",
+      "startLine": 1,
+      "endLine": 20,
+      "source": "memory",
+      "snippet": "# 2026-06-27 (토) 일일 로그 ## 📝 블로그 작성 — 분양대행사 하반기 마케팅 ### 최종 완료 (19:10) - **제목:** 분양대행사, 브로셔만 들고 있다가 영상 마케팅으로 하반기 매출 2배 올린 썰 - **본문:** 1,601자 / 84문단 / 해시태그 30개 - **이미지:** 6장 (REF 224320657442 분석 CSS + 월드컵 혼합 테마) - main: dark_purple 700×700 - cycle: light_cyan 700×400 - cost: dark_green 700×400 - channel: light_pink 700×400 - after: dark_purple 700×400 - cta: dark_green 700×400 - **센터 정렬:** 텍스트 100% + 이미지 섹션 100% - **참조 레퍼런스:** blog_worldcup_v3.js 패턴 (이미지 스타일) + 224320657442 (본문 스타일) - **이미지 CSS:** REF 픽셀 분석 기반 (배지~19%, CTA~65%, 하단여백~15%) - **SE4 frame URL:** PostWriteForm.naver (이전 /postwrite에서 변경됨) - **전체 프로세스 통합:** _full_rewrite.js",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1401012361049652,
+      "maxScore": 0.4153462469577789,
+      "firstRecalledAt": "2026-06-30T23:26:39.783Z",
+      "lastRecalledAt": "2026-07-12T00:14:50.009Z",
+      "queryHashes": [
+        "c87d813b5dd1",
+        "39490930b1d2",
+        "3774b858dacd"
+      ],
+      "recallDays": [
+        "2026-07-01",
+        "2026-07-07",
+        "2026-07-12"
+      ],
+      "conceptTags": [
+        "dark-purple",
+        "light-cyan",
+        "dark-green",
+        "light-pink",
+        "blog-worldcup-v3.js",
+        "postwriteform.naver",
+        "full-rewrite.js",
+        "일일"
+      ]
+    },
+    "memory:memory/2026-06-24.md:1:24": {
+      "key": "memory:memory/2026-06-24.md:1:24",
+      "path": "memory/2026-06-24.md",
+      "startLine": 1,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "# 2026-06-24 (수) 작업 로그 ## 🔧 memorial_admin.html — 대시보드 레이아웃 수정 - **문제:** `.main` CSS의 `flex:1`(flex-basis:0%)가 브라우저에서 제대로 계산되지 않아 메인 영역 너비가 **0px**로 붕괴 - **해결:** `.main { flex:none; width:calc(100% - 226px); }`으로 변경 → 정상 798px - 영향받은 대시보드 요소들: kpi-grid 0→754px, fee리스트 179→380px, 추모일 0→716px ## 📝 신규 계약 작성 페이지 추가 - 기존 모달(팝업) 방식 → **새 페이지(newcontract)** 전환 방식으로 변경 완료 - 뒤로가기 버튼 → 계약 관리 페이지로 복귀 - 폼 필드: 계약자명/연락처/고인명/위치/안치유형/결제방식 등 - 제출 시 발송 로그에 자동 기록 ## 📋 발송 로그 개선 - 로그 데이터에 `channel` 필드 추가 (kakao/sms/both) - 채널 자동 감지 로직 개선 - renderLogs 필터 channel 기반으로 개선 ## 💾 파일 백업 - `memorial_admin_logs.html` — 어제 발송 로그 버전 저장 (오늘 수정분 제거) - `memorial_admin_logs_today.html` — 오늘 수정본 백업 ## 📊 에이컷 마케팅 통합 대시보",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7241162403232244,
+      "maxScore": 0.7241162403232244,
+      "firstRecalledAt": "2026-07-01T22:33:00.435Z",
+      "lastRecalledAt": "2026-07-01T22:33:00.435Z",
+      "queryHashes": [
+        "aa6c5bbd6304"
+      ],
+      "recallDays": [
+        "2026-07-02"
+      ],
+      "conceptTags": [
+        "백업",
+        "memorial-admin.html",
+        "flex-basis",
+        "kpi-grid",
+        "계약자명/연락처/고인명/위치/안치유형/결제방식",
+        "kakao/sms/both",
+        "memorial-admin-logs.html",
+        "memorial-admin-logs-today.html"
+      ]
+    },
+    "memory:memory/2026-05-30.md:90:118": {
+      "key": "memory:memory/2026-05-30.md:90:118",
+      "path": "memory/2026-05-30.md",
+      "startLine": 90,
+      "endLine": 118,
+      "source": "memory",
+      "snippet": "- 핵심 발견: React UI라 `btn.click()`이 아닌 Playwright `page.mouse.click(x, y)` 좌표 클릭 필요 - 1번, 2번, 3번 포스팅은 이전에 완료됨 ### 팔로우 - 기존 62개: 전원 이미 팔로잉 상태 - 신규 타겟 76개 수집 (총 138개로 확장) - 신규 해시태그: 콘텐츠마케팅, 유튜브마케팅, 쇼핑몰마케팅, 인스타마케팅, 영상마케팅, 소셜미디어마케팅, 디지털마케팅, 퍼포먼스마케팅, 스타트업, 이커머스, 온라인마케팅, 광고대행사 - 76개 신규 팔로우 완료 ✅ ### 댓글 - v4: 10개 완료 (범용 댓글) - v5: 10개 완료 (본문 읽기 시도했으나 파싱 오류 — 네비 텍스트 읽음) - 총 20개 댓글 완료 - 개선 필요: `[data-pressable-container] span` 선택자로 본문 정확히 읽기 가능 (확인됨) - 댓글 제출 버튼: SVG title=\"답글\" 버튼, y=800~1100 범위 ### 자동화 크론 설정 - 매일 12:00: Threads 댓글 10개 (threads_comment_v5.js) - 매일 12:30: Instagram 댓글 10개 (insta_comment.js) - 매일 14:00: Threads 신규 타겟 수집 + 팔로우 - 매일 14:30: Instagram 신규 타겟 수집 + 팔로우 - 내일 10시 1회: GA4 주요 이",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.723068931698799,
+      "maxScore": 0.36770995557308195,
+      "firstRecalledAt": "2026-07-03T02:53:01.813Z",
+      "lastRecalledAt": "2026-07-06T23:54:02.681Z",
+      "queryHashes": [
+        "34d1b8c4b022",
+        "03d653d035cb"
+      ],
+      "recallDays": [
+        "2026-07-03",
+        "2026-07-07"
+      ],
+      "conceptTags": [
+        "btn.click",
+        "page.mouse.click",
+        "data-pressable-container",
+        "threads-comment-v5.js",
+        "insta-comment.js",
+        "핵심",
+        "발견",
+        "react"
+      ]
+    },
+    "memory:memory/2026-06-26.md:33:52": {
+      "key": "memory:memory/2026-06-26.md:33:52",
+      "path": "memory/2026-06-26.md",
+      "startLine": 33,
+      "endLine": 52,
+      "source": "memory",
+      "snippet": "- 미구현 버튼 → disabled + '준비 중' 처리 - localStorage 옛 값 DB에서 null로 강제 덮어쓰도록 DataStore 수정 - JSON 백업 생성: `aicut_blog_posts`, `aicut_meetings`, `aicut_tasks_v3`, `aicut_activities` ## 🏗️ 블로그 승인 워크플로우 구축 (14:00~16:00) ### DB/서버/스크립트 전면 구현 - **SQLite 스키마 확장**: content_assets + pending_actions 테이블 (정이사님 피드백: localStorage ❌ → SQLite ✅) - **db/store.js** — 9개 함수 추가 (createAsset, getAsset, getAllAssets, updateAssetStatus, createPendingAction, resolvePendingAction, getNextPendingAction, getPendingActionByAsset, deleteAsset) - **server.js** — 6개 API 엔드포인트 추가 (GET /api/blog/assets, /api/blog/pending, POST /api/blog/approve, /api/blog/reject, /api/blog/new, /api/blog/process) - **channels/blog.js** — ①②③ 자동",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.741561198234558,
+      "maxScore": 0.37926082909107206,
+      "firstRecalledAt": "2026-07-05T23:30:45.663Z",
+      "lastRecalledAt": "2026-07-09T00:03:02.538Z",
+      "queryHashes": [
+        "e949e600e8b3",
+        "77b26641430d"
+      ],
+      "recallDays": [
+        "2026-07-06",
+        "2026-07-09"
+      ],
+      "conceptTags": [
+        "백업",
+        "aicut-blog-posts",
+        "aicut-meetings",
+        "aicut-tasks-v3",
+        "aicut-activities",
+        "db/서버/스크립트",
+        "content-assets",
+        "pending-actions"
+      ]
+    },
+    "memory:memory/2026-06-28.md:25:32": {
+      "key": "memory:memory/2026-06-28.md:25:32",
+      "path": "memory/2026-06-28.md",
+      "startLine": 25,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "- 이미지 업로드: filechooser 방식 (하단 insert menu 버튼 사용 시 불안정 → toolbar 이미지 버튼 우선) ## 블로그 최종 상태 (23:00 6/27 기준) - **제목:** 분양대행사, 브로셔만 들고 있다가 영상 마케팅으로 하반기 매출 2배 올린 썰 - **본문:** 1,608자 / 91문단 / 해시태그 30개 / 센터정렬 100% - **이미지:** 6장 (REF2 스타일 적용) - **에디터:** 에이컷 네이버 블로그 SmartEditor SE4에 입력 완료",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.9933540637165768,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-06T23:53:38.780Z",
+      "lastRecalledAt": "2026-07-18T22:03:52.267Z",
+      "queryHashes": [
+        "39490930b1d2",
+        "871fede21a1c",
+        "c9b6b70da3f6"
+      ],
+      "recallDays": [
+        "2026-07-07",
+        "2026-07-18",
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "6/27",
+        "이미지",
+        "업로드",
+        "filechooser",
+        "방식",
+        "하단",
+        "insert",
+        "menu"
+      ]
+    },
+    "memory:memory/2026-06-26.md:68:75": {
+      "key": "memory:memory/2026-06-26.md:68:75",
+      "path": "memory/2026-06-26.md",
+      "startLine": 68,
+      "endLine": 75,
+      "source": "memory",
+      "snippet": "- `channels/naver.js` — 수정 (source=live, Secret Key utf-8) - `db/schema.sql` — content_assets + pending_actions 추가 - `db/store.js` — 9개 함수 추가 - `server.js` — 블로그 API 6개 추가 - `channels/blog.js` — 신규 (워크플로우 자동화) - `aicut_marketing_dashboard.html` — DataStore null 처리, 버튼 disabled, pipeline UI - `backup/aicut_blog_posts.json` + `aicut_meetings.json` + `aicut_tasks_v3.json` + `aicut_activities.json` — 백업",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.37819882631301877,
+      "maxScore": 0.37819882631301877,
+      "firstRecalledAt": "2026-07-09T00:03:02.538Z",
+      "lastRecalledAt": "2026-07-09T00:03:02.538Z",
+      "queryHashes": [
+        "77b26641430d"
+      ],
+      "recallDays": [
+        "2026-07-09"
+      ],
+      "conceptTags": [
+        "backup",
+        "백업",
+        "channels/naver.js",
+        "utf-8",
+        "db/schema.sql",
+        "content-assets",
+        "pending-actions",
+        "db/store.js"
+      ]
+    },
+    "memory:memory/2026-06-15-plan.md:1:37": {
+      "key": "memory:memory/2026-06-15-plan.md:1:37",
+      "path": "memory/2026-06-15-plan.md",
+      "startLine": 1,
+      "endLine": 37,
+      "source": "memory",
+      "snippet": "# 에이든 일일 업무 — 2026-06-15 (월) > 전날(6/14) 정이사님 지시사항 반영 --- ## ✅ 오늘의 업무 (우선순위 순) ### 1순위: 서치어드바이저 수동 수집 요청 🔴 **방법:** 1. searchadvisor.naver.com 접속 2. 네이버 계정으로 로그인 (자동로그인 가능) 3. 등록된 사이트(aicut.co.kr) 선택 4. \"요청\" 탭 → \"수집 요청\" 클릭 5. 전체 URL 다시 수집 요청 **스크립트:** `searchadvisor_request.js` 실행 --- ### 2순위: 블로그 포스팅 작성 (매일 1개) 🟠 - 주제: 정이사님이 제안한 \"영상 마케팅이 중요한 이유\" 시리즈 - 현재 초안 보유: 쇼핑몰(에디터 입력됨), 교육(파일), 프랜차이즈(파일) - 다음 주제: **FAQ 형식 블로그 포스팅** — 에이컷 서비스 관련 자주 묻는 질문 - SEO 반영 필수: 센터정렬, 모바일 줄바꿈, 이모티콘, CTA, 해시태그 20~30개 **포스팅 순서:** | 순서 | 주제 | 상태 | |:----:|:-----|:----:| | 1 | 영상편집 아웃소싱 FAQ — 가격·납기·수정·저작권 | 📝 오늘 작성 | | 2 | 교육 콘텐츠 영상편집 | ❌ 에디터 입력 필요 | | 3 | 프랜차이즈 영상마케팅 | ❌ 에디터 입력 필요 | --- ### 3순위: 지식iN 답변 활동",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.37640380859375,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-09T00:03:02.538Z",
+      "lastRecalledAt": "2026-07-17T00:00:48.838Z",
+      "queryHashes": [
+        "77b26641430d",
+        "c95eb9c9fb6f"
+      ],
+      "recallDays": [
+        "2026-07-09",
+        "2026-07-17"
+      ],
+      "conceptTags": [
+        "2026-06-15-plan.md",
+        "6/14",
+        "searchadvisor.naver.com",
+        "aicut.co.kr",
+        "searchadvisor-request.js",
+        "plan.md",
+        "에이든",
+        "일일"
+      ]
+    },
+    "memory:memory/2026-06-23.md:20:45": {
+      "key": "memory:memory/2026-06-23.md:20:45",
+      "path": "memory/2026-06-23.md",
+      "startLine": 20,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "- 대표 이미지 폰트 34px→46px 재생성 (톤 통일) ## 📱 인스타그램 - **신규 릴스 업로드 완료** (6/23, DZ6a5byNHfd): 숏폼 콘텐츠 아웃소싱 홍보 - **릴스 부스트 광고**: 프로필 방문 CTA + 3만 원/3일 + 자동 타겟팅 추천 - **기존 광고 데이터**: 5월 광고 CTR 53.7% (조회 1,998/웹방문 1,073/비용 ₩78,713), 6/14 광고 CTR 1.2% (조회 6,426/웹방문 77/비용 ₩57,428) ## 📊 GA4 데이터 분석 (첫 분석) - 기간: 지난 28일(5/23~6/22) - 활성 사용자: 273명 / 세션: 471 - 유입 채널 순위: 인스타그램(142) > 네이버(92) > 구글(17) > 네이버광고(14) - 평균 세션 시간: 4분 30초 - 전환: 0건 (네이버 전환추적 승인 후 확인 가능) - 실시간: 1명 접속 (한국) ## 🖥️ 에이컷 메인 페이지 평가 - 강점: Hero 메시지 명확, 숏폼 롤링 UI 인상적, CTA 배치 좋음 - 개선 제안: H1에 구체적 수치 추가, \"무료로 시작하기\" 혜택 명시 ## 🎯 전략 결정 - **1순위 집중**: 인스타그램 릴스 (카드뉴스 → 영상 전환) - **2순위**: 네이버 검색 유입 극대화 (블로그 + 지식iN) - **3순위**: 전환추적 승인 후 데이터 기반 최적화 - **릴스 24시간 데이",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.1253768503665924,
+      "maxScore": 0.39943078756332395,
+      "firstRecalledAt": "2026-07-09T23:24:14.854Z",
+      "lastRecalledAt": "2026-07-13T01:00:40.095Z",
+      "queryHashes": [
+        "5630b61da21b",
+        "b13adeb890d9",
+        "d2be98757a94"
+      ],
+      "recallDays": [
+        "2026-07-10",
+        "2026-07-12",
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "6/23",
+        "원/3일",
+        "53.7",
+        "998/웹방문",
+        "073/비용",
+        "6/14",
+        "1.2",
+        "426/웹방문"
+      ]
+    },
+    "memory:memory/2026-07-01.md:16:43": {
+      "key": "memory:memory/2026-07-01.md:16:43",
+      "path": "memory/2026-07-01.md",
+      "startLine": 16,
+      "endLine": 43,
+      "source": "memory",
+      "snippet": "- **효율 판단:** 발행 24시간 미만, 아직 검색 노출 전. 2주 후 평가 필요 ## 네이버 광고 현황 (6/30 기준) - 노출: 6,622회 (6/10 617→6,622, +5,845) - 클릭: 16회 (6/10 9→16, +7) - CTR: 0.24% (6/10 1.46%→0.24%, **급감**) - CPC: 995원 (875→995, 상승) - 총비용: 15,913원 - 비즈머니: 85,373원 - 하루예산: 30,000원 - **진단:** 노출은 늘었지만 CTR이 업계 평균(0.5~1.5%)의 1/3 수준, 광고 소재 개선 + 키워드 정밀 진단 필요 ## 라이브커머스 블로그 포스팅 (오늘 작업) - **제목:** C-커머스 시대, 라이브 다시보기 편집 하나로 전환율 2.1% 올린 쇼핑몰의 비결 - **이미지 5장:** main(700×700) + card1~3(600×338) + cta(600×338) - **본문:** 21개 컴포넌트 (H2 7개, Strong 11개, CTA 3종) - **해시태그:** 30개 - **상태:** 제목·본문·이미지·해시태그 모두 입력됨, 발행만 남음 ## 🔧 SE4 에디터 자동화 중요 발견 ### \"작성중인 글이 있습니다\" 팝업 처리 - **HTML 커스텀 모달** (브라우저 네이티브 dialog 아님) - \"취소\" 버튼: `<SPAN class=\"se-cover-butto",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7519270479679108,
+      "maxScore": 0.3838223487138748,
+      "firstRecalledAt": "2026-07-09T23:24:14.854Z",
+      "lastRecalledAt": "2026-07-12T00:14:50.009Z",
+      "queryHashes": [
+        "5630b61da21b",
+        "3774b858dacd"
+      ],
+      "recallDays": [
+        "2026-07-10",
+        "2026-07-12"
+      ],
+      "conceptTags": [
+        "6/30",
+        "6/10",
+        "0.24",
+        "1.46",
+        "0.5",
+        "1.5",
+        "1/3",
+        "c-커머스"
+      ]
+    },
+    "memory:memory/2026-07-03.md:1:22": {
+      "key": "memory:memory/2026-07-03.md:1:22",
+      "path": "memory/2026-07-03.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-07-03 (금) Daily Log ## 주요 작업 ### 📊 마케팅 통합 분석 (11:52~16:57) - **GA4**: 28일 데이터 분석 (활성사용자 296명, 세션 471회, 전월比 +335%) - **네이버 파워링크**: 7일 노출 2,977회(+4.8배↑), 클릭 30회(+3.3배↑), CTR 1.01% - **네이버 블로그 통계**: admin.blog.naver.com 접속 확인, 일일 트래픽 약 16회 - **UTM 캠페인**: ig 147세션(1위), naver 62세션 - **전환 추적 미작동** 확인 (GA4+네이버 둘 다 미설치) ### 🔌 PD 충전기 검색 (17:12~17:30, 중단됨) - Victus 15-fa2710TX: 정품 19.5V 7.7A 150W, 커넥터 4.5mm×3.0mm HP 스마트핀 - USB-C PD 충전 미지원 → DC 배럴 PD 트리거 필요 - 추천: 아트뮤 GX410 150W(82,700원) + 노트킹 D-8 4.5mm 변환젠더(3,900원) - **Victus 호환 리뷰 있는 제품 발견 실패** (게이밍 노트북 PD 충전 후기 희소) ### 📝 블로그 2개 포스팅 작성 (18:42~23:30+) - **블로키(Blokey) 키워드 분석** 활용: 실시간 트렌드(주말 장맛비), 황금키워드 - **레퍼런스**: https://blog.naver.com/ai",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.3701839357614517,
+      "maxScore": 0.3701839357614517,
+      "firstRecalledAt": "2026-07-12T00:14:50.009Z",
+      "lastRecalledAt": "2026-07-12T00:14:50.009Z",
+      "queryHashes": [
+        "3774b858dacd"
+      ],
+      "recallDays": [
+        "2026-07-12"
+      ],
+      "conceptTags": [
+        "4.8배",
+        "3.3배",
+        "1.01",
+        "admin.blog.naver.com",
+        "15-fa2710tx",
+        "19.5v",
+        "7.7a",
+        "4.5mm"
+      ]
+    },
+    "memory:memory/2026-06-23.md:1:24": {
+      "key": "memory:memory/2026-06-23.md:1:24",
+      "path": "memory/2026-06-23.md",
+      "startLine": 1,
+      "endLine": 24,
+      "source": "memory",
+      "snippet": "# 2026-06-23 Daily Log ## 📊 네이버 광고 - **입찰가 인상 완료**: 기본 입찰가 2,500원 → **3,500원** (6/23 10:58) - 비즈머니: 64,294원 (유상) - 전환추적: 6/15 신청, 8일째 \"신청중\" → 6/23 클로드 통해 aicut.co.kr에 네이버 전환 스크립트 설치 완료 (공통키: s_125a17e255b8, wcs.inflow() 포함, CTA 클릭 전환 이벤트 연동까지 완료) - 설치 확인됨 (GA4 G-D141VGTF79 정상 유지, wcslog.js 로드 확인) - 예상: 1~2일 내 \"신청중\" → \"운영중\" 변경 ## 📝 블로그 포스팅 (2편 작성, 3개 주제) ### 1. \"하반기 마케팅, 지금 영상 편집 외주사를 정해야 하는 이유\" - 이미지 생성 완료 (700x700 대표 + 800x450 4장) - 추후 light_cyan/light_pink 이미지 → dark 테마로 재생성 (글자 가독성 문제) - 저장 완료, 발행 대기 중 ### 2. \"출근길 30분, 바쁜 대표가 영상 마케팅으로 하루를 시작하는 법\" - 이미지 5장 생성 완료 - 저장 완료, 발행 대기 중 - 대표 이미지 폰트 34px→46px 재생성 (톤 통일) ## 📱 인스타그램 - **신규 릴스 업로드 완료** (6/23, DZ6a5byNHfd): 숏폼 콘텐츠 아웃소싱 홍보 - **릴",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.7439633101224898,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-12T00:19:06.039Z",
+      "lastRecalledAt": "2026-07-18T14:21:59.498Z",
+      "queryHashes": [
+        "b13adeb890d9",
+        "d2be98757a94",
+        "871fede21a1c"
+      ],
+      "recallDays": [
+        "2026-07-12",
+        "2026-07-13",
+        "2026-07-18"
+      ],
+      "conceptTags": [
+        "6/23",
+        "6/15",
+        "aicut.co.kr에",
+        "s-125a17e255b8",
+        "wcs.inflow",
+        "g-d141vgtf79",
+        "wcslog.js",
+        "light-cyan/light-pink"
+      ]
+    },
+    "memory:memory/2026-06-25.md:1:26": {
+      "key": "memory:memory/2026-06-25.md:1:26",
+      "path": "memory/2026-06-25.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-06-25 (목) 작업 로그 ## 🔬 SE4 1.77.0 텍스트 입력 방식 확정 ### 문제 - SE4 1.77.0 업데이트로 클립보드 paste(Ctrl+V)가 텍스트 입력에서 React에 차단됨 - `keyboard.type()` → React 무시 - `execCommand('insertText')` → contenteditable이 화면 밖(x:-9999)에 있어 DOM만 변경, SE4 데이터 레이어 미반영 - `ClipboardEvent` dispatch → 보안 제약으로 실제 데이터 미포함 ### 해결: `SmartEditor._editors['blogpc001']._editingService.write(text)` - **이게 유일하게 정상 동작하는 SE4 공식 입력 API** - 사람이 직접 타이핑하는 것과 동일한 경로로 SE4 데이터 레이어에 전달됨 - `writeTextWithSoftLineBreak(text)`로 \\n 단위 문단 입력 가능 - `lineBreak()`로 줄바꿈 가능 ### 핵심: 호출 순서 1. `resetDocumentData()` — 에디터 초기화 2. `setDocumentTitle('제목')` — 제목 설정 3. **`focusToFirstComp()`** ← 반드시 먼저 호출 (이거 안 하면 write()에서 `getText` undefined 오류) 4. `write",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.374238246679306,
+      "maxScore": 0.374238246679306,
+      "firstRecalledAt": "2026-07-13T01:28:50.148Z",
+      "lastRecalledAt": "2026-07-13T01:28:50.148Z",
+      "queryHashes": [
+        "0f3dd875775a"
+      ],
+      "recallDays": [
+        "2026-07-13"
+      ],
+      "conceptTags": [
+        "1.77.0",
+        "keyboard.type",
+        "editingservice.write",
+        "작업",
+        "로그",
+        "se4",
+        "텍스트",
+        "입력"
+      ]
+    },
+    "memory:memory/2026-05-23.md:1:25": {
+      "key": "memory:memory/2026-05-23.md:1:25",
+      "path": "memory/2026-05-23.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-05-23 (토) ## 첫 가동 - Telegram 다이렉트로 첫 접속, Paul Jung (7923113638) - 부트스트랩 미완료 상태에서 운영 규칙부터 수립 - 이름·정체성·SOUL 아직 미정 — Paul이 정책 세팅 우선 ## 정책 수립 (RULES.md 생성) 1. **호출 정책**: @정팀장(기본) / @전략 / @마팀장 / @콘텐츠 / @비서 / @전문 2. **언어·톤**: 한국어, 존댓말, 직설, 영어 용어 괄호 병기 3. **응답 형식**: 단순=3줄, 전략=표·bullet, 코드=블록 4. **완결성**: 중간 확인 없이 끝까지 완료 후 보고 5. **품질**: [사실]/[추정] 분리, 근거 없는 수치 금지, 면책 발언 금지 ## TODO - ~~역할별 세부 지침(@전략, @마팀장 등) 받기 → ROLES.md~~ ✅ 완료 (6개 역할 전부 정의) - IDENTITY.md, SOUL.md, USER.md 채우기 (Paul이 시간 될 때) - BOOTSTRAP.md 삭제 (정체성 확정 후) ## 사업 맥락 (정책에서 추출) - **업종**: 상조 + 에이컷 플랫폼 - **시장**: 한국 + 베트남 (현지 법인 운영 추정) - **콘텐츠**: 유튜브 롤폼 + 숯폼 + CF/브랜딩 + VFX - **가족**: 여행·자녀 교육 일정 @비서 담당",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-18T00:02:46.431Z",
+      "lastRecalledAt": "2026-07-18T00:02:46.431Z",
+      "queryHashes": [
+        "2132079496b0"
+      ],
+      "recallDays": [
+        "2026-07-18"
+      ],
+      "conceptTags": [
+        "rules.md",
+        "roles.md",
+        "identity.md",
+        "soul.md",
+        "user.md",
+        "bootstrap.md",
+        "cf/브랜딩",
+        "가동"
+      ]
+    },
+    "memory:memory/2026-06-02.md:43:50": {
+      "key": "memory:memory/2026-06-02.md:43:50",
+      "path": "memory/2026-06-02.md",
+      "startLine": 43,
+      "endLine": 50,
+      "source": "memory",
+      "snippet": "→ 정이사님이 CDP 모드로 Chrome 실행 중일 때만 브라우저 자동화 가능 ## 내일 체크 사항 - 14:00/14:30 크론 타임아웃 수정 후 첫 실행 결과 확인 - 네이버 광고 비즈머니 잔액 83,588원 → 충전 필요 (긴급) - DA 캠페인 생성 (비즈채널 승인 후) - 블로그 부동산 포스팅 이미지 삽입 후 발행",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.6346525467200963,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-18T14:21:59.498Z",
+      "lastRecalledAt": "2026-07-18T22:03:52.267Z",
+      "queryHashes": [
+        "871fede21a1c",
+        "7462848d7f0e",
+        "c9b6b70da3f6"
+      ],
+      "recallDays": [
+        "2026-07-18",
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "00/14",
+        "정이사님이",
+        "cdp",
+        "모드로",
+        "chrome",
+        "실행",
+        "중일",
+        "때만"
+      ]
+    },
+    "memory:memory/2026-07-15.md:1:30": {
+      "key": "memory:memory/2026-07-15.md:1:30",
+      "path": "memory/2026-07-15.md",
+      "startLine": 1,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "# Memory — 2026-07-15 (수) ## 📊 GA4 전환 추적 세팅 - `generate_lead` 이벤트 등록 + 주요 이벤트(전환) 마킹 완료 - `purchase`도 전환 마킹 완료 - `cta_click`은 등록 실패 (input 미스) — generate_lead가 커버하므로 덜 시급 - GA4 측정 ID: G-D141VGTF79 - **중요:** 정이사님이 GA4 관리 > 이벤트 페이지에서 직접 이벤트 만들기 + 전환 마킹까지 완료 ## 🚨 네이버 블로그 SE4 에디터 자동화 교훈 (매우 중요!) ### ❌ 절대 금지 1. **execCommand('copy') + execCommand('paste')** → SE4가 무시함 + **저품질 유발** 2. **execCommand('insertHTML')** → 작동 안 함 3. **setDocumentData()만으로는 canvas 업데이트 안 됨** ### ✅ 유일하게 작동하는 방식 1. `SmartEditor._editors['blogpc001'].setDocumentTitle('제목')` — 제목 설정 2. `ed.getDocumentData()` → `data.document.blocks` 배열 직접 구성 3. 블록 구조: `{ type: 'heading2'|'heading3'|'paragraph', text: '내용', style: { text",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-18T15:07:37.544Z",
+      "lastRecalledAt": "2026-07-18T15:07:37.544Z",
+      "queryHashes": [
+        "4c9cf865f805"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "generate-lead",
+        "cta-click",
+        "generate-lead가",
+        "g-d141vgtf79",
+        "ed.getdocumentdata",
+        "data.document.blocks",
+        "ga4",
+        "전환"
+      ]
+    },
+    "memory:memory/2026-07-15.md:22:62": {
+      "key": "memory:memory/2026-07-15.md:22:62",
+      "path": "memory/2026-07-15.md",
+      "startLine": 22,
+      "endLine": 62,
+      "source": "memory",
+      "snippet": "5. **canvas.innerHTML 직접 업데이트 (필수!)** 6. 저장 버튼 클릭 ### Strong 키워드 적용 - `text` 필드에 `<strong>키워드</strong>` HTML 태그 직접 삽입 가능 - SE4가 HTML을 그대로 렌더링함 ### 이미지 업로드 - 자동화 시 canvas 상태 깨짐 위험 - 안전하게는 정이사님이 직접 \"사진 추가\" 버튼으로 업로드 ### CTA 링크 - SE4가 `<a>` 태그 필터링해서 제거 - blocks에 link/href 속성 추가해도 저장 시 무시됨 - 텍스트 URL로만 표시 가능 ### 데이터 구조 (SE4) ```javascript { document: { version: \"2.10.2\", blocks: [ { type: 'paragraph', text: '내용', style: { textAlign: 'center' } }, { type: 'heading2', text: '제목', style: { textAlign: 'center' } }, ] }, documentId: \"...\" } ``` ## 📝 블로그 작성 기록 ### 보험설계사 + 무더위 포스트 - **제목:** 무더위에 지친 보험설계사라면? 하반기 숏폼 마케팅으로 승부보세요 - **메인 키워드:** 무더위(5,360) + 숏폼마케팅(210) + 영상",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-18T22:03:39.960Z",
+      "lastRecalledAt": "2026-07-18T22:03:39.960Z",
+      "queryHashes": [
+        "7462848d7f0e"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "canvas.innerhtml",
+        "link/href",
+        "2.10.2",
+        "직접",
+        "업데이트",
+        "필수",
+        "저장",
+        "버튼"
+      ]
+    },
+    "memory:memory/2026-06-15.md:45:49": {
+      "key": "memory:memory/2026-06-15.md:45:49",
+      "path": "memory/2026-06-15.md",
+      "startLine": 45,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "- **IG DM 자동화: 완전 중단 확정** — 앞으로 진행하지 않음 (MEMORY.md에도 기록) - **블로그 이미지: HTML+CSS 자동화보다 Canva 템플릿 기반이 더 안정적** - 네이버 Ads 새 UI(ads.naver.com)는 전환추적 메뉴 위치가 변경됨 - 블로그 이미지 톤앤매너: aicut.co.kr 분석 기반 (퍼플#5c3de8/네이비#1a1a2e/아이보리#f9fafb, Noto Sans KR, DM Mono)",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6341683417988658,
+      "maxScore": 0.6341683417988658,
+      "firstRecalledAt": "2026-07-18T22:03:52.267Z",
+      "lastRecalledAt": "2026-07-18T22:03:52.267Z",
+      "queryHashes": [
+        "c9b6b70da3f6"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "memory.md에도",
+        "ads.naver.com",
+        "aicut.co.kr",
+        "5c3de8/네이비",
+        "1a1a2e/아이보리",
+        "자동화",
+        "완전",
+        "중단"
+      ]
+    },
+    "memory:memory/2026-06-24.md:53:69": {
+      "key": "memory:memory/2026-06-24.md:53:69",
+      "path": "memory/2026-06-24.md",
+      "startLine": 53,
+      "endLine": 69,
+      "source": "memory",
+      "snippet": "- **해결:** 페이지 로드 시 `#content` 밖의 section들을 `#content` 안으로 이동시키는 JS 코드 추가 - **2차 조치:** `.main overflow:hidden`, `.page position:relative`, `.page.active z-index:1` 추가 - **블로그 내용 복원:** 실제 발행 데이터(10건) 반영되도록 수정 ## 📸 인스타그램 실제 데이터 업데이트 - DataStore에 인스타 데이터 저장: views=6426, likes=4, comments=1, followers=45, posts=12 - 대시보드 블로그 데이터 blogStore에 11건 저장 - 네이버 광고/GA4는 로그인 필요 → 정이사님 요청 대기 ## 🗑️ 정리한 임시 스크립트 - analyze_admin.js ~ analyze_admin5.js (CDP 분석용, 5개) - check_pages.js, check_dashboard.js, check_cross.js (페이지 점검) - update_dash_data.js, update_blog.js, update_blog_v2.js (데이터 업데이트) - add_meetings.js, add_meetings_v2.js (회의록) - verify_blog.js, verify_blog2.js, verify_final.js (검증) - test_layout_fix",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.6323269725396107,
+      "maxScore": 0.6323269725396107,
+      "firstRecalledAt": "2026-07-18T22:03:52.267Z",
+      "lastRecalledAt": "2026-07-18T22:03:52.267Z",
+      "queryHashes": [
+        "c9b6b70da3f6"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "page.active",
+        "z-index",
+        "광고/ga4는",
+        "analyze-admin.js",
+        "analyze-admin5.js",
+        "check-pages.js",
+        "check-dashboard.js",
+        "check-cross.js"
+      ]
+    },
+    "memory:memory/2026-06-12.md:18:27": {
+      "key": "memory:memory/2026-06-12.md:18:27",
+      "path": "memory/2026-06-12.md",
+      "startLine": 18,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "- ✅ 호스팅케이알 DNS 레코드 수정: GitHub IP 4개 삭제, Firebase A 레코드 + TXT 인증 추가 - ✅ 네이버 서치어드바이저: 수집 요청 완료 - ❌ 호스팅케이알 SPA 자동화: 매우 어려움 (MUI React 기반, 여러 번 시도했으나 삭제/저장이 안정적으로 안 됨) - 정이사님이 개발사에서 고객사 내부 시스템 데이터 테이블 초기 세팅 중 (화신기계상사 ERP) - Visily 툴 사용하여 기존 시스템 이미지 기반 데이터 테이블 설계 중 ## 첫 고객 문의 🎉 - 인테리어 업계, 유튜브 채널 운영 + 촬영 + 편집 패키지 문의 - 정이사님께 견적 제안 전달 (촬영 1인 출장 포함 월 110~260만원)",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-18T23:50:20.277Z",
+      "lastRecalledAt": "2026-07-18T23:50:20.277Z",
+      "queryHashes": [
+        "f01dcf49ce36"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "삭제/저장이",
+        "호스팅케이알",
+        "dns",
+        "레코드",
+        "수정",
+        "github",
+        "삭제",
+        "firebase"
+      ]
+    },
+    "memory:memory/2026-06-22.md:54:74": {
+      "key": "memory:memory/2026-06-22.md:54:74",
+      "path": "memory/2026-06-22.md",
+      "startLine": 54,
+      "endLine": 74,
+      "source": "memory",
+      "snippet": "### 크롬 149 remote debugging 제한 - `--remote-debugging-port` 사용 시 **기본 프로필 차단** - 오류: \"DevTools remote debugging requires a non-default data directory\" - 해결: 새 임시 프로필(--user-data-dir=새폴더) 필요 → 네이버 로그인 안 됨 ### 사용한 크롬 인스턴스 1. **9222포트** (chrome_debug_9222) — 오전에 실행, 네이버 미로그인 2. **9223포트** (playwright_chromiumdev_profile) — 네이버 로그인 OK, 광고센터+블로그 작업 ✅ - `browser.close()` 호출 시 모든 탭 닫힘 + 데이터 소실 3. **9224포트** (chrome_normal_profile) — 실행 성공했으나 정이사님 직접 사용 결정 ### 브라우저 종료 문제 - `chromium.connectOverCDP()` 후 `browser.close()` → CDP 연결만 끊는 게 아니라 **모든 탭 + DevTools 종료** - 해결: `browser.disconnect()` 사용 시 연결만 종료되고 브라우저 유지됨 (이번에 깨달음) ## 운영 원칙 (신규/재확인) - **시크릿 모드 절대 사용 금지** (2026-06-22 강조) — 모든 브라우저는 일반 모",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-07-18T23:50:20.277Z",
+      "lastRecalledAt": "2026-07-18T23:50:20.277Z",
+      "queryHashes": [
+        "f01dcf49ce36"
+      ],
+      "recallDays": [
+        "2026-07-19"
+      ],
+      "conceptTags": [
+        "remote-debugging-port",
+        "non-default",
+        "user-data-dir",
+        "chrome-debug-9222",
+        "playwright-chromiumdev-profile",
+        "browser.close",
+        "chrome-normal-profile",
+        "chromium.connectovercdp"
       ]
     }
   }

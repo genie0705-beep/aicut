@@ -1,47 +1,42 @@
 const { chromium } = require('playwright');
+const CDP_PORT = 9224;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
 (async () => {
-  const browser = await chromium.connectOverCDP('http://127.0.0.1:9224');
-  const ctx = browser.contexts()[0];
-  let page = ctx.pages().find(x => x.url().includes('memorial_admin_logs'));
-  if (!page) {
-    page = await ctx.newPage();
-    await page.goto('file:///C:/Users/paul/.openclaw/workspace/memorial_admin_logs.html');
+  const b = await chromium.connectOverCDP('http://127.0.0.1:' + CDP_PORT);
+  const ctx = b.contexts()[0];
+
+  let idx = 0;
+  for (const p of ctx.pages()) {
+    const f = p.frames().find(ff => ff.url().includes('PostWriteForm'));
+    if (!f) continue;
+
+    await p.bringToFront();
+    await sleep(2000);
+
+    const state = await f.evaluate(() => {
+      const ed = SmartEditor._editors?.blogpc001;
+      if (!ed?._documentService) return {error: 'no service'};
+      try {
+        const data = ed._documentService.getDocumentData();
+        const jsonStr = JSON.stringify(data);
+        const title = ed._documentService.getDocumentTitle();
+        return {
+          title: title?.substring(0, 50),
+          bodyLen: jsonStr.length,
+          hasContent: jsonStr.length > 500,
+          components: data?.document?.components?.length || 0
+        };
+      } catch(e) { return {error: e.message}; }
+    });
+
+    const names = ['⚾ 프로야구', '🌧 장맛비'];
+    console.log(`${names[idx] || '?'}:`);
+    console.log(`  제목: ${state.title || '(없음)'}${state.title ? ' ✅' : ' ❌'}`);
+    console.log(`  본문: ${state.hasContent ? '✅ ' + (state.bodyLen/1024).toFixed(0) + 'KB' : '❌ 비어있음'}`);
+    console.log(`  구성요소: ${state.components}개`);
+    idx++;
   }
-  
-  await page.evaluate(() => {
-    localStorage.setItem('chungsol_accounts', JSON.stringify([{ id: 'admin', name: '김민수', pw: '1234', type: 'master' }]));
-    localStorage.setItem('chungsol_session', JSON.stringify({ id: 'admin', name: '김민수', type: 'master' }));
-  });
-  await page.reload();
-  await page.waitForTimeout(2000);
-  
-  const tests = ['dashboard', 'fees', 'staff', 'settings', 'contracts'];
-  const results = [];
-  for (const pg of tests) {
-    await page.evaluate(function(pg) {
-      var btn = document.querySelector('.nav-item[data-page="' + pg + '"]');
-      if (btn) btn.click();
-    }, pg);
-    await page.waitForTimeout(300);
-    var r = await page.evaluate(function(pg) {
-      var s = document.querySelector('.page[data-page="' + pg + '"]');
-      if (!s) return { page: pg, error: 'no section' };
-      var rect = s.getBoundingClientRect();
-      return {
-        page: pg,
-        active: s.classList.contains('active'),
-        width: Math.round(rect.width),
-        left: Math.round(rect.left),
-        visible: rect.left < window.innerWidth && rect.right > 0
-      };
-    }, pg);
-    results.push(r);
-  }
-  results.forEach(r => console.log(JSON.stringify(r)));
-  
-  var allOK = results.every(r => r.visible && r.active);
-  console.log(allOK ? '✅ ALL PAGES VISIBLE!' : '❌ SOME ISSUES');
-  
-  await page.screenshot({ path: 'logs_fixed_final.png', fullPage: true });
-  console.log('Screenshot saved');
-})();
+
+  b.close();
+})().catch(e => console.log('ERR:', e.message.substring(0, 60)));

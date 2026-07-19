@@ -1,81 +1,126 @@
 const { chromium } = require('playwright');
-async function run() {
-  const b = await chromium.connectOverCDP('http://127.0.0.1:9224');
-  const ctx = b.contexts()[0];
-  let page = null;
-  for (const p of ctx.pages()) {
-    if (p.url().includes('PostWriteForm')) { page = p; break; }
-  }
-  if (!page) { console.log('❌ 에디터 탭 없음'); return; }
+const path = require('path');
 
-  const imgDir = 'C:/Users/paul/.openclaw/workspace';
-  const imgs = [
-    'aicut_blog_live_thumb.png',
-    'aicut_blog_live_problem.png',
-    'aicut_blog_live_solution.png',
-    'aicut_blog_live_compare.png',
-    'aicut_blog_live_cta.png'
+(async () => {
+  const browser = await chromium.connectOverCDP('http://127.0.0.1:9224');
+  const context = browser.contexts()[0];
+  let page = context.pages().find(p => p.url().includes('PostWriteForm'));
+  if (!page) {
+    page = await context.newPage();
+    await page.goto('https://blog.naver.com/PostWriteForm.naver?blogId=aicut', { waitUntil: 'domcontentloaded', timeout: 20000 });
+    await page.waitForTimeout(3000);
+  }
+  
+  // Get list of image files
+  const imageDir = __dirname;
+  const imageFiles = [
+    path.join(imageDir, 'aicut_blog_realestate_main.png'),
+    path.join(imageDir, 'aicut_blog_realestate_card1.png'),
+    path.join(imageDir, 'aicut_blog_realestate_card2.png'),
+    path.join(imageDir, 'aicut_blog_realestate_card3.png'),
+    path.join(imageDir, 'aicut_blog_realestate_cta.png'),
   ];
-
-  let successCount = 0;
-
-  for (let i = 0; i < imgs.length; i++) {
-    console.log(`\n[${i+1}/${imgs.length}] ${imgs[i]}`);
-
-    // 사진 버튼 클릭
-    await page.bringToFront();
-    const btnResult = await page.evaluate(() => {
-      const btns = document.querySelectorAll('button');
-      for (const btn of btns) {
-        const t = btn.textContent.trim();
-        if (t === '사진' || t === '사진 추가') { btn.click(); return true; }
-      }
-      return false;
-    });
-    console.log('  사진 버튼:', btnResult ? '✅' : '❌');
-    await new Promise(r => setTimeout(r, 2000));
-
-    // file input 찾기
-    const fi = await page.$('input[type="file"]');
-    if (fi) {
-      await fi.setInputFiles(imgDir + '/' + imgs[i]);
-      console.log('  ✅ 파일 업로드 성공');
-      await new Promise(r => setTimeout(r, 3000));
-      successCount++;
-    } else {
-      // MYBOX가 열렸을 수 있음 - ESC로 닫기
-      console.log('  ❌ file input 없음 (MYBOX)');
-      await page.keyboard.press('Escape');
-      await new Promise(r => setTimeout(r, 1000));
-      break;
+  
+  // Try to find image upload button and trigger file chooser
+  // SE4 has a dedicated image upload button in the toolbar
+  const btnFound = await page.evaluate(() => {
+    // Look for image-related buttons in the toolbar
+    const selectors = [
+      'button[title*="사진"]',
+      'button[title*="이미지"]',
+      'button[title*="Picture"]',
+      'button[title*="Image"]',
+      '.se-toolbar button:has(svg)',
+      '.editor_toolbar button',
+      'button._photoBtn',
+    ];
+    
+    for (const sel of selectors) {
+      try {
+        const el = document.querySelector(sel);
+        if (el) return 'found: ' + sel;
+      } catch(e) {}
     }
-  }
-
-  // 저장
-  await page.evaluate(() => {
-    const btns = document.querySelectorAll('button');
-    for (const btn of btns) if (btn.textContent.trim() === '저장') { btn.click(); return; }
+    
+    // Scan all toolbar buttons
+    const toolbars = document.querySelectorAll('.se-toolbar, .smart_editor_toolbar, .editor_toolbar, [class*="toolbar"]');
+    let foundBtns = [];
+    toolbars.forEach(tb => {
+      const btns = tb.querySelectorAll('button, a, span[role="button"]');
+      btns.forEach(b => {
+        const title = (b.getAttribute('title') || '').toLowerCase();
+        const text = (b.innerText || '').toLowerCase();
+        const cls = (b.className || '').toLowerCase();
+        if (title.includes('사진') || title.includes('이미지') || title.includes('그림') ||
+            text.includes('사진') || text.includes('이미지') || text.includes('그림') ||
+            cls.includes('photo') || cls.includes('image') || cls.includes('picture') ||
+            b.querySelector('svg[class*="photo"], svg[class*="image"], [class*="icon-photo"], [class*="icon-image"]')) {
+          foundBtns.push({ title: b.getAttribute('title'), text: b.innerText.slice(0, 10), cls: b.className.slice(0, 30) });
+        }
+      });
+    });
+    
+    if (foundBtns.length > 0) return 'found buttons: ' + JSON.stringify(foundBtns);
+    return 'no image buttons found';
   });
-  await new Promise(r => setTimeout(r, 3000));
-
-  // 이미지 component 확인
-  const verify = await page.evaluate(() => {
-    const editor = window.SmartEditor?._editors?.['blogpc001'];
-    if (!editor) return 'n/a';
-    const data = editor.getDocumentData();
-    let imgCount = 0, textLen = 0;
-    for (const c of data.document.components) {
-      if (c['@ctype'] === 'image') imgCount++;
-      if (c['@ctype'] === 'text') {
-        for (const p of (c.value || [])) {
-          for (const n of (p.nodes || [])) textLen += (n.value || '').length;
+  console.log('Image button search:', btnFound);
+  
+  // Try clicking any image-related toolbar button and capture file chooser
+  const [fileChooser] = await Promise.all([
+    page.waitForEvent('filechooser', { timeout: 8000 }).catch(() => null),
+    page.evaluate(() => {
+      // Scan all buttons comprehensively
+      const all = document.querySelectorAll('button, a, [role="button"], span[onclick]');
+      for (const el of all) {
+        const html = el.outerHTML.toLowerCase();
+        if (html.includes('사진') || html.includes('이미지') || html.includes('photo') || html.includes('image')) {
+          if (el.tagName === 'SPAN' || el.tagName === 'A') {
+            el.click();
+            return 'clicked via text match: ' + el.tagName;
+          }
+          el.click();
+          return 'clicked: ' + el.tagName;
         }
       }
+      // Try clicking directly on toolbar spans
+      const spans = document.querySelectorAll('.se-toolbar span');
+      for (const s of spans) {
+        if (s.getAttribute('title')?.includes('사진') || s.innerText.includes('사진')) {
+          s.click();
+          return 'clicked toolbar span';
+        }
+      }
+      return 'nothing clicked';
+    })
+  ]);
+  
+  console.log('File chooser captured:', !!fileChooser);
+  
+  if (fileChooser) {
+    await fileChooser.setFiles(imageFiles);
+    console.log('✅ Images uploaded via file chooser');
+    await page.waitForTimeout(5000);
+  } else {
+    console.log('⚠️ File chooser not captured - images will need manual upload');
+  }
+  
+  // === Find and click Save button ===
+  const saveResult = await page.evaluate(() => {
+    // Look for save button
+    const btns = document.querySelectorAll('button, a, [role="button"]');
+    for (const b of btns) {
+      const text = b.innerText.trim();
+      if (text === '저장' || text === '임시저장' || text.includes('저장')) {
+        b.click();
+        return 'clicked: ' + text;
+      }
     }
-    return { images: imgCount, textLen };
+    return 'save button not found';
   });
-  console.log(`\n✅ ${successCount}/${imgs.length}개 등록`);
-  console.log('최종:', JSON.stringify(verify));
-  process.exit(0);
-}
-run().catch(e => { console.error('❌', e.message); process.exit(1); });
+  console.log('Save:', saveResult);
+  await page.waitForTimeout(2000);
+  
+  await page.screenshot({ path: 'blog_saved_state.png', fullPage: false });
+  console.log('Screenshot saved');
+  console.log('\n✅ Blog post process complete!');
+})();

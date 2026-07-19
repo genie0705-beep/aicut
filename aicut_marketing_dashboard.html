@@ -285,6 +285,11 @@
   .badge-red{background:var(--red-100); color:var(--red-600);}
   .badge-blue{background:var(--blue-100); color:var(--blue-600);}
   .badge-purple{background:var(--purple-100); color:var(--purple-700);}
+  .badge-warm{background:#FDFAF2;color:#8b7355;border:1px solid #E8E0D0;}
+  .badge-cyan{background:#E8ECF5;color:#0891b2;border:1px solid #D0DCE8;}
+  .badge-light{background:#EEEBFF;color:var(--purple-700);}
+  .badge-green{background:#D1FAE5;color:#059669;}
+  .blog-std-body.collapsed{display:none !important;}
 
   .btn{
     display:inline-flex; align-items:center; gap:5px;
@@ -763,6 +768,18 @@
     main#content{padding:14px;}
     .form-row-sm,.form-row-3{grid-template-columns:1fr;}
   }
+
+            
+
+  [data-collapsible] .card-title { cursor:pointer; user-select:none; }
+  [data-collapsible] .card-title + * { display:none; }
+  [data-collapsible].open .card-title + * { display:block; }
+
+  #blog-pipeline-list .pipeline-card { font-size:11px; padding:8px 10px !important; }
+  #blog-pipeline-list .pipeline-card .step-flow { margin-bottom:4px !important; }
+  #blog-pipeline-list .pipeline-card .step-circle { width:20px; height:20px; font-size:10px; }
+  #blog-pipeline-list .pipeline-card .step-label { font-size:8px; }
+  #blog-pipeline-list .pipeline-card select { font-size:10px !important; padding:4px 6px !important; }
 </style>
 </head>
 <body>
@@ -1108,796 +1125,211 @@
       </section>
 
       <!-- ============= BLOG ============= -->
-      <section class="page" data-page="blog">
-        <div class="section-head"><h2 class="card-title">📝 네이버 블로그 한눈보기</h2></div>
+      <section class="page" data-page="blog" style="padding:0;">
 
+  <!-- KPI -->
+  <div class="kpi-row" 
+  <!-- 블로그 작성 가이드 (편집 가능) -->
+  <div class="card" style="margin:0 24px 14px;">
+    <div class="card-title" style="font-size:12px;padding:8px 10px;">
+      📝 블로그 작성 가이드
+      <span class="card-sub">클릭하여 수정 · 저장 가능</span>
+      <button class="btn btn-xs" id="guide-save-btn" style="margin-left:auto;" onclick="saveBlogGuide()">💾 저장</button>
+      <button class="btn btn-xs" id="guide-reset-btn" style="margin-left:4px;" onclick="resetBlogGuide()">↺ 초기화</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:4px 0;">
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">🖼️ 이미지 규격</label>
+        <input id="guide-img-size" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="700x700 / 800x450" />
+      </div>
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">📁 파일명 규칙</label>
+        <input id="guide-file-prefix" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="aicut_ prefix" />
+      </div>
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">🔤 폰트</label>
+        <input id="guide-font" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="Noto Sans KR" />
+      </div>
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">✏️ 글 스타일</label>
+        <input id="guide-writing-style" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="짧은 문장 · 평서체" />
+      </div>
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">📐 정렬</label>
+        <input id="guide-align" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="센터 정렬" />
+      </div>
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">🔍 SEO 키워드 위치</label>
+        <input id="guide-seo-position" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="제목 앞쪽" />
+      </div>
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">🏷️ 해시태그 수</label>
+        <input id="guide-hashtag-count" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="30개" />
+      </div>
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">📞 CTA 포함</label>
+        <input id="guide-cta" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="카톡/이메일/홈페이지" />
+      </div>
+      <div>
+        <label style="font-size:9px;color:#7B8299;font-weight:600;">📏 본문 길이</label>
+        <input id="guide-content-length" style="width:100%;padding:4px 6px;border:1px solid #E8EBF0;border-radius:4px;font-size:10px;box-sizing:border-box;" placeholder="1000~3000자" />
+      </div>
+    </div>
+  </div>
+  
+  <!-- 블로그 작성 표준 (2026-06-28 확정) -->
+  <div class="card" style="margin:0 24px 14px;">
+    <div class="card-title" style="font-size:12px;padding:8px 10px;">
+      📋 블로그 작성 표준
+      <span class="badge badge-purple" style="margin-left:6px;font-size:8px;">v2.0 · 2026-06-28</span>
+      <span class="card-sub">이미지 템플릿 · 등록 순서 · SEO · 모바일</span>
+      <button class="btn btn-xs" style="margin-left:auto;" onclick="document.querySelector('.blog-std-body').classList.toggle('collapsed');this.textContent=this.textContent==='접기'?'펼치기':'접기'">접기</button>
+    </div>
+    <div class="blog-std-body" style="padding:0;">
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:12px;padding:6px 0;">
+      
+      <!-- === LEFT: 이미지 템플릿 === -->
+      <div>
+        <div style="font-size:10px;font-weight:700;color:var(--purple-700);margin-bottom:6px;padding:0 4px;">🎨 이미지 템플릿 4종</div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <tr>
+            <th style="text-align:left;padding:4px 6px;background:var(--purple-100);color:var(--purple-700);font-weight:700;border-radius:4px 0 0 0;">템플릿</th>
+            <th style="text-align:center;padding:4px 6px;background:var(--purple-100);color:var(--purple-700);font-weight:700;">크기</th>
+            <th style="text-align:center;padding:4px 6px;background:var(--purple-100);color:var(--purple-700);font-weight:700;">테마</th>
+            <th style="text-align:center;padding:4px 6px;background:var(--purple-100);color:var(--purple-700);font-weight:700;border-radius:0 4px 0 0;">폰트</th>
+          </tr>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid var(--border);"><span class="badge badge-purple">main</span> 대표</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;font-weight:600;">700×700</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;">dark_purple</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;color:var(--text-muted);">42/18px</td></tr>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid var(--border);"><span class="badge badge-warm">card</span> 본문</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;font-weight:600;">800×450</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;">light_warm</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;color:var(--text-muted);">42/18px</td></tr>
+          <tr><td style="padding:4px 6px;border-bottom:1px solid var(--border);"><span class="badge badge-purple">cardDark</span> 본문</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;font-weight:600;">800×450</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;">dark_purple</td><td style="padding:4px 6px;border-bottom:1px solid var(--border);text-align:center;color:var(--text-muted);">42/18px</td></tr>
+          <tr><td style="padding:4px 6px;"><span class="badge badge-green">ctaCard</span> CTA</td><td style="padding:4px 6px;text-align:center;font-weight:600;">800×450</td><td style="padding:4px 6px;text-align:center;">dark_green</td><td style="padding:4px 6px;text-align:center;color:var(--text-muted);">42/18px</td></tr>
+        </table>
+        <div style="margin-top:6px;font-size:8px;color:var(--text-light);line-height:1.6;padding:0 4px;">
+          레이아웃: body→card div 고정 · padding 60px · flex center · Noto Sans KR<br>
+          배지: {accent} solid · main 42px 900 · sub 18px · CTA grad accent→#7c3aed pill
+        </div>
+      </div>
+      
+      <!-- === RIGHT: 순서 + SEO + 모바일 === -->
+      <div style="display:flex;flex-direction:column;gap:8px;">
         
-        <!-- 실행 버튼 -->
-        <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
-          <button class="btn btn-sm" style="background:var(--green-600);color:#fff;border:none;" onclick="quickRunTask('task_012','블로그 포스팅 작성')"><i class="ti ti-player-play"></i> 블로그 포스팅 작성</button>
-          <button class="btn btn-sm" style="background:var(--blue-600);color:#fff;border:none;" onclick="quickRunTask('task_013','블로그 이미지 생성')"><i class="ti ti-player-play"></i> 블로그 이미지 생성</button>
-        </div>
-
-        <!-- KPI Row -->
-        <div class="kpi-row" id="blog-kpis">
-          <div class="kpi-card">
-            <div class="kpi-head">
-              <div class="kpi-icon" style="background:var(--purple-100);color:var(--purple-700);"><i class="ti ti-article"></i></div>
-              <div>
-                <div class="kpi-label">총 발행</div>
-                <div class="kpi-value" id="blog-kpi-total">10</div>
-                <div class="kpi-sub">전체 포스팅</div>
-              </div>
-            </div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-head">
-              <div class="kpi-icon" style="background:var(--green-100);color:var(--green-600);"><i class="ti ti-circle-check"></i></div>
-              <div>
-                <div class="kpi-label">올림 완료</div>
-                <div class="kpi-value" id="blog-kpi-published">1</div>
-                <div class="kpi-sub" id="blog-kpi-publish-sub">6월 2일 발행</div>
-              </div>
-            </div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-head">
-              <div class="kpi-icon" style="background:var(--amber-100);color:var(--amber-600);"><i class="ti ti-progress"></i></div>
-              <div>
-                <div class="kpi-label">진행중</div>
-                <div class="kpi-value" id="blog-kpi-progress">9</div>
-                <div class="kpi-sub">이미지 · 초안 단계</div>
-              </div>
-            </div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-head">
-              <div class="kpi-icon" style="background:var(--blue-100);color:var(--blue-600);"><i class="ti ti-percentage"></i></div>
-              <div>
-                <div class="kpi-label">평균 진행률</div>
-                <div class="kpi-value" id="blog-kpi-avg">48%</div>
-                <div class="kpi-sub"><span class="kpi-trend up" id="blog-kpi-trend">▲ 전주 대비 +12%</span></div>
-              </div>
-            </div>
+        <!-- 등록 순서 -->
+        <div style="background:var(--bg);border-radius:var(--radius-sm);padding:8px 10px;">
+          <div style="font-size:10px;font-weight:700;color:var(--purple-700);margin-bottom:4px;">🔢 등록 순서</div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:3px;font-size:9px;">
+            <span class="badge badge-purple" style="font-size:9px;padding:2px 8px;">① main</span><span style="color:var(--text-light);">→</span>
+            <span class="badge badge-light" style="font-size:9px;padding:2px 8px;">텍스트</span><span style="color:var(--text-light);">→</span>
+            <span class="badge badge-cyan" style="font-size:9px;padding:2px 8px;">②~⑤ card</span><span style="color:var(--text-light);">→</span>
+            <span class="badge badge-light" style="font-size:9px;padding:2px 8px;">텍스트</span><span style="color:var(--text-light);">→</span>
+            <span class="badge badge-green" style="font-size:9px;padding:2px 8px;font-weight:700;">⑥ cta</span><span style="color:var(--text-light);">→</span>
+            <span class="badge badge-light" style="font-size:9px;padding:2px 8px;">CTA텍스트+연락처+해시태그</span>
           </div>
         </div>
-
-        <!-- Sub Tabs -->
-        <div class="sub-tabs" id="blog-sub-tabs">
-          <button class="sub-tab active" data-blog-tab="dashboard">📊 대시보드</button>
-          <button class="sub-tab" data-blog-tab="calendar">📅 올림 달력</button>
-          <button class="sub-tab" data-blog-tab="ideas">💡 아이디어 보드</button>
+        
+        <!-- SEO + 모바일 2열 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          
+          <!-- SEO -->
+          <div style="background:var(--bg);border-radius:var(--radius-sm);padding:8px 10px;">
+            <div style="font-size:10px;font-weight:700;color:var(--purple-700);margin-bottom:4px;">✅ SEO (15항목)</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px 6px;font-size:8px;color:var(--text-muted);">
+              <span>✓ 제목 키워드 앞쪽</span>
+              <span>✓ 본문 1,000~3,000자</span>
+              <span>✓ DIA+ 경험·인사이트</span>
+              <span>✓ Strong(굵기) 키워드</span>
+              <span>✓ H2 스타일 섹션 제목</span>
+              <span>✓ 목록/표 활용</span>
+              <span>✓ 해시태그 30개</span>
+              <span>✓ 이미지 alt 태그</span>
+              <span>✓ 키워드 본문 4~5회</span>
+              <span>✓ CTA 3종 필수</span>
+              <span>✓ 첫 댓글</span>
+              <span>✓ 서치어드바이저</span>
+              <span style="color:#EF4444;font-weight:700;">★ 모바일 최적화</span>
+              <span style="color:#EF4444;font-weight:700;">★ 가운데 정렬</span>
+            </div>
+          </div>
+          
+          <!-- 모바일 -->
+          <div style="border-radius:var(--radius-sm);padding:8px 10px;background:#FEF3C7;">
+            <div style="font-size:10px;font-weight:700;color:#D97706;margin-bottom:4px;">📱 모바일 최적화</div>
+            <div style="font-size:8px;color:#92400E;line-height:1.6;">
+              • 문단 2~3줄 이내 (50자 제한)<br>
+              • 이미지 800×450 (16:9)<br>
+              • 360~430px 기준 줄바꿈<br>
+              • text-align center<br>
+              • 110문단 내외 분할
+            </div>
+          </div>
+          
         </div>
-
-        <!-- ====== DASHBOARD TAB ====== -->
-        <div id="blog-dashboard-tab">
-
-          <div class="grid-2">
-            <!-- 📋 기획팀: 올림 과정 -->
-            <div class="card">
-              <div class="card-title">
-                📋 올림 과정
-                <span class="card-sub">기획팀</span>
-                <span class="badge badge-purple" id="blog-process-step-label" style="margin-left:auto;">주제 고르기</span>
-              </div>
-              <div class="step-flow" id="blog-process-flow">
-                <div class="step-item" data-step="1">
-                  <div class="step-circle" id="step-circle-1"><i class="ti ti-bulb" style="font-size:16px;"></i></div>
-                  <div class="step-label" id="step-label-1">주제 고르기</div>
-                </div>
-                <div class="step-item" data-step="2">
-                  <div class="step-circle" id="step-circle-2"><i class="ti ti-file-pencil" style="font-size:16px;"></i></div>
-                  <div class="step-label" id="step-label-2">밑그림 쓰기</div>
-                </div>
-                <div class="step-item" data-step="3">
-                  <div class="step-circle" id="step-circle-3"><i class="ti ti-photo" style="font-size:16px;"></i></div>
-                  <div class="step-label" id="step-label-3">그림 만들기</div>
-                </div>
-                <div class="step-item" data-step="4">
-                  <div class="step-circle" id="step-circle-4"><i class="ti ti-eye" style="font-size:16px;"></i></div>
-                  <div class="step-label" id="step-label-4">살피기</div>
-                </div>
-                <div class="step-item" data-step="5">
-                  <div class="step-circle" id="step-circle-5"><i class="ti ti-rocket" style="font-size:16px;"></i></div>
-                  <div class="step-label" id="step-label-5">발행</div>
-                </div>
-              </div>
-              <div style="margin-top:8px; font-size:11px; color:var(--text-muted); text-align:center;">
-                현재 <strong id="blog-process-post-name">대부분의 포스팅</strong>이 <strong id="blog-process-current-name">밑그림 쓰기 단계</strong>에 있습니다
-              </div>
-            </div>
-
-            <!-- 🎨 디자인팀: 톤앤매너 가이드 -->
-            <div class="card">
-              <div class="card-title">
-                🎨 이미지 톤앤매너 가이드
-                <span class="card-sub">디자인팀</span>
-              </div>
-              <div class="card-sub" style="margin-bottom:6px; display:block;">에이컷 브랜드 컬러</div>
-              <div class="color-swatch-group">
-                <div class="color-swatch-item">
-                  <div class="color-swatch" style="background:#5C3DE8;" title="#5C3DE8"></div>
-                  <div class="color-swatch-label">퍼플</div>
-                  <div class="color-swatch-hex">#5C3DE8</div>
-                </div>
-                <div class="color-swatch-item">
-                  <div class="color-swatch" style="background:#1A1A2E;" title="#1A1A2E"></div>
-                  <div class="color-swatch-label">네이비</div>
-                  <div class="color-swatch-hex">#1A1A2E</div>
-                </div>
-                <div class="color-swatch-item">
-                  <div class="color-swatch" style="background:#F9FAFB; border-color:#D0D5DD;" title="#F9FAFB"></div>
-                  <div class="color-swatch-label">아이보리</div>
-                  <div class="color-swatch-hex">#F9FAFB</div>
-                </div>
-              </div>
-              <div class="card-sub" style="margin-bottom:6px; display:block; margin-top:8px;">폰트</div>
-              <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">
-                <span class="guide-mini-tag purple">Noto Sans KR</span>
-                <span class="guide-mini-tag green">Pretendard</span>
-                — 가독성 최우선
-              </div>
-              <div class="card-sub" style="margin-bottom:6px; display:block;">이미지 규격</div>
-              <div class="img-spec-row">
-                <div class="img-spec-card">
-                  <div class="is-size">700×700</div>
-                  <div class="is-label">대표 이미지</div>
-                </div>
-                <div class="img-spec-card">
-                  <div class="is-size">800×450</div>
-                  <div class="is-label">본문 이미지</div>
-                </div>
-              </div>
-              <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">
-                📁 파일명: <code style="font-size:11px; background:var(--bg); padding:1px 6px; border-radius:4px; color:var(--purple-700);">aicut_</code> 접두사 필수 (예: <code style="font-size:11px; background:var(--bg); padding:1px 6px; border-radius:4px; color:var(--purple-700);">aicut_blog_대표_01.png</code>)
-              </div>
-              <div style="font-size:11px; color:var(--text-muted);">
-                💡 이미지 준수 시 검색 노출 품질 향상 · 명도 대비 4.5:1 유지
-              </div>
-            </div>
-          </div>
-
-          <!-- 📖 블로그 톤앤매너 가이드 -->
-          <div class="guide-card">
-            <div class="guide-header collapsed" onclick="this.classList.toggle('collapsed'); this.nextElementSibling.classList.toggle('hidden');">
-              <span class="guide-icon">📖</span>
-              <span class="guide-title">블로그 톤앤매너 가이드</span>
-              <span class="guide-badge">필독</span>
-              <span class="guide-toggle">▼</span>
-            </div>
-            <div class="guide-body hidden">
-              <div class="guide-item">
-                <span class="gi-icon">✏️</span>
-                <div><span class="gi-label">문체</span> <span class="gi-desc">짧은 문장, 평서체 <code>"~다"</code>, 차분·단정한 어조, 기사·칼럼체</span></div>
-              </div>
-              <div class="guide-item">
-                <span class="gi-icon">😊</span>
-                <div><span class="gi-label">이모티콘</span> <span class="gi-desc">과도한 사용 금지, 감탄사 자제 (<code>~!
-</code> 최소화)</span></div>
-              </div>
-              <div class="guide-item">
-                <span class="gi-icon">💬</span>
-                <div><span class="gi-label">인용</span> <span class="gi-desc">큰따옴표 <code>""</code> 로 고객 멘트 강조 — 실제 사례 느낌 극대화</span></div>
-              </div>
-              <div class="guide-item">
-                <span class="gi-icon">↩️</span>
-                <div><span class="gi-label">줄바꿈</span> <span class="gi-desc">의미 단위로 잦은 줄바꿈 — 모바일 가독성 최우선</span></div>
-              </div>
-              <div class="guide-divider"></div>
-              <div style="font-size:11px; color:var(--text-light); line-height:1.5;">
-                💡 <strong>CTA 필수 링크</strong>:
-                <span class="guide-mini-tag purple">💬 카카오톡 <code style="font-size:10px;background:transparent;">pf.kakao.com/_GIesX/chat</code></span>
-                <span class="guide-mini-tag green">📧 이메일 <code style="font-size:10px;background:transparent;">master@aicut.co.kr</code></span>
-                <span class="guide-mini-tag blue">🌐 홈페이지 <code style="font-size:10px;background:transparent;">aicut.co.kr</code></span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 📝 포스팅 목록 (전체 팀 공통) -->
-          <div class="card" style="padding:0;">
-            <div class="card-title" style="padding:14px 16px 0;">
-              📄 포스팅 현황
-              <span class="card-sub">전체 팀</span>
-              <button class="btn btn-sm" id="blog-add-btn" style="margin-left:auto;"><i class="ti ti-plus"></i> 새 포스팅</button>
-            </div>
-            <div class="table-wrap">
-              <table class="data" id="blog-posts-table">
-                <thead>
-                  <tr>
-                    <th style="width:40%;">제목</th>
-                    <th>진행률</th>
-                    <th>상태</th>
-                    <th>이미지</th>
-                    <th>등록일</th>
-                    <th style="width:30px;"></th>
-                  </tr>
-                </thead>
-                <tbody id="blog-posts-body"></tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="grid-2" style="margin-top:14px;">
-            <!-- 🔍 리서치팀: 철 핵심어 현황 -->
-            <div class="card">
-              <div class="card-title">
-                🔍 철 핵심어 현황
-                <span class="card-sub">리서치팀</span>
-              </div>
-              <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">
-                현재 시즌: <strong>6월 (여름)</strong> · 키워드플래너 기준
-              </div>
-              <div style="margin-bottom:8px;">
-                <span class="keyword-tag season">🌞 여름 마케팅</span>
-                <span class="keyword-tag season">🏖️ 하계 시즌 영상</span>
-                <span class="keyword-tag season">🎓 방학 특강 영상</span>
-                <span class="keyword-tag season">✈️ 휴가철 영상</span>
-                <span class="keyword-tag season">📊 상반기 마케팅</span>
-              </div>
-              <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">🔥 핫 키워드 (6월 트렌드)</div>
-              <div style="margin-bottom:8px;">
-                <span class="keyword-tag hot">🤖 AI 영상 편집</span>
-                <span class="keyword-tag hot">🎬 릴스 알고리즘</span>
-                <span class="keyword-tag hot">📱 숏폼 마케팅</span>
-                <span class="keyword-tag hot">🔁 생성형 AI</span>
-                <span class="keyword-tag hot">🛍️ 라이브 커머스</span>
-              </div>
-              <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">업종별 추천 키워드</div>
-              <div>
-                <span class="keyword-tag industry">🏥 병원 <span style="font-size:10px;color:var(--text-light);">(여름피부/다이어트)</span></span>
-                <span class="keyword-tag industry">🏢 부동산 <span style="font-size:10px;color:var(--text-light);">(여름이사/분양)</span></span>
-                <span class="keyword-tag industry">📚 교육 <span style="font-size:10px;color:var(--text-light);">(방학특강)</span></span>
-                <span class="keyword-tag industry">🛒 이커머스</span>
-                <span class="keyword-tag industry">🍔 프랜차이즈</span>
-                <span class="keyword-tag industry">🚀 스타트업</span>
-              </div>
-              <div style="margin-top:8px; padding-top:8px; border-top:1px solid var(--border);">
-                <div class="card-title" style="margin-bottom:6px;">📊 경쟁사 블로그 트렌드 인사이트</div>
-                <div class="comp-card">
-                  <div class="comp-title">🔍 영상편집 · 마케팅 업계</div>
-                  <div class="comp-desc">경쟁사 블로그 70%가 'AI 영상편집' 키워드 사용 중. 차별화 포인트: 사례 기반 콘텐츠 집중</div>
-                </div>
-                <div class="comp-card">
-                  <div class="comp-title">📈 업종별 사례 콘텐츠 증가</div>
-                  <div class="comp-desc">2026년 상반기 블로그 포스팅 중 '실제 사례/도입이야기' 형식 43% 증가. 스토리텔링형 콘텐츠 선호</div>
-                </div>
-                <div class="comp-card">
-                  <div class="comp-title">🎯 릴스·숏폼 연동 콘텐츠</div>
-                  <div class="comp-desc">블로그→릴스 재활용 포스팅 대비 방문자 2.3배. 블로그-인스타 크로스 채널 전략 필수</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 📢 마케팅팀: SEO + 채널 재활용 -->
-            <div class="card">
-              <div class="card-title">
-                📢 SEO 점검표
-                <span class="card-sub">마케팅팀</span>
-                <span class="badge badge-green" id="seo-completion-badge" style="margin-left:auto;">80%</span>
-              </div>
-              <div class="progress-bar" style="margin-bottom:8px;">
-                <div class="progress-fill green" id="seo-progress-fill" style="width:80%;"></div>
-              </div>
-              <div id="seo-checklist">
-                <div class="seo-stat-row" data-seo-idx="0">
-                  <span class="seo-label"><i class="ti ti-typography"></i> 제목에 핵심 키워드 앞쪽 배치</span>
-                  <input type="checkbox" checked>
-                </div>
-                <div class="seo-stat-row" data-seo-idx="1">
-                  <span class="seo-label"><i class="ti ti-heading"></i> H2/H3 태그 + Strong 키워드</span>
-                  <input type="checkbox" checked>
-                </div>
-                <div class="seo-stat-row" data-seo-idx="2">
-                  <span class="seo-label"><i class="ti ti-photo"></i> 이미지 alt 태그 키워드 포함</span>
-                  <input type="checkbox">
-                </div>
-                <div class="seo-stat-row" data-seo-idx="3">
-                  <span class="seo-label"><i class="ti ti-message"></i> CTA 3종 포함 (카톡/메일/홈페이지)</span>
-                  <input type="checkbox" checked>
-                </div>
-                <div class="seo-stat-row" data-seo-idx="4">
-                  <span class="seo-label"><i class="ti ti-hash"></i> 해시태그 30개 (시즌 5+핫 3 혼합)</span>
-                  <input type="checkbox" checked>
-                </div>
-                <div class="seo-stat-row" data-seo-idx="5">
-                  <span class="seo-label"><i class="ti ti-link"></i> 내부 링크 2개 이상 연결</span>
-                  <input type="checkbox">
-                </div>
-                <div class="seo-stat-row" data-seo-idx="6">
-                  <span class="seo-label"><i class="ti ti-device-mobile"></i> 모바일 최적화 확인</span>
-                  <input type="checkbox" checked>
-                </div>
-              </div>
-
-              <div style="margin-top:12px; padding-top:10px; border-top:1px solid var(--border);">
-                <div class="card-title" style="margin-bottom:6px;">🔄 채널별 재활용 현황</div>
-                <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">블로그 → 인스타그램 연동</div>
-                <div id="blog-recycle-list">
-                  <div class="recycle-item">
-                    <span class="ri-post">고객사례 도입이야기 — 부동산 중개법인</span>
-                    <span class="badge badge-green">✅ 재활용</span>
-                  </div>
-                  <div class="recycle-item">
-                    <span class="ri-post">하반기 마케팅, 지금 영상 편집 외주사를 정해야 하는 이유</span>
-                    <span class="badge badge-amber">⏳ 살피기중</span>
-                  </div>
-                  <div class="recycle-item">
-                    <span class="ri-post">출근길 30분, 바쁜 대표가 영상 마케팅으로 하루를 시작하는 법</span>
-                    <span class="badge badge-blue">📝 준비중</span>
-                  </div>
-                  <div class="recycle-item">
-                    <span class="ri-post">릴스 조회수, 3일 만든 영상보다 3시간 만든 영상이 더 잘 나가는 이유</span>
-                    <span class="badge badge-purple">🎬 릴스 제작</span>
-                  </div>
-                </div>
-                <div style="text-align:right; margin-top:6px;">
-                  <span style="font-size:11px; color:var(--text-light);">재활용률 </span>
-                  <span style="font-size:13px; font-weight:700; color:var(--green-600);" id="blog-recycle-rate">10%</span>
-                </div>
-              </div>
-            </div>
+        
+        <!-- 레퍼런스 -->
+        <div style="background:var(--purple-100);border-radius:var(--radius-sm);padding:6px 10px;">
+          <div style="font-size:8px;color:var(--purple-700);line-height:1.6;">
+            📎 blog.naver.com/aicut/224321668804 · 🛠 makeTemplateImage(tpl, badge, main, sub, cta, outFile)
           </div>
         </div>
+        
+      </div>
+    </div>
+    </div>
+  </div>id="blog-live-kpis" style="margin-bottom:14px;padding:0 24px;">
+    <div class="kpi-card"><div class="kpi-head"><div class="kpi-icon" style="background:#EEEBFF;color:#5C3DE8;font-size:17px;">📝</div></div><div class="kpi-label">총 포스트</div><div class="kpi-value" id="kpi-total-posts">—</div><div class="kpi-sub">content_assets</div></div>
+    <div class="kpi-card"><div class="kpi-head"><div class="kpi-icon" style="background:#DBEAFE;color:#3B82F6;">🔄</div></div><div class="kpi-label">진행 중</div><div class="kpi-value" id="kpi-in-progress">—</div><div class="kpi-sub">topic~draft</div></div>
+    <div class="kpi-card"><div class="kpi-head"><div class="kpi-icon" style="background:#FEF3C7;color:#F59E0B;">⏳</div></div><div class="kpi-label">승인 대기</div><div class="kpi-value" id="kpi-pending-approvals">—</div><div class="kpi-sub">승인 요청</div></div>
+    <div class="kpi-card"><div class="kpi-head"><div class="kpi-icon" style="background:#D1FAE5;color:#10B981;">✅</div></div><div class="kpi-label">발행 대기</div><div class="kpi-value" id="kpi-ready-to-publish">—</div><div class="kpi-sub">draft_approved</div></div>
+    <div class="kpi-card"><div class="kpi-head"><div class="kpi-icon" style="background:#FEE2E2;color:#EF4444;">📊</div></div><div class="kpi-label">반려율</div><div class="kpi-value" id="kpi-reject-rate">—</div><div class="kpi-sub">반려/전체</div></div>
+  </div>
 
-        <!-- ====== CALENDAR TAB ====== -->
-        <div id="blog-calendar-tab" style="display:none;">
-          <div class="card">
-            <div class="card-title">
-              📅 발행 일정 캘린더
-              <span class="card-sub">마케팅팀</span>
-              <div style="margin-left:auto; display:flex; align-items:center; gap:6px;">
-                <button class="btn btn-xs" id="cal-prev"><i class="ti ti-chevron-left"></i></button>
-                <span id="cal-month-label" style="font-size:13px; font-weight:600; min-width:80px; text-align:center;">2026년 6월</span>
-                <button class="btn btn-xs" id="cal-next"><i class="ti ti-chevron-right"></i></button>
-              </div>
-            </div>
-            <div class="cal-grid" id="cal-grid">
-              <div class="cal-header">일</div>
-              <div class="cal-header">월</div>
-              <div class="cal-header">화</div>
-              <div class="cal-header">수</div>
-              <div class="cal-header">목</div>
-              <div class="cal-header">금</div>
-              <div class="cal-header">토</div>
-            </div>
-            <div style="margin-top:8px; font-size:11px; color:var(--text-light);">
-              <span class="cal-dot" style="display:inline-block; margin-right:4px;"></span> 포스팅 발행일
-            </div>
-          </div>
+  <!-- 2-column: pipeline(left 320px) + preview(right) -->
+  <div style="display:grid;grid-template-columns:320px 1fr;gap:14px;align-items:start;padding:0 24px;">
+    
+    <!-- Left: Pipeline -->
+    <div>
+      <div class="card" id="blog-pipeline-section" style="margin-bottom:10px;">
+        <div class="card-title" style="font-size:12px;padding:8px 10px;">
+          📋 파이프라인
+          <span class="card-sub">진행 중</span>
+          <button class="btn btn-xs" id="blog-pipeline-new-btn" style="margin-left:auto;" onclick="blogPipelineNew()"><i class="ti ti-plus"></i></button>
+          <button class="btn btn-xs" id="blog-pipeline-refresh-btn" style="margin-left:4px;" onclick="renderBlogPipeline()"><i class="ti ti-refresh"></i></button>
         </div>
+        <div id="blog-pipeline-list"><p style="font-size:11px;color:#A0A7BD;text-align:center;padding:12px 0;">로딩 중...</p></div>
+      </div>
 
-        <!-- ====== IDEAS TAB ====== -->
-        <div id="blog-ideas-tab" style="display:none;">
-          <div class="card">
-            <div class="card-title">
-              💡 향후 발행 아이디어
-              <span class="card-sub">기획팀</span>
-              <button class="btn btn-sm" id="blog-idea-add-btn" style="margin-left:auto;"><i class="ti ti-plus"></i> 아이디어 등록</button>
-            </div>
-            <div id="blog-ideas-list">
-              <p style="font-size:12px; color:var(--text-light); text-align:center; padding:20px 0;">
-                아직 등록된 아이디어가 없습니다. '아이디어 등록' 버튼을 눌러 주제를 추가하세요.
-              </p>
-            </div>
-          </div>
+      <!-- 생성된 데이터 -->
+      <div class="card" id="blog-data-section">
+        <div class="card-title" style="font-size:12px;padding:8px 10px;">
+          📦 완료
+          <span class="card-sub">draft_approved</span>
         </div>
-      </section>
+        <div id="blog-data-list"><p style="font-size:10px;color:#A0A7BD;text-align:center;padding:12px 0;">로딩 중...</p></div>
+      </div>
 
-      <!-- ============= GA4 ============= -->
-      <section class="page" data-page="ga4">
-        <div class="section-head"><h2 class="card-title">📊 Google Analytics 4</h2></div>
-        <div class="kpi-row">
-          <div class="kpi-card"><div class="kpi-label">활성 사용자</div><div class="kpi-value" data-key="ga4.active_users">273</div><div class="kpi-sub">28일</div></div>
-          <div class="kpi-card"><div class="kpi-label">세션</div><div class="kpi-value" data-key="ga4.sessions">471</div><div class="kpi-sub">28일</div></div>
-          <div class="kpi-card"><div class="kpi-label">평균 세션 시간</div><div class="kpi-value" data-key="ga4.avg_session_time">4분 30초</div><div class="kpi-sub">↑ 업계 평균 2분 12초</div></div>
-          <div class="kpi-card"><div class="kpi-label">전환</div><div class="kpi-value" data-key="ga4.conversions">0</div><div class="kpi-sub">추적 미설치</div></div>
+      <!-- 참고자료 -->
+      <div class="card" style="margin-top:10px;" data-collapsible>
+        <div class="card-title" style="font-size:11px;padding:8px 10px;cursor:pointer;">📖 참고자료</div>
+        <div style="font-size:10px;color:#7B8299;padding:8px 10px;line-height:1.4;">
+          <strong>톤앤매너</strong>: 700x700/800x450 · 짧은 문장 · H2/H3<br>
+          <strong>키워드</strong>: 여름/하계/방학 · AI/릴스/숏폼 · 병원/부동산/교육<br>
+          <strong>경쟁사</strong>: 블로그 2.1편/주 · 숏폼 3.4개/주
         </div>
-        <div class="card">
-          <div class="card-title">📈 유입 채널 순위</div>
-          <div class="channel-stat"><div class="channel-left">1위 · 📸 인스타그램</div><div class="channel-right"><span data-key="ga4.insta_users">142</span>명 (30.1%)</div></div>
-          <div class="channel-stat"><div class="channel-left">2위 · 🔍 네이버 (유기)</div><div class="channel-right"><span data-key="ga4.naver_users">92</span>명 (19.5%)</div></div>
-          <div class="channel-stat"><div class="channel-left">3위 · 🌐 구글 (기타)</div><div class="channel-right"><span data-key="ga4.google_users">17</span>명 (3.6%)</div></div>
-          <div class="channel-stat"><div class="channel-left">4위 · 📢 네이버 광고</div><div class="channel-right"><span data-key="ga4.naver_ad_users">14</span>명 (3.0%)</div></div>
-        </div>
-        <div class="card" style="margin-top:12px;">
-          <div class="card-title">🔌 API 연동 상태 <span class="card-sub">개발팀</span></div>
-          <div class="channel-stat"><div class="channel-left"><span class="api-badge mock">🔌 Mock</span> GA4 Data API (v1)</div><div class="channel-right" style="font-size:11px; color:var(--text-light);">실제 연동 시 자동 갱신</div></div>
-          <div class="channel-stat"><div class="channel-left"><i class="ti ti-settings" style="color:var(--text-light);"></i> 측정 ID: <span data-key="settings.ga4_id">G-D141VGTF79</span></div><div class="channel-right" style="font-size:11px; color:var(--text-light);">설정에서 변경 가능</div></div>
-        </div>
-      </section>
+      </div>
+    </div>
 
-      <!-- ============= KIN ============= -->
-      <section class="page" data-page="kin">
-        <div class="section-head"><h2 class="card-title">🔍 네이버 지식iN 활동</h2></div>
-        <div class="kpi-row">
-          <div class="kpi-card"><div class="kpi-label">누적 답변</div><div class="kpi-value" data-key="kin.total_answers">85</div><div class="kpi-sub">전체</div></div>
-          <div class="kpi-card"><div class="kpi-label">금주 답변</div><div class="kpi-value" data-key="kin.weekly_answers">8</div><div class="kpi-sub">목표 15 · <span class="progress-bar" style="display:inline-block; width:50px; vertical-align:middle;"><span class="progress-fill amber" style="width:53%;"></span></span></div></div>
-          <div class="kpi-card"><div class="kpi-label">채택률</div><div class="kpi-value" data-key="kin.adoption_rate">--</div><div class="kpi-sub">추적 필요</div></div>
-          <div class="kpi-card"><div class="kpi-label">주요 키워드</div><div class="kpi-value" style="font-size:14px;" data-key="kin.keywords">영상편집/숏폼/릴스</div><div class="kpi-sub">하루 3~5개 목표</div></div>
+    <!-- Right: Preview Area -->
+    <div>
+      <div class="card" id="blog-preview-section">
+        <div class="card-title" style="font-size:12px;padding:8px 10px;">
+          📄 본문 미리보기
+          <span class="card-sub" id="preview-asset-title">선택된 포스트 없음</span>
         </div>
-      </section>
-
-      <!-- ============= TASKS ============= -->
-      <section class="page" data-page="tasks">
-        <div class="section-head">
-          <h2 class="card-title">✅ 팀별 업무 관리</h2>
-          <div style="display:flex; gap:6px; align-items:center;">
-            <span id="task-total-counter" class="task-counter"></span>
-            <button class="btn btn-sm btn-primary" id="task-add-btn"><i class="ti ti-plus"></i> 새 업무</button>
-          </div>
+        <div id="blog-preview-content">
+          <p style="font-size:11px;color:#A0A7BD;text-align:center;padding:40px 20px;">왼쪽 파이프라인에서 포스트를 선택하면 본문이 표시됩니다.</p>
         </div>
-
-        <!-- 필터 바 -->
-        <div class="task-filter-bar">
-          <div class="task-filter-tabs" id="task-date-tabs">
-            <button class="task-filter-tab active" data-filter="today">오늘</button>
-            <button class="task-filter-tab" data-filter="week">이번주</button>
-            <button class="task-filter-tab" data-filter="all">전체</button>
-          </div>
-          <div class="task-team-filter" id="task-team-filter">
-            <button class="active" data-team="all">전체</button>
-            <button data-team="dev" style="border-color:var(--blue-600);color:var(--blue-600);">🛠️ 개발</button>
-            <button data-team="plan" style="border-color:var(--purple-700);color:var(--purple-700);">📋 기획</button>
-            <button data-team="research" style="border-color:var(--red-600);color:var(--red-600);">🔍 리서치</button>
-            <button data-team="design" style="border-color:var(--amber-600);color:var(--amber-600);">🎨 디자인</button>
-            <button data-team="market" style="border-color:var(--green-600);color:var(--green-600);">📢 마케팅</button>
-          </div>
-        </div>
-
-        <!-- 타임라인 -->
-        <div class="card" style="padding:0 16px;">
-          <div id="task-timeline">
-            <div class="task-empty">⏳ 업무를 불러오는 중...</div>
-          </div>
-          <div id="task-no-tasks" style="display:none;">
-            <div class="task-empty">
-              <p>📭 표시할 업무가 없습니다.</p>
-              <p style="margin-top:6px;"><button class="btn btn-sm btn-primary" id="task-empty-add-btn"><i class="ti ti-plus"></i> 새 업무 추가</button></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 통계 -->
-        <div style="margin-top:10px; display:flex; gap:12px; flex-wrap:wrap; font-size:11px; color:var(--text-muted);" id="task-stats-bar"
-        <!-- 멀티 에이전트 현황 -->
-        <div style="margin-top:14px;">
-          <div class="card-title" style="margin-bottom:8px;">🤖 팀 에이전트 현황</div>
-          <div class="agent-grid" id="agent-grid">
-            <div class="agent-card idle" data-agent="dev"><span class="agent-glow"></span><span class="agent-avatar">🐯</span><div class="agent-name">개발팀 🐯</div><div class="agent-status">대기 중</div></div>
-            <div class="agent-card idle" data-agent="plan"><span class="agent-glow"></span><span class="agent-avatar">🦉</span><div class="agent-name">기획팀 🦉</div><div class="agent-status">대기 중</div></div>
-            <div class="agent-card idle" data-agent="research"><span class="agent-glow"></span><span class="agent-avatar">🐶</span><div class="agent-name">리서치팀 🐶</div><div class="agent-status">대기 중</div></div>
-            <div class="agent-card idle" data-agent="design"><span class="agent-glow"></span><span class="agent-avatar">🐱</span><div class="agent-name">디자인팀 🐱</div><div class="agent-status">대기 중</div></div>
-            <div class="agent-card idle" data-agent="market"><span class="agent-glow"></span><span class="agent-avatar">🐼</span><div class="agent-name">마케팅팀 🐼</div><div class="agent-status">대기 중</div></div>
-          </div>
-        </div>
-></div>
-      </section>
-
-      <!-- ============= CONTENT ============= -->
-      <section class="page" data-page="content">
-        <div class="section-head"><h2 class="card-title">📦 콘텐츠 저장소</h2></div>
-        <div class="card">
-          <div class="card-title">📝 블로그 원고</div>
-          <div id="blog-drafts"></div>
-          <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--border);">
-            <button class="btn btn-sm" id="draft-add-btn"><i class="ti ti-plus"></i> 원고 추가</button>
-          </div>
-        </div>
-        <div class="card" style="margin-top:12px;">
-          <div class="card-title">🎨 디자인 리소스</div>
-          <div class="channel-stat"><div class="channel-left">블로그 대표 이미지 700x700</div><div class="channel-right"><span data-key="design.blog_images">5</span>장</div></div>
-          <div class="channel-stat"><div class="channel-left">인스타 카드뉴스</div><div class="channel-right"><span data-key="design.cardnews">5</span>장</div></div>
-          <div class="channel-stat"><div class="channel-left">릴스 영상</div><div class="channel-right"><span data-key="design.reels_videos">4</span>개</div></div>
-        </div>
-      </section>
-
-      <!-- ============= DATA MANAGEMENT ============= -->
-      <section class="page" data-page="data">
-        <div class="section-head">
-          <h2 class="card-title">🗄️ 데이터 관리</h2>
-          <div style="display:flex; gap:6px;">
-            <span class="api-badge mock" id="data-api-badge">🔌 Mock 데이터</span>
-            <button class="btn btn-sm btn-primary" id="data-save-all"><i class="ti ti-device-floppy"></i> 전체 저장</button>
-            <button class="btn btn-sm" id="data-reset-default"><i class="ti ti-refresh"></i> 초기화</button>
-          </div>
-        </div>
-        <p style="font-size:12px; color:var(--text-muted); margin-bottom:14px;">
-          각 채널별 데이터를 직접 입력하거나 수정할 수 있습니다. 변경사항은 브라우저에 자동 저장되며,
-          실제 API 연동 시 실시간 데이터로 대체됩니다.
-        </p>
-
-        <!-- 섹션: 오버뷰 KPI -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-overview">
-            <i class="ti ti-layout-dashboard"></i> 오버뷰 KPI
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-overview">
-            <div class="form-row-sm">
-              <div class="form-group"><label>총 방문자 (GA4)</label><input type="number" id="f-overview-visitors" /></div>
-              <div class="form-group"><label>방문자 트렌드</label><input id="f-overview-visitors_trend" placeholder="예: ▲ +12.3%" /></div>
-            </div>
-            <div class="form-row-sm">
-              <div class="form-group"><label>네이버 클릭</label><input type="number" id="f-overview-naver_clicks" /></div>
-              <div class="form-group"><label>클릭 트렌드</label><input id="f-overview-naver_trend" placeholder="예: ▲ +25%" /></div>
-            </div>
-            <div class="form-row-sm">
-              <div class="form-group"><label>릴스 조회수</label><input type="number" id="f-overview-reels_views" /></div>
-              <div class="form-group"><label>릴스 트렌드</label><input id="f-overview-reels_trend" placeholder="예: ▲ +221%" /></div>
-            </div>
-            <div class="form-row-sm">
-              <div class="form-group"><label>광고비 (원)</label><input type="number" id="f-overview-ad_cost" /></div>
-              <div class="form-group"><label>광고비 트렌드</label><input id="f-overview-adcost_trend" placeholder="예: ▼ -8.2%" /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 섹션: 채널 유입 -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-channels">
-            <i class="ti ti-network"></i> 채널별 유입
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-channels">
-            <div class="form-row-3">
-              <div class="form-group"><label>인스타그램</label><input type="number" id="f-channel-instagram" /></div>
-              <div class="form-group"><label>네이버 (유기)</label><input type="number" id="f-channel-naver" /></div>
-              <div class="form-group"><label>네이버 광고</label><input type="number" id="f-channel-naver_ad" /></div>
-            </div>
-            <div class="form-group"><label>구글 (기타)</label><input type="number" id="f-channel-google" style="max-width:200px;" /></div>
-          </div>
-        </div>
-
-        <!-- 섹션: 네이버 광고 -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-naver">
-            <i class="ti ti-search"></i> 네이버 광고
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-naver">
-            <div class="form-row-3">
-              <div class="form-group"><label>노출</label><input type="number" id="f-naver-impressions" /></div>
-              <div class="form-group"><label>클릭</label><input type="number" id="f-naver-clicks" /></div>
-              <div class="form-group"><label>CTR (%)</label><input type="number" step="0.01" id="f-naver-ctr" /></div>
-            </div>
-            <div class="form-row-3">
-              <div class="form-group"><label>CPC (원)</label><input type="number" id="f-naver-cpc" /></div>
-              <div class="form-group"><label>총 비용 (원)</label><input type="number" id="f-naver-total_cost" /></div>
-              <div class="form-group"><label>일평균 (원)</label><input type="number" id="f-naver-daily_cost" /></div>
-            </div>
-            <div class="form-row-3">
-              <div class="form-group"><label>입찰가 (원)</label><input type="number" id="f-naver-bid" /></div>
-              <div class="form-group"><label>비즈머니 (원)</label><input type="number" id="f-naver-bizmoney" /></div>
-              <div class="form-group"><label>유상 (원)</label><input type="number" id="f-naver-bizmoney_paid" /></div>
-            </div>
-            <div class="form-group"><label>무상 (원)</label><input type="number" id="f-naver-bizmoney_free" style="max-width:200px;" /></div>
-          </div>
-        </div>
-
-        <!-- 섹션: 인스타그램 -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-instagram">
-            <i class="ti ti-camera"></i> 인스타그램
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-instagram">
-            <div class="form-row-3">
-              <div class="form-group"><label>팔로워</label><input type="number" id="f-instagram-followers" /></div>
-              <div class="form-group"><label>게시물</label><input type="number" id="f-instagram-posts" /></div>
-              <div class="form-group"><label>카드뉴스</label><input type="number" id="f-instagram-cardnews" /></div>
-            </div>
-            <div class="form-row-3">
-              <div class="form-group"><label>릴스 개수</label><input type="number" id="f-instagram-reels" /></div>
-              <div class="form-group"><label>최근 릴스 조회</label><input type="number" id="f-instagram-recent_reels_views" /></div>
-              <div class="form-group"><label>릴스 트렌드</label><input id="f-instagram-reels_trend" placeholder="▲ +221%" /></div>
-            </div>
-            <div class="form-row-3">
-              <div class="form-group"><label>릴스 광고 CTR (%)</label><input type="number" step="0.1" id="f-instagram-reels_ctr" /></div>
-              <div class="form-group"><label>숏폼 조회</label><input type="number" id="f-instagram-shortform_views" /></div>
-              <div class="form-group"><label>숏폼 웹방문</label><input type="number" id="f-instagram-shortform_web" /></div>
-            </div>
-            <div class="form-row-3">
-              <div class="form-group"><label>숏폼 비용 (원)</label><input type="number" id="f-instagram-shortform_cost" /></div>
-              <div class="form-group"><label>프로필 조회</label><input type="number" id="f-instagram-profile_views" /></div>
-              <div class="form-group"><label>프로필 웹방문</label><input type="number" id="f-instagram-profile_web" /></div>
-            </div>
-            <div class="form-group"><label>프로필 광고 비용 (원)</label><input type="number" id="f-instagram-profile_cost" style="max-width:200px;" /></div>
-          </div>
-        </div>
-
-        <!-- 섹션: GA4 -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-ga4">
-            <i class="ti ti-chart-bar"></i> GA4
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-ga4">
-            <div class="form-row-3">
-              <div class="form-group"><label>활성 사용자</label><input type="number" id="f-ga4-active_users" /></div>
-              <div class="form-group"><label>세션</label><input type="number" id="f-ga4-sessions" /></div>
-              <div class="form-group"><label>평균 세션 시간</label><input id="f-ga4-avg_session_time" placeholder="4분 30초" /></div>
-            </div>
-            <div class="form-row-3">
-              <div class="form-group"><label>전환</label><input type="number" id="f-ga4-conversions" /></div>
-              <div class="form-group"><label>인스타 유입</label><input type="number" id="f-ga4-insta_users" /></div>
-              <div class="form-group"><label>네이버 유입</label><input type="number" id="f-ga4-naver_users" /></div>
-            </div>
-            <div class="form-row-sm">
-              <div class="form-group"><label>구글 유입</label><input type="number" id="f-ga4-google_users" /></div>
-              <div class="form-group"><label>네이버광고 유입</label><input type="number" id="f-ga4-naver_ad_users" /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 섹션: 지식iN -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-kin">
-            <i class="ti ti-message"></i> 지식iN
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-kin">
-            <div class="form-row-3">
-              <div class="form-group"><label>누적 답변</label><input type="number" id="f-kin-total_answers" /></div>
-              <div class="form-group"><label>금주 답변</label><input type="number" id="f-kin-weekly_answers" /></div>
-              <div class="form-group"><label>채택률</label><input id="f-kin-adoption_rate" placeholder="--" /></div>
-            </div>
-            <div class="form-group"><label>주요 키워드</label><input id="f-kin-keywords" style="max-width:300px;" /></div>
-          </div>
-        </div>
-
-        <!-- 섹션: 디자인 리소스 -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-design">
-            <i class="ti ti-palette"></i> 디자인 리소스
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-design">
-            <div class="form-row-3">
-              <div class="form-group"><label>블로그 이미지 (장)</label><input type="number" id="f-design-blog_images" /></div>
-              <div class="form-group"><label>카드뉴스 (장)</label><input type="number" id="f-design-cardnews" /></div>
-              <div class="form-group"><label>릴스 영상 (개)</label><input type="number" id="f-design-reels_videos" /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 섹션: 설정 -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-settings">
-            <i class="ti ti-settings"></i> 시스템 설정
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-settings">
-            <div class="form-group"><label>GA4 측정 ID</label><input id="f-settings-ga4_id" style="max-width:300px;" /></div>
-            <div class="form-group"><label>네이버 광고 계정</label><input id="f-settings-naver_account" style="max-width:400px;" /></div>
-            <div class="form-group"><label>인스타그램 계정</label><input id="f-settings-instagram_account" style="max-width:300px;" /></div>
-            <div class="form-group"><label>데이터 소스 모드</label>
-              <select id="f-settings-api_mode" style="max-width:200px;">
-                <option value="mock">Mock (수동 입력)</option>
-                <option value="live">Live (실제 API)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- 섹션: 활동 테이블 (행 추가) -->
-        <div class="data-section">
-          <div class="data-section-header" data-target="ds-activity">
-            <i class="ti ti-list"></i> 활동 기록
-            <i class="ti ti-chevron-down toggle-icon"></i>
-          </div>
-          <div class="data-section-body" id="ds-activity">
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">새 활동 기록을 추가합니다.</p>
-            <div class="form-row-3">
-              <div class="form-group"><label>날짜</label><input type="text" id="f-activity-date" placeholder="6/24" /></div>
-              <div class="form-group"><label>채널</label>
-                <select id="f-activity-channel">
-                  <option>📸 인스타</option><option>📝 블로그</option><option>📊 광고</option><option>🔍 지식iN</option><option>🌐 구글</option>
-                </select>
-              </div>
-              <div class="form-group"><label>액션</label><input id="f-activity-action" placeholder="릴스 업로드" /></div>
-            </div>
-            <div class="form-row-sm">
-              <div class="form-group"><label>결과</label><input id="f-activity-result" placeholder="조회 6,426" /></div>
-              <div class="form-group"><label>담당팀</label>
-                <select id="f-activity-team">
-                  <option value="market">📢 마케팅</option><option value="dev">🛠️ 개발</option><option value="plan">📋 기획</option><option value="research">🔍 리서치</option><option value="design">🎨 디자인</option>
-                </select>
-              </div>
-            </div>
-            <button class="btn btn-sm btn-success" id="activity-add-btn"><i class="ti ti-plus"></i> 활동 추가</button>
-          </div>
-        </div>
-
-        <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="btn btn-primary" id="data-save-all-2"><i class="ti ti-device-floppy"></i> 모든 변경사항 저장</button>
-          <button class="btn btn-sm" id="data-export-btn"><i class="ti ti-download"></i> 데이터 내보내기</button>
-          <button class="btn btn-sm" id="data-import-btn"><i class="ti ti-upload"></i> 가져오기</button>
-        </div>
-        <input type="file" id="data-import-file" accept=".json" style="display:none;" />
-        <div style="margin-top:8px; font-size:11px; color:var(--text-light);">
-          💾 데이터는 자동으로 localStorage에 저장됩니다.
-        </div>
-      </section>
-
-      <!-- ============= MEETING NOTES ============= -->
-      <section class="page" data-page="meeting">
-        <div class="section-head">
-          <h2 class="card-title">📋 팀별 회의록</h2>
-          <button class="btn btn-sm btn-primary" id="meeting-add-btn"><i class="ti ti-plus"></i> 새 회의록 작성</button>
-        </div>
-        <div class="sub-tabs" id="meeting-team-tabs">
-          <button class="sub-tab active" data-team="all">📋 전체</button>
-          <button class="sub-tab" data-team="dev">🛠️ 개발팀</button>
-          <button class="sub-tab" data-team="plan">📋 기획팀</button>
-          <button class="sub-tab" data-team="research">🔍 리서치팀</button>
-          <button class="sub-tab" data-team="design">🎨 디자인팀</button>
-          <button class="sub-tab" data-team="market">📢 마케팅팀</button>
-        </div>
-        <div id="meeting-list"></div>
-        <p style="font-size:12px; color:var(--text-light); text-align:center; margin-top:20px;" id="meeting-empty">
-          아직 회의록이 없습니다. '새 회의록 작성' 버튼을 눌러 시작하세요.
-        </p>
-      </section>
-
-      <!-- ============= SETTINGS ============= -->
-      <section class="page" data-page="settings">
-        <div class="section-head"><h2 class="card-title">⚙️ 설정</h2></div>
-        <div class="card">
-          <div class="card-title">🏢 기본 정보</div>
-          <div class="form-group"><label>사업장명</label><input id="f-settings-business_name" value="에이컷 (Aicut)" /></div>
-          <div class="form-group"><label>GA4 측정 ID</label><input id="f-settings-ga4_id2" value="G-D141VGTF79" /></div>
-          <div class="form-group"><label>네이버 광고 계정</label><input id="f-settings-naver_account2" value="aicut (master@aicut.co.kr)" /></div>
-          <div class="form-group"><label>인스타그램 계정</label><input id="f-settings-instagram_account2" value="@aicut.official" /></div>
-          <div class="form-group"><label>API 모드</label>
-            <select id="f-settings-api_mode2" style="max-width:200px;">
-              <option value="mock">Mock (수동 입력)</option>
-              <option value="live">Live (실제 API)</option>
-            </select>
-          </div>
-          <button class="btn btn-primary" id="settings-save-btn"><i class="ti ti-device-floppy"></i> 설정 저장</button>
-        </div>
-        <div class="card" style="margin-top:14px;">
-          <div class="card-title">🔌 API 연동 설정 <span class="card-sub">개발팀</span></div>
-          <div style="font-size:12px; color:var(--text-muted); line-height:1.6;">
-            <p style="margin-bottom:6px;">• GA4 Data API v1: <code>https://analyticsdata.googleapis.com/v1beta/properties/{propertyId}:runReport</code></p>
-            <p style="margin-bottom:6px;">• 네이버 광고 API: <code>https://api.naver.com/searchad/v1</code></p>
-            <p style="margin-bottom:6px;">• 인스타그램 Graph API: <code>https://graph.facebook.com/v22.0/{ig-user-id}/media</code></p>
-            <p>• 현재 모드: <span class="api-badge mock">Mock</span> — 모든 데이터는 localStorage에서 불러옵니다.</p>
-          </div>
-          <div style="margin-top:10px; padding:10px; background:var(--bg); border-radius:var(--radius-xs);">
-            <p style="font-size:12px; font-weight:600; margin-bottom:6px;">🛠️ 실제 API 연동 시 (개발자용)</p>
-            <pre style="font-size:11px; color:var(--text-muted); white-space:pre-wrap; line-height:1.5;">// GA4 API 호출 예시
-const GA4_API = {
-  endpoint: 'https://analyticsdata.googleapis.com/v1beta/properties/',
-  async fetchReport(propertyId, credentials) {
-    // TODO: OAuth 2.0 인증 구현 필요
-    // const response = await fetch(...)
-    // return response.json()
-  }
-}
-
-// 네이버 광고 API 호출 예시
-const NAVER_AD_API = {
-  endpoint: 'https://api.naver.com/searchad/v1',
-  async fetchStats(campaignId, apiKey) {
-    // TODO: API 키 인증 구현 필요
-    // const response = await fetch(...)
-    // return response.json()
-  }
-}
-
-// 인스타그램 Graph API 호출 예시
-const INSTAGRAM_API = {
-  endpoint: 'https://graph.facebook.com/v22.0/',
-  async fetchInsights(igUserId, accessToken) {
-    // TODO: Facebook Login + Token 발급 필요
-    // const response = await fetch(...)
-    // return response.json()
-  }
-}</pre>
-          </div>
-        </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section></section></section>
 
     </main>
   </div>
@@ -1932,23 +1364,24 @@ const DataStore = {
   _prefix: 'aicut_ds_',
   _cache: null,
 
-  /** 기본 데이터 (초기값) */
+  /** 기본 데이터 (초기값) — 연동 완료된 채널만 실제 값, 나머지는 null */
   _defaults() {
     return {
-      'overview.visitors': 273,
-      'overview.visitors_trend': '▲ +12.3%',
-      'overview.naver_clicks': 15,
-      'overview.naver_trend': '▲ +25%',
-      'overview.reels_views': 6426,
-      'overview.reels_trend': '▲ +221%',
-      'overview.ad_cost': 137141,
-      'overview.adcost_trend': '▼ -8.2%',
+      'overview.visitors': null,
+      'overview.visitors_trend': null,
+      'overview.naver_clicks': null,
+      'overview.naver_trend': null,
+      'overview.reels_views': null,
+      'overview.reels_trend': null,
+      'overview.ad_cost': null,
+      'overview.adcost_trend': null,
 
-      'channel.instagram': 142,
-      'channel.naver': 92,
-      'channel.naver_ad': 14,
-      'channel.google': 17,
+      'channel.instagram': null,
+      'channel.naver': null,
+      'channel.naver_ad': null,
+      'channel.google': null,
 
+      // 네이버 — live 연동 완료
       'naver.impressions': 1042,
       'naver.clicks': 15,
       'naver.ctr': 1.44,
@@ -1960,37 +1393,37 @@ const DataStore = {
       'naver.bizmoney_paid': 80731,
       'naver.bizmoney_free': 18536,
 
-      'instagram.followers': 45,
-      'instagram.posts': 12,
-      'instagram.cardnews': 5,
-      'instagram.reels': 4,
-      'instagram.recent_reels_views': 6426,
-      'instagram.reels_trend': '▲ +221%',
-      'instagram.reels_ctr': 1.2,
-      'instagram.shortform_views': 6426,
-      'instagram.shortform_web': 77,
-      'instagram.shortform_cost': 57428,
-      'instagram.profile_views': 1998,
-      'instagram.profile_web': 1073,
-      'instagram.profile_cost': 78713,
+      'instagram.followers': null,
+      'instagram.posts': null,
+      'instagram.cardnews': null,
+      'instagram.reels': null,
+      'instagram.recent_reels_views': null,
+      'instagram.reels_trend': null,
+      'instagram.reels_ctr': null,
+      'instagram.shortform_views': null,
+      'instagram.shortform_web': null,
+      'instagram.shortform_cost': null,
+      'instagram.profile_views': null,
+      'instagram.profile_web': null,
+      'instagram.profile_cost': null,
 
-      'ga4.active_users': 273,
-      'ga4.sessions': 471,
-      'ga4.avg_session_time': '4분 30초',
-      'ga4.conversions': 0,
-      'ga4.insta_users': 142,
-      'ga4.naver_users': 92,
-      'ga4.google_users': 17,
-      'ga4.naver_ad_users': 14,
+      'ga4.active_users': null,
+      'ga4.sessions': null,
+      'ga4.avg_session_time': null,
+      'ga4.conversions': null,
+      'ga4.insta_users': null,
+      'ga4.naver_users': null,
+      'ga4.google_users': null,
+      'ga4.naver_ad_users': null,
 
-      'kin.total_answers': 85,
-      'kin.weekly_answers': 8,
-      'kin.adoption_rate': '--',
-      'kin.keywords': '영상편집/숏폼/릴스',
+      'kin.total_answers': null,
+      'kin.weekly_answers': null,
+      'kin.adoption_rate': null,
+      'kin.keywords': null,
 
-      'design.blog_images': 5,
-      'design.cardnews': 5,
-      'design.reels_videos': 4,
+      'design.blog_images': null,
+      'design.cardnews': null,
+      'design.reels_videos': null,
 
       'settings.ga4_id': 'G-D141VGTF79',
       'settings.naver_account': 'aicut (master@aicut.co.kr)',
@@ -2007,11 +1440,19 @@ const DataStore = {
       const raw = localStorage.getItem(this._prefix + 'all');
       if (raw) {
         this._cache = JSON.parse(raw);
-        // 빠진 키는 기본값으로 채우기
+        // 기본값 병합: null은 강제 덮어쓰기, 빠진 키는 채우기
         const defs = this._defaults();
+        let changed = false;
         for (const k in defs) {
-          if (!(k in this._cache)) this._cache[k] = defs[k];
+          if (defs[k] === null && this._cache[k] !== null) {
+            this._cache[k] = null;
+            changed = true;
+          } else if (!(k in this._cache)) {
+            this._cache[k] = defs[k];
+            changed = true;
+          }
         }
+        if (changed) this._save();
         return this._cache;
       }
     } catch(e) {}
@@ -2159,13 +1600,21 @@ function renderAllDataKeys() {
   document.querySelectorAll('[data-key]').forEach(el => {
     const key = el.dataset.key;
     const val = DataStore.get(key);
-    if (val === null) return;
     renderDataValue(el, key, val);
   });
 }
 
 /** 단일 data-key 요소 렌더링 */
 function renderDataValue(el, key, val) {
+  // null = 아직 연동 안 됨
+  if (val === null || val === undefined) {
+    el.textContent = '—';
+    el.style.opacity = '0.3';
+    el.title = '아직 연동되지 않은 데이터입니다';
+    return;
+  }
+  el.style.opacity = '1';
+  el.title = '';
   // 숫자 포맷팅
   const numVal = Number(val);
   const isNumeric = !isNaN(numVal) && val !== '' && val !== null && val !== '--';
@@ -3225,19 +2674,7 @@ function requestTaskExecution(taskId, taskTitle) {
 
 // ===== 빠른 작업 실행 (블로그/인스타 페이지에서 직접 실행) =====
 function quickRunTask(taskId, taskTitle) {
-  if (typeof requestTaskExecution === 'function') {
-    var tasks = taskStore.load();
-    var task = tasks.find(function(t) { return t.id === taskId; });
-    if (task) {
-      taskStore.setStatus(taskId, '진행중');
-      requestTaskExecution(taskId, taskTitle);
-      showToast('🛠️ 에이든에게 "' + taskTitle + '" 작업이 전달되었습니다!');
-    } else {
-      showToast('❌ 작업을 찾을 수 없습니다.');
-    }
-  } else {
-    showToast('❌ 작업 실행 시스템이 초기화되지 않았습니다.');
-  }
+  showToast('⏳ "' + taskTitle + '"은(는) 준비 중인 기능입니다.');
 }
 
 
@@ -3659,7 +3096,48 @@ function renderMiniChart(containerId, values, color) {
 
 // ===== 초기화 =====
 function init() {
+
+  // 아코디언: 특정 카드들을 접힌 상태로 시작
+  setTimeout(function() {
+    var collapsibleTitles = ['통합 가이드', '시즌 키워드', '핫 키워드', '업종별 키워드', '경쟁사 인사이트', '블로그 톤앤매너', 'SEO 점검표'];
+    document.querySelectorAll('.card-title').forEach(function(title) {
+      var text = title.textContent.trim();
+      var isTarget = false;
+      for (var ci = 0; ci < collapsibleTitles.length; ci++) {
+        if (text.indexOf(collapsibleTitles[ci]) >= 0) { isTarget = true; break; }
+      }
+      if (!isTarget) return;
+      var card = title.closest('.card');
+      if (!card) return;
+      // Add toggle arrow
+      var toggle = document.createElement('span');
+      toggle.textContent = '▶';
+      toggle.style.cssText = 'margin-left:auto; font-size:10px; color:var(--text-light); cursor:pointer; transition:transform .2s;';
+      title.appendChild(toggle);
+      title.style.cursor = 'pointer';
+      // Hide body content (everything after card-title)
+      var found = false;
+      card.querySelectorAll(':scope > *').forEach(function(child) {
+        if (found) child.style.display = 'none';
+        if (child === title || child.classList.contains('card-title')) found = true;
+      });
+      // Click to toggle
+      title.addEventListener('click', function() {
+        var isHidden = false;
+        card.querySelectorAll(':scope > *').forEach(function(child) {
+          if (found && child.style.display === 'none') { child.style.display = ''; isHidden = false; }
+          else if (found) { child.style.display = 'none'; isHidden = true; }
+          if (child === title || child.classList.contains('card-title')) found = true;
+        });
+        toggle.textContent = isHidden ? '▶' : '▼';
+      });
+    });
+  }, 1000);
+
   // DataStore 초기화
+
+  // 블로그 파이프라인
+  renderBlogPipeline();
   DataStore._load();
   ApiService.init();
 
@@ -3669,6 +3147,9 @@ function init() {
   // 블로그 한눈보기 및 원고
   renderBlogDashboard();
   renderBlogDrafts();
+  
+  // 블로그 파이프라인 (SQLite 기반)
+  renderBlogPipeline();
 
   // 업무 관리
   renderTasks();
@@ -3915,12 +3396,498 @@ function bindEvents() {
   });
 }
 
+// ================================================================
+// 블로그 콘텐츠 파이프라인 UI (SQLite 기반)
+// ================================================================
+
+/** 블로그 파이프라인 데이터 로드 및 렌더링 */
+async function renderBlogPipeline() {
+
+  // KPI 업데이트
+  try {
+    var kpiAssets = (await (await fetch('http://127.0.0.1:3001/api/blog/assets')).json()).data || [];
+    var kpiPending = (await (await fetch('http://127.0.0.1:3001/api/blog/pending')).json()).data;
+    var inProgressStatuses = ['topic_proposed','topic_approved','keyword_proposed','keyword_approved','draft_writing','draft_review'];
+    var el1 = document.getElementById('kpi-total-posts');
+    var el2 = document.getElementById('kpi-in-progress');
+    var el3 = document.getElementById('kpi-pending-approvals');
+    var el4 = document.getElementById('kpi-ready-to-publish');
+    if (el1) { el1.textContent = kpiAssets.length; el1.parentElement.parentElement.parentElement.style.opacity = '1'; }
+    if (el2) el2.textContent = kpiAssets.filter(function(a) { return inProgressStatuses.indexOf(a.status) >= 0; }).length;
+    if (el3) el3.textContent = kpiPending ? 1 : 0;
+    if (el4) el4.textContent = kpiAssets.filter(function(a) { return a.status === 'draft_approved'; }).length;
+    var el5 = document.getElementById('kpi-reject-rate');
+    if (el5) {
+      var allActs = [];
+      try {
+        var res = await fetch('http://127.0.0.1:3001/api/blog/assets');
+        var allAssets = (await res.json()).data || [];
+        var rejectedCount = 0;
+        // Count rejected actions across all assets
+        for (var ri = 0; ri < allAssets.length; ri++) {
+          var actionsRes = await fetch('http://127.0.0.1:3001/api/blog/assets/' + allAssets[ri].id);
+          var actionsData = await actionsRes.json();
+          var actions = actionsData.actions || [];
+          for (var ai = 0; ai < actions.length; ai++) {
+            if (actions[ai].status === 'rejected') rejectedCount++;
+          }
+        }
+        var total = rejectedCount + kpiAssets.length;
+        el5.textContent = total > 0 ? Math.round(rejectedCount / total * 100) + '%' : '0%';
+      } catch(e) { el5.textContent = '—'; }
+    }
+  } catch(e) {}
+
+  const container = document.getElementById('blog-pipeline-list');
+  if (!container) return;
+  container.innerHTML = '<p style="font-size:12px; color:var(--text-light); text-align:center; padding:20px 0;">영.. 로딩...</p>';
+
+  try {
+    const API_BASE = 'http://127.0.0.1:3001';
+    const [assetsRes, pendingRes] = await Promise.all([
+      fetch(API_BASE + '/api/blog/assets'),
+      fetch(API_BASE + '/api/blog/pending')
+    ]);
+    const assets = (await assetsRes.json()).data || [];
+    const pending = (await pendingRes.json()).data || null;
+
+    if (assets.length === 0) {
+      container.innerHTML = '<p style="font-size:12px; color:var(--text-light); text-align:center; padding:20px 0;">아직 포스트가 없습니다. 새 포스트를 생성해보세요.</p>';
+      return;
+    }
+
+    let html = '';
+    for (const asset of assets) {
+      const sd = asset.step_data || {};
+      const proposedTopics = sd.proposed_topics || [];
+      const kwStrategy = sd.keyword_strategy || {};
+      const hasDraft = sd.draft_html_file ? true : false;
+
+      // 상태 매핑
+      const statusMap = {
+        'topic_proposed': { step:1, label:'주제 제안', icon:'bulb', active: true },
+        'topic_approved': { step:1, label:'주제 승인', icon:'bulb', active: false },
+        'keyword_proposed': { step:2, label:'키워드 제안', icon:'file-pencil', active: true },
+        'keyword_approved': { step:2, label:'키워드 승인', icon:'file-pencil', active: false },
+        'draft_writing': { step:3, label:'본문 작성', icon:'photo', active: false },
+        'draft_review': { step:3, label:'본문 검토', icon:'photo', active: true },
+        'draft_approved': { step:4, label:'발행 대기', icon:'eye', active: false },
+        'published': { step:5, label:'발행 완료', icon:'rocket', active: false }
+      };
+      const sm = statusMap[asset.status] || { step:1, label:asset.status, icon:'bulb', active:false };
+
+      // 현재 pending action 확인
+      const isPending = pending && pending.asset_id === asset.id;
+
+      html += '<div class="pipeline-card" style="border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:12px; background:var(--surface);">';
+      // 제목
+      html += '<div style="font-size:13px; font-weight:700; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;"><span>' + (asset.title || '(제목 미정)') + '</span><button onclick=\"blogPipelineDelete(' + asset.id + ')\" style=\"border:none; background:none; cursor:pointer; font-size:14px; color:#EF4444; padding:2px 6px; border-radius:4px;\" title=\"삭제\">🗑️</button></div>';
+
+      // Step Flow
+      html += '<div class="step-flow progress-' + sm.step + '" style="margin-bottom:10px;">';
+      const steps = ['주제', '키워드', '본문', '검토', '발행'];
+      for (let i = 0; i < steps.length; i++) {
+        const num = i + 1;
+        const isDone = num < sm.step;
+        const isCurrent = num === sm.step;
+        const circleClass = isDone ? 'done' : (isCurrent ? 'active' : '');
+        const labelClass = isDone ? 'done' : (isCurrent ? 'active' : '');
+        const icon = isDone ? 'ti ti-check' : (isCurrent ? 'ti ti-' + sm.icon : 'ti ti-circle');
+        html += '<div class="step-item">';
+        html += '<div class="step-circle ' + circleClass + '"><i class="' + icon + '" style="font-size:16px;"></i></div>';
+        html += '<div class="step-label ' + labelClass + '">' + steps[i] + '</div>';
+        html += '</div>';
+      }
+      html += '</div>';
+
+      // 현재 상태 설명
+      html += '<div style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">현재: <strong>' + sm.label + '</strong></div>';
+
+      // 산출물 표시
+      if (asset.status === 'topic_proposed' && proposedTopics.length > 0) {
+        html += '<div style="font-size:11px; background:var(--bg); border-radius:8px; padding:10px; margin-bottom:10px;">';
+        html += '<div style="font-weight:600; margin-bottom:4px;">제안된 주제 (선택 후 승인):</div>';
+        html += '<select id="topic-select-' + asset.id + '" style="width:100%; padding:8px; border:1px solid var(--border); border-radius:6px; font-size:12px; margin-bottom:4px; box-sizing:border-box;">';
+        for (var si = 0; si < proposedTopics.length; si++) {
+          var tTitle = proposedTopics[si].title || proposedTopics[si];
+          html += '<option value="' + tTitle.replace(/"/g, '&quot;') + '">' + (si+1) + '. ' + tTitle + '</option>';
+        }
+        html += '</select>';
+        html += '</div>';}
+
+      if ((asset.status === 'keyword_proposed' || asset.status === 'keyword_approved') && kwStrategy.main_keyword) {
+        html += '<div style="font-size:11px; background:var(--bg); border-radius:8px; padding:10px; margin-bottom:10px;">';
+        html += '<div style="font-weight:600; margin-bottom:6px;">키워드 전략:</div>';
+        html += '메인: <strong>' + kwStrategy.main_keyword + '</strong> | SEO 점수: ' + (kwStrategy.seo_score || '-') + '/100';
+        if (kwStrategy.sub_keywords && kwStrategy.sub_keywords.length > 0) {
+          html += '<br>서브: ' + kwStrategy.sub_keywords.join(', ');
+        }
+        html += '</div>';
+      }
+
+      if (asset.status === 'draft_review' && hasDraft) {
+        html += '<div style="font-size:11px; background:var(--green-100); border-radius:8px; padding:10px; margin-bottom:10px;">';
+        html += '<span style="color:var(--green-600); font-weight:600;">✓ 본문 + 이미지 작성 완료</span>';
+        var imgCount = (sd.draft_images || []).length;
+        html += '<br>이미지 ' + imgCount + '장 포함';
+        html += '</div>';
+
+                // 본문 미리보기 (기본 접힘, 클릭 시 펼쳐짐)
+        html += '<div style="margin-bottom:10px;">';
+        html += '<div onclick="var p=this.parentElement;var b=p.querySelector(\'.draft-body\');var t=this.querySelector(\'.draft-toggle\');if(b){var isHidden=b.style.display===\'none\';b.style.display=isHidden?\'\':\'none\';t.textContent=isHidden?\'▼\':\'▶\';}" style="font-size:11px; font-weight:600; cursor:pointer; padding:6px 0; display:flex; align-items:center; gap:6px;">';
+        html += '<span class="draft-toggle">▶</span> 본문 미리보기 (블로그 발행 시 모습)';
+        html += '</div>';
+        html += '<div class="draft-body" style="display:none;">';
+        html += '<div id="draft-frame-' + asset.id + '" style="border:1px solid var(--border); border-radius:8px; overflow:hidden; height:520px; background:var(--bg);">';
+        html += '<div style="padding:20px; text-align:center; color:var(--text-light); font-size:12px;">본문을 불러오는 중...</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+
+        // 비동기로 본문 HTML 로드 후 srcdoc 설정
+        setTimeout(function() {
+          fetch('http://127.0.0.1:3001/api/blog/draft/' + asset.id)
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+              var container = document.getElementById('draft-frame-' + asset.id);
+              if (!container || !d.full_html) return;
+              var iframe = document.createElement('iframe');
+              iframe.srcdoc = d.full_html;
+              iframe.style.width = '100%';
+              iframe.style.height = '520px';
+              iframe.style.border = 'none';
+              container.innerHTML = '';
+              container.appendChild(iframe);
+            })
+            .catch(function() {});
+        }, 100);        // 이미지 썸네일
+        var images = sd.draft_images || [];
+        if (images.length > 0) {
+          html += '<div style="margin-bottom:10px;">';
+          html += '<div style="font-size:11px; font-weight:600; margin-bottom:6px;">생성된 이미지:</div>';
+          html += '<div style="display:flex; gap:8px; flex-wrap:wrap;">';
+          var maxThumbs = Math.min(images.length, 3);
+          for (var ii = 0; ii < maxThumbs; ii++) {
+            var imgPath = 'file:///C:/Users/paul/.openclaw/workspace/' + images[ii];
+            html += '<div style="width:120px; height:67px; border-radius:6px; overflow:hidden; border:1px solid var(--border); background:var(--bg);">';
+            html += '<img src="' + imgPath + '" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display=\'none\'"/>';
+            html += '</div>';
+          }
+          if (images.length > 3) {
+            html += '<div style="font-size:10px; color:var(--text-light); align-self:flex-end;">+' + (images.length - 3) + '장 더</div>';
+          }
+          html += '</div></div>';
+        }
+      }
+
+      if (asset.status === 'draft_approved') {
+        html += '<div style="font-size:11px; background:var(--amber-100); border-radius:8px; padding:10px; margin-bottom:10px;">';
+        html += '<span style="color:var(--amber-600);">🛑 발행 직전까지 완성. 본문과 이미지를 확인하고 직접 발행해주세요.</span>';
+        html += '</div>';
+      }
+
+      // 승인/반려 버튼
+      if (isPending) {
+        html += '<div style="display:flex; gap:6px; flex-wrap:wrap;">';
+        html += '<button class="btn btn-sm btn-success" onclick="blogPipelineApproveWithTopic(' + pending.id + ',' + asset.id + ')" style="flex:1;">✅ 승인</button>';
+        html += '<button class="btn btn-sm" onclick="blogPipelineReject(' + pending.id + ',' + asset.id + ')" style="flex:1; border-color:var(--red-600); color:var(--red-600);">❌ 반려</button>';
+        html += '</div>';
+        html += '<div id="feedback-area-' + pending.id + '" style="display:none; margin-top:8px;">';
+        html += '<input type="text" id="feedback-input-' + pending.id + '" placeholder="반려 사유를 입력해주세요" style="width:100%; padding:8px; border:1px solid var(--border); border-radius:6px; font-size:12px; box-sizing:border-box;">';
+        html += '<button class="btn btn-sm" onclick="blogPipelineSubmitReject(' + pending.id + ',' + asset.id + ')" style="margin-top:4px; width:100%; border-color:var(--red-600); color:var(--red-600);">반려 확정</button>';
+        html += '</div>';
+      }
+
+      html += '</div>';
+    }
+
+    container.innerHTML = html;
+    // Add click-to-preview on pipeline cards
+    setTimeout(function() {
+      document.querySelectorAll('#blog-pipeline-list .pipeline-card').forEach(function(card, idx) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('button, select, input')) return;
+          var title = this.querySelector('[style*="font-weight:700"]');
+          if (title) showPreview(title.textContent.trim());
+        });
+      });
+    }, 800);
+  
+
+    // 데이터 목록 분리: completed asset => data-list
+    setTimeout(function() {
+      var dataList = document.getElementById('blog-data-list');
+      var pipelineContainer = document.getElementById('blog-pipeline-list');
+      if (!dataList || !pipelineContainer) return;
+      
+      // asset ID와 title을 저장해둔 completed 배열 사용
+      var completed = [];
+      for (var ci = 0; ci < assets.length; ci++) {
+        var a = assets[ci];
+        var progressStatuses = ['topic_proposed','topic_approved','keyword_proposed','keyword_approved','draft_writing','draft_review'];
+        if (progressStatuses.indexOf(a.status) < 0) {
+          completed.push({ id: a.id, title: a.title, status: a.status });
+        }
+      }
+      
+      if (completed.length === 0) {
+        dataList.innerHTML = '<p style="font-size:11px;color:#A0A7BD;text-align:center;padding:16px 0;">완료된 데이터가 없습니다</p>';
+      } else {
+        var dlHtml = '';
+        for (var di = 0; di < completed.length; di++) {
+          var item = completed[di];
+          var statusBadge = item.status === 'draft_approved' ? '발행 대기' : item.status;
+          dlHtml += '<div class="channel-stat" style="padding:8px 0;">';
+          dlHtml += '<div class="channel-left"><div class="channel-icon" style="background:#D1FAE5;font-size:14px;">&#10003;</div><div><div class="channel-name">' + (item.title || '(제목 미정)') + '</div><div class="channel-desc">' + statusBadge + '</div></div></div>';
+          dlHtml += '<div class="channel-right"><span class="badge badge-green">&#10003; 완료</span>';
+          dlHtml += ' <button class="btn btn-xs" onclick="blogPipelineDelete(' + item.id + ')" style="color:#EF4444;border:none;background:none;cursor:pointer;font-size:13px;" title="삭제">&#10005;</button></div>';
+          dlHtml += '</div>';
+        }
+        dataList.innerHTML = dlHtml;
+      }
+      
+      // pipeline에서 completed 카드 제거
+      var pipeCards = pipelineContainer.querySelectorAll('.pipeline-card');
+      pipeCards.forEach(function(card) {
+        var titleEl = card.querySelector('[style*="font-weight:700"]');
+        if (titleEl) {
+          var cardTitle = titleEl.textContent.trim();
+          for (var di2 = 0; di2 < completed.length; di2++) {
+            if (cardTitle.indexOf(completed[di2].title || '') >= 0) {
+              if (card.parentNode) card.parentNode.removeChild(card);
+            }
+          }
+        }
+      });
+    }, 600);
+  
+
+    // Hide old hardcoded sections when pipeline data exists
+    var oldStepFlow = document.querySelector('.card:has(#blog-process-flow)');
+    if (oldStepFlow) oldStepFlow.style.display = 'none';
+    var oldPostTable = document.querySelector('.card:has(#blog-posts-body)');
+    if (oldPostTable) oldPostTable.style.display = 'none';
+    var oldSeoChecklist = document.querySelector('.card:has(#seo-checklist)');
+    if (oldSeoChecklist) oldSeoChecklist.style.display = 'none';
+  
+  } catch (err) {
+    container.innerHTML = '<p style="font-size:12px; color:var(--red-600); text-align:center; padding:20px 0;">데이터를 불러오는 중 오류가 발생했습니다: ' + err.message + '</p>';
+  }
+}
+
+/** 새 포스트 생성 */
+async function blogPipelineNew() {
+  const btn = document.getElementById('blog-pipeline-new-btn');
+  btn.disabled = true;
+  btn.textContent = '생성 중...';
+  try {
+    const res = await fetch('http://127.0.0.1:3001/api/blog/new', { method: 'POST' });
+    const data = await res.json();
+    if (data.success) {
+      showToast('✔ 새 포스트가 생성되었습니다.');
+    } else {
+      showToast('⚠ 오류: ' + (data.error || '알 수 없는 오류'));
+    }
+  } catch (err) {
+    showToast('⚠ 요청 실패: ' + err.message);
+  }
+  btn.disabled = false;
+  btn.textContent = '새 포스트';
+  renderBlogPipeline();
+}
+
+/** 승인 처리 */
+
+/** 주제 선택 후 승인 */
+
+/** 포스트 삭제 */
+
+/** 본문 미리보기 표시 */
+async function showPreview(assetTitle) {
+  var titleEl = document.getElementById('preview-asset-title');
+  var contentEl = document.getElementById('blog-preview-content');
+  if (!titleEl || !contentEl) return;
+  titleEl.textContent = assetTitle;
+  contentEl.innerHTML = '<p style="font-size:11px;color:#A0A7BD;text-align:center;padding:20px;">본문을 불러오는 중...</p>';
+
+  try {
+    var res = await fetch('http://127.0.0.1:3001/api/blog/assets');
+    var data = await res.json();
+    var assets = data.data || [];
+    var asset = null;
+    for (var si = 0; si < assets.length; si++) {
+      if (assets[si].title === assetTitle) { asset = assets[si]; break; }
+    }
+    if (!asset) { contentEl.innerHTML = '<p style="font-size:11px;color:#A0A7BD;text-align:center;padding:20px;">데이터를 찾을 수 없습니다.</p>'; return; }
+
+    var sd = asset.step_data || {};
+    
+    if (asset.status === 'topic_proposed' && sd.proposed_topics) {
+      var html = '<div style="font-size:11px;padding:10px;">';
+      html += '<div style="font-weight:600;margin-bottom:6px;">제안된 주제 후보:</div>';
+      sd.proposed_topics.forEach(function(t, i) {
+        html += '<div style="padding:4px 0;border-bottom:1px solid #E8EBF0;">' + (i+1) + '. ' + (t.title || t) + '</div>';
+      });
+      html += '</div>';
+      contentEl.innerHTML = html;
+      return;
+    }
+
+    if ((asset.status === 'keyword_proposed' || asset.status === 'keyword_approved') && sd.keyword_strategy) {
+      var kw = sd.keyword_strategy;
+      var html = '<div style="font-size:11px;padding:10px;">';
+      html += '<div style="font-weight:600;margin-bottom:6px;">키워드 전략:</div>';
+      html += '메인: <strong>' + kw.main_keyword + '</strong> | SEO: ' + (kw.seo_score || '-') + '/100<br>';
+      if (kw.sub_keywords) html += '서브: ' + kw.sub_keywords.join(', ');
+      html += '</div>';
+      contentEl.innerHTML = html;
+      return;
+    }
+
+    if (sd.draft_html_file && (asset.status === 'draft_review' || asset.status === 'draft_approved')) {
+      var draftRes = await fetch('http://127.0.0.1:3001/api/blog/draft/' + asset.id);
+      var draftData = await draftRes.json();
+      if (draftData.full_html) {
+        contentEl.innerHTML = '<iframe srcdoc="' + draftData.full_html.replace(/"/g, '&quot;') + '" style="width:100%;height:600px;border:none;"></iframe>';
+        return;
+      }
+    }
+
+    contentEl.innerHTML = '<p style="font-size:11px;color:#A0A7BD;text-align:center;padding:20px;">이 단계에서는 표시할 본문이 없습니다.</p>';
+  } catch(e) {
+    contentEl.innerHTML = '<p style="font-size:11px;color:#EF4444;text-align:center;padding:20px;">오류: ' + e.message + '</p>';
+  }
+}
+
+
+/** 블로그 작성 가이드 저장 */
+function saveBlogGuide() {
+  var keys = ['img-size','file-prefix','font','writing-style','align','seo-position','hashtag-count','cta','content-length'];
+  var data = {};
+  keys.forEach(function(k) {
+    var el = document.getElementById('guide-' + k);
+    if (el) data[k] = el.value;
+  });
+  localStorage.setItem('aicut_blog_guide', JSON.stringify(data));
+  showToast('💾 가이드가 저장되었습니다.');
+}
+
+/** 블로그 작성 가이드 초기화 */
+function resetBlogGuide() {
+  loadBlogGuide(true);
+  showToast('↺ 초기화되었습니다.');
+}
+
+/** 블로그 작성 가이드 로드 */
+function loadBlogGuide(forceDefault) {
+  var defaults = {
+    'img-size': '700x700 / 800x450',
+    'file-prefix': 'aicut_ prefix',
+    'font': 'Noto Sans KR',
+    'writing-style': '짧은 문장 · 평서체',
+    'align': '센터 정렬',
+    'seo-position': '제목 앞쪽',
+    'hashtag-count': '30개',
+    'cta': '카톡/이메일/홈페이지 3종',
+    'content-length': '1000~3000자'
+  };
+  var saved = null;
+  if (!forceDefault) {
+    try { saved = JSON.parse(localStorage.getItem('aicut_blog_guide') || '{}'); } catch(e) {}
+  }
+  var data = saved || defaults;
+  Object.keys(defaults).forEach(function(k) {
+    var el = document.getElementById('guide-' + k);
+    if (el) el.value = data[k] || defaults[k];
+  });
+}
+
+async function blogPipelineDelete(assetId) {
+  if (!confirm('이 포스트를 삭제하시겠습니까? 관련된 승인 요청도 함께 삭제됩니다.')) return;
+  try {
+    const res = await fetch('http://127.0.0.1:3001/api/blog/assets/' + assetId, { method: 'DELETE' });
+    const data = await res.json();
+    if (data.success) {
+      showToast('🗑️ 포스트가 삭제되었습니다.');
+      renderBlogPipeline();
+    } else {
+      showToast('⚠️ 삭제 실패: ' + (data.error || '오류'));
+    }
+  } catch (err) {
+    showToast('⚠️ 오류: ' + err.message);
+  }
+}
+
+function blogPipelineApproveWithTopic(actionId, assetId) {
+  var sel = document.getElementById('topic-select-' + assetId);
+  var topic = sel ? sel.value : '';
+  blogPipelineApprove(actionId, assetId, topic);
+}
+
+async function blogPipelineApprove(actionId, assetId, selectedTopic) {
+  try {
+    const bodyData = { actionId: actionId, assetId: assetId };
+    if (selectedTopic) bodyData.selected_topic = selectedTopic;
+    const res = await fetch('http://127.0.0.1:3001/api/blog/approve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(bodyData)
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('✔ 승인되었습니다. 다음 단계로 진행합니다.');
+      renderBlogPipeline();
+    }
+  } catch (err) {
+    showToast('⚠ 오류: ' + err.message);
+  }
+}
+
+/** 반려 입력창 표시 */
+function blogPipelineReject(actionId, assetId) {
+  var area = document.getElementById('feedback-area-' + actionId);
+  if (area) area.style.display = area.style.display === 'none' ? 'block' : 'none';
+}
+
+/** 반려 확정 */
+async function blogPipelineSubmitReject(actionId, assetId) {
+  var input = document.getElementById('feedback-input-' + actionId);
+  var feedback = input ? input.value.trim() : '';
+  if (!feedback) { showToast('반려 사유를 입력해주세요.'); return; }
+  try {
+    const res = await fetch('http://127.0.0.1:3001/api/blog/reject', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ actionId, assetId, feedback })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('피드백이 저장되었습니다. 같은 단계에서 재제안합니다.');
+      // blog.js 실행해서 재제안
+      fetch('http://127.0.0.1:3001/api/blog/process', { method: 'POST' }).catch(function(){});
+      renderBlogPipeline();
+    }
+  } catch (err) {
+    showToast('⚠ 오류: ' + err.message);
+  }
+}
+
+
+  // 블로그 파이프라인
+  setTimeout(renderBlogPipeline, 2000);
+  setTimeout(loadBlogGuide, 1000);
+  document.addEventListener("click",function(e){var t=e.target.closest("[data-collapsible]");if(t)t.classList.toggle("open");});
+
 // ===== DOM Ready =====
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
   init();
 }
+
+// 블로그 파이프라인 자동 실행 (init 후)
+setTimeout(renderBlogPipeline, 2000);
 
 // ===== 팀 에이전트 채팅 시스템 =====
 var CHAT_STORE_KEY = 'aicut_chat_messages';

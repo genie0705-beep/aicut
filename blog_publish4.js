@@ -1,68 +1,81 @@
-// 발행 - 모달 안의 발행 버튼 찾기
 const { chromium } = require('playwright');
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 (async () => {
-  const b = await chromium.connectOverCDP('http://localhost:9222');
-  const ctx = b.contexts()[0];
-
-  let page = null;
-  for (const p of ctx.pages()) {
-    if (p.url().includes('postwrite')) { page = p; break; }
-  }
-  if (!page) { console.log('에디터 탭 없음'); process.exit(1); }
-
-  ctx.on('dialog', async d => { try { await d.accept(); } catch(e) {} });
-
-  // 1) 먼저 발행 버튼 클릭 (모달 열기)
-  const btns = await page.$$('button');
-  for (const btn of btns) {
-    const txt = await btn.innerText().catch(() => '');
-    const vis = await btn.isVisible().catch(() => false);
-    if (txt.trim() === '발행') {
-      console.log(`발행(1) visible=${vis}`);
-      if (vis) {
-        await btn.click({ force: true });
-        await page.waitForTimeout(2000);
-        break;
-      }
+  try {
+    const browser = await chromium.connectOverCDP('http://127.0.0.1:9224');
+    const context = browser.contexts()[0];
+    const page = context.pages().find(p => p.url().includes('PostWriteForm'));
+    
+    if (!page) {
+      console.log('PostWriteForm page not found');
+      process.exit(1);
     }
-  }
 
-  // 2) 모달 안의 발행 버튼 찾기
-  console.log('\n=== 모달 내 발행 버튼 검색 ===');
-  const allBtns2 = await page.$$('button');
-  for (const btn of allBtns2) {
-    const txt = await btn.innerText().catch(() => '');
-    const vis = await btn.isVisible().catch(() => false);
-    const cls = await btn.getAttribute('class').catch(() => '');
-    if (vis && (txt.trim() === '발행' || txt.includes('발행'))) {
-      console.log(`발행(2): class="${cls?.substring(0, 50)}" text="${txt.trim()}"`);
+    console.log('=== Examining publish dialog and blog category settings ===');
+    
+    // First, let's find the "발행" button and click it to see the dialog
+    const publishBtn = await page.$('.publish_btn__m9KHH, .publish_btn_area__KjA2i button');
+    if (publishBtn) {
+      console.log('Found publish button, clicking...');
+      await publishBtn.click();
+      await sleep(2000);
+      
+      // Now check what appeared
+      const dialogState = await page.evaluate(() => {
+        const result = {};
+        
+        // Check for any visible dialogs, modals, overlays
+        const dialogs = document.querySelectorAll('[class*="dialog"], [class*="modal"], [class*="overlay"], [class*="popup"], [role="dialog"]');
+        result.dialogs = Array.from(dialogs).map(d => ({
+          class: d.className?.substring(0, 100),
+          visible: d.offsetParent !== null,
+          html: d.outerHTML.substring(0, 800)
+        }));
+        
+        // Check for any new layer
+        const layers = document.querySelectorAll('[class*="layer"], [class*="Layer"]');
+        result.layers = Array.from(layers).filter(l => l.offsetParent !== null).map(l => ({
+          class: l.className?.substring(0, 100),
+          html: l.innerHTML.substring(0, 600)
+        }));
+        
+        // Look for any visible elements containing 카테고리, 분류, 설정, 픽
+        const all = document.querySelectorAll('*');
+        const categoryRefs = [];
+        all.forEach(el => {
+          if (el.offsetParent === null) return;
+          const t = el.textContent?.trim() || '';
+          if ((t.includes('카테고리') || t.includes('분류') || t.includes('에이컷 오늘')) && t.length < 80) {
+            categoryRefs.push({
+              text: t,
+              tag: el.tagName,
+              class: el.className?.substring(0, 60)
+            });
+          }
+        });
+        result.categoryRefs = categoryRefs;
+        
+        // Check for select elements in visible dialogs
+        const selects = document.querySelectorAll('select');
+        result.visibleSelects = Array.from(selects).filter(s => s.offsetParent !== null).map(s => ({
+          options: Array.from(s.options).map(o => ({ text: o.text, value: o.value.substring(0, 30) })),
+          selectedIndex: s.selectedIndex
+        }));
+        
+        return result;
+      });
+      
+      console.log('Dialog State:', JSON.stringify(dialogState, null, 2));
+    } else {
+      console.log('Publish button not found');
     }
+    
+    await browser.close();
+    process.exit(0);
+  } catch (e) {
+    console.error('Error:', e.message);
+    console.error(e.stack);
+    process.exit(1);
   }
-
-  // 발행 버튼이 여러 개면, 두 번째 것 클릭
-  const publishBtns = [];
-  for (const btn of allBtns2) {
-    const txt = await btn.innerText().catch(() => '');
-    const vis = await btn.isVisible().catch(() => false);
-    if (vis && txt.trim() === '발행') {
-      publishBtns.push(btn);
-    }
-  }
-  
-  console.log(`발행 버튼 총 ${publishBtns.length}개`);
-  if (publishBtns.length >= 2) {
-    console.log('두 번째 발행 버튼 클릭');
-    await publishBtns[1].click({ force: true });
-    await page.waitForTimeout(3000);
-    console.log('발행 완료!');
-  } else if (publishBtns.length === 1 && false) {
-    // 이미 첫 번째가 클릭됐으면...
-  }
-
-  console.log('URL:', page.url());
-  const body = await page.evaluate(() => document.body.innerText.substring(0, 400)).catch(() => '');
-  console.log('상태:', body);
-
-  try { await b.close(); } catch(e) {}
 })();

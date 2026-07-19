@@ -1,25 +1,41 @@
 const { chromium } = require('playwright');
 
-(async () => {
-  const b = await chromium.connectOverCDP('http://localhost:9222');
-  const ctx = b.contexts()[0];
-  const pages = ctx.pages();
-
-  for (let i = 0; i < pages.length; i++) {
-    const p = pages[i];
-    const url = p.url();
+async function main() {
+  const b = await chromium.connectOverCDP('http://127.0.0.1:9224');
+  const pages = b.contexts()[0].pages();
+  
+  // Write 탭 3개 분석
+  const writeTabs = [0, 4, 5];
+  for (const idx of writeTabs) {
+    const p = pages[idx];
+    if (!p.url().includes('Redirect=Write')) continue;
+    
+    const fe = await p.$('#mainFrame');
+    if (!fe) { console.log(`탭 ${idx}: iframe 없음`); continue; }
+    const f = await fe.contentFrame();
+    if (!f) { console.log(`탭 ${idx}: frame 접근 불가`); continue; }
+    
     try {
-      const hasCe = await p.evaluate(() => !!document.querySelector('[contenteditable]'));
-      const text = await p.evaluate(() => {
-        const ce = document.querySelector('[contenteditable]');
-        return ce ? (ce.innerText || '').substring(0, 40) : '-';
+      const info = await f.evaluate(() => {
+        const ed = SmartEditor._editors['blogpc001'];
+        const title = ed.getDocumentTitle();
+        const data = ed.getDocumentData();
+        const blocks = data.document.blocks;
+        const h2Count = blocks.filter(b => b.type === 'heading2').length;
+        const pCount = blocks.filter(b => b.type === 'paragraph').length;
+        const imgComps = data.document.components.filter(c => c.fileName || c.src).length;
+        const firstBlocks = blocks.slice(0, 5).map(b => ({ type: b.type, text: (b.text || '').substring(0, 40) }));
+        const canvasImgs = document.querySelectorAll('.se-canvas img').length;
+        
+        return { title, totalBlocks: blocks.length, h2: h2Count, p: pCount, imgComps, canvasImgs, firstBlocks };
       });
-      console.log(`[${i}] contenteditable=${hasCe} text="${text}"`);
-      console.log(`     url=${url.substring(0, 130)}`);
-    } catch (e) {
-      console.log(`[${i}] ERROR: ${url.substring(0, 80)}`);
+      console.log(`🔍 탭 ${idx}:`, JSON.stringify(info, null, 2));
+    } catch(e) {
+      console.log(`탭 ${idx}: 오류 - ${e.message.substring(0, 80)}`);
     }
   }
-  console.log(`\n총 ${pages.length}개 탭`);
-  await b.close();
-})().catch(e => console.log('ERR:', e.message.split('\n')[0]));
+  
+  process.exit(0);
+}
+
+main().catch(e => console.error('❌', e.message));

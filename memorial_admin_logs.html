@@ -349,6 +349,117 @@
     main#content{padding:18px 14px 50px;}
     .topbar{padding:14px 16px;}
   }
+
+  /* ---------- Global Search ---------- */
+  .global-search-wrap{position:relative; width:260px;}
+  .global-search-wrap input{
+    width:100%; padding:8px 14px 8px 34px;
+    border:1px solid var(--border); border-radius:999px;
+    font-size:13px; background:var(--stone-50); color:var(--ink-900);
+    outline:none; transition:border-color .15s, box-shadow .15s;
+  }
+  .global-search-wrap input:focus{
+    border-color:var(--jade-700); box-shadow:0 0 0 3px rgba(91,95,239,.12);
+    background:#fff;
+  }
+  .global-search-wrap .search-icon{
+    position:absolute; left:10px; top:50%; transform:translateY(-50%);
+    color:var(--ink-400); font-size:15px; pointer-events:none;
+  }
+  .search-results-dropdown{
+    position:fixed; background:#fff; border:1px solid var(--border);
+    border-radius:var(--radius-md); box-shadow:var(--shadow-card);
+    width:340px; max-height:360px; overflow-y:auto;
+    z-index:50; display:none;
+    padding:6px 0;
+  }
+  .search-results-dropdown.show{display:block;}
+  .search-result-item{
+    padding:10px 14px; cursor:pointer; display:flex; align-items:center; gap:10px;
+    transition:background .12s;
+  }
+  .search-result-item:hover{background:var(--stone-50);}
+  .search-result-item .type-badge{
+    flex-shrink:0; font-size:10px; font-weight:700; letter-spacing:.02em;
+    padding:2px 7px; border-radius:4px;
+    background:var(--stone-200); color:var(--ink-600);
+    text-transform:uppercase; min-width:40px; text-align:center;
+  }
+  .search-result-item .type-badge.contract{background:rgba(91,95,239,.12); color:var(--jade-700);}
+  .search-result-item .type-badge.deceased{background:var(--brass-100); color:var(--brass-800);}
+  .search-result-item .type-badge.location{background:var(--jade-100); color:var(--jade-800);}
+  .search-result-item .result-name{font-size:13.5px; font-weight:600; margin:0;}
+  .search-result-item .result-sub{font-size:12px; color:var(--ink-400); margin:2px 0 0;}
+  .search-result-item .result-meta{font-size:11.5px; color:var(--ink-400); margin-left:auto; flex-shrink:0;}
+  .search-no-result{
+    padding:24px 16px; text-align:center; font-size:13px; color:var(--ink-400);
+  }
+
+  /* ---------- Location Side Panel ---------- */
+  #loc-side-panel{font-size:13.5px;}
+  #loc-side-panel h4{margin:12px 0 6px; font-size:13px; color:var(--ink-600); font-weight:600;}
+  #loc-side-panel .info-row{display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--stone-200); font-size:13px;}
+  #loc-side-panel .info-row:last-child{border-bottom:none;}
+  #loc-side-panel .info-label{color:var(--ink-400); font-size:12px;}
+  #loc-side-panel .info-value{font-weight:600; text-align:right;}
+  #loc-side-panel .history-item{padding:6px 0; border-bottom:1px solid var(--stone-200); font-size:12.5px;}
+  #loc-side-panel .history-item:last-child{border-bottom:none;}
+  #loc-side-panel .history-date{color:var(--ink-400); font-size:11px;}
+  #loc-side-panel .history-action{font-weight:600; margin:1px 0;}
+  #loc-side-panel .history-by{color:var(--ink-400); font-size:11px;}
+  #loc-side-panel .lsp-btn{
+    width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-sm);
+    text-align:left; display:flex; align-items:center; gap:8px;
+    font-size:13.5px; font-weight:600; cursor:pointer;
+    transition:background .12s; background:var(--surface); color:var(--ink-900);
+  }
+  #loc-side-panel .lsp-btn:hover{background:var(--stone-50);}
+  #loc-side-panel .lsp-btn.primary{background:var(--jade-700); color:#fff; border-color:var(--jade-700);}
+  #loc-side-panel .lsp-btn.primary:hover{background:var(--jade-600);}
+  #loc-side-panel .lsp-btn.danger{color:var(--wine-600); border-color:var(--wine-100);}
+  #loc-side-panel .lsp-btn.danger:hover{background:var(--wine-100);}
+
+  /* ---------- Bulk Action Bar ---------- */
+  .bulk-action-bar{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink-900); color:#fff;
+    padding:12px 20px; border-radius:999px;
+    display:flex; align-items:center; gap:14px;
+    box-shadow:0 4px 20px rgba(0,0,0,.25);
+    opacity:0; transition:opacity .2s, transform .2s;
+    pointer-events:none; z-index:50; white-space:nowrap;
+  }
+  .bulk-action-bar.show{
+    opacity:1; transform:translateX(-50%) translateY(0);
+    pointer-events:auto;
+  }
+  .bulk-action-bar .bulk-count{font-size:13px; font-weight:600;}
+  .bulk-action-bar .btn-bulk{
+    background:rgba(255,255,255,.15); border:none; color:#fff;
+    font-size:13px; padding:6px 14px; border-radius:999px; cursor:pointer;
+  }
+  .bulk-action-bar .btn-bulk:hover{background:rgba(255,255,255,.25);}
+  .bulk-action-bar .bulk-cancel{
+    background:none; border:none; color:rgba(255,255,255,.6);
+    font-size:12px; cursor:pointer;
+  }
+
+  /* ---------- @media print ---------- */
+  @media print{
+    body *{visibility:hidden;}
+    #loc-side-panel, #lsp-overlay, .bulk-action-bar{display:none !important;}
+    .print-area, .print-area *{visibility:visible;}
+    .print-area{position:absolute; left:0; top:0; width:100%; padding:20px;}
+    .sidebar, .topbar, .top-right, .global-search-wrap, nav, .sidebar-footer{display:none !important;}
+    .app{display:block !important;}
+    .main{width:100% !important;}
+    main#content{padding:10px 20px !important; max-width:100% !important;}
+    @page{margin:15mm;}
+  }
+
+  /* ---------- Receipt button ---------- */
+  .receipt-btn{background:none; border:1px solid var(--jade-700); color:var(--jade-700); font-size:12px; padding:4px 10px; border-radius:var(--radius-sm); cursor:pointer; margin-left:6px;}
+  .receipt-btn:hover{background:var(--jade-700); color:#fff;}
 </style>
 </head>
 <body>
@@ -396,6 +507,11 @@
   <div class="main">
     <header class="topbar">
       <h1 id="page-title">대시보드</h1>
+      <div class="global-search-wrap">
+        <i class="ti ti-search search-icon"></i>
+        <input id="global-search-input" type="text" placeholder="계약자·고인·위치 빠른 검색 (단축키: /)" autocomplete="off">
+        <div id="global-search-results" class="search-results-dropdown"></div>
+      </div>
       <div class="top-right">
         <span class="facility-badge" id="facility-badge">수목장</span>
         <span class="operator-name">청솔원 메모리얼파크</span>
@@ -440,6 +556,14 @@
             <p class="kpi-label">이번달 매출</p>
             <p class="kpi-value">₩48,500,000</p>
           </div>
+        </div>
+
+        <div class="card" style="padding:16px 20px; margin-bottom:16px; border-left:4px solid var(--jade-700);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <h2 style="margin:0; font-size:15px; font-weight:700;">⚡️ 오늘 처리할 항목</h2>
+            <span id="today-action-count" style="font-size:13px; color:var(--ink-400);"></span>
+          </div>
+          <div id="today-action-list" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
 
         <div class="card" style="padding:18px 18px 16px; margin-bottom:16px; width:100%;">
@@ -513,137 +637,7 @@
               <div class="loc-grid" id="full-loc-grid"></div>
             </div>
           </div>
-          
-          <!-- 우측 상세 패널 (fixed) -->
-          <div id="loc-detail-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.25); z-index:55;"></div>
-          <div id="loc-detail-panel" style="position:fixed; top:0; right:0; width:340px; max-width:90vw; height:100vh; display:none; flex-direction:column; z-index:56; background:var(--surface); box-shadow:-4px 0 24px rgba(0,0,0,.12);">
-            <div style="padding:16px 18px; background:var(--stone-50); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
-                <div>
-                  <p style="font-size:11px; color:var(--ink-400); margin:0 0 2px;">위치 상세</p>
-                  <p id="dp-code" style="font-size:17px; font-weight:700; margin:0; color:var(--ink-900);">--</p>
-                </div>
-                <button id="dp-close" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink-400); padding:6px; border-radius:50%; hover:background:var(--stone-200);">&times;</button>
-              </div>
-              <!-- 상태 배지 -->
-              <div style="padding:12px 18px; border-bottom:1px solid var(--stone-200); display:flex; gap:6px; flex-shrink:0;">
-                <span id="dp-status-badge" class="badge" style="font-size:13px; padding:5px 14px;">--</span>
-              </div>
-              <!-- 내용 (스크롤) -->
-              <div style="padding:12px 0; flex:0 0 auto; overflow-y:auto; overflow-x:auto; max-height:calc(100vh - 140px); word-break:break-word; overflow-wrap:break-word;">
-                <!-- 고인/계약자 정보 (한 줄) -->
-                <div id="dp-occupied-info" style="margin-bottom:6px; padding:0 16px;">
-                  <div style="display:flex; gap:16px; flex-wrap:wrap;">
-                    <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">고인</label>
-                      <p id="dp-occupant" style="font-size:13px; font-weight:600; margin:0;">--</p>
-                    </div>
-                    <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">계약자</label>
-                      <p id="dp-holder" style="font-size:13px; font-weight:600; margin:0;">--</p>
-                    </div>
-                    <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">계약일</label>
-                      <p id="dp-date" style="font-size:13px; font-weight:600; margin:0; color:var(--ink-900);">--</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- 공실 (줄임) -->
-                <div id="dp-empty-info" style="display:none; margin-bottom:6px; padding:0 16px;">
-                  <p style="font-size:13px; color:var(--ink-400); margin:0;">현재 공실입니다.</p>
-                  <p id="dp-price" style="font-size:13px; font-weight:600; margin:6px 0 0;">--</p>
-                </div>
-                <!-- 예약자 (한 줄) -->
-                <div id="dp-reserved-info" style="display:none; margin-bottom:6px; padding:0 16px;">
-                  <div style="display:flex; gap:16px; flex-wrap:wrap;">
-                    <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">예약자</label>
-                      <p id="dp-reserver" style="font-size:13px; font-weight:600; margin:0;">--</p>
-                    </div>
-                    <div style="flex:1; min-width:80px;">
-                      <label style="font-size:10px; color:var(--ink-400); display:block; margin-bottom:1px;">예약일</label>
-                      <p id="dp-res-date" style="font-size:13px; font-weight:600; margin:0; color:var(--ink-900);">--</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- 계약 사항 (접힘 기본) -->
-                <div id="dp-contract-info" style="display:none; border-top:1px solid var(--stone-200); padding-top:6px; margin-bottom:6px; padding:6px 16px 0 16px;;">
-                  <div onclick="toggleSection('contract-detail')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; padding-left:0; margin-left:0;">
-                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📄 계약 사항 <span class="toggle-icon" id="toggle-contract-detail" style="font-size:10px; color:var(--ink-400);">▼</span></p>
-                  </div>
-                  <div id="dp-contract-detail" data-section="contract-detail" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; min-width:0;">
-                    <div style="min-width:0; overflow:hidden;">
-                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:2px;">계약번호</label>
-                      <p id="dp-contract-no" style="font-size:13px; font-weight:600; margin:0;">--</p>
-                    </div>
-                    <div style="min-width:0; overflow:hidden;">
-                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:2px;">계약금액</label>
-                      <p id="dp-contract-amount" style="font-size:13px; font-weight:600; margin:0;">--</p>
-                    </div>
-                    <div style="min-width:0; overflow:hidden;">
-                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:2px;">안치유형</label>
-                      <p id="dp-plan-type" style="font-size:13px; font-weight:600; margin:0; color:var(--ink-900);">--</p>
-                    </div>
-                    <div style="min-width:0; overflow:hidden;">
-                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:2px;">관리비 주기</label>
-                      <p id="dp-fee-cycle" style="font-size:13px; font-weight:600; margin:0; color:var(--ink-900);">--</p>
-                    </div>
-                    <div style="min-width:0; overflow:hidden;">
-                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:2px;">납부상태</label>
-                      <p id="dp-pay-status" style="font-size:13px; margin:0;"><span class="badge badge-success">완납</span></p>
-                    </div>
-                    <div style="min-width:0; overflow:hidden;">
-                      <label style="font-size:11px; color:var(--ink-400); display:block; margin-bottom:2px;">영업담당</label>
-                      <p id="dp-agent" style="font-size:13px; font-weight:600; margin:0; color:var(--ink-900);">--</p>
-                    </div>
-                  </div>
-                </div>
-                </div>
-                <!-- 관리비 (펼침 기본) -->
-                <div style="border-top:1px solid var(--stone-200); padding-top:6px; margin-bottom:6px; padding:6px 16px 0 16px;">
-                  <div onclick="toggleSection('fee-status')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; padding-left:0;">
-                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📋 관리비 납부 현황 <span class="toggle-icon" id="toggle-fee-status" style="font-size:10px; color:var(--ink-400);">▼</span></p>
-                  </div>
-                  <div id="dp-fee-status" data-section="fee-status" style="display:flex; flex-direction:column; gap:6px;">
-                    <p style="font-size:13px; color:var(--ink-600);">--</p>
-                  </div>
-                </div>
-                <!-- 변경이력 (펼침 기본) -->
-                <div style="border-top:1px solid var(--stone-200); padding-top:6px; margin-bottom:6px; padding:6px 16px 0 16px;">
-                  <div onclick="toggleSection('history')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; padding-left:0;">
-                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📜 변경이력 <span class="toggle-icon" id="toggle-history" style="font-size:10px; color:var(--ink-400);">▼</span></p>
-                  </div>
-                  <div id="dp-history" data-section="history" style="display:flex; flex-direction:column; gap:6px;">
-                    <p style="font-size:13px; color:var(--ink-400);">변경 이력이 없습니다.</p>
-                  </div>
-                  <div style="margin-top:10px; border-top:1px solid var(--stone-200); padding-top:10px;">
-                    <div style="display:flex; gap:6px;">
-                      <input id="dp-history-input" type="text" placeholder="비고/사유 입력..." style="flex:1; padding:7px 0 7px 0; border:1px solid var(--border); border-radius:var(--radius-sm); font-size:12.5px; text-indent:10px;">
-                      <button id="dp-history-add" class="btn btn-primary btn-sm" style="white-space:nowrap;">등록</button>
-                    </div>
-                    <p style="font-size:10.5px; color:var(--ink-400); margin:5px 0 0;">관리자 메모는 브라우저에 저장됩니다</p>
-                  </div>
-                </div>
-                <!-- 알림톡 발송 (펼침 기본) -->
-                <div style="border-top:1px solid var(--stone-200); padding-top:6px; margin-bottom:0; padding:6px 16px 0 16px;">
-                  <div onclick="toggleSection('kakao')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; padding-left:0;">
-                    <p style="font-size:12px; font-weight:600; color:var(--ink-400); margin:0 0 4px;">📬 알림톡 발송 <span class="toggle-icon" id="toggle-kakao" style="font-size:10px; color:var(--ink-400);">▼</span></p>
-                  </div>
-                  <div data-section="kakao" style="display:block;">
-                  <div style="display:flex; flex-direction:column; gap:6px;">
-                    <button class="dp-kakao-btn" data-type="fee" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); cursor:pointer; font-size:12.5px; font-weight:500; color:var(--ink-900); text-align:left; width:100%;" onmouseenter="this.style.background='var(--stone-50)'" onmouseleave="this.style.background='var(--surface)'">
-                      <span style="width:28px; height:28px; border-radius:50%; background:#FEE500; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">💛</span>
-                      <div><p style="margin:0; font-weight:600;">관리비 납부 안내</p><p style="margin:0; font-size:11px; color:var(--ink-400);">계약자에게 관리비 납부 안내 전송</p></div>
-                    </button>
-                    <button class="dp-kakao-btn" data-type="memorial" style="display:flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); cursor:pointer; font-size:12.5px; font-weight:500; color:var(--ink-900); text-align:left; width:100%;" onmouseenter="this.style.background='var(--stone-50)'" onmouseleave="this.style.background='var(--surface)'">
-                      <span style="width:28px; height:28px; border-radius:50%; background:#FEE500; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;">💛</span>
-                      <div><p style="margin:0; font-weight:600;">추모일 안내</p><p style="margin:0; font-size:11px; color:var(--ink-400);">기일/삼우제/49제 안내 전송</p></div>
-                    </button>
-                  </div>
-                  <button id="dp-kakao-log-btn" style="background:none; border:none; color:var(--jade-700); font-size:11.5px; font-weight:600; cursor:pointer; padding:0; margin-top:6px;"><i class="ti ti-history"></i> 발송이력 보기</button>
-                </div>
-              </div>
-          </div>
-        </div>
+</div>
 
         <div class="section-head" style="margin-top:24px;">
           <div>
@@ -930,6 +924,39 @@
               </div>
             </div>
           </div>
+
+          <!-- ================= 개인정보 동의 ================= -->
+          <div style="margin-top:18px; padding:14px; border:1px solid var(--border); border-radius:var(--radius-md); background:var(--stone-50);">
+            <p style="font-size:13px; font-weight:700; margin:0 0 10px;">\uac1c\uc778\uc815\ubcf4 \uc218\uc9d1 \ubc0f \uc774\uc6a9 \ub3d9\uc758</p>
+            <div style="font-size:12px; color:var(--ink-600); line-height:1.6; margin-bottom:10px; padding:8px 10px; background:#fff; border:1px solid var(--border); border-radius:var(--radius-sm); max-height:80px; overflow-y:auto;">
+              \ucf68\uc14b\uba54\ubaa8\ub9ac\uc5bc\ud30c\ud06c(\uccad\uc20c\uc6d0)\ub294 \uacc4\uc57d \uccb4\uacb0 \ubc0f \uad00\ub9ac\ub97c \uc704\ud574 \uac1c\uc778\uc815\ubcf4\ub97c \uc218\uc9d1\ud558\uace0 \uc788\uc2b5\ub2c8\ub2e4. \uace0\uc778\uba85, \uacc4\uc57d\uc790\uba85, \uc5f0\ub77d\ucc98, \uc8fc\uc18c \ub4f1 \ud544\uc218 \uc815\ubcf4\ub97c \uc218\uc9d1\ud558\uba70, \ub3d9\uc758\ub97c \uac70\ubd80\ud558\uc2e4 \uacbd\uc6b0 \uacc4\uc57d \uccb4\uacb0\uc774 \uc81c\ud55c\ub429\ub2c8\ub2e4.
+            </div>
+            <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; cursor:pointer; margin-bottom:8px;">
+              <input type="checkbox" id="nc-privacy-required" style="width:16px; height:16px;">
+              <span style="color:var(--wine-600);">[\ud544\uc218]</span> \uac1c\uc778\uc815\ubcf4 \uc218\uc9d1 \ubc0f \uc774\uc6a9\uc5d0 \ub3d9\uc758\ud569\ub2c8\ub2e4.
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:400; cursor:pointer; margin-bottom:8px;">
+              <input type="checkbox" id="nc-privacy-thirdparty" style="width:16px; height:16px;">
+              <span style="color:var(--ink-400);">[\uc120\ud0dd]</span> \uc81c3\uc790 \uc81c\uacf5\uc5d0 \ub3d9\uc758\ud569\ub2c8\ub2e4.
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:400; cursor:pointer;">
+              <input type="checkbox" id="nc-kakao-consent" style="width:16px; height:16px;" checked>
+              \u2709\ufe0f \uce74\uce74\uc624 \uc54c\ub9bc\ud1a1 \uc218\uc2e0\uc5d0 \ub3d9\uc758\ud569\ub2c8\ub2e4.
+            </label>
+          </div>
+
+          <!-- ================= \uc804\uc790\uc11c\uba85 \ud328\ub4dc ================= -->
+          <div style="margin-top:14px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+              <label style="font-size:13px; font-weight:600; color:var(--ink-900);">\u270d\ufe0f \uacc4\uc57d\uc790 \uc11c\uba85</label>
+              <button id="nc-sign-clear" class="btn btn-ghost btn-sm" style="font-size:11px; color:var(--ink-400);">\uc9c0\uc6b0\uae30</button>
+            </div>
+            <div style="border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; background:#fff;">
+              <canvas id="nc-sign-pad" width="520" height="140" style="width:100%; height:140px; touch-action:none; cursor:crosshair;"></canvas>
+            </div>
+            <p style="font-size:11px; color:var(--ink-400); margin:4px 0 0;">\ub9c8\uc6b0\uc2a4 \ub610\ub294 \ud134\uce58\ub85c \uc11c\uba85\ud574 \uc8fc\uc138\uc694.</p>
+          </div>
+
           <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:20px;">
             <button class="btn btn-ghost" id="nc-cancel-btn">취소</button>
             <button class="btn btn-primary" id="nc-submit-btn"><i class="ti ti-circle-check"></i> 계약서 생성</button>
@@ -1003,9 +1030,12 @@
 
         <div class="section-head">
           <div>
-            <h2>🧾 수수료 정산</h2>
+            <h2><i class="ti ti-receipt"></i> 수수료 정산</h2>
             <p class="section-sub">2026년 6월 · 영업자별 미정산 합계</p>
           </div>
+          <button class="btn btn-ghost btn-sm" id="export-csv-btn">
+            <i class="ti ti-file-spreadsheet"></i> CSV 내보내기
+          </button>
         </div>
         <div class="card table-wrap">
           <table class="data-table" id="settle-table">
@@ -1703,7 +1733,6 @@
 
     </main>
   </div>
-</div>
 
 <!-- ================= 납부 알림 패널 ================= -->
 <div id="notif-panel" style="display:none; position:fixed; top:0; right:0; width:380px; max-width:90vw; height:100vh; z-index:70; background:var(--surface); box-shadow:-4px 0 20px rgba(0,0,0,.1); overflow-y:auto;">
@@ -2194,6 +2223,7 @@ function buildLocationGrid(containerId, count){
         cell.addEventListener('mouseenter', function(e){ showLocTooltip(e.currentTarget, e); });
         cell.addEventListener('mousemove', function(e){ positionLocTooltip(e); });
         cell.addEventListener('mouseleave', hideLocTooltip);
+        cell.addEventListener('click', function(){ showLocationSidePanel(this); });
         branches.appendChild(cell);
       }
       treeWrapper.appendChild(branches);
@@ -2296,7 +2326,7 @@ function buildLocationGrid(containerId, count){
               cell.dataset.holder = holderNames[cellIdx % holderNames.length];
             }
             
-            cell.onclick = function(d){ return function(){ showLocationDetail(d); }; }(cell);
+            cell.addEventListener('click', function(){ showLocationSidePanel(this); });
             
             cell.addEventListener('mouseenter', function(e){ this.style.transform = 'scale(1.2)'; this.style.boxShadow = '0 2px 6px rgba(0,0,0,.15)'; showLocTooltip(this, e); });
             cell.addEventListener('mousemove', function(e){ positionLocTooltip(e); });
@@ -2396,6 +2426,7 @@ function buildLocationGrid(containerId, count){
     cell.addEventListener('mouseenter', function(e){ showLocTooltip(e.currentTarget, e); });
     cell.addEventListener('mousemove', function(e){ positionLocTooltip(e); });
     cell.addEventListener('mouseleave', hideLocTooltip);
+    cell.addEventListener('click', function(){ showLocationSidePanel(this); });
     return cell;
   }
   
@@ -2618,7 +2649,7 @@ function setupLocationClickHandlers(){
     cell.style.cursor = 'pointer';
     cell.addEventListener('click', function(e){
       e.stopPropagation();
-      showLocationDetail(cell);
+      showLocationSidePanel(cell);
     });
   });
   // 건물형 UI 내 셀도 포함
@@ -2627,187 +2658,10 @@ function setupLocationClickHandlers(){
     el.style.cursor = 'pointer';
     el.addEventListener('click', function(e){
       e.stopPropagation();
-      showLocationDetail(el);
+      showLocationSidePanel(el);
     });
   });
 }
-
-function showLocationDetail(cell){
-  var panel = document.getElementById('loc-detail-panel');
-  var overlay = document.getElementById('loc-detail-overlay');
-  panel.style.display = 'flex';
-  overlay.style.display = 'block';
-  
-  var code = cell.dataset.code || '--';
-  var status = cell.dataset.status || 'empty';
-  document.getElementById('dp-code').textContent = code;
-  
-  // 상태 배지
-  var badge = document.getElementById('dp-status-badge');
-  if(status === 'occupied'){
-    badge.className = 'badge badge-success';
-    badge.innerHTML = '<i class="ti ti-circle-check"></i> 사용중';
-  } else if(status === 'reserved'){
-    badge.className = 'badge badge-warning';
-    badge.innerHTML = '<i class="ti ti-clock"></i> 예약중';
-  } else {
-    badge.className = 'badge badge-neutral';
-    badge.innerHTML = '<i class="ti ti-circle"></i> 공실';
-  }
-  
-  document.getElementById('dp-occupied-info').style.display = 'none';
-  document.getElementById('dp-empty-info').style.display = 'none';
-  document.getElementById('dp-reserved-info').style.display = 'none';
-  
-  if(status === 'occupied'){
-    document.getElementById('dp-occupied-info').style.display = 'block';
-    document.getElementById('dp-occupant').textContent = cell.dataset.occupant || '--';
-    document.getElementById('dp-holder').textContent = cell.dataset.holder || '--';
-    document.getElementById('dp-date').textContent = cell.dataset.date || '--';
-    
-    // 관리비: 더미 데이터로 회차별 시각화
-    var feeHtml = '<div style="display:flex; align-items:center; justify-content:space-between;">';
-    feeHtml += '<span class="badge badge-success"><i class="ti ti-circle-check"></i> 정상 납부중</span>';
-    var feeAmt = localStorage.getItem('chungsol_settings') ? JSON.parse(localStorage.getItem('chungsol_settings')).feeAmount || '360000' : '360000';
-    var feeCycle = localStorage.getItem('chungsol_settings') ? JSON.parse(localStorage.getItem('chungsol_settings')).feeCycle || '3' : '3';
-    feeHtml += '<span style="font-size:12px; color:var(--ink-400);">' + feeCycle + '년 약정 · 연 ₩' + Number(feeAmt).toLocaleString() + '</span>';
-    feeHtml += '</div>';
-    feeHtml += '<p style="font-size:11px; color:var(--ink-400); margin:2px 0 0;">최근 납부: 2026-06-10 · 다음 납부예정: 2026-09-10 (D-78)</p>';
-    feeHtml += '<div style="margin-top:6px;">';
-    feeHtml += '<div style="display:flex; justify-content:space-between; font-size:11px; color:var(--ink-600); margin-bottom:4px;">';
-    feeHtml += '<span>회차별 납부율</span><span>5/12회차</span>';
-    feeHtml += '</div>';
-    feeHtml += '<div style="height:6px; background:var(--stone-200); border-radius:999px; overflow:hidden; display:flex;">';
-    for(var fi=0; fi<12; fi++){
-      var fb = fi < 5 ? 'var(--jade-700)' : (fi === 5 ? 'var(--brass-500)' : 'var(--stone-200)');
-      feeHtml += '<div style="flex:1; height:100%; background:' + fb + '; border-right:1px solid #fff;"></div>';
-    }
-    feeHtml += '</div>';
-    feeHtml += '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--ink-400); margin-top:3px;">';  
-    feeHtml += '<span>✅ 완납</span><span>⏳ 이번회차</span><span>⬜ 예정</span>';
-    feeHtml += '</div>';
-    feeHtml += '</div>';
-    document.getElementById('dp-fee-status').innerHTML = feeHtml;
-    
-    // 계약 사항 채우기 (접힘 상태)
-    document.getElementById('dp-contract-info').style.display = 'block';
-    var cd = document.querySelector('[data-section="contract-detail"]');
-    if(cd) { cd.style.display = 'grid'; var ci = document.getElementById('toggle-contract-detail'); if(ci) ci.textContent = '▼'; }
-    document.getElementById('dp-contract-no').textContent = 'CT-2026-' + String(Math.floor(Math.random() * 900) + 100);
-    document.getElementById('dp-contract-amount').textContent = ['₩9,800,000','₩7,200,000','₩6,500,000'][Math.floor(Math.random() * 3)];
-    document.getElementById('dp-plan-type').textContent = ['개인단','부부단','가족단'][Math.floor(Math.random() * 3)];
-    document.getElementById('dp-fee-cycle').textContent = '3년 (' + (Math.floor(Math.random() * 5) + 1) + '/' + 5 + '회차)';
-    var payType = Math.floor(Math.random() * 4);
-    var payBadge = payType < 2 ? 'badge-success' : (payType < 3 ? 'badge-warning' : 'badge-danger');
-    var payText = payType < 2 ? '완납' : (payType < 3 ? '미납' : '연체');
-    var payLabel = ['계약금','중도금','잔금'][Math.floor(Math.random() * 3)];
-    document.getElementById('dp-pay-status').innerHTML = '<span class="badge ' + payBadge + '">' + payLabel + ' ' + payText + '</span>';
-    document.getElementById('dp-agent').textContent = ['김민수(내부)','박지훈(내부)','늘봄상조(외부)'][Math.floor(Math.random() * 3)];
-  } else if(status === 'reserved'){
-    document.getElementById('dp-reserved-info').style.display = 'block';
-    document.getElementById('dp-reserver').textContent = cell.dataset.holder || '--';
-    document.getElementById('dp-res-date').textContent = cell.dataset.date || '--';
-    document.getElementById('dp-fee-status').innerHTML = '<span class="badge badge-warning"><i class="ti ti-clock"></i> 예약금 입금완료</span><p style="font-size:11px; color:var(--ink-400); margin:4px 0 0;">계약 전환 대기중</p>';
-    document.getElementById('dp-contract-info').style.display = 'none';
-  } else {
-    document.getElementById('dp-empty-info').style.display = 'block';
-    document.getElementById('dp-price').textContent = cell.dataset.price ? '분양가 ' + cell.dataset.price : '--';
-    document.getElementById('dp-fee-status').innerHTML = '<span class="badge badge-neutral">해당 없음</span>';
-    document.getElementById('dp-contract-info').style.display = 'none';
-  }
-  
-  // 변경이력 (기본 + 커스텀 노트)
-  var historyContainer = document.getElementById('dp-history');
-  var code = cell.dataset.code;
-  
-  // 기본 히스토리
-  var defaultHistories = [];
-  if(status === 'occupied'){
-    defaultHistories = [
-      { date: cell.dataset.date || '2026-06-10', action: '최초 안치 계약 체결', by: cell.dataset.holder || '--' },
-      { date: '2026-06-12', action: '안장 위치 확정', by: '김민수(관리자)' }
-    ];
-  } else if(status === 'reserved'){
-    defaultHistories = [
-      { date: cell.dataset.date || '2026-06-15', action: '예약 등록', by: cell.dataset.holder || '--' },
-      { date: '2026-06-15', action: '예약금 입금 확인', by: '김민수(관리자)' }
-    ];
-  }
-  
-  // localStorage에서 커스텀 노트 로드
-  var customNotes = [];
-  try {
-    var saved = JSON.parse(localStorage.getItem('chungsol_notes_' + code));
-    if(saved && Array.isArray(saved)) customNotes = saved;
-  } catch(e){}
-  
-  // 대표 계약자 정보를 첫 번째 노트에 표시
-  var allHistories = defaultHistories.concat(customNotes);
-  
-  // 최신순 정렬
-  allHistories.sort(function(a, b){ return (b.date || '').localeCompare(a.date || ''); });
-  
-  if(allHistories.length === 0){
-    historyContainer.innerHTML = '<p style="font-size:12px; color:var(--ink-400);">변경 이력이 없습니다.</p>';
-  } else {
-    historyContainer.innerHTML = allHistories.map(function(h){
-      var isCustom = h.by === '관리자 메모';
-      var borderStyle = isCustom ? 'border-left:2px solid var(--jade-700); padding-left:8px;' : '';
-      return '<div style="display:flex; gap:8px; font-size:12px; ' + borderStyle + '">' +
-        '<span style="color:var(--ink-400); flex-shrink:0; width:80px;">' + (h.date || '') + '</span>' +
-        '<div><p style="margin:0; color:var(--ink-900);">' + h.action + '</p>' +
-        '<p style="margin:0; color:var(--ink-400); font-size:11px;">' + (h.by || '') + '</p></div></div>';
-    }).join('');
-  }
-  
-  // 현재 코드 저장 (등록 버튼용)
-  window.__currentDetailCode = code;
-  
-  // 모바일 스크롤
-  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-/* 닫기 버튼 + 오버레이 */
-function closeDetailPanel(){
-  document.getElementById('loc-detail-panel').style.display = 'none';
-  document.getElementById('loc-detail-overlay').style.display = 'none';
-}
-document.getElementById('dp-close').addEventListener('click', closeDetailPanel);
-document.getElementById('loc-detail-overlay').addEventListener('click', closeDetailPanel);
-
-/* 변경이력 메모 등록 */
-document.getElementById('dp-history-add').addEventListener('click', function(){
-  var input = document.getElementById('dp-history-input');
-  var text = input.value.trim();
-  var code = window.__currentDetailCode;
-  if(!text || !code) return;
-  
-  var now = new Date();
-  var dateStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
-  var timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
-  
-  var note = { date: dateStr, action: '📝 ' + text, by: '관리자 메모 ' + timeStr };
-  
-  // 저장
-  try {
-    var saved = JSON.parse(localStorage.getItem('chungsol_notes_' + code)) || [];
-    saved.push(note);
-    localStorage.setItem('chungsol_notes_' + code, JSON.stringify(saved));
-  } catch(e){}
-  
-  input.value = '';
-  showToast('메모가 저장되었습니다.');
-  
-  // 히스토리 갱신 (현재 보고 있는 셀 다시 표시)
-  var panel = document.getElementById('loc-detail-panel');
-  if(panel._lastCell) showLocationDetail(panel._lastCell);
-});
-
-var _origShowDetail = showLocationDetail;
-showLocationDetail = function(cell){
-  document.getElementById('loc-detail-panel')._lastCell = cell;
-  _origShowDetail(cell);
-};
 
 /* ---------- 섹션 접힘/펼침 ---------- */
 function toggleSection(id){
@@ -2868,33 +2722,26 @@ function addKakaoLog(type, target, message){
   saveKakaoLog(logs);
 }
 
-document.querySelectorAll('.dp-kakao-btn').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    var type = btn.dataset.type;
-    var code = window.__currentDetailCode || '--';
-    var holder = document.getElementById('dp-holder')?.textContent || '계약자';
-    var occupant = document.getElementById('dp-occupant')?.textContent || '고인';
-    
-    var templateMessages = {
-      fee: '{계약자}님, {고인}님의 관리비 납부 안내입니다.\n\n계약서상의 납부자명과 동일하게 입금자명을 기재해주셔야 자동 매칭이 가능합니다.\n입금 시 반드시 "{계약자}"(으)로 입금해주세요.',
-      memorial: '{계약자}님, {고인}님의 추모일이 다가오고 있습니다.'
-    };
-    
-    var msg = (templateMessages[type] || '')
-      .replace('{계약자}', holder)
-      .replace('{고인}', occupant);
-    
-    addKakaoLog(
-      type === 'fee' ? '관리비 안내' : '추모일 안내',
-      code + ' · ' + holder,
-      msg
-    );
-    showToast('💛 알림톡이 발송되었습니다. (' + (type === 'fee' ? '관리비 안내' : '추모일 안내') + ')');
-  });
+document.querySelector('body').addEventListener('click', function(e_dp){
+  if(!e_dp.target.classList.contains('dp-kakao-btn')) return;
+  var btn = e_dp.target;
+  var type = btn.dataset.type;
+  var code = window.__currentDetailCode || '--';
+  var holder = window.__currentDetailHolder || '계약자';
+  var occupant = window.__currentDetailOccupant || '고인';
+  var templateMessages = {
+    fee: '{계약자}님, {고인}님의 관리비 납부 안내입니다.',
+    memorial: '{계약자}님, {고인}님의 추모일이 다가오고 있습니다.'
+  };
+  var msg = (templateMessages[type] || '').replace('{계약자}', holder).replace('{고인}', occupant);
+  addKakaoLog(type === 'fee' ? '관리비 안내' : '추모일 안내', code + ' · ' + holder, msg);
+  showToast('💛 알림톡이 발송되었습니다. (' + (type === 'fee' ? '관리비 안내' : '추모일 안내') + ')');
 });
 
 /* 발송이력 모달 */
-document.getElementById('dp-kakao-log-btn').addEventListener('click', function(){
+document.querySelector('body').addEventListener('click', function(e_log){
+  if(e_log.target.id !== 'dp-kakao-log-btn') return;
+  (function(){
   var logs = getKakaoLogs();
   var html = logs.length === 0 
     ? '<p style="font-size:13px; color:var(--ink-400); padding:20px; text-align:center;">발송 이력이 없습니다.</p>'
@@ -2922,6 +2769,7 @@ document.getElementById('dp-kakao-log-btn').addEventListener('click', function()
   document.body.appendChild(modal);
   modal.querySelector('.modal-close-btn').addEventListener('click', function(){ modal.remove(); });
   modal.addEventListener('click', function(e){ if(e.target === modal) modal.remove(); });
+  })();
 });
 
 /* ---------- 관리비 리스트 ---------- */
@@ -2967,7 +2815,8 @@ function renderFeeRow(item, withAction){
     ? '<div class="urgency-bar" title="납부 임박도"><div class="urgency-fill" style="width:'+v.fill+'%; background:'+tierFillColor(v.tier)+';"></div></div>'
     : '';
   var borderColor = v.tier === 'danger' ? 'var(--wine-600)' : (v.tier === 'warning' ? 'var(--brass-500)' : (v.tier === 'success' ? 'var(--jade-700)' : 'var(--stone-200)'));
-  return '<div class="fee-row" data-status="'+v.filterStatus+'" style="border-left-color:'+borderColor+';">' +
+  return '<div class="fee-row" data-status="'+v.filterStatus+'" style="border-left-color:'+borderColor+'; cursor:pointer;">' +
+    '<input type="checkbox" class="fee-checkbox" style="margin-right:6px; width:15px; height:15px; cursor:pointer; flex-shrink:0; vertical-align:middle;">' +
     '<div class="fee-left"><div class="fee-icon"><i class="ti ti-user"></i></div>' +
     '<div><p class="fee-name">'+item.name+'</p><p class="fee-sub">'+item.sub+'</p></div></div>' +
     '<div class="fee-right"><span class="badge '+cls+'" data-role="status-badge">'+v.badge+'</span>' +
@@ -3006,6 +2855,38 @@ function attachFeePayHandlers(){
       badge.className = 'badge badge-success';
       var bar = row.querySelector('.urgency-bar');
       if(bar){ bar.remove(); }
+      // \uc601\uc218\uc99d \ucd9c\ub825 \ubc84\ud2bc \ucd94\uac00
+      var receiptBtn = document.createElement('button');
+      receiptBtn.className = 'receipt-btn';
+      receiptBtn.innerHTML = '\u1f4b3 \uc601\uc218\uc99d \ucd9c\ub825';
+      receiptBtn.addEventListener('click', function(){
+        var nameEl = row.querySelector('.fee-name');
+        var subEl = row.querySelector('.fee-sub');
+        var name = nameEl ? nameEl.textContent : '--';
+        var sub = subEl ? subEl.textContent : '--';
+        var now = new Date();
+        var dateStr = now.getFullYear() + '.' + (now.getMonth()+1) + '.' + now.getDate();
+        
+        var receiptHtml = '<div class="print-area" style="padding:30px; font-family:Pretendard,sans-serif;">';
+        receiptHtml += '<h2 style="text-align:center; margin-bottom:20px;">\uad00\ub9ac\ube44 \uc218\ub0a9 \uc601\uc218\uc99d</h2>';
+        receiptHtml += '<hr style="border:1px solid #000; margin-bottom:16px;">';
+        receiptHtml += '<p><strong>\uc218\ub0a9\uc77c:</strong> ' + dateStr + '</p>';
+        receiptHtml += '<p><strong>\uace0\uac1d\uba85:</strong> ' + name + '</p>';
+        receiptHtml += '<p><strong>\ub0b4\uc5ed:</strong> ' + sub + '</p>';
+        receiptHtml += '<hr style="margin:16px 0;">';
+        receiptHtml += '<p style="text-align:right; font-size:16px;"><strong>\uc218\ub0a9\uae08\uc561: \u20a9 360,000</strong></p>';
+        receiptHtml += '<hr style="margin:16px 0;">';
+        receiptHtml += '<p style="text-align:center; font-size:12px; color:#888;">\uccad\uc20c\uc6d4 \uba54\ubaa8\ub9ac\uc5bc\ud30c\ud06c</p>';
+        receiptHtml += '</div>';
+        
+        var printWin = window.open('', '_blank', 'width=600,height=800');
+        printWin.document.write('<html><head><title>\uad00\ub9ac\ube44 \uc601\uad6c\uc99d</title></head><body>' + receiptHtml + '</body></html>');
+        printWin.document.close();
+        printWin.focus();
+        setTimeout(function(){ printWin.print(); }, 500);
+      });
+      row.querySelector('.fee-right').appendChild(receiptBtn);
+      
       btn.remove();
       showToast('관리비 수납이 처리되었습니다.');
       var activeFilter = document.querySelector('#fee-filter-tabs .tab-btn.active').dataset.filter;
@@ -3014,6 +2895,102 @@ function attachFeePayHandlers(){
   });
 }
 renderFullFeeList('all');
+
+/* ================= Fee Bulk Actions ================= */
+function attachFeeBulkActions(){
+  var bar = document.getElementById('bulk-action-bar');
+  var countEl = document.getElementById('bulk-count');
+  var list = document.getElementById('fee-list');
+  if(!list || !bar || !countEl) return;
+
+  function updateBulkBar(){
+    var checked = list.querySelectorAll('.fee-checkbox:checked');
+    var len = checked.length;
+    countEl.textContent = len + '\uac74 \uc120\ud0dd';
+    if(len > 0){
+      bar.classList.add('show');
+    } else {
+      bar.classList.remove('show');
+    }
+  }
+
+  function clearAllChecks(){
+    list.querySelectorAll('.fee-checkbox').forEach(function(c){ c.checked = false; });
+    updateBulkBar();
+  }
+
+  // 체크박스 이벤트 (위임)
+  list.addEventListener('change', function(e){
+    if(e.target.classList.contains('fee-checkbox')){
+      updateBulkBar();
+    }
+  });
+
+  // 행 클릭 시 체크박스 토글
+  list.addEventListener('click', function(e){
+    var row = e.target.closest('.fee-row');
+    if(!row || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+    var chk = row.querySelector('.fee-checkbox');
+    if(chk){ chk.checked = !chk.checked; updateBulkBar(); }
+  });
+
+  // 일괄 알림톡 발송
+  document.getElementById('bulk-kakao-btn').addEventListener('click', function(){
+    var checked = list.querySelectorAll('.fee-checkbox:checked');
+    var names = [];
+    checked.forEach(function(c){
+      var row = c.closest('.fee-row');
+      var nameEl = row ? row.querySelector('.fee-name') : null;
+      if(nameEl) names.push(nameEl.textContent);
+    });
+    if(names.length > 0){
+      showToast(names.length + '\uac74\uc5d0 \uc54c\ub9bc\ud1a1\uc774 \ubc1c\uc1a1\ub418\uc5c8\uc2b5\ub2c8\ub2e4.');
+    }
+    clearAllChecks();
+  });
+
+  // 일괄 수납처리
+  document.getElementById('bulk-pay-btn').addEventListener('click', function(){
+    var checked = list.querySelectorAll('.fee-checkbox:checked');
+    var count = checked.length;
+    checked.forEach(function(c){
+      var row = c.closest('.fee-row');
+      if(!row) return;
+      row.dataset.status = 'paid';
+      row.style.borderLeftColor = 'var(--jade-700)';
+      var badge = row.querySelector('[data-role="status-badge"]');
+      if(badge){
+        badge.textContent = '\uc644\ub8cc';
+        badge.className = 'badge badge-success';
+      }
+      var barEl = row.querySelector('.urgency-bar');
+      if(barEl) barEl.remove();
+      var payBtn = row.querySelector('.fee-pay-btn');
+      if(payBtn) payBtn.remove();
+      var chk = row.querySelector('.fee-checkbox');
+      if(chk) chk.remove();
+    });
+    showToast(count + '\uac74 \uc218\ub0a9\uc774 \uc77c\uad34 \ucc98\ub9ac\ub418\uc5c8\uc2b5\ub2c8\ub2e4.');
+    clearAllChecks();
+    // 현재 활성 필터 재적용 (paid 아닌 경우 숨김)
+    var activeTab = document.querySelector('#fee-filter-tabs .tab-btn.active');
+    if(activeTab && activeTab.dataset.filter !== 'all' && activeTab.dataset.filter !== 'paid'){
+      checked.forEach(function(c){
+        var row = c.closest('.fee-row');
+        if(row) row.style.display = 'none';
+      });
+    }
+  });
+
+  // 취소
+  document.getElementById('bulk-cancel-btn').addEventListener('click', clearAllChecks);
+
+  // 탭 변경 시 체크 초기화
+  document.querySelectorAll('#fee-filter-tabs .tab-btn').forEach(function(btn){
+    btn.addEventListener('click', clearAllChecks);
+  });
+}
+attachFeeBulkActions();
 
 document.querySelectorAll('#fee-filter-tabs .tab-btn').forEach(function(btn){
   btn.addEventListener('click', function(){
@@ -3068,6 +3045,110 @@ function renderMemorialList(){
   });
 }
 renderMemorialList();
+
+/* ================= Today Actions ================= */
+function renderTodayActions(){
+  var list = document.getElementById('today-action-list');
+  var countEl = document.getElementById('today-action-count');
+  if(!list) return;
+
+  var items = [];
+
+  feeData.forEach(function(f){
+    if(f.daysLeft !== null && f.daysLeft < 0){
+      if(items.length === 0 || items[items.length-1].type !== 'overdue'){
+        items.push({type:'overdue', label:'\ud68c\uc218 \ud544\uc694 \uad00\ub9ac\ube44', count:0, urgent:true, actionLabel:'\uc54c\ub9bc\ud1a1 \ubc1c\uc1a1', actionFn:function(){}});
+      }
+      items[items.length-1].count++;
+    }
+  });
+
+  memorialData.forEach(function(m){
+    if(m.badge === 'D-0'){
+      if(items.length === 0 || items[items.length-1].type !== 'memorial'){
+        items.push({type:'memorial', label:'\uc624\ub298 \ucd94\ubaa8\uc77c', count:0, urgent:true, actionLabel:'\uc548\ub0b4 \ubc1c\uc1a1', actionFn:function(){}});
+      }
+      items[items.length-1].count++;
+    }
+  });
+
+  feeData.forEach(function(f){
+    if(f.daysLeft !== null && f.daysLeft > 0 && f.daysLeft <= 30){
+      if(items.length === 0 || items[items.length-1].type !== 'expiring'){
+        items.push({type:'expiring', label:'\uad00\ub9ac\ube44 \ub0a9\ubd80 \uc608\uc815', count:0, urgent:false, actionLabel:'\uc0ac\uc804 \uc548\ub0b4', actionFn:function(){}});
+      }
+      items[items.length-1].count++;
+    }
+  });
+
+  var undone = 0;
+  dashTasks.forEach(function(t){ if(!t.done) undone++; });
+  if(undone > 0){
+    items.push({type:'task', label:'\ubbf8\uc644\ub8cc \uc5c5\ubb34', count:undone, urgent:false, actionLabel:'\uc5c5\ubb34 \ubcf4\uae30', actionFn:function(){ goPage('staff'); }});
+  }
+
+  countEl.textContent = '\ucd1d ' + items.length + '\uac74';
+
+  if(items.length === 0){
+    list.innerHTML = '<div style="padding:12px 4px; font-size:13.5px; color:var(--jade-800);">\u2705 \uc624\ub298 \ucc98\ub9ac\ud560 \uae34\uae09 \ud56d\ubaa9\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.</div>';
+    return;
+  }
+
+  var html = '';
+  items.forEach(function(item, idx){
+    var bgColor = item.urgent ? 'var(--wine-100)' : 'var(--stone-50)';
+    var borderColor = item.urgent ? 'var(--wine-600)' : 'var(--jade-700)';
+    var btnStyle = item.urgent ? 'background:var(--wine-600); color:#fff; border-color:var(--wine-600);' : 'background:var(--jade-700); color:#fff; border-color:var(--jade-700);';
+    item._idx = idx;
+    html += '<div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:var(--radius-sm); background:' + bgColor + '; border-left:3px solid ' + borderColor + ';">';
+    html += '<div><span style="font-size:13.5px; font-weight:600;">' + item.label + '</span><span style="font-size:12px; color:var(--ink-600); margin-left:8px;">' + item.count + '\uac74</span></div>';
+    html += '<button class="btn btn-sm" data-today-idx="' + idx + '" style="' + btnStyle + ' padding:5px 12px; font-size:12px;">' + item.actionLabel + '</button>';
+    html += '</div>';
+  });
+  list.innerHTML = html;
+
+  list.querySelectorAll('[data-today-idx]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var idx = parseInt(btn.dataset.todayIdx);
+      if(items[idx]) items[idx].actionFn();
+    });
+  });
+}
+
+// Bind action functions separately (closure fix)
+(function(){
+  var items = [];
+  var overdueCount = 0;
+  feeData.forEach(function(f){ if(f.daysLeft !== null && f.daysLeft < 0) overdueCount++; });
+  if(overdueCount > 0) items.push({label:'\uc54c\ub9bc\ud1a1 \ubc1c\uc1a1', fn:function(){ showToast('\uc5f0\uccb4 \uc54c\ub9bc\ud1a1\uc744 ' + overdueCount + '\uac74 \ubc1c\uc1a1\ud569\ub2c8\ub2e4.'); }});
+
+  var todayMemorialCount = 0;
+  memorialData.forEach(function(m){ if(m.badge === 'D-0') todayMemorialCount++; });
+  if(todayMemorialCount > 0) items.push({label:'\uc548\ub0b4 \ubc1c\uc1a1', fn:function(){ showToast('\ucd94\ubaa8\uc77c \uc548\ub0b4 \ubb38\uc790\ub97c ' + todayMemorialCount + '\uac74 \ubc1c\uc1a1\ud569\ub2c8\ub2e4.'); }});
+
+  var expiringCount = 0;
+  feeData.forEach(function(f){ if(f.daysLeft !== null && f.daysLeft > 0 && f.daysLeft <= 30) expiringCount++; });
+  if(expiringCount > 0) items.push({label:'\uc0ac\uc804 \uc548\ub0b4', fn:function(){ showToast('\uad00\ub9ac\ube44 \ub0a9\ubd80 \uc0ac\uc804 \uc548\ub0b4\ub97c ' + expiringCount + '\uac74 \ubc1c\uc1a1\ud569\ub2c8\ub2e4.'); }});
+
+  // Replace action functions after render
+  var origRender = renderTodayActions;
+  renderTodayActions = function(){
+    origRender();
+    var list = document.getElementById('today-action-list');
+    if(!list) return;
+    var btns = list.querySelectorAll('[data-today-idx]');
+    btns.forEach(function(btn){
+      var idx = parseInt(btn.dataset.todayIdx);
+      if(idx < items.length && items[idx]){
+        btn.addEventListener('click', items[idx].fn);
+      }
+    });
+  };
+})();
+
+if(document.getElementById('today-action-list')){
+  renderTodayActions();
+}
 
 /* ---------- 직원 관리 ---------- */
 // 출퇴근 데이터
@@ -3767,9 +3848,87 @@ document.querySelector('#contract-table tbody').addEventListener('click', functi
     showToast('계약서 · 봉안증명서 · 거래명세서가 발급되었습니다.');
   }
   if(e.target.classList.contains('changelog-row-btn')){
-    var contractNo = e.target.closest('tr').children[0].textContent;
-    renderChangeLog(contractNo);
-    openModal('changelog-modal');
+    var tr = e.target.closest('tr');
+    var tds = tr.children;
+    var contractNo = tds[0].textContent;
+    
+    // 사이드패널에 계약 상세 표시
+    var panel = document.getElementById('loc-side-panel');
+    var overlay = document.getElementById('lsp-overlay');
+    
+    document.getElementById('lsp-title').textContent = contractNo;
+    
+    var badgeEl = document.getElementById('lsp-status-badge');
+    var status = tds[8].textContent.trim();
+    if(status.indexOf('\uc815\uc0c1') >= 0){
+      badgeEl.className = 'badge badge-success';
+      badgeEl.innerHTML = '<i class="ti ti-circle-check"></i> \uc815\uc0c1';
+    } else if(status.indexOf('\ud574\uc57d') >= 0){
+      badgeEl.className = 'badge badge-danger';
+      badgeEl.innerHTML = '<i class="ti ti-alert-circle"></i> \ud574\uc57d';
+    } else {
+      badgeEl.className = 'badge badge-neutral';
+      badgeEl.innerHTML = status;
+    }
+    
+    var body = document.getElementById('lsp-body');
+    body.innerHTML = '';
+    
+    function addRow(label, value){
+      var row = document.createElement('div');
+      row.className = 'info-row';
+      row.innerHTML = '<span class="info-label">' + label + '</span><span class="info-value">' + value + '</span>';
+      body.appendChild(row);
+    }
+    function addSection(title){
+      var h = document.createElement('h4');
+      h.textContent = title;
+      body.appendChild(h);
+    }
+    
+    addRow('\uacc4\uc57d\uc790', tds[2].textContent);
+    addRow('\uace0\uc778', tds[3].textContent);
+    addRow('\uc704\uce58', tds[4].textContent);
+    addRow('\uacc4\uc57d\uae08\uc561', tds[5].textContent.replace(/<div.*/, ''));
+    addRow('\uacc4\uc57d\uc77c', tds[1].textContent);
+    addRow('\uc601\uc5c5\ub2f9\ub2f9', tds[6].textContent);
+    addRow('\uc2e4\ubb3c\ubcf4\uad00', tds[7].textContent);
+    
+    addSection('\ub0a9\ubd80 \uc774\ub825');
+    var dots = tds[5].querySelectorAll('.stage-dots .dot');
+    var paidCount = 0;
+    dots.forEach(function(d){ if(d.classList.contains('filled')) paidCount++; });
+    addRow('\ub0a9\ubd80 \uc9c4\ud589\ub960', paidCount + '/' + dots.length + '\ud68c\ucc28');
+    
+    addSection('\ucd5c\uadfc \ubcc0\uacbd \uc774\ub825');
+    var logs = getChangeLog(contractNo);
+    if(logs && logs.length > 0){
+      logs.slice(-5).reverse().forEach(function(log){
+        var item = document.createElement('div');
+        item.className = 'history-item';
+        item.innerHTML = '<div class="history-date">' + (log.date || '--') + '</div><div class="history-action">' + (log.text || log.action || '--') + '</div><div class="history-by">' + (log.by || '') + '</div>';
+        body.appendChild(item);
+      });
+    } else {
+      body.innerHTML += '<p style="font-size:12px; color:var(--ink-400); margin:4px 0;">\ubcc0\uacbd \uc774\ub825\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.</p>';
+    }
+    
+    var actions = document.getElementById('lsp-actions');
+    actions.innerHTML = '';
+    
+    function addActionBtn(text, icon, cls, onClick){
+      var btn = document.createElement('button');
+      btn.className = 'lsp-btn' + (cls ? ' ' + cls : '');
+      btn.innerHTML = '<i class="' + icon + '"></i> ' + text;
+      btn.addEventListener('click', onClick);
+      actions.appendChild(btn);
+    }
+    
+    addActionBtn('\uc11c\ub958 \ubc1c\uae09', 'ti ti-file-invoice', '', function(){ showToast('\uacc4\uc57d\uc11c \u00b7 \ubd09\uc548\uc99d\uba85\uc11c\uac00 \ubc1c\uae09\ub418\uc5c8\uc2b5\ub2c8\ub2e4.'); });
+    addActionBtn('\uc704\uce58 \uc774\ub3d9', 'ti ti-arrows-shuffle', 'danger', function(){ showToast('\uc704\uce58 \uc774\ub3d9 \ud398\uc774\uc9c0\ub97c \uc5ec\ub294 \uc911\uc785\ub2c8\ub2e4.'); });
+    
+    panel.style.transform = 'translateX(0)';
+    overlay.style.display = 'block';
   }
   if(e.target.classList.contains('relocate-btn')){
     var row = e.target.closest('tr');
@@ -4056,9 +4215,16 @@ document.getElementById('submit-reservation').addEventListener('click', function
 });
 document.querySelector('#reservation-table tbody').addEventListener('click', function(e){
   if(e.target.classList.contains('reservation-convert-btn')){
-    showToast('계약 작성 화면으로 이동합니다.');
-    goPage('contracts');
-    openModal('contract-modal');
+    var tr = e.target.closest('tr');
+    var tds = tr.children;
+    sessionStorage.setItem('chungsol_contract_convert', JSON.stringify({
+      customer: tds[1].textContent,
+      phone: tds[2].textContent,
+      location: tds[0].textContent,
+      deceased: ''
+    }));
+    showToast('\uacc4\uc57d \uc791\uc131 \ud654\uba74\uc73c\ub85c \uc774\ub3d9\ud569\ub2c8\ub2e4.');
+    goPage('newcontract');
   }
 });
 
@@ -5110,7 +5276,29 @@ function initNewContractForm(){
   var ncEnshrine = document.getElementById('nc-enshrine-date');
   if(ncDeath && !ncDeath.value) ncDeath.value = today;
   if(ncEnshrine && !ncEnshrine.value) ncEnshrine.value = today;
-  showToast('신규 계약 작성 폼이 준비되었습니다.');
+  
+  // \uc608\uc57d\uc5d0\uc11c \uacc4\uc57d \uc804\ud658 \ub370\uc774\ud130 \uc790\ub3d9 \uce44\uc6b0\uae30
+  try {
+    var saved = sessionStorage.getItem('chungsol_contract_convert');
+    if(saved){
+      var data = JSON.parse(saved);
+      if(data.customer) document.getElementById('nc-customer').value = data.customer;
+      if(data.phone) document.getElementById('nc-phone').value = data.phone;
+      if(data.deceased) document.getElementById('nc-deceased').value = data.deceased;
+      if(data.location){
+        var locSelect = document.getElementById('nc-location');
+        for(var i=0; i<locSelect.options.length; i++){
+          if(locSelect.options[i].text.indexOf(data.location) >= 0){
+            locSelect.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      sessionStorage.removeItem('chungsol_contract_convert');
+    }
+  } catch(e){}
+  
+  showToast('\uc2e0\uaddc \uacc4\uc57d \uc791\uc131 \ud3fc\uc774 \uc900\ube44\ub418\uc5c8\uc2b5\ub2c8\ub2e4.');
 }
 
 // 뒤로가기
@@ -5127,11 +5315,71 @@ document.getElementById('nc-submit-btn').addEventListener('click', function(){
     showToast('계약자명, 연락처, 고인명은 필수 입력 항목입니다.');
     return;
   }
-  // 로그 기록
-  addKakaoLog('신규 계약 등록', customer + '·' + deceased, '위치: ' + location + ', 수동 등록');
-  showToast('✅ 계약서가 생성되었습니다. (시뮬레이션)');
+  if(!document.getElementById('nc-privacy-required').checked){
+    showToast('[\ud544\uc218] \uac1c\uc778\uc815\ubcf4 \uc218\uc9d1 \ubc0f \uc774\uc6a9\uc5d0 \ub3d9\uc758\ud574 \uc8fc\uc138\uc694.');
+    document.getElementById('nc-privacy-required').focus();
+    return;
+  }
+  // \ub85c\uadf8 \uae30\ub85d
+  addKakaoLog('\uc2e0\uaddc \uacc4\uc57d \ub4f1\ub85d', customer + '\u00b7' + deceased, '\uc704\uce58: ' + location + ', \uc218\ub3d9 \ub4f1\ub85d');
+  showToast('\u2705 \uacc4\uc57d\uc11c\uac00 \uc0dd\uc131\ub418\uc5c8\uc2b5\ub2c8\ub2e4. (\uc2dc\ubbac\ub808\uc774\uc158)');
   goPage('contracts');
 });
+
+/* ================= 전자서명 패드 ================= */
+(function(){
+  var canvas = document.getElementById('nc-sign-pad');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var drawing = false;
+  var rect = {};
+
+  function getPos(e){
+    var r = canvas.getBoundingClientRect();
+    var scaleX = canvas.width / r.width;
+    var scaleY = canvas.height / r.height;
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: (clientX - r.left) * scaleX, y: (clientY - r.top) * scaleY };
+  }
+
+  function startDraw(e){
+    e.preventDefault();
+    drawing = true;
+    var pos = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+  }
+
+  function draw(e){
+    e.preventDefault();
+    if(!drawing) return;
+    var pos = getPos(e);
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#15171C';
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+  }
+
+  function endDraw(e){
+    e.preventDefault();
+    drawing = false;
+  }
+
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', endDraw);
+  canvas.addEventListener('mouseleave', endDraw);
+  canvas.addEventListener('touchstart', startDraw, {passive:false});
+  canvas.addEventListener('touchmove', draw, {passive:false});
+  canvas.addEventListener('touchend', endDraw);
+
+  // 서명 지우기
+  document.getElementById('nc-sign-clear').addEventListener('click', function(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
+})();
 
 /* ---------- 자동 발송 엔진 ---------- */
 var autoEngineRunning = false;
@@ -5295,6 +5543,360 @@ setTimeout(function(){
   var tbl = document.getElementById('contract-table');
   if(tbl) obs.observe(tbl, {childList:true, subtree:true});
 }, 500);
+
+/* ================= Global Search ================= */
+(function(){
+  var searchInput = document.getElementById('global-search-input');
+  var searchResults = document.getElementById('global-search-results');
+  if(!searchInput || !searchResults) return;
+
+  function getSearchData(){
+    var rows = [];
+    var tbody = document.querySelector('#contract-table tbody');
+    if(!tbody) return rows;
+    var trs = tbody.querySelectorAll('tr');
+    trs.forEach(function(tr){
+      var tds = tr.querySelectorAll('td');
+      if(tds.length < 9) return;
+      rows.push({
+        contractNo: (tds[0].textContent || '').trim(),
+        contractDate: (tds[1].textContent || '').trim(),
+        contractor: (tds[2].textContent || '').trim(),
+        deceased: (tds[3].textContent || '').trim(),
+        location: (tds[4].textContent || '').trim(),
+        amount: (tds[5].textContent || '').trim(),
+        staff: (tds[6].textContent || '').trim(),
+        status: (tds[8].textContent || '').trim()
+      });
+    });
+    return rows;
+  }
+
+  function searchData(query, data){
+    if(query.length < 2) return [];
+    var q = query.toLowerCase();
+    var results = [];
+    data.forEach(function(d){
+      var score = 0;
+      var matched = '';
+      if(d.contractNo.toLowerCase().indexOf(q) >= 0){
+        score += 10; matched = d.contractNo;
+      }
+      if(d.contractor.indexOf(q) >= 0){
+        if(d.contractor.indexOf(q) === 0) score += 8;
+        else score += 5;
+        if(!matched) matched = d.contractor;
+      }
+      if(d.deceased.indexOf(q) >= 0){
+        if(d.deceased.indexOf(q) === 0) score += 8;
+        else score += 5;
+        if(!matched) matched = d.deceased;
+      }
+      if(d.location.toLowerCase().indexOf(q) >= 0){
+        if(d.location.toLowerCase().indexOf(q) === 0) score += 7;
+        else score += 4;
+        if(!matched) matched = d.location;
+      }
+      if(score > 0){
+        results.push({data:d, score:score, matched:matched});
+      }
+    });
+    results.sort(function(a,b){ return b.score - a.score; });
+    return results.slice(0, 10);
+  }
+
+  function renderResults(results){
+    searchResults.innerHTML = '';
+    if(results.length === 0){
+      searchResults.innerHTML = '<div class="search-no-result">검색 결과가 없습니다</div>';
+      searchResults.classList.add('show');
+      return;
+    }
+    results.forEach(function(r){
+      var d = r.data;
+      var item = document.createElement('div');
+      item.className = 'search-result-item';
+
+      var badge = document.createElement('span');
+      badge.className = 'type-badge contract';
+      if(d.contractor.indexOf(r.matched) >= 0) { badge.textContent = '계약'; badge.className = 'type-badge contract'; }
+      else if(d.deceased.indexOf(r.matched) >= 0) { badge.textContent = '고인'; badge.className = 'type-badge deceased'; }
+      else if(d.location.indexOf(r.matched) >= 0) { badge.textContent = '위치'; badge.className = 'type-badge location'; }
+      else { badge.textContent = '번호'; }
+
+      var info = document.createElement('div');
+      info.style.cssText = 'min-width:0;';
+      var name = document.createElement('p');
+      name.className = 'result-name';
+      name.textContent = d.contractor + ' \u00b7 ' + d.deceased;
+      var sub = document.createElement('p');
+      sub.className = 'result-sub';
+      sub.textContent = d.location + ' | ' + d.contractNo;
+
+      info.appendChild(name);
+      info.appendChild(sub);
+
+      var meta = document.createElement('span');
+      meta.className = 'result-meta';
+      meta.textContent = d.status;
+
+      item.appendChild(badge);
+      item.appendChild(info);
+      item.appendChild(meta);
+
+      item.addEventListener('click', function(){
+        goPage('contracts');
+        var tbody = document.querySelector('#contract-table tbody');
+        if(tbody){
+          var trs = tbody.querySelectorAll('tr');
+          trs.forEach(function(tr){
+            tr.style.background = '';
+            var firstTd = tr.querySelector('td');
+            if(firstTd && (firstTd.textContent || '').trim() === d.contractNo){
+              tr.style.background = 'rgba(91,95,239,.08)';
+              tr.scrollIntoView({behavior:'smooth', block:'center'});
+            }
+          });
+        }
+        searchInput.value = '';
+        searchResults.classList.remove('show');
+        searchResults.innerHTML = '';
+      });
+
+      searchResults.appendChild(item);
+    });
+    searchResults.classList.add('show');
+  }
+
+  var lastData = [];
+  searchInput.addEventListener('keyup', function(e){
+    if(e.key === 'Escape'){
+      searchInput.value = '';
+      searchResults.classList.remove('show');
+      return;
+    }
+    var val = searchInput.value.trim();
+    if(val.length < 2){
+      searchResults.classList.remove('show');
+      return;
+    }
+    if(lastData.length === 0){
+      lastData = getSearchData();
+    }
+    var results = searchData(val, lastData);
+    renderResults(results);
+  });
+
+  searchInput.addEventListener('focus', function(){
+    if(searchInput.value.trim().length >= 2){
+      searchResults.classList.add('show');
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey){
+      var tag = (e.target || {}).tagName || '';
+      if(tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT'){
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      }
+    }
+  });
+
+  document.addEventListener('click', function(e){
+    if(!searchInput.contains(e.target) && !searchResults.contains(e.target)){
+      searchResults.classList.remove('show');
+    }
+  });
+
+  var observer = new MutationObserver(function(){
+    lastData = [];
+  });
+  var tbody = document.querySelector('#contract-table tbody');
+  if(tbody) observer.observe(tbody, {childList:true, subtree:true});
+})();
+
+/* ================= Location Side Panel ================= */
+function showLocationSidePanel(cell){
+  var panel = document.getElementById('loc-side-panel');
+  var overlay = document.getElementById('lsp-overlay');
+  if(!panel || !overlay) return;
+
+  var code = cell.dataset.code || '--';
+  var status = cell.dataset.status || 'empty';
+
+  document.getElementById('lsp-title').textContent = code;
+
+  var badgeEl = document.getElementById('lsp-status-badge');
+  var badgeCls, badgeIcon, badgeText;
+  if(status === 'occupied'){
+    badgeCls = 'badge badge-success'; badgeIcon = 'ti ti-circle-check'; badgeText = '\uc0ac\uc6a9\uc911';
+  } else if(status === 'reserved'){
+    badgeCls = 'badge badge-warning'; badgeIcon = 'ti ti-clock'; badgeText = '\uc608\uc57d\uc911';
+  } else {
+    badgeCls = 'badge badge-neutral'; badgeIcon = 'ti ti-circle'; badgeText = '\uacf5\uc2e4';
+  }
+  badgeEl.className = badgeCls;
+  badgeEl.innerHTML = '<i class="' + badgeIcon + '"></i> ' + badgeText;
+
+  var body = document.getElementById('lsp-body');
+  body.innerHTML = '';
+
+  function addRow(label, value){
+    var row = document.createElement('div');
+    row.className = 'info-row';
+    row.innerHTML = '<span class="info-label">' + label + '</span><span class="info-value">' + value + '</span>';
+    body.appendChild(row);
+  }
+
+  function addSection(title){
+    var h = document.createElement('h4');
+    h.textContent = title;
+    body.appendChild(h);
+  }
+
+  if(status === 'occupied'){
+    addRow('\uace0\uc778', cell.dataset.occupant || '--');
+    window.__currentDetailHolder = cell.dataset.holder || '--';
+    window.__currentDetailOccupant = cell.dataset.occupant || '--';
+    addRow('\uacc4\uc57d\uc790', cell.dataset.holder || '--');
+    addRow('\uacc4\uc57d\uc77c', cell.dataset.date || '--');
+    addSection('\uad00\ub9ac\ube44');
+    var settings = localStorage.getItem('chungsol_settings');
+    var parsed = settings ? JSON.parse(settings) : {};
+    var feeAmt = parsed.feeAmount || '360000';
+    addRow('\uc815\uae09\uae08\uc561', '\u20a9 ' + Number(feeAmt).toLocaleString() + '/\ub144');
+    addRow('\ub0a9\ubd80\uc0c1\ud0dc', '<span class="badge badge-success">\uc815\uc0c1 \ub0a9\ubd80\uc911</span>');
+    addRow('\ub2e4\uc74c \ub0a9\ubd80\uc608\uc815\uc77c', '2026-09-10 (D-78)');
+    addSection('\ucd5c\uadfc \uc774\ub3d9 \uc774\ub825');
+    var histories = [
+      { date: cell.dataset.date || '2026-06-10', action: '\ucd5c\ucd08 \uc548\uce58 \uacc4\uc57d \uccb4\uacb0', by: cell.dataset.holder || '--' },
+      { date: '2026-06-12', action: '\uc548\uc7a5 \uc704\uce58 \ud655\uc815', by: '\uae40\ubbfc\uc218(\uad00\ub9ac\uc790)' }
+    ];
+    histories.forEach(function(h){
+      var item = document.createElement('div');
+      item.className = 'history-item';
+      item.innerHTML = '<div class="history-date">' + h.date + '</div><div class="history-action">' + h.action + '</div><div class="history-by">' + h.by + '</div>';
+      body.appendChild(item);
+    });
+  } else if(status === 'reserved'){
+    addRow('\uc608\uc57d\uc790', cell.dataset.holder || '--');
+    addRow('\uc608\uc57d\uc77c', cell.dataset.date || '--');
+    addRow('\ub9cc\ub8cc\uc77c', (cell.dataset.date ? (function(d){ var dt=new Date(d); dt.setFullYear(dt.getFullYear()+1); return dt.toISOString().slice(0,10); })(cell.dataset.date) : '--'));
+    addRow('\uc608\uc57d\uae08', '\u20a9 500,000');
+  } else {
+    addRow('\uad6c\uc88c \ucf54\ub4dc', code);
+    addRow('\uae30\uc900 \ubd84\uc591\uac00', cell.dataset.price || '--');
+  }
+
+  var actions = document.getElementById('lsp-actions');
+  actions.innerHTML = '';
+
+  function addActionBtn(text, icon, cls, onClick){
+    var btn = document.createElement('button');
+    btn.className = 'lsp-btn' + (cls ? ' ' + cls : '');
+    btn.innerHTML = '<i class="' + icon + '"></i> ' + text;
+    btn.addEventListener('click', onClick);
+    actions.appendChild(btn);
+  }
+
+  if(status === 'empty'){
+    addActionBtn('\uc2e0\uaddc \uacc4\uc57d \uc791\uc131', 'ti ti-file-plus', 'primary', function(){
+      closeSidePanel();
+      goPage('newcontract');
+    });
+  } else if(status === 'occupied'){
+    addActionBtn('\uad00\ub9ac\ube44 \uc218\ub0a9', 'ti ti-coin', '', function(){ showToast('\uad00\ub9ac\ube44 \uc218\ub0a9 \ud398\uc774\uc9c0\ub97c \uc5ec\ub294 \uc911\uc785\ub2c8\ub2e4.'); });
+    addActionBtn('\uc54c\ub9bc\ud1a1 \ubc1c\uc1a1', 'ti ti-message', '', function(){ showToast('\uc54c\ub9bc\ud1a1 \ubc1c\uc1a1 \ud398\uc774\uc9c0\ub97c \uc5ec\ub294 \uc911\uc785\ub2c8\ub2e4.'); });
+    addActionBtn('\uc704\uce58 \uc774\ub3d9', 'ti ti-arrows-shuffle', 'danger', function(){ showToast('\uc704\uce58 \uc774\ub3d9 \uae30\ub2a5\uc740 \uc900\ube44 \uc911\uc785\ub2c8\ub2e4.'); });
+  } else {
+    addActionBtn('\uacc4\uc57d \uc804\ud658', 'ti ti-file-text', 'primary', function(){
+      closeSidePanel();
+      var cell = panel._lastCell;
+      if(cell){
+        var data = {customer: cell.dataset.holder || '', phone: '', location: cell.dataset.code || '', deceased: cell.dataset.occupant || ''};
+        sessionStorage.setItem('chungsol_contract_convert', JSON.stringify(data));
+      }
+      goPage('newcontract');
+    });
+    addActionBtn('\uc608\uc57d \ucde8\uc18c', 'ti ti-x', 'danger', function(){ showToast('\uc608\uc57d\uc774 \ucde8\uc18c\ub418\uc5c8\uc2b5\ub2c8\ub2e4.'); closeSidePanel(); });
+  }
+
+  panel.style.transform = 'translateX(0)';
+  overlay.style.display = 'block';
+}
+
+function closeSidePanel(){
+  var panel = document.getElementById('loc-side-panel');
+  var overlay = document.getElementById('lsp-overlay');
+  if(panel) panel.style.transform = 'translateX(100%)';
+  if(overlay) overlay.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('lsp-close').addEventListener('click', closeSidePanel);
+  document.getElementById('lsp-overlay').addEventListener('click', closeSidePanel);
+});
+
+/* ================= CSV \ub0b4\ubcf4\ub0b4\uae30 ================= */
+document.getElementById('export-csv-btn').addEventListener('click', function(){
+  var rows = [];
+  document.querySelectorAll('#settle-table tbody tr').forEach(function(tr){
+    var tds = tr.querySelectorAll('td');
+    if(tds.length < 7) return;
+    rows.push([
+      tds[0].textContent.trim(),
+      tds[1].textContent.trim(),
+      tds[2].textContent.trim(),
+      tds[3].textContent.trim(),
+      tds[4].textContent.trim(),
+      tds[5].textContent.trim().replace(/\s+/g, ' ')
+    ]);
+  });
+  if(rows.length === 0){ showToast('\ub0b4\ubcf4\ub0bc \ub370\uc774\ud130\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.'); return; }
+  var csv = '\uc601\uc5c5\uc790,\ubbf8\uc815\uc0b0 \uac74\uc218,\uc138\uc804 \ud569\uacc4,\uc6d0\ucc9c\uc9d5\uc218,\uc2e4\uc9c0\uae09\uc561,\uc0c1\ud0dc\n';
+  rows.forEach(function(r){ csv += r.join(',') + '\n'; });
+  var blob = new Blob(['\uFEFF' + csv], {type:'text/csv;charset=utf-8;'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = '\uc218\uc218\ub8cc_\uc815\uc0b0_' + new Date().toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('CSV \ud30c\uc77c\uc774 \ub2e4\uc6b4\ub85c\ub4dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4.');
+});
 </script>
+
+<!-- ================= Location Side Panel HTML ================= -->
+<div id="loc-side-panel" style="
+  position:fixed; top:0; right:0; width:360px; height:100vh;
+  background:#fff; box-shadow:-4px 0 24px rgba(0,0,0,.12);
+  transform:translateX(100%); transition:transform .25s ease;
+  z-index:55; overflow-y:auto; padding:24px 20px;
+  display:flex; flex-direction:column; gap:14px;
+">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h3 id="lsp-title" style="margin:0; font-size:16px; font-weight:700;"></h3>
+    <button id="lsp-close" class="btn btn-ghost btn-sm">\u2715 \ub2eb\uae30</button>
+  </div>
+  <div id="lsp-status-badge"></div>
+  <div id="lsp-body" style="display:flex; flex-direction:column; gap:10px;"></div>
+  <div id="lsp-actions" style="display:flex; flex-direction:column; gap:8px; margin-top:auto;"></div>
+</div>
+<div id="lsp-overlay" style="
+  position:fixed; inset:0; background:rgba(0,0,0,.2);
+  z-index:54; display:none;
+"></div>
+
+<!-- ================= Bulk Action Bar ================= -->
+<div id="bulk-action-bar" class="bulk-action-bar">
+  <span id="bulk-count" class="bulk-count">0\uac74 \uc120\ud0dd</span>
+  <button class="btn-bulk" id="bulk-kakao-btn">\ud3ec\ud1a0ALERT \ucca0\ud680</button>
+  <button class="btn-bulk" id="bulk-pay-btn">\u2705 \uc218\ub0a9 \ucc98\ub9ac</button>
+  <button class="bulk-cancel" id="bulk-cancel-btn">\u2715 \ucde8\uc18c</button>
+</div>
 </body>
 </html>

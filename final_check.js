@@ -1,47 +1,63 @@
 const { chromium } = require('playwright');
-(async () => {
-  const browser = await chromium.connectOverCDP('http://127.0.0.1:9224');
-  const ctx = browser.contexts()[0];
-  let page = ctx.pages().find(x => x.url().includes('memorial_admin_logs'));
-  if (!page) {
-    page = await ctx.newPage();
-    await page.goto('file:///C:/Users/paul/.openclaw/workspace/memorial_admin_logs.html');
-  } else {
-    await page.reload();
-  }
-  await page.waitForTimeout(1500);
+
+async function main() {
+  const b = await chromium.connectOverCDP('http://127.0.0.1:9224');
+  const pages = b.contexts()[0].pages();
+  const write = pages.find(p => p.url().includes('Redirect=Write'));
+  const fe = await write.$('#mainFrame');
+  const f = await fe.contentFrame();
+
+  const final = await f.evaluate(() => {
+    const ed = SmartEditor._editors['blogpc001'];
+    const data = ed.getDocumentData();
+    const blocks = data.document.blocks;
+    const comps = data.document.components;
+    
+    // 이미지 컴포넌트
+    const imgComps = comps.filter(c => c.fileName || c.src);
+    
+    // 텍스트 블록 수
+    const h2 = blocks.filter(b => b.type === 'heading2').length;
+    const p = blocks.filter(b => b.type === 'paragraph').length;
+    const textOnly = blocks.filter(b => b.text).length;
+    
+    // 전체 텍스트 길이 (대략)
+    let totalChars = 0;
+    blocks.forEach(b => { if (b.text) totalChars += b.text.length; });
+    
+    // 제목
+    const title = ed.getDocumentTitle();
+    
+    // canvas의 img 태그
+    const canvas = document.querySelector('.se-canvas');
+    const canvasImgs = canvas ? canvas.querySelectorAll('img').length : 0;
+    
+    return {
+      title,
+      blocks: {
+        heading2: h2,
+        paragraphs: p,
+        total: blocks.length,
+        estimatedChars: totalChars,
+      },
+      images: {
+        inComponents: imgComps.length,
+        inCanvas: canvasImgs,
+        details: imgComps.map(c => ({
+          fileName: c.fileName || '(unknown)',
+          width: c.width,
+          height: c.height,
+          represent: c.represent,
+          hasSrc: !!c.src,
+        })),
+      },
+    };
+  });
+
+  console.log('📋 최종 점검 결과:');
+  console.log(JSON.stringify(final, null, 2));
   
-  // Login
-  const loginVis = await page.locator('#login-overlay').isVisible();
-  console.log('Login visible:', loginVis);
-  if (loginVis) {
-    await page.selectOption('#login-account', 'admin');
-    await page.fill('#login-password', '1234');
-    await page.click('#login-btn');
-    await page.waitForTimeout(1500);
-  }
-  
-  // Test pages
-  const tests = ['dashboard', 'fees', 'staff', 'settings'];
-  for (const pg of tests) {
-    await page.evaluate((pg) => {
-      const btn = document.querySelector('.nav-item[data-page="' + pg + '"]');
-      if (btn) btn.click();
-    }, pg);
-    await page.waitForTimeout(400);
-    const r = await page.evaluate((pg) => {
-      const s = document.querySelector('.page[data-page="' + pg + '"]');
-      if (!s) return { page: pg, error: 'no section' };
-      const rect = s.getBoundingClientRect();
-      return {
-        page: pg,
-        active: s.classList.contains('active'),
-        left: Math.round(rect.left),
-        width: Math.round(rect.width),
-        visibleInViewport: rect.left < window.innerWidth && rect.right > 0
-      };
-    }, pg);
-    console.log(JSON.stringify(r));
-  }
-  console.log('DONE');
-})();
+  process.exit(0);
+}
+
+main().catch(e => { console.error('❌', e.message); process.exit(1); });

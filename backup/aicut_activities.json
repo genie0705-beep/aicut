@@ -1,0 +1,44 @@
+[
+  {
+    "date": "6/24",
+    "channel": "📸 인스타",
+    "action": "릴스 업로드",
+    "result": "조회 6,426",
+    "team": "market"
+  },
+  {
+    "date": "6/23",
+    "channel": "📝 블로그",
+    "action": "하반기 마케팅 포스팅",
+    "result": "저장 완료",
+    "team": "design"
+  },
+  {
+    "date": "6/23",
+    "channel": "📸 인스타",
+    "action": "릴스 부스트 광고",
+    "result": "CTR 1.2%",
+    "team": "market"
+  },
+  {
+    "date": "6/23",
+    "channel": "📊 광고",
+    "action": "입찰가 인상 3,500원",
+    "result": "완료",
+    "team": "dev"
+  },
+  {
+    "date": "6/22",
+    "channel": "📝 블로그",
+    "action": "출근길 30분 포스팅",
+    "result": "저장 완료",
+    "team": "plan"
+  },
+  {
+    "date": "6/21",
+    "channel": "🔍 지식iN",
+    "action": "영상편집 답변 5건",
+    "result": "등록 완료",
+    "team": "research"
+  }
+]
