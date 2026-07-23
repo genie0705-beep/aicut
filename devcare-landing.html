@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI로 만든 서비스, 전문가가 지킵니다. 바이브코딩 이후 월정액 SI 유지보수 파트너 DevCare.">
+<title>DevCare — AI 개발 이후 전문 유지보수 파트너</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #ffffff;
+  --bg2: #F7F8FA;
+  --bg3: #EEEEF2;
+  --text: #111111;
+  --sub: #444444;
+  --muted: #888888;
+  --border: #E2E4E9;
+  --green: #05C072;
+  --gl: #E6FAF3;
+  --gd: #029456;
+  --dark: #0D1117;
+  --dark2: #161B22;
+  --dark3: #1C2430;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 62px;
+  background: rgba(13, 17, 23, 0.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.logo {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+.logo em { color: var(--green); font-style: normal; }
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: #fff; }
+.nav-btn {
+  background: var(--green);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 1.1rem;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Pretendard', sans-serif;
+  letter-spacing: -0.01em;
+  transition: background 0.2s;
+}
+.nav-btn:hover { background: var(--gd); }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 7rem 2rem 5rem;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--dark);
+}
+/* 실제 영상 배경 - 영상 파일 경로를 아래 src에 입력하세요 */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.18;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(13,17,23,0.45) 0%,
+    rgba(13,17,23,0.65) 50%,
+    rgba(13,17,23,0.95) 100%
+  );
+}
+/* 영상 없을 때 폴백 배경 */
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(5,192,114,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(5,192,114,0.05) 0%, transparent 50%),
+    linear-gradient(135deg, #0D1117 0%, #0f1f2e 50%, #0D1117 100%);
+}
+.hero-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(5,192,114,0.12);
+  border: 1px solid rgba(5,192,114,0.3);
+  color: var(--green);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.35rem 0.9rem;
+  border-radius: 99px;
+  margin-bottom: 1.75rem;
+  letter-spacing: 0.04em;
+}
+.badge-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.12;
+  color: #fff;
+  letter-spacing: -0.045em;
+  margin-bottom: 1.1rem;
+}
+.hero h1 .hl { color: var(--green); }
+.hero-desc {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  max-width: 420px;
+  margin: 0 auto 2.25rem;
+  line-height: 1.8;
+  letter-spacing: -0.01em;
+}
+.hero-btns {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.btn-g {
+  background: var(--green);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  padding: 0.9rem 1.85rem;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Pretendard', sans-serif;
+  letter-spacing: -0.02em;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-g:hover { background: var(--gd); transform: translateY(-1px); }
+.btn-w {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.9rem 1.85rem;
+  border-radius: 9px;
+  border: 1px solid rgba(255,255,255,0.18);
+  cursor: pointer;
+  font-family: 'Pretendard', sans-serif;
+  letter-spacing: -0.02em;
+  transition: background 0.2s;
+}
+.btn-w:hover { background: rgba(255,255,255,0.14); }
+.hero-hint {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: -0.01em;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+}
+.scroll-bar {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  animation: scrollbar 2s ease-in-out infinite;
+}
+@keyframes scrollbar {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(0.6); }
+}
+
+/* ─── MARQUEE ─── */
+.marquee-wrap {
+  background: var(--green);
+  padding: 0.75rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-block;
+  animation: marq 24s linear infinite;
+}
+@keyframes marq {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  padding: 0 1.75rem;
+}
+.marquee-sep {
+  color: rgba(255,255,255,0.45);
+  margin: 0 0.25rem;
+}
+
+/* ─── STATS ─── */
+.stats {
+  background: var(--dark);
+  padding: 2.75rem 2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.stats-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+.stat-num {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.stat-num em { color: var(--green); font-style: normal; }
+.stat-lab {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.4rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* ─── SECTION SHARED ─── */
+.sec {
+  padding: 5rem 2rem;
+}
+.sec.gray { background: var(--bg2); }
+.sec.dark { background: var(--dark); color: #fff; }
+.sec-inner { max-width: 780px; margin: 0 auto; }
+.sec-head { text-align: center; margin-bottom: 3rem; }
+.stag {
+  display: inline-block;
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  padding: 0.28rem 0.7rem;
+  border-radius: 99px;
+  margin-bottom: 0.9rem;
+}
+.stag.green { background: var(--gl); color: var(--gd); }
+.stag.dark-g { background: rgba(5,192,114,0.14); color: var(--green); }
+.stitle {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1.22;
+  margin-bottom: 0.65rem;
+}
+.stitle.white { color: #fff; }
+.sdesc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+.sdesc.light { color: rgba(255,255,255,0.48); }
+
+/* ─── WHY / PAIN ─── */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+.why-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.4rem;
+  transition: box-shadow 0.2s;
+}
+.why-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+.why-bar {
+  height: 2.5px;
+  width: 26px;
+  background: #EF4444;
+  border-radius: 2px;
+  margin-bottom: 0.9rem;
+}
+.why-icon { font-size: 1.35rem; margin-bottom: 0.6rem; }
+.why-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+.why-body {
+  font-size: 0.74rem;
+  color: var(--muted);
+  line-height: 1.68;
+  letter-spacing: -0.01em;
+}
+
+/* ─── SERVICES ─── */
+.svc-list { display: flex; flex-direction: column; gap: 3rem; }
+.svc-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.svc-row.rev { direction: rtl; }
+.svc-row.rev > * { direction: ltr; }
+.svc-num {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.55rem;
+}
+.svc-title {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #111;
+  letter-spacing: -0.035em;
+  line-height: 1.3;
+  margin-bottom: 0.55rem;
+}
+.svc-body {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.72;
+  letter-spacing: -0.01em;
+}
+.svc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+.tag {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  font-size: 0.67rem;
+  font-weight: 600;
+  color: #555;
+  padding: 0.22rem 0.6rem;
+  border-radius: 6px;
+}
+.svc-visual {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.3rem;
+}
+/* mock ui */
+.mock-bar { display: flex; gap: 5px; margin-bottom: 0.9rem; }
+.mdot { width: 10px; height: 10px; border-radius: 50%; }
+.mock-stat { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 0.75rem; }
+.msc {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem;
+  text-align: center;
+}
+.msc-n { font-size: 0.95rem; font-weight: 900; color: #111; letter-spacing: -0.03em; }
+.msc-l { font-size: 0.58rem; color: var(--muted); margin-top: 2px; }
+.mock-row { height: 7px; border-radius: 4px; margin-bottom: 5px; background: var(--bg3); }
+.mock-row.g { background: rgba(5,192,114,0.25); }
+.mock-shield {
+  background: var(--gl);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+.mock-check { display: flex; flex-direction: column; gap: 6px; }
+.mc {
+  font-size: 0.72rem;
+  color: var(--sub);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: -0.01em;
+}
+.mc::before { content: '✓'; color: var(--green); font-weight: 800; font-size: 0.7rem; flex-shrink: 0; }
+.mock-task {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.72rem;
+  color: var(--sub);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.mbadge {
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+}
+.mbadge.g { background: var(--gl); color: var(--gd); }
+.mbadge.y { background: #FEF9C3; color: #854D0E; }
+.mbadge.n { background: var(--bg3); color: var(--muted); }
+
+/* ─── PRICING ─── */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.plan {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+.plan:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.08); }
+.plan.pop { border-color: var(--green); border-width: 2px; }
+.plan-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--green);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 0.22rem 0.85rem;
+  border-radius: 99px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.pname { font-size: 0.68rem; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; }
+.pprice {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #111;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.pprice span { font-size: 0.72rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.pper { font-size: 0.68rem; color: var(--muted); margin-top: 0.15rem; letter-spacing: -0.01em; }
+.pline { height: 1px; background: var(--border); margin: 0.6rem 0; }
+.pdesc { font-size: 0.74rem; color: var(--muted); line-height: 1.6; letter-spacing: -0.01em; }
+.pul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.pul li {
+  font-size: 0.74rem;
+  color: var(--sub);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  letter-spacing: -0.01em;
+}
+.pul li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pcta {
+  margin-top: auto;
+  padding: 0.7rem;
+  background: transparent;
+  color: #111;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Pretendard', sans-serif;
+  letter-spacing: -0.01em;
+  transition: all 0.2s;
+}
+.pcta:hover { border-color: #aaa; }
+.plan.pop .pcta {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+.plan.pop .pcta:hover { background: var(--gd); border-color: var(--gd); }
+.pnote { font-size: 0.62rem; color: var(--muted); text-align: center; margin-top: 0.35rem; }
+
+/* ─── PROCESS ─── */
+.steps { max-width: 520px; margin: 0 auto; }
+.step { display: flex; gap: 1.2rem; padding-bottom: 1.85rem; }
+.step:last-child { padding-bottom: 0; }
+.step-l { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.step-n {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-ln { flex: 1; width: 1.5px; background: var(--border); margin: 5px 0; }
+.step:last-child .step-ln { display: none; }
+.step-r { padding-top: 7px; }
+.step-title { font-size: 0.92rem; font-weight: 800; color: #111; letter-spacing: -0.025em; margin-bottom: 0.3rem; }
+.step-body { font-size: 0.76rem; color: var(--muted); line-height: 1.68; letter-spacing: -0.01em; }
+.step-chip {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background: var(--gl);
+  color: var(--gd);
+  font-size: 0.63rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  letter-spacing: -0.01em;
+}
+
+/* ─── REVIEWS ─── */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+}
+.rv {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.2rem;
+  transition: border-color 0.2s;
+}
+.rv:hover { border-color: rgba(5,192,114,0.25); }
+.rv-stars { color: var(--green); font-size: 0.7rem; margin-bottom: 0.55rem; }
+.rv-q {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.68;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.8rem;
+}
+.rv-name { font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.45); letter-spacing: -0.01em; }
+.rv-tag {
+  display: inline-block;
+  background: rgba(5,192,114,0.15);
+  color: var(--green);
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  margin-left: 0.4rem;
+}
+
+/* ─── FINAL CTA ─── */
+.final {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 7rem 2rem 5rem;
+  overflow: hidden;
+}
+.final-bg { position: absolute; inset: 0; background: var(--dark); }
+/* 실제 영상 배경 - 히어로와 동일한 영상 또는 다른 영상 경로 입력 */
+.final-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.12;
+}
+.final-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(13,17,23,0.6) 0%, rgba(13,17,23,0.9) 100%);
+}
+.final-fallback {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 60%, rgba(5,192,114,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 30%, rgba(5,192,114,0.04) 0%, transparent 50%);
+}
+.final-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.final-content { position: relative; z-index: 2; max-width: 580px; }
+.final h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.045em;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+.final h2 em { color: var(--green); font-style: normal; }
+.final-desc {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1.75rem;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+.final-chips {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.fchip {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.58);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.32rem 0.8rem;
+  border-radius: 99px;
+  letter-spacing: -0.01em;
+}
+.final-hint { margin-top: 1.1rem; font-size: 0.68rem; color: rgba(255,255,255,0.28); letter-spacing: -0.01em; }
+
+/* ─── FOOTER ─── */
+.footer {
+  background: #0A0E14;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 2.25rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-logo { font-size: 0.95rem; font-weight: 800; color: rgba(255,255,255,0.5); letter-spacing: -0.02em; }
+.footer-logo em { color: var(--green); font-style: normal; }
+.footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: -0.01em; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 680px) {
+  .nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  .hero { padding: 6rem 1.5rem 4rem; }
+  .sec { padding: 3.5rem 1.5rem; }
+  .svc-row { grid-template-columns: 1fr; gap: 1.5rem; }
+  .svc-row.rev { direction: ltr; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .final { padding: 5rem 1.5rem 4rem; min-height: 420px; }
+  .footer { flex-direction: column; text-align: center; padding: 1.75rem 1.5rem; }
+}
+
+/* ─── SCROLL ANIMATION ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="logo" href="#">Dev<em>Care</em></a>
+  <ul class="nav-links">
+    <li><a href="#why">서비스</a></li>
+    <li><a href="#pricing">요금제</a></li>
+    <li><a href="#process">프로세스</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.getElementById('final').scrollIntoView({behavior:'smooth'})">무료 진단 받기</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <!-- 영상 배경 사용 시: src 속성에 영상 파일 경로 또는 URL 입력 -->
+  <!-- <video class="hero-video" autoplay muted loop playsinline src="YOUR_VIDEO_URL.mp4"></video> -->
+  <div class="hero-fallback"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>AI 개발 이후 전문 파트너</div>
+    <h1>AI로 만든 서비스,<br><span class="hl">이제 전문가가 지킵니다</span></h1>
+    <p class="hero-desc">바이브코딩으로 런칭한 건 대단합니다.<br>서버 장애 · 보안 · 기능 추가, 그 다음은 저희가 맡습니다.</p>
+    <div class="hero-btns">
+      <button class="btn-g" onclick="document.getElementById('final').scrollIntoView({behavior:'smooth'})">무료 코드 진단 받기 →</button>
+      <button class="btn-w" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">요금제 보기</button>
+    </div>
+    <p class="hero-hint">진단 비용 없음 &nbsp;·&nbsp; 48시간 내 리포트 &nbsp;·&nbsp; 구독 강요 없음</p>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">✓ SI 개발 경력 10년+</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">⚡ 장애 대응 SLA 1시간</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">🛡 무료 코드 진단 48H</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">📋 월정액 100만 / 200만</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">✓ 숨은 추가 비용 없음</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">🔒 보안 취약점 정기 점검</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">✓ SI 개발 경력 10년+</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">⚡ 장애 대응 SLA 1시간</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">🛡 무료 코드 진단 48H</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">📋 월정액 100만 / 200만</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">✓ 숨은 추가 비용 없음</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">🔒 보안 취약점 정기 점검</span><span class="marquee-sep">·</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">10<em>년+</em></div>
+      <div class="stat-lab">SI 개발 경력</div>
+    </div>
+    <div>
+      <div class="stat-num"><em>48</em>H</div>
+      <div class="stat-lab">코드 진단 납기</div>
+    </div>
+    <div>
+      <div class="stat-num">SLA <em>1H</em></div>
+      <div class="stat-lab">장애 대응 목표</div>
+    </div>
+    <div>
+      <div class="stat-num"><em>0</em>원</div>
+      <div class="stat-lab">숨은 추가 비용</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="sec gray" id="why">
+  <div class="sec-inner">
+    <div class="sec-head fade-up">
+      <div class="stag green">WHY DEVCARE</div>
+      <div class="stitle">AI 코드, 런칭 후가 더 문제입니다</div>
+      <div class="sdesc">Claude와 Cursor가 만들어준 코드는 작동합니다.<br>하지만 운영 환경에서 버텨내는 건 전혀 다른 이야기입니다.</div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <div class="why-icon">💥</div>
+        <div class="why-bar"></div>
+        <div class="why-title">서버가 갑자기 먹통</div>
+        <div class="why-body">에러 로그는 있는데 어디서부터 손대야 할지 모르는 상황. 고객이 먼저 연락옵니다.</div>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🔓</div>
+        <div class="why-bar"></div>
+        <div class="why-title">보안 취약점</div>
+        <div class="why-body">SQL 인젝션, API 키 하드코딩, 인증 우회—AI가 놓치는 보안 구멍이 생각보다 많습니다.</div>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">💸</div>
+        <div class="why-bar"></div>
+        <div class="why-title">API 요금 폭탄</div>
+        <div class="why-body">최적화 없이 붙인 외부 API가 사용자 늘면서 한 달 수백만 원으로 튑니다.</div>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🧱</div>
+        <div class="why-bar"></div>
+        <div class="why-title">기능 추가가 막힘</div>
+        <div class="why-body">스파게티 코드가 쌓이면 Claude도 더 이상 못 고칩니다. 처음부터 다시 짜야 할 수 있어요.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="service">
+  <div class="sec-inner">
+    <div class="sec-head fade-up">
+      <div class="stag green">SERVICE</div>
+      <div class="stitle">운영부터 확장까지, 한 팀이 담당합니다</div>
+      <div class="sdesc">코드 진단 후 전담 개발자가 배정되어 처음부터 끝까지 직접 관리합니다</div>
+    </div>
+    <div class="svc-list">
+
+      <div class="svc-row fade-up">
+        <div>
+          <div class="svc-num">01 · 모니터링 & 장애 대응</div>
+          <div class="svc-title">서버가 터지면<br>저희가 먼저 압니다</div>
+          <div class="svc-body">24시간 서버 상태를 감시하고, 장애 감지 즉시 온콜 대응합니다. 고객보다 먼저 문제를 발견하고 해결하는 것이 목표입니다.</div>
+          <div class="svc-tags">
+            <span class="tag">24/7 모니터링</span>
+            <span class="tag">SLA 1시간</span>
+            <span class="tag">월간 리포트</span>
+          </div>
+        </div>
+        <div class="svc-visual">
+          <div class="mock-bar">
+            <div class="mdot" style="background:#FF5F57"></div>
+            <div class="mdot" style="background:#FFBD2E"></div>
+            <div class="mdot" style="background:#28C840"></div>
+          </div>
+          <div class="mock-stat">
+            <div class="msc"><div class="msc-n" style="color:var(--green)">99.9%</div><div class="msc-l">업타임</div></div>
+            <div class="msc"><div class="msc-n">11분</div><div class="msc-l">평균 복구</div></div>
+          </div>
+          <div class="mock-row g" style="width:100%"></div>
+          <div class="mock-row g" style="width:72%"></div>
+          <div class="mock-row" style="width:100%"></div>
+          <div class="mock-row g" style="width:45%"></div>
+        </div>
+      </div>
+
+      <div class="svc-row rev fade-up">
+        <div>
+          <div class="svc-num">02 · 보안 & 코드 품질</div>
+          <div class="svc-title">AI 코드의 빈틈을<br>전문가가 메웁니다</div>
+          <div class="svc-body">취약점 점검, 코드 리팩토링, 보안 패치를 정기 적용합니다. AI가 생성한 코드의 구조적 문제를 사람이 직접 검토합니다.</div>
+          <div class="svc-tags">
+            <span class="tag">취약점 스캔</span>
+            <span class="tag">코드 리팩토링</span>
+            <span class="tag">분기 보안 감사</span>
+          </div>
+        </div>
+        <div class="svc-visual">
+          <div class="mock-shield">
+            <div style="font-size:1.4rem">🛡</div>
+            <div style="font-size:0.78rem;font-weight:800;color:var(--gd);margin-top:5px">보안 점검 완료</div>
+          </div>
+          <div class="mock-check">
+            <div class="mc">SQL 인젝션 취약점 수정</div>
+            <div class="mc">API 키 환경변수 분리</div>
+            <div class="mc">인증 미들웨어 강화</div>
+            <div class="mc">의존성 보안 업데이트</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="svc-row fade-up">
+        <div>
+          <div class="svc-num">03 · 추가 개발</div>
+          <div class="svc-title">기능 확장도<br>월정액 안에서</div>
+          <div class="svc-body">월 개발 시간 내에서 새 기능 구현, 외부 API 연동, UI 개선을 진행합니다. 외주를 따로 맡길 필요 없이 한 팀이 연속성 있게 개발합니다.</div>
+          <div class="svc-tags">
+            <span class="tag">신규 기능 개발</span>
+            <span class="tag">API 연동</span>
+            <span class="tag">성능 최적화</span>
+          </div>
+        </div>
+        <div class="svc-visual">
+          <div class="mock-task">결제 모듈 연동 <span class="mbadge g">완료</span></div>
+          <div class="mock-task">알림 발송 기능 <span class="mbadge y">진행중</span></div>
+          <div class="mock-task">관리자 대시보드 <span class="mbadge n">예정</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec gray" id="pricing">
+  <div class="sec-inner">
+    <div class="sec-head fade-up">
+      <div class="stag green">PRICING</div>
+      <div class="stitle">예측 가능한 월정액</div>
+      <div class="sdesc">숨은 비용 없이, 무료 진단 후 맞는 플랜을 추천드립니다</div>
+    </div>
+    <div class="plan-grid fade-up">
+
+      <div class="plan pop">
+        <div class="plan-badge">가장 많이 선택</div>
+        <div class="pname">STANDARD</div>
+        <div class="pprice">100<span>만원</span></div>
+        <div class="pper">/ 월 · VAT 별도</div>
+        <div class="pline"></div>
+        <div class="pdesc">안정적 운영과 유지보수가 필요한 소기업 · 1인 창업자</div>
+        <ul class="pul">
+          <li>전담 개발자 배정</li>
+          <li>서버 모니터링 24/7</li>
+          <li>장애 대응 SLA 2시간</li>
+          <li>월 10시간 유지보수 · 개발</li>
+          <li>분기 보안 점검</li>
+          <li>월간 작업 리포트</li>
+        </ul>
+        <button class="pcta" onclick="document.getElementById('final').scrollIntoView({behavior:'smooth'})">시작하기</button>
+        <div class="pnote">무료 코드 진단 후 시작</div>
+      </div>
+
+      <div class="plan">
+        <div class="pname">PREMIUM</div>
+        <div class="pprice">200<span>만원</span></div>
+        <div class="pper">/ 월 · VAT 별도</div>
+        <div class="pline"></div>
+        <div class="pdesc">빠른 기능 확장과 높은 안정성이 필요한 성장 스타트업</div>
+        <ul class="pul">
+          <li>시니어 개발자 전담</li>
+          <li>장애 대응 SLA 1시간</li>
+          <li>월 25시간 유지보수 · 개발</li>
+          <li>월 보안 점검 · 취약점 패치</li>
+          <li>코드 리팩토링 포함</li>
+          <li>월간 기술 리뷰 미팅</li>
+        </ul>
+        <button class="pcta" onclick="document.getElementById('final').scrollIntoView({behavior:'smooth'})">시작하기</button>
+        <div class="pnote">무료 코드 진단 후 시작</div>
+      </div>
+
+      <div class="plan">
+        <div class="pname">ENTERPRISE</div>
+        <div class="pprice" style="font-size:1.45rem;padding-top:0.3rem">맞춤 견적</div>
+        <div class="pper">/ 월 · 협의 후 확정</div>
+        <div class="pline"></div>
+        <div class="pdesc">외주 개발팀 대체 또는 대규모 시스템이 필요한 기업</div>
+        <ul class="pul">
+          <li>전담 팀 구성 (2인+)</li>
+          <li>무제한 긴급 대응</li>
+          <li>월 40시간+ 개발</li>
+          <li>아키텍처 설계 · 컨설팅</li>
+          <li>전용 슬랙 채널 운영</li>
+        </ul>
+        <button class="pcta" onclick="document.getElementById('final').scrollIntoView({behavior:'smooth'})">견적 요청 →</button>
+        <div class="pnote">규모에 따라 조정 가능</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="process">
+  <div class="sec-inner">
+    <div class="sec-head fade-up">
+      <div class="stag green">HOW IT WORKS</div>
+      <div class="stitle">3단계로 시작합니다</div>
+      <div class="sdesc">온보딩 한 번이면 매월 자동으로 진행됩니다</div>
+    </div>
+    <div class="steps fade-up">
+      <div class="step">
+        <div class="step-l"><div class="step-n">01</div><div class="step-ln"></div></div>
+        <div class="step-r">
+          <div class="step-title">무료 코드 진단</div>
+          <div class="step-body">GitHub 링크 또는 코드베이스를 공유해 주시면 전문가가 48시간 내 진단 리포트를 드립니다. 취약점, 기술 부채, 위험 요소를 정리해 드려요.</div>
+          <div class="step-chip">비용 없음 · 의무 없음</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-l"><div class="step-n">02</div><div class="step-ln"></div></div>
+        <div class="step-r">
+          <div class="step-title">플랜 선택 & 전담 배정</div>
+          <div class="step-body">진단 결과를 바탕으로 적합한 플랜을 추천드립니다. 구독 시작과 동시에 전담 개발자가 배정되고 온보딩이 시작됩니다.</div>
+          <div class="step-chip">온보딩 1~3일</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-l"><div class="step-n">03</div></div>
+        <div class="step-r">
+          <div class="step-title">운영 시작</div>
+          <div class="step-body">매월 정해진 시간 안에서 유지보수와 개발이 진행됩니다. 카카오톡 또는 슬랙으로 실시간 소통하며, 매월 작업 내역을 리포트로 제공합니다.</div>
+          <div class="step-chip">카카오톡 · 슬랙 소통</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec dark" id="reviews">
+  <div class="sec-inner">
+    <div class="sec-head fade-up">
+      <div class="stag dark-g">REVIEWS</div>
+      <div class="stitle white">고객사 후기</div>
+      <div class="sdesc light">실제 AI 개발 서비스를 운영 중인 고객사들의 이야기</div>
+    </div>
+    <div class="review-grid fade-up">
+      <div class="rv">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-q">"Claude로 만든 서비스가 배포 첫 주에 DB가 날아갔어요. DevCare에서 2시간 만에 복구해주고 재발 방지까지 잡아줬습니다."</div>
+        <div class="rv-name">이준혁 님 · 1인 SaaS 창업자 <span class="rv-tag">STANDARD</span></div>
+      </div>
+      <div class="rv">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-q">"보안 감사에서 우리 서비스에 SQL 인젝션 취약점이 있다는 걸 처음 알았어요. 고객 데이터가 노출될 뻔했는데 정말 다행이었습니다."</div>
+        <div class="rv-name">김소영 님 · 소기업 대표 <span class="rv-tag">PREMIUM</span></div>
+      </div>
+      <div class="rv">
+        <div class="rv-stars">★★★★★</div>
+        <div class="rv-q">"월정액으로 개발자 한 명 두는 것보다 훨씬 효율적입니다. 필요한 기능을 월 시간 안에서 계속 추가해주고 있어요."</div>
+        <div class="rv-name">박민수 님 · 스타트업 CTO <span class="rv-tag">PREMIUM</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="final">
+  <div class="final-bg"></div>
+  <!-- 마지막 영상 배경 - src 속성에 영상 파일 경로 또는 URL 입력 -->
+  <!-- <video class="final-video" autoplay muted loop playsinline src="YOUR_VIDEO_URL.mp4"></video> -->
+  <div class="final-fallback"></div>
+  <div class="final-grid"></div>
+  <div class="final-overlay"></div>
+  <div class="final-content fade-up">
+    <div class="hero-badge" style="margin-bottom:1.5rem"><span class="badge-dot"></span>지금 바로 시작하세요</div>
+    <h2>개발자 채용 전,<br><em>DevCare로 먼저 시작하세요</em></h2>
+    <p class="final-desc">월정액 유지보수 파트너를 찾고 계신다면,<br>무료 코드 진단 후 24시간 내 전담 매니저가 연락드립니다.</p>
+    <div class="final-chips">
+      <span class="fchip">✓ 계약 강제 없음</span>
+      <span class="fchip">✓ 진단 비용 없음</span>
+      <span class="fchip">✓ 48시간 내 리포트</span>
+      <span class="fchip">✓ 24시간 내 응답 보장</span>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-g">무료 코드 진단 신청 →</button>
+      <button class="btn-w" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">요금제 보기</button>
+    </div>
+    <p class="final-hint">평일 오전 10시 — 오후 6시 · 주말 · 공휴일 휴무</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Dev<em>Care</em></div>
+  <div class="footer-copy">© 2026 DevCare. All Rights Reserved.</div>
+</footer>
+
+<script>
+// Scroll fade-up animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
